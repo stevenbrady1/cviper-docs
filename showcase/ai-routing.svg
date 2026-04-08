@@ -1,0 +1,175 @@
+<!-- HAND-CRAFTED: Do not regenerate — this SVG is manually styled, not Mermaid-rendered -->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 850 750" font-family="Inter, system-ui, -apple-system, sans-serif">
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 7" refX="10" refY="3.5" markerWidth="8" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 3.5 L 0 7 z" fill="#64748b"/>
+    </marker>
+    <marker id="arrow-green" viewBox="0 0 10 7" refX="10" refY="3.5" markerWidth="8" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 3.5 L 0 7 z" fill="#059669"/>
+    </marker>
+    <marker id="arrow-amber" viewBox="0 0 10 7" refX="10" refY="3.5" markerWidth="8" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 3.5 L 0 7 z" fill="#d97706"/>
+    </marker>
+    <marker id="arrow-rose" viewBox="0 0 10 7" refX="10" refY="3.5" markerWidth="8" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 3.5 L 0 7 z" fill="#e11d48"/>
+    </marker>
+    <filter id="shadow" x="-4%" y="-4%" width="108%" height="112%">
+      <feDropShadow dx="0" dy="1" stdDeviation="2" flood-opacity="0.08" flood-color="#000"/>
+    </filter>
+    <filter id="shadow-sm" x="-2%" y="-4%" width="104%" height="112%">
+      <feDropShadow dx="0" dy="1" stdDeviation="1.5" flood-opacity="0.06" flood-color="#000"/>
+    </filter>
+  </defs>
+  <rect width="850" height="750" fill="#fafbfc" rx="0"/>
+
+  <!-- ENTRY -->
+  <rect x="335" y="18" width="180" height="40" rx="8" fill="#eff6ff" stroke="#2563eb" stroke-width="1.5" filter="url(#shadow)"/>
+  <text x="425" y="43" text-anchor="middle" font-size="13" font-weight="600" fill="#1e40af">AI Task Request</text>
+  <line x1="425" y1="58" x2="425" y2="76" stroke="#64748b" stroke-width="1.2" marker-end="url(#arrow)"/>
+
+  <!-- DECISION 1: Demo user? (uniform 170x64) -->
+  <polygon points="425,76 510,108 425,140 340,108" fill="#f8fafc" stroke="#64748b" stroke-width="1.5" filter="url(#shadow)"/>
+  <text x="425" y="105" text-anchor="middle" font-size="11" font-weight="500" fill="#334155">Demo</text>
+  <text x="425" y="117" text-anchor="middle" font-size="11" font-weight="500" fill="#334155">user?</text>
+
+  <!-- Yes -> Demo Routing -->
+  <path d="M 340,108 L 200,108 L 200,148" stroke="#e11d48" stroke-width="1.2" fill="none" marker-end="url(#arrow-rose)"/>
+  <text x="270" y="100" text-anchor="middle" font-size="10" font-weight="600" fill="#e11d48">Yes</text>
+
+  <!-- No -> Decision 2 -->
+  <line x1="425" y1="140" x2="425" y2="168" stroke="#64748b" stroke-width="1.2" marker-end="url(#arrow)"/>
+  <text x="438" y="156" font-size="10" font-weight="600" fill="#64748b">No</text>
+
+  <!-- DEMO ROUTING (shifted left to clear standardised decision diamonds) -->
+  <rect x="20" y="150" width="300" height="130" rx="10" fill="#fff1f2" stroke="#e11d48" stroke-width="1.5" filter="url(#shadow)"/>
+  <text x="170" y="170" text-anchor="middle" font-size="12" font-weight="700" fill="#9f1239">Demo Routing</text>
+  <rect x="35" y="180" width="270" height="24" rx="5" fill="#ffe4e6" stroke="#fda4af" stroke-width="0.8"/>
+  <text x="170" y="196" text-anchor="middle" font-size="9" fill="#881337">sandbox_google · Gemini Flash · 1000 req/day</text>
+  <rect x="35" y="212" width="270" height="24" rx="5" fill="#ffe4e6" stroke="#fda4af" stroke-width="0.8"/>
+  <text x="170" y="228" text-anchor="middle" font-size="9" fill="#881337">sandbox_openrouter · GPT-4o-mini · 50 req/day</text>
+  <rect x="35" y="244" width="270" height="24" rx="5" fill="#dcfce7" stroke="#86efac" stroke-width="0.8"/>
+  <text x="170" y="260" text-anchor="middle" font-size="9" fill="#14532d">keyword fallback · always available</text>
+  <text x="170" y="277" text-anchor="middle" font-size="7" fill="#9f1239" font-style="italic">quota hit → falls through to next provider</text>
+
+  <!-- DECISION 2: Provider override? (uniform 170x64) -->
+  <polygon points="425,168 510,200 425,232 340,200" fill="#f8fafc" stroke="#64748b" stroke-width="1.5" filter="url(#shadow)"/>
+  <text x="425" y="197" text-anchor="middle" font-size="11" font-weight="500" fill="#334155">Provider</text>
+  <text x="425" y="209" text-anchor="middle" font-size="11" font-weight="500" fill="#334155">override?</text>
+
+  <!-- Yes -> Use specified provider -->
+  <path d="M 510,200 L 540,200" stroke="#64748b" stroke-width="1.2" fill="none" marker-end="url(#arrow)"/>
+  <text x="520" y="193" font-size="10" font-weight="600" fill="#64748b">Yes</text>
+  <rect x="542" y="185" width="140" height="30" rx="6" fill="#eef2ff" stroke="#4f46e5" stroke-width="1.2" filter="url(#shadow-sm)"/>
+  <text x="612" y="204" text-anchor="middle" font-size="10" font-weight="500" fill="#3730a3">Use specified provider</text>
+  <path d="M 682 200 L 822 200 L 822 496 L 500 496" stroke="#64748b" stroke-width="1.2" fill="none" marker-end="url(#arrow)"/>
+
+  <!-- No -> Decision 3 -->
+  <line x1="425" y1="232" x2="425" y2="268" stroke="#64748b" stroke-width="1.2" marker-end="url(#arrow)"/>
+  <text x="438" y="252" font-size="10" font-weight="600" fill="#64748b">No</text>
+
+  <!-- DECISION 3: Task group preference? (uniform 170x64) -->
+  <polygon points="425,268 510,300 425,332 340,300" fill="#f8fafc" stroke="#64748b" stroke-width="1.5" filter="url(#shadow)"/>
+  <text x="425" y="294" text-anchor="middle" font-size="11" font-weight="500" fill="#334155">Task group</text>
+  <text x="425" y="306" text-anchor="middle" font-size="11" font-weight="500" fill="#334155">preference?</text>
+
+  <!-- Yes -> Group preferred -->
+  <path d="M 510,300 L 540,300" stroke="#64748b" stroke-width="1.2" fill="none" marker-end="url(#arrow)"/>
+  <text x="520" y="293" font-size="10" font-weight="600" fill="#64748b">Yes</text>
+  <rect x="542" y="285" width="160" height="30" rx="6" fill="#eef2ff" stroke="#4f46e5" stroke-width="1.2" filter="url(#shadow-sm)"/>
+  <text x="622" y="304" text-anchor="middle" font-size="10" font-weight="500" fill="#3730a3">Use group's preferred provider</text>
+
+  <!-- Unavailable -> Priority Chain (re-routed to land at x=460 so the arrowhead doesn't merge with the No arrow at x=425) -->
+  <path d="M 622,315 L 622,355 L 460,355 L 460,370" stroke="#059669" stroke-width="1.4" fill="none" stroke-dasharray="5,3" marker-end="url(#arrow-green)"/>
+  <text x="632" y="340" font-size="9" font-style="italic" fill="#059669">unavailable</text>
+
+  <!-- No -> Priority Chain -->
+  <line x1="425" y1="332" x2="425" y2="372" stroke="#64748b" stroke-width="1.2" marker-end="url(#arrow)"/>
+  <text x="438" y="358" font-size="10" font-weight="600" fill="#64748b">No</text>
+
+  <!-- PRIORITY CHAIN -->
+  <rect x="32" y="374" width="786" height="68" rx="10" fill="#eef2ff" stroke="#4f46e5" stroke-width="1.5" filter="url(#shadow)"/>
+  <text x="425" y="392" text-anchor="middle" font-size="12" font-weight="700" fill="#3730a3">Priority Chain</text>
+  <text x="425" y="403" text-anchor="middle" font-size="9" fill="#6366f1" font-style="italic">User-configurable order</text>
+
+  <!-- 8 provider boxes (Pluribus removed — local-only gateway) -->
+  <rect x="50" y="410" width="85" height="24" rx="5" fill="#e0e7ff" stroke="#818cf8" stroke-width="0.8"/>
+  <text x="92" y="426" text-anchor="middle" font-size="9" font-weight="600" fill="#3730a3">① Anthropic</text>
+  <rect x="145" y="410" width="85" height="24" rx="5" fill="#e0e7ff" stroke="#818cf8" stroke-width="0.8"/>
+  <text x="187" y="426" text-anchor="middle" font-size="9" font-weight="600" fill="#3730a3">② Google</text>
+  <rect x="240" y="410" width="85" height="24" rx="5" fill="#e0e7ff" stroke="#818cf8" stroke-width="0.8"/>
+  <text x="282" y="426" text-anchor="middle" font-size="9" font-weight="600" fill="#3730a3">③ OpenAI</text>
+  <rect x="335" y="410" width="85" height="24" rx="5" fill="#e0e7ff" stroke="#818cf8" stroke-width="0.8"/>
+  <text x="377" y="426" text-anchor="middle" font-size="9" font-weight="600" fill="#3730a3">④ Grok</text>
+  <rect x="430" y="410" width="85" height="24" rx="5" fill="#e0e7ff" stroke="#818cf8" stroke-width="0.8"/>
+  <text x="472" y="426" text-anchor="middle" font-size="9" font-weight="600" fill="#3730a3">⑤ OpenRouter</text>
+  <rect x="525" y="410" width="85" height="24" rx="5" fill="#e0e7ff" stroke="#818cf8" stroke-width="0.8"/>
+  <text x="567" y="426" text-anchor="middle" font-size="9" font-weight="600" fill="#3730a3">⑥ Mistral</text>
+  <rect x="620" y="410" width="90" height="24" rx="5" fill="#e0e7ff" stroke="#818cf8" stroke-width="0.8"/>
+  <text x="665" y="426" text-anchor="middle" font-size="9" font-weight="600" fill="#3730a3">⑦ GitHub</text>
+  <rect x="720" y="410" width="85" height="24" rx="5" fill="#e0e7ff" stroke="#818cf8" stroke-width="0.8"/>
+  <text x="762" y="426" text-anchor="middle" font-size="9" font-weight="600" fill="#3730a3">⑧ Ollama</text>
+
+  <!-- Chain connectors -->
+  <line x1="135" y1="422" x2="145" y2="422" stroke="#a5b4fc" stroke-width="0.8"/>
+  <line x1="230" y1="422" x2="240" y2="422" stroke="#a5b4fc" stroke-width="0.8"/>
+  <line x1="325" y1="422" x2="335" y2="422" stroke="#a5b4fc" stroke-width="0.8"/>
+  <line x1="420" y1="422" x2="430" y2="422" stroke="#a5b4fc" stroke-width="0.8"/>
+  <line x1="515" y1="422" x2="525" y2="422" stroke="#a5b4fc" stroke-width="0.8"/>
+  <line x1="610" y1="422" x2="620" y2="422" stroke="#a5b4fc" stroke-width="0.8"/>
+  <line x1="710" y1="422" x2="720" y2="422" stroke="#a5b4fc" stroke-width="0.8"/>
+
+  <!-- CIRCUIT BREAKER -->
+  <line x1="425" y1="442" x2="425" y2="462" stroke="#64748b" stroke-width="1.2" marker-end="url(#arrow)"/>
+  <polygon points="425,464 498,496 425,528 352,496" fill="#fffbeb" stroke="#d97706" stroke-width="1.5" filter="url(#shadow)"/>
+  <text x="425" y="492" text-anchor="middle" font-size="11" font-weight="600" fill="#92400e">Circuit</text>
+  <text x="425" y="504" text-anchor="middle" font-size="11" font-weight="600" fill="#92400e">Breaker</text>
+
+  <!-- Closed -> Success -->
+  <line x1="425" y1="528" x2="425" y2="558" stroke="#059669" stroke-width="1.2" marker-end="url(#arrow-green)"/>
+  <text x="440" y="548" font-size="10" font-weight="600" fill="#059669">Closed</text>
+
+  <!-- Open -> Skip back to priority chain (re-routed so arrowhead lands ON the left edge, not inside the chain box) -->
+  <path d="M 352,496 L 22,496 L 22,422 L 32,422" stroke="#d97706" stroke-width="1.2" fill="none" stroke-dasharray="5,3" marker-end="url(#arrow-amber)"/>
+  <text x="180" y="488" font-size="10" font-weight="600" fill="#d97706">Open — skip, try next</text>
+
+  <!-- SUCCESS -->
+  <rect x="350" y="560" width="150" height="36" rx="8" fill="#ecfdf5" stroke="#059669" stroke-width="1.5" filter="url(#shadow)"/>
+  <text x="425" y="583" text-anchor="middle" font-size="13" font-weight="600" fill="#065f46">AI Provider Call</text>
+
+  <!-- FALLBACK -->
+  <path d="M 425,596 L 425,628" stroke="#059669" stroke-width="1.2" fill="none" stroke-dasharray="5,3" marker-end="url(#arrow-green)"/>
+  <text x="470" y="617" font-size="9" font-style="italic" fill="#059669">all providers fail</text>
+  <rect x="200" y="630" width="450" height="64" rx="10" fill="#dcfce7" stroke="#059669" stroke-width="1.5" filter="url(#shadow)"/>
+  <text x="425" y="652" text-anchor="middle" font-size="13" font-weight="700" fill="#065f46">Keyword Fallback Engine</text>
+  <text x="425" y="670" text-anchor="middle" font-size="10" fill="#166534">26 template methods · covers every AI operation · no API key needed</text>
+  <text x="425" y="684" text-anchor="middle" font-size="10" font-weight="600" fill="#166534">Always works</text>
+
+  <!-- TASK GROUPS -->
+  <rect x="20" y="630" width="168" height="110" rx="10" fill="#f5f3ff" stroke="#7c3aed" stroke-width="1.5" filter="url(#shadow)"/>
+  <text x="104" y="652" text-anchor="middle" font-size="12" font-weight="700" fill="#5b21b6">Task Groups</text>
+  <rect x="32" y="662" width="68" height="22" rx="4" fill="#ede9fe" stroke="#a78bfa" stroke-width="0.7"/>
+  <text x="66" y="677" text-anchor="middle" font-size="9" font-weight="500" fill="#5b21b6">Writing (4)</text>
+  <rect x="108" y="662" width="68" height="22" rx="4" fill="#ede9fe" stroke="#a78bfa" stroke-width="0.7"/>
+  <text x="142" y="677" text-anchor="middle" font-size="9" font-weight="500" fill="#5b21b6">Analysis (8)</text>
+  <rect x="32" y="692" width="68" height="22" rx="4" fill="#ede9fe" stroke="#a78bfa" stroke-width="0.7"/>
+  <text x="66" y="707" text-anchor="middle" font-size="9" font-weight="500" fill="#5b21b6">Research (7)</text>
+  <rect x="108" y="692" width="68" height="22" rx="4" fill="#ede9fe" stroke="#a78bfa" stroke-width="0.7"/>
+  <text x="142" y="707" text-anchor="middle" font-size="9" font-weight="500" fill="#5b21b6">Quick (5)</text>
+  <text x="104" y="732" text-anchor="middle" font-size="8" fill="#7c3aed" font-style="italic">24 tasks across 4 groups</text>
+
+  <!-- LEGEND -->
+  <rect x="662" y="630" width="170" height="110" rx="8" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1"/>
+  <text x="747" y="649" text-anchor="middle" font-size="10" font-weight="600" fill="#475569">Legend</text>
+  <line x1="680" y1="664" x2="710" y2="664" stroke="#64748b" stroke-width="1.2"/>
+  <text x="718" y="668" font-size="9" fill="#475569">Normal flow</text>
+  <line x1="680" y1="682" x2="710" y2="682" stroke="#059669" stroke-width="1.2" stroke-dasharray="5,3"/>
+  <text x="718" y="686" font-size="9" fill="#475569">Fallback path</text>
+  <line x1="680" y1="700" x2="710" y2="700" stroke="#d97706" stroke-width="1.2" stroke-dasharray="5,3"/>
+  <text x="718" y="704" font-size="9" fill="#475569">Circuit breaker skip</text>
+  <polygon points="695,714 701,720 695,726 689,720" fill="#f8fafc" stroke="#64748b" stroke-width="1"/>
+  <text x="718" y="724" font-size="9" fill="#475569">Decision point</text>
+
+  <!-- Watermark -->
+  <text x="425" y="748" text-anchor="middle" font-size="9" fill="#cbd5e1">CViper · AI Routing &amp; Fallback Architecture</text>
+  <!-- stats-updated: 2026-04-08 -->
+</svg>

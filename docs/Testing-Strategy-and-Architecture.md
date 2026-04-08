@@ -1,0 +1,592 @@
+# Testing Strategy & Architecture
+
+## CViper - AI-Powered Job Search & Application Platform
+
+---
+
+| Field | Value |
+|-------|-------|
+| **Document ID** | TSA-CVIPER-001 |
+| **Version** | 0.2.3 |
+| **Status** | Pre-Release |
+| **Author** | CViper Project Team |
+| **Date** | 2026-03-27 |
+| **Classification** | Internal |
+| **Related BRD** | BRD-CVIPER-001 v0.2.3 |
+| **Related FSD** | FSD-CVIPER-001 v0.2.3 |
+
+### Version History
+
+| Version | Date | Author | Changes |
+|---------|------|--------|---------|
+| 0.2.3 | 2026-03-27 | CViper Project Team | Updated gateway retry/circuit breaker test counts (+20 tests). CI schema drift check now uses PostgreSQL 16 service container. Alembic migration 013 batch fix for SQLite compat. |
+| 0.2.2 | 2026-03-27 | CViper Project Team | Version reset to align with application semver (pre-release). Consolidates v1.0 content with updated test counts, folder structure, and CI pipeline layout. Prior version archived in `docs/Archive/`. |
+
+> **Note:** Prior to v0.2.2 (v1.0, dated 24 March 2026) an independent numbering scheme was used. That document is preserved in `docs/Archive/` for reference. From v0.2.2 onward, document versions track the application version in `package.json`.
+
+**Audience:** Developers, QA, DevOps, Product
+**Scope:** Backend (Python/FastAPI), Frontend (React/Vite), E2E (Playwright), CI/CD (GitHub Actions)
+
+---
+
+## Table of Contents
+
+1. [Testing Philosophy](#1-testing-philosophy)
+2. [Test Pyramid & Layer Definitions](#2-test-pyramid--layer-definitions)
+3. [Repository Folder Structure](#3-repository-folder-structure)
+4. [Naming Conventions](#4-naming-conventions)
+5. [Testing Strategy by Layer](#5-testing-strategy-by-layer)
+6. [Regression Prevention Plan](#6-regression-prevention-plan)
+7. [CI Pipeline Design](#7-ci-pipeline-design)
+8. [Cross-Platform Guidance (Windows & macOS)](#8-cross-platform-guidance-windows--macos)
+9. [Mocking & Determinism](#9-mocking--determinism)
+10. [Performance & Flaky Test Elimination](#10-performance--flaky-test-elimination)
+11. [Coverage Strategy](#11-coverage-strategy)
+12. [Maintenance & Hygiene](#12-maintenance--hygiene)
+13. [Quick Reference](#13-quick-reference)
+
+---
+
+## 1. Testing Philosophy
+
+### Principles
+
+| Principle | What it means in practice |
+|-----------|--------------------------|
+| Tests are a safety net, not a checkbox | Every test must protect against a real failure mode. Delete tests that verify nothing useful. |
+| Fast by default, thorough on demand | Local runs complete in < 90s. Full suite (with integration/quality) runs in CI only. |
+| Deterministic always | No test may depend on wall-clock time, network state, filesystem ordering, or global mutable state. |
+| Single source of truth | Business rules live in shared modules. Tests verify the module, and contract tests verify all consumers agree. |
+| Fail loud, fail early | A broken test blocks the PR. A flaky test is treated as a P1 bug until stabilised or quarantined. |
+| Developer experience matters | Tests must be easy to run, easy to read, and easy to debug. Relevant tests runnable in < 10s. |
+
+### Test Budget
+
+| Layer | Target % of suite | Target runtime (local) | Target runtime (CI) |
+|-------|-------------------|----------------------|-------------------|
+| Unit | 60–70% | < 20s | < 30s |
+| Component / Integration | 20–25% | < 40s | < 60s |
+| Contract | 3–5% | < 5s | < 10s |
+| E2E | 5–10% | N/A (CI only) | < 120s |
+| Quality gate (AI) | < 1% | N/A (manual) | N/A (separate workflow) |
+
+---
+
+## 2. Test Pyramid & Layer Definitions
+
+The test suite follows a classic test pyramid, with the majority of tests at the unit level, fewer at the component/integration level, and the fewest at E2E.
+
+### Layer Definitions
+
+| Layer | Scope | Database | Network | Browser | Marker |
+|-------|-------|----------|---------|---------|--------|
+| Unit | Single function/class | None | None | None | `@pytest.mark.unit` |
+| Component | One module in isolation | In-memory SQLite | Mocked | None | `@pytest.mark.component` |
+| API / Functional | Single endpoint via TestClient | In-memory SQLite | Mocked | None | `@pytest.mark.api` / `functional` |
+| Contract | Multiple endpoints, same rule | In-memory SQLite | Mocked | None | `@pytest.mark.contract` |
+| Security | Auth, RBAC, SSRF, rate limiting | In-memory SQLite | Mocked | None | `@pytest.mark.security` |
+| Integration | Real network I/O (job boards) | In-memory SQLite | Real | None | `@pytest.mark.integration` |
+| E2E | Full stack (browser → API → DB) | SQLite file | Real (localhost) | Chromium | N/A (Playwright) |
+| Quality gate | AI output scoring | In-memory SQLite | Real AI | None | `@pytest.mark.quality` |
+
+---
+
+## 3. Repository Folder Structure
+
+### Backend Tests (193 files)
+
+```
+backend/tests/
+├── conftest.py                     # Session fixtures, DB isolation, mocks
+├── ai/                             # AI service, scoring, routing (33 files)
+│   ├── fake_ai_gateway.py          # Reusable test double
+│   └── test_keyword_matching.py ...
+├── api/                            # HTTP endpoint tests (16 files)
+├── companies/                      # Company boards, salary (7 files)
+├── cv/                             # CV analysis, generation (10 files)
+├── data/                           # Repository CRUD, migrations (9 files)
+├── features/                       # Analytics, deep analysis, reminders (8 files)
+├── infrastructure/                 # Admin, encryption, monitoring (12 files)
+├── scoring/                        # Fit score, history (4 files)
+├── search/                         # Job search, career pages (22 files)
+└── security/                       # Auth, RBAC, GDPR, sandboxing (23 files)
+```
+
+### Frontend Tests (59 files)
+
+```
+frontend/src/
+├── App.test.jsx                    # Main integration tests
+├── components/*.test.jsx           # Co-located with source (24 files)
+├── hooks/*.test.js                 # Hook tests (4 files)
+├── tabs/*.test.jsx                 # Tab component tests (5 files)
+├── utils/*.test.js                 # Utility tests (3 files)
+└── test/
+    ├── setup.js                    # @testing-library/jest-dom
+    ├── appTestHelpers.js           # Global fetch mock, default API responses
+    └── timerConstants.js           # Test timer config
+```
+
+### E2E Tests (Playwright)
+
+```
+frontend/e2e/
+├── smoke.spec.js                   # Main paths after deployment
+├── cv-upload.spec.js               # CV upload workflows
+├── search-streaming.spec.js        # Real-time search updates
+├── document-editing.spec.js        # Document editing workflows
+├── advanced-mode.spec.js           # Advanced search mode
+├── about-showcase.spec.js          # About page and showcase gallery
+├── company-salary.spec.js          # Company salary estimation flows
+├── faq-navigation.spec.js          # FAQ navigation and content
+├── onboarding-tour.spec.js         # Onboarding tour walkthrough
+└── settings-ai-config.spec.js      # AI provider settings configuration
+```
+
+### Structure Rationale
+
+| Decision | Reason |
+|----------|--------|
+| Backend tests in `tests/` (separate) | FastAPI convention; avoids shipping test code in Docker; simpler coverage exclusion. |
+| Frontend tests co-located with source | React convention; easier to find and maintain; Vitest auto-discovers. |
+| Subdirectories by domain, not layer | Developers think in features ("I changed search"), not layers. |
+| Contract tests inside domain folder | Primary audience is the domain owner. |
+| E2E tests in separate `e2e/` folder | Different runner (Playwright), different lifecycle, different CI stage. |
+
+---
+
+## 4. Naming Conventions
+
+### Backend (Python / pytest)
+
+```
+File:     test_{domain}_{aspect}.py
+          test_keyword_matching.py
+          test_provider_visibility_contracts.py
+
+Function: test_{action}_{scenario}[_{expected_outcome}]
+          test_fallback_analysis()
+          test_regular_user_never_sees_ollama_on_any_endpoint()
+
+Class:    Test{Feature}{Aspect}
+          TestLocalOnlyHiddenContract
+          TestGoogleGeminiProvider
+```
+
+### Frontend (JavaScript / Vitest)
+
+```
+File:     {ComponentName}.test.jsx
+          {ComponentName}.{feature}.test.jsx
+
+Describe: describe('{Component or AC-N: Acceptance Criteria}')
+Test:     it('{does something specific}')
+```
+
+### E2E (Playwright)
+
+```
+File:     {feature-slug}.spec.js
+Test:     test('{user action} → {expected outcome}')
+```
+
+### Markers / Tags
+
+Every backend test file must have a `pytestmark` at module level:
+
+| Marker | When to use |
+|--------|-------------|
+| `unit` | Pure logic, no I/O, no DB, no HTTP |
+| `component` | Tests one module with real DB (in-memory) |
+| `api` | Tests an HTTP endpoint via TestClient |
+| `contract` | Same rule holds across multiple endpoints |
+| `security` | Auth, RBAC, SSRF, rate limiting, encryption |
+| `regression` | Guards against a previously-fixed bug |
+| `integration` | Makes real network calls (excluded from default CI) |
+| `quality` | AI output quality gates (manual only) |
+| `acceptance` | Given/When/Then business requirement tests |
+| `sanity` | Validates test infrastructure itself |
+| `smoke` | Post-deployment verification |
+| `gdpr` | Data export, deletion, consent |
+| `allow_ai_gateway` | Opt out of AI mock |
+
+---
+
+## 5. Testing Strategy by Layer
+
+### 5.1 Unit Tests
+
+- **What to test:** Pure business logic (score calculation, keyword matching, date parsing), data transformations, validation rules, utility functions.
+- **What NOT to test:** Database queries, HTTP response codes, multi-step workflows.
+- **Fixture strategy:** Use `shared_ai_service` for read-only AI methods (saves ~6s/test). No database or HTTP mocks needed.
+
+### 5.2 Component / Integration Tests
+
+- **What to test:** Repository CRUD against in-memory SQLite, single API endpoint request/response, AI service with mocked gateway, background task execution.
+- **Fixture strategy:** `client` (TestClient), `db_session` (direct DB), `_block_ai_gateway` and `_mock_outbound_http` autouse mocks.
+
+### 5.3 Contract Tests
+
+**Purpose:** Verify that the SAME business rule is enforced consistently across ALL endpoints. If a rule is applied in one endpoint but missed in another, these tests fail.
+
+- `test_provider_visibility_contracts.py` — Ollama/Pluribus hidden from non-admin on 3 endpoints
+- `test_company_boards_contracts.py` — Seed data merged into 4 endpoints
+
+**When to add:** A business rule must hold across 2+ endpoints; a regression was caused by fixing one endpoint but missing another.
+
+### 5.4 Security Tests
+
+| Category | What's tested | Example file |
+|----------|--------------|--------------|
+| Authentication | Login, logout, session management | `test_auth.py` |
+| Authorisation (RBAC) | Role-based access to admin endpoints | `test_rbac_enforcement.py` |
+| Data isolation | User A cannot see User B's data | `test_user_data_isolation_ac.py` |
+| Input validation | URL validation, path traversal | `test_url_validation.py` |
+| Rate limiting | Endpoint-level throttling | `test_rate_limiting.py` |
+| Encryption | API keys encrypted at rest | `test_key_encryption_at_rest.py` |
+| GDPR | Data export, deletion, consent | `test_gdpr.py` |
+| Sandbox | Abuse prevention, session isolation | `test_sandbox_abuse_prevention.py` |
+| OAuth | External auth provider flows | `test_oauth.py` |
+
+### 5.5 E2E Tests (Playwright)
+
+| Spec | User journey |
+|------|-------------|
+| `smoke.spec.js` | Main paths after deployment |
+| `cv-upload.spec.js` | Upload CV → see analysis results |
+| `search-streaming.spec.js` | Start search → see streaming results |
+| `document-editing.spec.js` | Edit generated document → save |
+| `advanced-mode.spec.js` | Toggle advanced features |
+| `about-showcase.spec.js` | About page renders, showcase gallery loads |
+| `company-salary.spec.js` | Company salary estimation flows |
+| `faq-navigation.spec.js` | FAQ navigation and content display |
+| `onboarding-tour.spec.js` | Onboarding tour walkthrough |
+| `settings-ai-config.spec.js` | AI provider settings configuration |
+
+**Shared Helpers** (`e2e/helpers/`): `mocks.js` (route interception), `test-data.js` (users, jobs, documents), `actions.js` (navigation, login). All tests use Playwright route mocking — no real backend needed.
+
+**CI Integration:** Runs as a soft gate (`continue-on-error`) in GitHub Actions after frontend tests pass. Single Chromium worker, 2 retries, Playwright HTML report + JUnit XML uploaded as artifacts. Browser binaries cached across runs.
+
+**Guidelines:** Test user journeys not implementation details. Use `data-testid` attributes. Each spec independent. Use Playwright auto-waiting — never `sleep()`.
+
+### 5.6 Quality Gate Tests (AI Output)
+
+**Purpose:** TDD-style feedback loop for prompt engineering. Uses real AI APIs. NOT run in CI by default. Run manually after changing AI prompts.
+
+---
+
+## 6. Regression Prevention Plan
+
+### 6.1 Root Cause Analysis of Recurring Issues
+
+| Recurring bug | Root cause | Prevention |
+|--------------|------------|------------|
+| Careers page missing data | Board seed data not merged in new endpoint | `company_boards_merge.py` + contract tests |
+| Provider leaking to wrong role | Visibility rules duplicated across 3 endpoints | `provider_visibility.py` + contract tests |
+| Services not starting | Missing env vars / config not validated | `test_config_smoke.py` + startup diagnostics |
+| Logging/monitoring disappearing | Config changes removing monitoring | `test_monitoring.py` + `test_monitoring_endpoints.py` |
+| Rate limiter breaking tests | State leaking between tests | `reset_rate_limiter` autouse fixture |
+| AI calls in tests (slow/flaky) | Test making real AI calls | `_block_ai_gateway` autouse + `shared_ai_service` |
+| New user sees admin features | Role check missing on new endpoint | `test_rbac_enforcement.py` + contract tests |
+| Database schema drift | Model change without migration | Alembic migration + `test_conftest_guards.py` + CI PostgreSQL schema drift check |
+
+### 6.2 Structural Safeguards
+
+**Single source of truth modules:**
+- `provider_visibility.py` — all provider filtering rules
+- `company_boards_merge.py` — all board data merging
+
+**Autouse fixtures in conftest.py:**
+- `_block_ai_gateway` — blocks ALL AI calls unless opted out
+- `_mock_outbound_http` — blocks ALL external HTTP
+- `_mock_cv_analysis` — prevents real CV analysis
+- `_mock_adaptive_ai` — prevents adaptive parser AI calls
+- `_mock_background_salary_check` — prevents background AI calls
+- `reset_rate_limiter` — resets rate limits between tests
+- `clean_db_between_tests` — resets DB state
+
+### 6.3 Regression Prevention Checklist (Code Reviews)
+
+- **New endpoint?** → Needs provider visibility filtering? Board seed merging? RBAC? Add to contract tests.
+- **Business rule changed?** → In single-source module? All consumers updated? Contract tests updated?
+- **New DB model/column?** → Added to `clean_db_between_tests`? Migration created?
+- **New external API call?** → Mocked in conftest.py? Blocked by autouse fixtures?
+- **Changed AI prompt?** → Run quality gate tests manually.
+- **Changed auth/role logic?** → RBAC and data isolation tests updated?
+
+---
+
+## 7. CI Pipeline Design
+
+### 7.1 Pipeline Stages
+
+| Stage | Trigger | What runs | Gate |
+|-------|---------|-----------|------|
+| Detect Changes | All | `paths-filter`: backend/frontend changed? | N/A |
+| Backend Tests | Backend changed or push | 9 test areas in parallel (`-n auto`), coverage summary | Hard gate |
+| Frontend Tests | Frontend changed or push | 5 test areas + coverage via `@vitest/coverage-v8` + build | Hard gate |
+| Lint | All | flake8 + ESLint + `npx depcheck` (unused frontend deps) | Soft gate |
+| Docs Drift & Code Hygiene | All | `docs_drift_check.py` (stats.json freshness, stale patterns, sandbox refs), `dead_exports_check.py` (unused components/hooks), `unused_deps_check.py` (unused backend packages) | Hard (drift) / Soft (exports, deps) |
+| Security SCA | All | pip-audit, npm audit, Snyk | Soft gate |
+| Security SAST | All | Snyk Code, Aikido, secrets, SSRF | Soft gate |
+| Schema Drift Check | Backend changed | Alembic autogenerate against PostgreSQL 16 service container | Hard gate |
+| Integration Smoke | After tests pass | Start backend, hit 5 endpoints | Hard gate |
+| CI Summary | Always | Aggregate results, JUnit XML report | Final gate |
+| Build & Push | Main push only | Docker images to ACR | N/A |
+
+### 7.2 Backend Test Areas in CI
+
+| CI Step | Test directory | Approx. tests | Approx. time |
+|---------|---------------|---------------|--------------|
+| AI & Scoring | `tests/ai/` `tests/scoring/` | ~370 | ~15s |
+| API Endpoints | `tests/api/` | ~250 | ~10s |
+| Search | `tests/search/` | ~400 | ~12s |
+| Companies & Salary | `tests/companies/` | ~120 | ~5s |
+| CV & Documents | `tests/cv/` | ~150 | ~8s |
+| Data & Repository | `tests/data/` | ~200 | ~6s |
+| Security | `tests/security/` | ~350 | ~10s |
+| Features | `tests/features/` | ~100 | ~5s |
+| Infrastructure | `tests/infrastructure/` | ~80 | ~4s |
+
+### 7.3 What Runs Where
+
+| Test type | Local | CI (PR) | CI (main) | Manual |
+|-----------|-------|---------|-----------|--------|
+| Unit | Yes | Yes | Yes | — |
+| Component | Yes | Yes | Yes | — |
+| Contract | Yes | Yes | Yes | — |
+| Security | Yes | Yes | Yes | — |
+| Integration | No (opt-in) | No | No | Yes |
+| E2E (Playwright) | No (opt-in) | Yes (soft gate) | Yes (soft gate) | Yes |
+| Quality gate | No | No | No | Yes |
+| Coverage | No | Yes (3.12) | Yes (3.12) | — |
+| Lint | No (opt-in) | Yes | Yes | — |
+| Security scans | No | Yes | Yes | — |
+
+---
+
+## 8. Cross-Platform Guidance (Windows & macOS)
+
+### 8.1 Environment Setup
+
+| Requirement | Windows | macOS |
+|-------------|---------|-------|
+| Python | 3.11 or 3.12 via python.org | `brew install python@3.12` |
+| Node.js | 20.x or 22.x via nodejs.org | `brew install node@22` |
+| Shell | Git Bash (ships with Git) | Terminal (zsh) |
+| Playwright | `npx playwright install chromium` | Same |
+
+### 8.2 Running Tests
+
+```bash
+# Backend
+cd backend
+pytest                              # Default: parallel
+pytest -n0                          # Sequential (debugging)
+pytest -n0 -x -vvs tests/ai/       # Debug one area
+pytest -m "not integration"         # Skip network tests
+
+# Frontend
+cd frontend
+npm test                            # Vitest (CI mode)
+npm run test:watch                  # Watch mode
+npm run test:e2e                    # Playwright headless
+```
+
+### 8.3 Platform-Specific Gotchas
+
+| Issue | Windows | macOS | Fix |
+|-------|---------|-------|-----|
+| Path separators | Backslash | Forward slash | Use `pathlib.Path` — never hardcode |
+| Line endings | CRLF | LF | `.gitattributes` normalises |
+| Temp directory | `AppData\Local\Temp` | `/tmp` | Use pytest `tmp_path` or `tempfile` |
+| SQLite locking | Less aggressive | WAL mode | `StaticPool` in conftest |
+| Case sensitivity | Case-insensitive | Case-sensitive | Use exact filenames. CI runs on Linux. |
+| Port conflicts | Antivirus may block | Rarely | Smoke test retries. E2E `reuseExistingServer`. |
+
+---
+
+## 9. Mocking & Determinism
+
+### 9.1 Mock Architecture
+
+| Real World | Test Mock | Scope |
+|-----------|-----------|-------|
+| AI Providers (OpenAI, Google, etc.) | `_block_ai_gateway` → stub JSON | Autouse |
+| External HTTP (job boards) | `_mock_outbound_http` → stub HTML | Autouse |
+| Database (PostgreSQL / SQLite) | In-memory SQLite + `StaticPool` (tests); PostgreSQL 16 service container (CI schema drift) | Session |
+| CV Analysis pipeline | `_mock_cv_analysis` → fallback profile | Autouse |
+| Rate Limiter (slowapi) | `reset_rate_limiter` → `.reset()` | Autouse |
+
+### 9.2 Mock Rules
+
+| Rule | Why |
+|------|-----|
+| Mock at the boundary, not inside | Mock `AIGateway.call()` (chokepoint). One mock covers all 9 providers. |
+| Autouse for safety, opt-out for intent | All outbound blocked by default. Opt out with `@pytest.mark.allow_ai_gateway`. |
+| Never mock the thing you're testing | Testing keyword matching? Don't mock keyword service. |
+| Session-scoped for expensive resources | `shared_ai_service` (6s init), `isolate_database`. |
+| Function-scoped for state | `clean_db_between_tests`, `reset_rate_limiter` run per-test. |
+
+### 9.3 Determinism Checklist
+
+| Non-determinism source | Mitigation |
+|-----------------------|------------|
+| Wall-clock time | Use `freezegun` or mock `datetime.now()` |
+| AI response variance | AI gateway blocked; quality tests separate |
+| DB auto-increment IDs | Never assert on exact IDs; use `filter_by()` |
+| Rate limiter state | Reset between tests |
+| Global singletons | `deps._invalidate_cache()` in cleanup |
+
+---
+
+## 10. Performance & Flaky Test Elimination
+
+### 10.1 Current Performance
+
+| Metric | Before | After | Improvement |
+|--------|--------|-------|-------------|
+| Backend (sequential) | ~380s | ~234s | 38% faster |
+| Backend (parallel) | ~380s | ~60s | 84% faster |
+| Frontend (Vitest) | ~47s | ~47s | (already fast) |
+| Total local run | ~430s | ~107s | 75% faster |
+
+### 10.2 Optimisations Applied
+
+| Optimisation | Savings | How |
+|-------------|---------|-----|
+| `shared_ai_service` fixture | ~220s | Session-scoped init (was 6.3s x 35) |
+| pytest-xdist parallel | ~60% wall time | `-n auto --dist worksteal` |
+| Selective DB cleanup | ~30s | Skip cleanup for pure unit tests |
+| Autouse mock layering | ~200s prevented | Blocks AI/HTTP calls |
+| `worksteal` distribution | ~10% vs loadgroup | Dynamic rebalancing |
+
+### 10.3 Flaky Test Prevention
+
+| Pattern | Detection | Prevention |
+|---------|-----------|------------|
+| Timer-dependent | Passes alone, fails in suite | `await waitFor()` with assertions, never `sleep()` |
+| Order-dependent | Passes in isolation | `clean_db_between_tests` + cache invalidation |
+| Rate-limit bleed | Sporadic 429 errors | `reset_rate_limiter` autouse |
+| Port conflict | E2E can't start server | `reuseExistingServer` in Playwright |
+| Network-dependent | Real API that's down | All HTTP mocked by default |
+
+### 10.4 Flaky Test Quarantine Process
+
+1. **Detect:** CI reports flaky test (passes on retry)
+2. **Quarantine:** `@pytest.mark.skip(reason="FLAKY: #123")`
+3. **Investigate:** Within 48 hours, diagnose root cause
+4. **Fix:** Address non-determinism, remove skip marker
+5. **Monitor:** Watch 1 week before considering stable
+
+---
+
+## 11. Coverage Strategy
+
+### 11.1 Targets
+
+| Component | Statements | Branches | Functions | Rationale |
+|-----------|-----------|----------|-----------|-----------|
+| Backend | 60% (current) | — | — | Growing towards 75% |
+| Frontend | 80% | 75% | 80% | Configured in `vite.config.js` |
+| E2E | Not measured | — | — | About user journeys, not lines |
+
+### 11.2 Priority Code Paths
+
+| Priority | Code path | Target |
+|----------|----------|--------|
+| P0 | Auth (login, session, RBAC) | 90%+ |
+| P0 | Data isolation (user A ≠ user B) | 90%+ |
+| P1 | AI service fallback chain | 80% |
+| P1 | API endpoints | 85% |
+| P2 | Search parsers | 75% |
+| P2 | Document generation | 70% |
+| P3 | Admin/config endpoints | 60% |
+
+---
+
+## 12. Maintenance & Hygiene
+
+### 12.1 Test Debt Signals
+
+| Signal | Action |
+|--------|--------|
+| Test takes > 5s without `@pytest.mark.slow` | Profile it. Usually an unmocked external call. |
+| Test name doesn't describe what it verifies | Rename to `test_{action}_{scenario}_{expected}`. |
+| Asserts on exact error message strings | Assert on status codes and structure instead. |
+| Creates DB records AND uses `client` | Pick one: direct DB or via API. |
+| `# TODO: fix this test` older than 30 days | Fix or delete. |
+| Test file has > 500 lines | Split by feature area. |
+
+### 12.2 Quarterly Review
+
+- **Slowest 20 tests** (`pytest --durations=20`) — optimise or move to separate stage
+- **Skipped tests** — still relevant? Unskip or delete.
+- **Coverage gaps** — new critical paths uncovered?
+- **Contract test completeness** — new endpoints missing?
+- **Marker accuracy** — still correct?
+
+### 12.3 New Test Decision Tree
+
+1. Pure function? → **Unit test** (`@pytest.mark.unit`)
+2. Single API endpoint? → **API test** (`@pytest.mark.api`)
+3. Rule across multiple endpoints? → **Contract test** (`@pytest.mark.contract`)
+4. Requires browser? → **E2E** (Playwright)
+5. Real network calls? → **Integration** (`@pytest.mark.integration`)
+6. Otherwise? → **Component** (`@pytest.mark.component`)
+
+---
+
+## 13. Quick Reference
+
+### Run Commands
+
+```bash
+# Backend
+pytest                              # Full suite (parallel)
+pytest -n0 -x -vvs tests/ai/       # Debug one area
+pytest -m unit                      # Unit tests only
+pytest -m contract                  # Contract tests only
+pytest -m security                  # Security tests only
+pytest --durations=20               # Show 20 slowest
+pytest --cov=. --cov-report=term    # With coverage
+
+# Frontend
+npm test                            # Vitest (CI mode)
+npm run test:watch                  # Watch mode
+npx vitest run src/components/      # One directory
+npm run test:e2e                    # Playwright headless
+npm run test:e2e:headed             # With browser
+```
+
+### Fixture Quick Reference
+
+| Fixture | Scope | Purpose |
+|---------|-------|---------|
+| `shared_ai_service` | Session | Pre-initialised AIService (saves 6s/test) |
+| `isolate_database` | Session | In-memory SQLite |
+| `isolate_data_dirs` | Session | Temp config/db directories |
+| `default_user_id` | Session | Default user's UUID |
+| `client` | Function | FastAPI TestClient |
+| `db_session` | Function | SQLAlchemy session |
+| `sample_job_data` | Function | Sample job dict |
+| `sample_search_file` | Function | Search record in DB |
+| `sample_saved_job` | Function | Saved job record in DB |
+| `temp_cv_dir` | Function | Temp dir with sample CVs |
+| `clean_db_between_tests` | Function (autouse) | Wipes DB between tests |
+| `reset_rate_limiter` | Function (autouse) | Resets slowapi |
+| `_block_ai_gateway` | Function (autouse) | Blocks AI calls |
+| `_mock_outbound_http` | Function (autouse) | Blocks external HTTP |
+
+### Current Test Counts (as of v0.3.1)
+
+| Suite | Files | Tests |
+|-------|-------|-------|
+| Backend (pytest) | 184 | 3,300+ |
+| Frontend (Vitest) | 56 | 700+ |
+| E2E (Playwright) | 11 | 44 |
+| **Total** | **251** | **4,000+** |
+
+---
+
+*This document should be reviewed and updated quarterly, or whenever the test architecture changes significantly.*
