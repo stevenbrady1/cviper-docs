@@ -5,7 +5,105 @@ All notable changes to CViper are documented in this file.
 Format based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 This project uses [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [Unreleased]
+## [0.5.2] - 2026-04-15
+
+### Added
+- **Usage tracking and Free/Pro tiers (CV-093).** Full-stack metering system: `User.tier` column, `UsageDailySummary` table, `UsageLimitMiddleware` enforcing daily limits on 15 AI endpoints, `GET /api/usage` with per-operation breakdown, `GET /api/usage/limits`, `UsageBadge` with per-operation tooltip, `UpgradeModal` on 429. Free tier: 10 AI calls, 3 CV scores, 5 salary estimates, 2 doc generations per day. Pro/Admin: unlimited. 75 tests.
+- **Job alerts — live search integration (CV-082).** `AlertService._run_profile_search()` now calls the real job search engine, filters via `seen_jobs` dedup, and creates in-app notifications via `NotificationBell`. Frontend alert toggle on active search profiles. Background loop runs every 900s. 18 tests.
+- **AI bias audit Phase 1 (CV-187).** 31 synthetic CV profiles across 5 bias dimensions (name origin, university prestige, career gaps, graduation year, gendered language). 17 prompt-level tests verify FAIRNESS_GUARDRAIL presence, prompt invariance across demographics, and job-relevant-only scoring dimensions. Audit report in `ClaudeReports/audits/`.
+- **API contract tests (LESSON-035).** `test_api_response_contracts.py` validates real endpoint response keys match frontend expectations — prevents mock-hiding-mismatch bugs.
+- **Benchmark separation guard (LESSON-036).** `test_benchmark_separation_guard.py` seeds both permanent + contract benchmarks and asserts filtered queries never leak the other type.
+- **14 E2E tests for UK Regional Salary Comparison.** Negative (empty salary, API error), boundary (zero, negative, large salary), edge (same location, API failure), regression (dropdown population).
+- **4 E2E tests for contract rate rendering.** Verifies day rate vs annual display, mixed contract+permanent, null rate_unit fallback.
+
+### Fixed
+- **Salary comparison dropdowns empty.** Backend `list_cost_of_living_locations()` returned `{"location": ...}` but frontend read `l.name`. Fixed key to `"name"`.
+- **Contractor rates returning blended data.** `get_benchmarks_for_role()` had no `role_type` filter, mixing permanent and contract benchmarks. Added SQL-level filtering, updated all 5 callers.
+- **CI stale branch noise.** Session-start hook reported failures from closed PR branches as actionable. Fixed: filter against open PRs, added `types: [opened, synchronize, reopened]` to CI workflow, enabled `delete_branch_on_merge`.
+
+### Changed
+- **DPIA updated** with bias audit Phase 1 results, usage tracking limits, solicitor action summary table (7 items), and Appendix A.
+
+## [0.5.1] - 2026-04-13
+
+### Added
+- **Career Intelligence UI (CV-137, CV-138, CV-139).** Role Discovery, Career Progression Map (IC + management tracks), and AI Training Plan sections wired into Career Insights and Skills tabs — all backed by existing API endpoints.
+- **UK Regional Salary Comparison (CV-072).** Interactive salary comparison card in Companies tab using cost-of-living index across 13 UK locations. Shows purchasing-power equivalent with percentage difference.
+- **Legal markdown rendering.** Privacy Policy and Terms of Service now rendered from canonical `docs/*.md` via `react-markdown`, eliminating manual sync between markdown and JSX.
+- **AI Provider Settings redesign.** Visual card grid replacing flat key list — brand color accents, provider descriptions, status badges, free tier hints, model selectors, and Get Key links.
+- **Progressive tab disclosure (CV-200).** New users see 4 core tabs; secondary tabs unlock after CV upload + search; full tabs after applying or via Settings toggle. 3-tier model (focused/standard/full).
+- **Wizard Mode guided onboarding (CV-200).** Auto-starting wizard constrains UI to one tab at a time. Separate step sets for registered and demo users.
+- **Desktop tab grouping (CV-200).** 13 tabs reduced to 7 visible via Insights and More dropdowns.
+- **Demo value-first experience (CV-200).** First 2 scoring results untruncated for sandbox users. SandboxWelcomeModal redesigned.
+- **Data retention schedule + email token cleanup (CV-102).** All 5 retention policies now scheduled in `_scheduled_maintenance()`.
+- **Dynamic sub-score weights by role seniority (CV-085).** Fit scoring adjusts weights by seniority level.
+- **Security observability for banking enhancements (CV-190).** Monitoring dashboards, anomaly alerts, fingerprint tracking.
+- **Few-shot score calibration examples (CV-086).** Three calibration anchors for consistent scoring.
+- **Email verification deep-link handler (CV-142).** Secure single-use token verification flow with E2E tests.
+- **100% E2E journey coverage (CV-182).** All 48 user journey scenarios covered by Playwright specs.
+- **Pre-commit untracked import guard (Layer 8).** Blocks commits when staged files import untracked local modules.
+- **E2E tab navigation guard.** Fast-fail spec verifying all 11 E2E-referenced tabs are reachable after mock setup.
+- **UI consistency audit.** 54 issues found and fixed, surface style registry + ESLint rule + contract test added.
+
+## [0.4.3] - 2026-04-10
+
+### Fixed
+- **P0 cross-user data leak in multi-provider CV generation.** Six `multiGen*` state variables (CV text, cover letter, ATS scores, target job ID) were not cleared on logout or user switch, allowing the previous user's multi-provider CV comparison results to remain visible. Added resets to both `handleLogout()` and the user-switch `useEffect`.
+- **Job Search blocked in cloud mode.** The `cvFolder` guard rejected all searches for cloud-deployed users with "Please specify CV folder location or load a profile". Now bypassed when `cloudMode` is true, matching the existing sandbox user exemption.
+
+### Added
+- **State cleanup regression guard** (`App.userScopedState.test.js`). Static-analysis test that parses App.jsx and verifies both cleanup paths (handleLogout + user-switch useEffect) reset the same setters, all registered user-scoped setters appear in both, and no unregistered setters slip through. Makes the entire class of missing-state-reset bugs structurally impossible.
+- **Pre-launch banner** on the login page — amber "Coming Soon" notice informing visitors that CViper is in development.
+
+## [0.4.2] - 2026-04-10
+
+### Added
+- **Persistent generated documents (closes #208).** Generated CVs and cover letters are uploaded to Azure Blob Storage immediately after generation. Lifecycle policy auto-tiers to Cool after 7 days and hard-deletes after 30. Survives container restarts and revisions, no operational burden. Bicep adds the `cviper-documents` blob container, lifecycle policy, and grants the backend's managed identity Storage Blob Data Contributor — auth via `DefaultAzureCredential`, no connection strings or account keys. Backend `helpers/blob_storage.py` wraps the SDK with `upload_file` / `download_document` / `delete_user_blobs` helpers. New `jobs.blob_keys` JSON column via Alembic migration 028. Download route checks blob storage first then falls back to local FS for legacy rows pre-#208. Edited documents are mirrored back via `PUT /api/documents/{id}/text`. Falls through silently when blob storage isn't configured (local dev / CI / on-prem).
+- **Blob storage audit logging.** New `diagnosticSettings` on the storage account's blob service streams `StorageRead` / `StorageWrite` / `StorageDelete` events to the existing Log Analytics workspace — same pattern as the Key Vault diagnostic logs. Forensic trail for "who accessed which generated document and when" (GDPR Art. 32 auditability).
+- **GDPR right-to-erasure for blob storage.** `/api/gdpr/delete-account` enumerates `users/{uid}/` and deletes every blob before the DB cascade so users get a clean "all data gone" guarantee. Idempotent and non-fatal — failures fall through to the 30-day lifecycle as a backstop. Logs `gdpr_blob_sweep` and `gdpr_blob_cleanup_summary` events for audit correlation.
+- **Freelancer.com job source.** New `FreelancerAPI` scraper class wrapping the public REST endpoint `/api/projects/0.1/projects/active/`. Returns active freelance projects (always Contract type) with budget rendered as a project range. Wired into Bicep, `deploy.sh`, and `routes/config.py`. About page Job Sources stat now reads 14 (was 13).
+- **176 roles in registration step 4** (was 43). New `_ADDITIONAL_ROLES_BY_SECTOR` dict in `routes/auth.py` merges ~130 commonly-searched UK IT roles into the salary-seed baseline without polluting the curated benchmark data.
+- **Industry filter on registration step 6 (Career Pages).** Dropdown above the list filters by industry with per-industry counts. Select All / Clear All scoped to the current filter so users can mass-select within an industry without disturbing prior selections.
+- **`Back to sign in` button** at the top of the registration form so users can return to login from any step.
+- **`parseServerTimestamp` / `parseServerExpiry`** shared frontend utility for parsing backend ISO timestamps. Treats naive strings as UTC and refuses to return values implausibly far in the past — defence-in-depth for the LESSON-027 sandbox-bounce class of bug.
+- **Ruff `DTZ` rules** enabled in `backend/pyproject.toml` to ban naive `datetime.now()` in new code. CLAUDE.md auto-correction rule 21 + LESSON-027 entry document the bug class.
+- **Employment Type filter** in Search Criteria — Permanent / Contractor dropdown, filters results client-side on `contract_type`. Search results column relabelled "Salary" → "Salary / Rate".
+- **Sticky search status banner** pinned near the top while scrolling — pulsing blue during search, solid green when complete. Shows source count, jobs found, and failure count.
+- **Auto-favourite company** when saving a job from search results — career-page favourites reflect the user's interests from day one.
+- **Quick-jump to Applications** — "View →" button next to Saved badge, plus "View My Applications →" in bulk save bar.
+- **Email pre-check at registration step 1.** Debounced availability check with inline ✓/✗ marker and fail-fast gate.
+- **"Don't show again" checkbox** on the Welcome modal so users control whether it reappears on next login.
+- **Per-user namespaced localStorage** (`userStorage.js`). Keys stored under `cviper:u:<userId>:<rawKey>` — physically prevents cross-user reads.
+- **Friendly error messages** (`errorMessages.js`). Translates HTTP codes to actionable text with troubleshooting hints. 20 worst-offender sites migrated.
+- **Skills tab** promoted to first-class top-nav feature with training providers, skill gap analysis, and market demand.
+- **AI model badge** in CV Analysis and Document Centre showing actual model used (not just provider).
+
+### Security
+- **P0: Cross-user data leak — three layers fixed (LESSON-029 + LESSON-030).** (1) Backend `repo.get_*` scoped with `user_id`. (2) Frontend user-switch effect resets 37+ state slots (was 17). (3) `localStorage` keys migrated to `userStorage` + `purgeAllUserScopedStorage()` on switch/logout. Backend audit test catches unscoped calls at PR time.
+- **`completeAuthentication` helper** — single post-login state machine replaces three duplicated auth handlers. `handleLogin` was missing JWT bearer token storage (LESSON-028).
+
+### Fixed
+- **AI model switcher crash (React error #31).** `showMessage` calls passed `{type, text}` objects instead of `(text, type)` args.
+- **"Please wait for username check"** blocked fast typists at registration step 1. Gate now only blocks on definitive "taken".
+- **useSearch state survived user switch.** `siteSummaries`, `lastSearchParams`, `keywordsUsed` leaked between sessions. Exposed `resetSearchState()` in the hook.
+- **Work Mode defaulted to stale saved preference.** Now resets to "Any" each session.
+- **Document Centre close button** replaced bare "X" with clear "✕ Close" pill. Job rail shows AI model alongside provider.
+- **Toast notifications** moved to bottom-centre above the FAB. Floating-element z-index centralised in `utils/layers.js`.
+- **Try Demo bounced users back to login (LESSON-027).** Sandbox `expires_at` was serialised as a naive ISO string from `datetime.now()` (Azure container = UTC). JS `new Date()` parses naive strings as local time, so a BST browser saw a fresh 30-minute session as 30 minutes expired and `SandboxBanner`'s countdown fired `onLogout()` on mount. Three-layer fix: backend uses `datetime.now(timezone.utc)`; frontend `parseServerExpiry` appends `Z` and refuses values >30s in the past; `SandboxBanner` rewritten to use the shared util.
+- **Folder browser exposed Unix container paths** (third recurrence). `/api/browse-folders` returns 410 in cloud mode. PUT settings scrubs incoming `cv_folder` / `output_folder` starting with Unix server prefixes. New `CLOUD_MODE=true` env var on the backend.
+- **Output Folder field in General Settings was unusable** for cloud-hosted users. Frontend now reads `cloud_mode` from `/api/config/settings` and hides the input + Browse button entirely in cloud mode, replaced with an info card. `helpers/documents.py` defaults `output_folder` to `$CLOUD_MODE_OUTPUT_DIR` when empty.
+- **OAuth `redirect_uri_mismatch` errors** in production. Bicep now sets explicit `*_REDIRECT_URI` env vars; new startup guard refuses to boot if any contain `.internal.` or aren't `https://`.
+- **Try Demo broke 3× in 24h** before LESSON-027 was identified. Restored the 5s `suspendAuthInterceptorFor` window alongside the header gate, exempted `/api/auth/refresh`, added Playwright `try-demo-fetch-storm.spec.js`, CLAUDE.md auto-correction rule 19, and a microtask flush in `handleSandboxLogin`.
+- **Demo profile auto-load surfaced a scary "Error loading profile" toast** on the demo landing screen. Added a `silent` flag to `loadProfileIntoForm`; auto-restore on app mount uses `{ silent: true }`.
+- **Contract salary estimates showed annual figures** instead of day rates. New `_apply_employment_type_units()` helper converts via `salary_utils.perm_to_day_rate` when `employment_type == "Contract"` and tags with `rate_unit: "day"`. Migration 027 backfills existing rows.
+- **Generated documents 410'd silently** when ephemeral `/tmp` files had been wiped. Backend returns 410 with a friendly "regenerate" message; frontend `DocumentCentre` converts the four `<a href>` download tags to `<button>` handlers that fetch via `authFetch` and surface the toast.
+- **Showcase SVG diagrams** had overlapping rects, mis-routed arrows, and inconsistent diamond sizes across all three diagrams. All fixed with explicit coordinate adjustments. Stale "23" fallback method count refreshed to "26".
+- **Search action bar layout** — LinkedIn caption span pushed History to the right edge. Restructured to two rows: three buttons close together, then the caption full-width below.
+- **Salary estimate `rate_unit` persistence** — was tagged on the API response but never stored. Migration 027 adds the column; model + repo + serialiser all carry it through.
+- **Login page chip sizes** standardised to 12px / 4px 10px / fontWeight 500 across CV Analysis and Job Search.
+- **"New to AI?" toggle** was a near-invisible ghost link. Converted to a tinted pill button.
+- **`Search on LinkedIn` button height** misaligned with siblings — pinned `lineHeight: 1.5` + `boxSizing` and shrank the SVG to 12px.
+- **Action bar floated over the page** — removed `position: sticky` so it sits inline.
 
 ## [0.4.1] - 2026-04-08
 

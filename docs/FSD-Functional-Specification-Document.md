@@ -7,17 +7,19 @@
 | Field | Value |
 |-------|-------|
 | **Document ID** | FSD-CVIPER-001 |
-| **Version** | 0.3.1 |
+| **Version** | 0.5.1 |
 | **Status** | Pre-Release |
 | **Author** | CViper Project Team |
-| **Date** | 2026-04-07 |
+| **Date** | 2026-04-13 |
 | **Classification** | Internal |
-| **Related BRD** | BRD-CVIPER-001 v0.3.1 |
+| **Related BRD** | BRD-CVIPER-001 v0.5.1 |
 
 ### Version History
 
 | Version | Date | Author | Changes |
 |---------|------|--------|---------|
+| 0.5.1 | 2026-04-13 | CViper Project Team | Career Intelligence UI, UK salary comparison, legal markdown rendering, provider settings redesign, progressive disclosure, wizard mode, E2E guards. All doc versions aligned to 0.5.1. |
+| 0.3.2 | 2026-04-10 | CViper Project Team | CV Optimisation Pipeline (keyword injection, ATS format validator, one-click optimise). Training Provider Foundation (8 providers, certifications, skill progress). AI Ethics & Fairness (prompt guardrails, confidence scores, Challenge This Score). Growth Readiness (OG/Twitter meta, robots.txt, sitemap.xml, PWA install, Plausible). Cross-user Data Isolation (3-layer: backend scoping, frontend reset, userStorage). API Contract Tests (14 tests, shared schema). P0 security verified. |
 | 0.3.1 | 2026-04-07 | CViper Project Team | Phase 0 security hardening: encrypted `.env` secrets, SecurityHeadersMiddleware, fatal guards for SECURE_COOKIES + CORS wildcards, all `shell=True` removed from backend (AST ratchet test). OAuth extended to LinkedIn + Google + Microsoft. `?tab=` deep links for external URLs. Terms of Service published. Public-route registry (single source of truth for auth middleware). Stale chunk prevention (nginx cache headers + lazyRetry + Cloudflare purge). PR-based backlog sync. News Feed full-width fix. |
 | 0.2.3 | 2026-03-27 | CViper Project Team | Sandbox Gemini quota fix (permanent quota error detection, force_open circuit breaker). Alembic migration 013 batch fix (SQLite batch_alter_table compatibility). CI PostgreSQL service container for schema drift checks. |
 | 0.2.2 | 2026-03-27 | CViper Project Team | Version reset to align with application semver (pre-release). Consolidates all prior work (formerly v1.0–v2.2). Full history archived in `docs/Archive/`. |
@@ -25,6 +27,16 @@
 > **Note:** Versions prior to 0.2.2 used an independent numbering scheme (v1.0–v2.2). Those documents are preserved in `docs/Archive/` for reference. From this version onward, document versions track the application version in `package.json`.
 
 ---
+
+### What's New in v0.3.2
+
+- **CV Optimisation Pipeline (FR-033)**: Keyword injection suggestions identify missing ATS keywords from job descriptions. ATS format validator checks CV structure against compatibility rules. One-click optimise-for-job automates CV tailoring for a specific role.
+- **Training Provider Foundation (FR-034)**: 8 curated providers (4 free: freeCodeCamp, Coursera Audit, edX Audit, Khan Academy; 4 paid: Udemy, Pluralsight, LinkedIn Learning, Codecademy Pro). Certification mapping to skills. Skill progress tracking via Skills & Training tab.
+- **AI Ethics & Fairness (FR-035)**: Fairness guardrails injected into all AI scoring prompts (no bias on name, age, gender, ethnicity). Confidence scores displayed on all AI outputs. "Challenge This Score" button for user-initiated re-evaluation. AI transparency disclosure explaining scoring methodology.
+- **Growth Readiness (FR-036)**: Open Graph and Twitter Card meta tags for social sharing. robots.txt and sitemap.xml for SEO. PWA install prompt for mobile users. Plausible analytics for privacy-respecting usage tracking.
+- **Cross-user Data Isolation (FR-037)**: 3-layer prevention — backend `user_id` scoping on all repo functions, frontend state reset on user switch, `userStorage` namespacing (`cviper:u:<userId>:<key>`) with purge on switch.
+- **API Contract Tests (FR-038)**: 14 contract tests with shared schema file validating response shapes across major endpoints. Hard CI gate.
+- **Security Verification (FR-039)**: All P0 security items verified — CSP headers, CORS guards, secret encryption, Terms of Service, subprocess hardening (AST ratchet test).
 
 ### What's New in v0.3.1
 
@@ -755,17 +767,17 @@ board.ats_provider → resolve_site_type() → get_handler() → handler.search(
 - Warning alert with "Go to Settings" CTA shown when no provider is configured
 - Provider configuration remains exclusively in Settings tab
 
-### 4.13 FR-013: Guided Onboarding Stepper (P2)
+### 4.13 FR-013: Guided Onboarding — Wizard Mode + ProgressStepper (P2)
 
 **Traces to**: BR-040
 
-**User Story**: As a first-time user, I want to see a clear progress indicator showing where I am in the job search workflow.
+**User Story**: As a first-time user, I want guided onboarding that walks me through the core workflow without overwhelming me with the full UI.
 
 **Acceptance Criteria**:
-- 4-step horizontal stepper below TopNav: Upload CV → Review Profile → Find Jobs → Apply
-- Steps auto-complete based on user progress (CV analyzed, tab navigated, jobs saved, application status changed)
-- Clicking a step navigates to the corresponding tab
-- Current step highlighted with teal border; completed steps show checkmark with teal connector lines
+- **WizardMode** (primary): auto-starts for first-visit and demo users. Full-width ribbon below TopNav guides through Upload → Search → Score → Save (registered) or Explore CV → See Scores → Try Search → Your Turn (demo). Auto-advances on completion signals (e.g. hasCv, hasSearchResults). When active, TopNav shows only the current step's tab + Settings. "Exit Guide" available at any step.
+- **ProgressStepper** (ambient): 5-step compact stepper (Upload CV → Review Profile → Find Jobs → Apply → Get Help) always visible below TopNav. Tracks completion with per-step checkmarks. Pulses next incomplete step. Clicking a step navigates to its tab.
+- Wizard auto-start: `useWizard({ autoStart: true })` activates on mount when no saved state exists. Welcome modals dismiss to reveal the already-running wizard ("Get Started") or dismiss + exit ("Skip").
+- Demo wizard uses viewing steps with auto-complete timers (8s) + action steps + conversion CTA.
 
 ### 4.14 FR-014: CV-to-Search Data Flow (P3)
 
@@ -791,17 +803,22 @@ board.ats_provider → resolve_site_type() → get_handler() → handler.search(
 - Company grid shows only selected/favourited items when total exceeds 10 companies
 - "Show All Companies" toggle available for large lists
 
-### 4.16 FR-016: Advanced Mode Toggle (P5)
+### 4.16 FR-016: Progressive Tab Disclosure + Advanced Mode Toggle (P5)
 
 **Traces to**: BR-043
 
-**User Story**: As a job seeker, I should not see developer-oriented tabs unless I explicitly opt in.
+**User Story**: As a new user, I should see only the tabs relevant to my current workflow. As a power user, I should be able to reveal all tabs.
 
 **Acceptance Criteria**:
-- Monitoring and Prompt Lab tabs hidden from navigation by default
-- Advanced Mode toggle in Settings > Preferences enables/disables visibility
-- Setting persisted to `localStorage` (`cviper_advancedMode`) and backend config (`advanced_mode`)
-- Advanced tabs show small gear icon when visible
+- **Progressive disclosure tiers** (config/tabs.js `TAB_TIERS`):
+  - `focused` (default): CV Analysis, Job Search, Applications, Settings (4 tabs)
+  - `standard` (after CV upload + first search): + Company Salaries, Career Insights, Skills & Training
+  - `full` (after applying, or explicit opt-in): all tabs including News Feed, FAQ, Behind CViper
+- **Tab grouping**: Insights dropdown (Companies, Career Insights, Skills, News Feed) and More dropdown (Prompt Lab, My Requests, FAQ, Behind CViper) reduce visible top-level items
+- **"Show all tabs" toggle** in Settings > Preferences bypasses tier filtering. Persisted via `userStorage.getItemGlobal`/`setItemGlobal` (readable before login)
+- **Advanced Mode toggle** (existing): Monitoring and Prompt Lab hidden unless enabled. Gear icon on advanced tabs
+- Tier derivation: `useTabTier` hook reads `onboarding.steps` (upload/search/apply) and `showAllTabs` preference
+- Admin users always see full tier
 
 ### 4.17 FR-017: Settings Sub-Navigation (P6)
 
@@ -1133,6 +1150,163 @@ board.ats_provider → resolve_site_type() → get_handler() → handler.search(
 - Sandbox users do not see Monitoring or Prompt Lab tabs unless Advanced Mode is enabled
 - Admin (root) users continue to see all tabs and access all service control endpoints
 - 26 RBAC enforcement tests pass (24 existing + 2 new service control tests)
+
+### 4.33 FR-033: CV Optimisation Pipeline
+
+**Traces to**: BR-071
+
+**User Story**: As a job seeker, I want the system to identify missing ATS keywords in my CV, validate its format for ATS compatibility, and optimise it for a specific job with one click — so I can maximise my chances of passing automated screening.
+
+**Components**:
+
+| Feature | Description |
+|---------|-------------|
+| Keyword Injection Suggestions | Compares CV text against job description to identify high-value missing keywords; suggests natural incorporation points |
+| ATS Format Validator | Checks CV structure against ATS compatibility rules: clean section headers, no tables/images/columns, consistent date formats, standard fonts |
+| One-Click Optimise | Combines keyword injection + bullet rewriting + format validation into a single action tailored to a specific job posting |
+
+**Acceptance Criteria**:
+- Keyword injection returns a list of missing keywords ranked by importance with suggested incorporation locations
+- ATS format validator returns a structured report with pass/fail checks and specific remediation advice
+- One-click optimise produces a tailored CV variant with keywords injected, weak bullets rewritten, and format issues resolved
+- All operations include AI provider attribution and confidence scores
+- Fallback to keyword-based suggestions when AI is unavailable
+
+### 4.34 FR-034: Training Provider Foundation
+
+**Traces to**: BR-072
+
+**User Story**: As a job seeker, I want to see recommended training courses and certifications for skills I'm missing, so I can close gaps and become a stronger candidate.
+
+**Training Providers**:
+
+| Provider | Type | Cost |
+|----------|------|------|
+| freeCodeCamp | Free | Free |
+| Coursera (Audit mode) | Free | Free (audit) |
+| edX (Audit mode) | Free | Free (audit) |
+| Khan Academy | Free | Free |
+| Udemy | Paid | Per-course |
+| Pluralsight | Paid | Subscription |
+| LinkedIn Learning | Paid | Subscription |
+| Codecademy Pro | Paid | Subscription |
+
+**Acceptance Criteria**:
+- Skills & Training tab accessible via TopNav navigation
+- Each skill gap from CV analysis links to relevant courses from the 8 providers
+- Certification mapping: specific certifications (AWS, Azure, PMP, etc.) mapped to skills they validate
+- Skill progress tracking: users can mark skills as "learning", "completed", or "certified"
+- Provider data stored in seed data with URLs, cost indicators, and certification details
+
+### 4.35 FR-035: AI Ethics & Fairness
+
+**Traces to**: BR-073
+
+**User Story**: As a user, I want assurance that AI scoring is fair and transparent, so I can trust the system's recommendations and challenge results I disagree with.
+
+**Components**:
+
+| Component | Implementation |
+|-----------|---------------|
+| Fairness Guardrails | System prompts include explicit instructions to evaluate based on skills, experience, and qualifications only — not name, age, gender, ethnicity, or other protected characteristics |
+| Confidence Scores | Every AI-generated score includes a confidence rating (0-100) indicating model certainty |
+| Challenge This Score | Button on score detail panels triggers re-evaluation with a different prompt variation and explicit reasoning |
+| AI Transparency | Disclosure panel explaining how scores are generated, which provider/model was used, and limitations |
+
+**Acceptance Criteria**:
+- All AI scoring prompts contain fairness guardrails (verifiable via prompt audit)
+- Confidence scores displayed alongside fit scores, salary estimates, and analysis results
+- Challenge This Score produces a new evaluation with written reasoning for the score
+- AI transparency disclosure accessible from any AI-generated result
+- Fairness guardrails cannot be overridden by user input (prompt injection prevention applies)
+
+### 4.36 FR-036: Growth Readiness
+
+**Traces to**: BR-074
+
+**User Story**: As the platform operator, I want the application to be discoverable via search engines, shareable on social media, installable as a PWA, and instrumented with privacy-respecting analytics.
+
+**Components**:
+
+| Feature | Implementation |
+|---------|---------------|
+| Open Graph Tags | `og:title`, `og:description`, `og:image`, `og:url` meta tags in index.html |
+| Twitter Cards | `twitter:card`, `twitter:title`, `twitter:description` meta tags |
+| robots.txt | Allows search engine crawling of public pages, disallows API and admin paths |
+| sitemap.xml | Lists public-facing pages for search engine indexing |
+| PWA Install Prompt | Browser-native install prompt with custom UI trigger for supported browsers |
+| Plausible Analytics | Privacy-respecting analytics script (no cookies, no personal data, GDPR-compliant) |
+
+**Acceptance Criteria**:
+- Social sharing previews render correctly on LinkedIn, Twitter/X, and Facebook
+- robots.txt correctly allows/disallows appropriate paths
+- sitemap.xml lists all public pages
+- PWA install prompt appears on mobile browsers that support installation
+- Plausible analytics tracks page views without cookies or personal data
+
+### 4.37 FR-037: Cross-user Data Isolation
+
+**Traces to**: BR-075
+
+**User Story**: As a user, I want my data to be completely isolated from other users, so that switching accounts never reveals another user's jobs, analyses, or preferences.
+
+**3-Layer Prevention Strategy**:
+
+| Layer | Mechanism | Implementation |
+|-------|-----------|---------------|
+| 1. Backend Scoping | All repo functions filter by `user_id` | Every `repo.get_*`, `repo.list_*`, `repo.find_*` called with explicit `user_id=_uid(request)` |
+| 2. Frontend State Reset | React state cleared on user switch | `handleLogout` resets all user-scoped state; `useEffect` on `currentUser?.id` as safety net |
+| 3. localStorage Namespacing | Per-user key namespacing | `userStorage` utility: `cviper:u:<userId>:<key>` format; `purgeAllUserScopedStorage()` on switch |
+
+**Acceptance Criteria**:
+- No backend repo function returns data across users (enforced by `test_user_isolation_audit.py`)
+- Switching users clears all previous user data from React state
+- localStorage keys are namespaced per user; switching users purges all namespaced keys
+- Legacy unprefixed localStorage keys are also purged on user switch (defence-in-depth)
+- Regression guard tests verify all three layers
+
+### 4.38 FR-038: API Contract Tests
+
+**Traces to**: BR-076
+
+**User Story**: As a developer, I want automated contract tests that verify API response shapes so that backward-incompatible changes are caught before deployment.
+
+**Implementation**:
+
+| Aspect | Detail |
+|--------|--------|
+| Test Count | 14 contract tests covering major endpoints |
+| Schema File | Shared schema definition with required keys and value types per endpoint |
+| CI Gate | Contract test failures block merge (hard gate) |
+| Coverage | Health, auth, jobs, search, CV analysis, companies, monitoring, config endpoints |
+
+**Acceptance Criteria**:
+- 14 contract tests validate response shapes against shared schema
+- Adding or removing a required response field without updating the schema fails CI
+- Schema file serves as machine-readable API documentation
+- Contract tests run as part of the standard test suite (no separate execution)
+
+### 4.39 FR-039: Security Verification
+
+**Traces to**: BR-077
+
+**User Story**: As the platform operator, I want all P0 security controls verified and maintained so that the application meets security baseline requirements.
+
+**Verified Controls**:
+
+| Control | Status | Enforcement |
+|---------|--------|-------------|
+| Content Security Policy headers | Verified | SecurityHeadersMiddleware (report-only mode) |
+| CORS origin guards | Verified | Fatal production guard prevents wildcard origins |
+| Secret encryption at rest | Verified | Fernet master key; `MASTER_KEY` required in production |
+| Terms of Service | Verified | Published at `/?tab=terms`; accepted during registration |
+| Subprocess hardening | Verified | All `shell=True` removed; AST ratchet test enforces in CI |
+
+**Acceptance Criteria**:
+- All P0 security controls pass automated verification
+- AST ratchet test prevents reintroduction of `shell=True` in backend code
+- Fatal startup guards prevent production boot without required security configuration
+- Security controls are documented in `SECURITY.md`
 
 ---
 
@@ -1852,33 +2026,38 @@ Response:
 ### 8.1 Navigation Structure
 
 ```
-┌─────────────────────────────────────────────────────────────────────┐
+┌──────────────────────────────────────────────────────────────────────┐
 │ TopNav: Logo + Version + Git Hash | AI Provider Indicator | User Menu │
-├─────────────────────────────────────────────────────────────────────┤
-│ Tab Bar: CV Analysis | Job Search | Applications | Company Salaries │
-│          [Monitoring]* [Prompt Lab]* | Settings | [Admin]**         │
-│ Quick Stats: Results | Saved | Selected                             │
-├─────────────────────────────────────────────────────────────────────┤
-│ ProgressStepper: Upload CV → Review Profile → Find Jobs → Apply     │
-├─────────────────────────────────────────────────────────────────────┤
-│                                                                      │
-│  Main Content Area                                                   │
-│  (Active tab renders here)                                          │
-│                                                                      │
-│  ┌──────────────────────────────────────────────────────────────┐   │
-│  │  Tab-specific content                                        │   │
-│  │  (or empty state with icon + CTA if no data)                │   │
-│  └──────────────────────────────────────────────────────────────┘   │
-│                                                                      │
-└─────────────────────────────────────────────────────────────────────┘
+├──────────────────────────────────────────────────────────────────────┤
+│ Tab Bar (progressive disclosure — new users see fewer tabs):          │
+│   Focused:  CV Analysis | Job Search | Applications | Settings       │
+│   + Standard: [▼ Insights: Companies, Career Insights, Skills]       │
+│   + Full:     [▼ More: Prompt Lab*, My Requests, FAQ, Behind CViper] │
+│               [Admin]** | [Monitoring]* (in More dropdown)            │
+├──────────────────────────────────────────────────────────────────────┤
+│ WizardMode ribbon (if active): Step N of M — instruction — [Next]    │
+│ ProgressStepper: Upload CV → Review Profile → Find Jobs → Apply      │
+├──────────────────────────────────────────────────────────────────────┤
+│                                                                       │
+│  Main Content Area                                                    │
+│  (Active tab renders here)                                           │
+│                                                                       │
+│  ┌──────────────────────────────────────────────────────────────┐    │
+│  │  Tab-specific content                                        │    │
+│  │  (or empty state with icon + CTA if no data)                │    │
+│  └──────────────────────────────────────────────────────────────┘    │
+│                                                                       │
+└──────────────────────────────────────────────────────────────────────┘
 
-*  Monitoring and Prompt Lab visible only when Advanced Mode is enabled (applies to all non-admin users including sandbox)
+*  Monitoring and Prompt Lab visible only when Advanced Mode is enabled
 ** Admin tab visible only to root users
 ```
 
-**Layout**: Horizontal TopNav with tab buttons (no sidebar). Tab buttons render inline in a scrollable row. ProgressStepper appears below tabs as a 4-step horizontal workflow indicator. Git commit hash (short SHA, e.g., `#ac6e25b`) displayed beneath version number in TopNav, Sidebar footer, and LoginScreen — injected at build time via Vite define.
+**Layout**: Horizontal TopNav with tab buttons and dropdown groups (no sidebar). Ungrouped tabs render directly; grouped tabs render inside "Insights" and "More" dropdown menus (click to open, click-outside to close). WizardMode ribbon appears below tabs when wizard is active. ProgressStepper appears as ambient progress tracker. Git commit hash displayed beneath version number — injected at build time via Vite define.
 
-**Advanced Mode**: Defaults to `false`. Toggled via Settings > Preferences. Persisted to `localStorage` (`cviper_advancedMode`) and backend config (`advanced_mode`). When off, Monitoring and Prompt Lab tabs are hidden from the tab bar.
+**Progressive Disclosure**: Tabs have a `tier` field (focused/standard/full). The `useTabTier` hook derives the current tier from onboarding progress (`upload` + `search` → standard; + `apply` → full) or from the "Show all tabs" user preference. Admin users always see full tier. TopNav filters tabs by `tierLevel` before applying advanced mode filtering.
+
+**Advanced Mode**: Defaults to `false`. Toggled via Settings > Preferences. Persisted via `userStorage.getItemGlobal` (readable before login) and backend config (`advanced_mode`). When off, Monitoring and Prompt Lab tabs are hidden from the More dropdown.
 
 ### 8.2 Tab Specifications
 
@@ -2152,6 +2331,14 @@ key_source, username, role
 | Password reset flow (22 tests) | test_password_reset.py | Forgot/reset/token/email | FR-023 |
 | Adzuna integration (25 tests) | test_adzuna.py | API, affiliate URLs, tracking | FR-021 |
 
+#### Category 4b: Cross-user Data Isolation
+
+| Test Case | File | Purpose | Traces To |
+|-----------|------|---------|-----------|
+| Backend repo functions filter by user_id | test_user_isolation_audit.py | Verify all repo functions scope by user | FR-037, BR-075 |
+| Frontend userStorage namespaces per user | userStorage.test.js | Verify key namespacing and purge | FR-037, BR-075 |
+| API contract response shapes validated | test_api_contracts.py | Response shape regression | FR-038, BR-076 |
+
 #### Category 5: Data Layer (9 test files)
 
 | Test Case | File | Purpose | Traces To |
@@ -2278,6 +2465,13 @@ key_source, username, role
 | F-042 | Sandbox UI components | FR-030 |
 | F-043 | Guided CV bullet optimization | FR-031 |
 | F-044 | RBAC audit & hardening (service control admin-only, sandbox tab visibility) | FR-032 |
+| F-054 | CV Optimisation Pipeline | FR-033 |
+| F-055 | Training Provider Foundation | FR-034 |
+| F-056 | AI Ethics & Fairness | FR-035 |
+| F-057 | Growth Readiness (OG tags, PWA, analytics) | FR-036 |
+| F-058 | Cross-user Data Isolation | FR-037 |
+| F-059 | API Contract Tests | FR-038 |
+| F-060 | Security hardening verification | FR-039 |
 
 ### 10.5 Traceability Matrix (BR -> FR -> Test)
 
@@ -2341,6 +2535,13 @@ key_source, username, role
 | BR-068 (Backward compat) | FR-027, 3.1 | test_auth.py (existing 383 tests) | 1 file |
 | BR-069 (CV bullet optimization) | FR-031 | test_cv_optimization.py (7 tests) | 1 file |
 | BR-070 (RBAC hardening) | FR-032, 3.1 | test_rbac_enforcement.py (2 service control tests), TopNav.test.jsx (18 tests) | 2 files |
+| BR-071 (CV Optimisation Pipeline) | FR-033 | test_cv_optimization.py | 1 file |
+| BR-072 (Training Providers) | FR-034 | Skills & Training tab tests | 1 file |
+| BR-073 (AI Ethics & Fairness) | FR-035 | Fairness guardrail prompt tests, confidence score tests | 2 files |
+| BR-074 (Growth Readiness) | FR-036 | Meta tag tests, PWA manifest tests | 2 files |
+| BR-075 (Cross-user Data Isolation) | FR-037 | test_user_isolation_audit.py, userStorage.test.js | 2 files |
+| BR-076 (API Contract Tests) | FR-038 | test_api_contracts.py (14 tests) | 1 file |
+| BR-077 (Security Verification) | FR-039 | test_shell_ratchet.py, security header tests | 2 files |
 
 ### 10.6 CI/CD Pipeline Test Gates
 

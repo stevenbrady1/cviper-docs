@@ -7,10 +7,10 @@
 | Field | Value |
 |-------|-------|
 | **Document ID** | BRD-CVIPER-001 |
-| **Version** | 0.3.1 |
+| **Version** | 0.5.1 |
 | **Status** | Pre-Release |
 | **Author** | CViper Project Team |
-| **Date** | 2026-04-07 |
+| **Date** | 2026-04-13 |
 | **Classification** | Internal |
 
 ### Version History
@@ -19,6 +19,8 @@
 |---------|------|--------|---------|
 | 0.2.2 | 2026-03-27 | CViper Project Team | Version reset to align with application semver (pre-release). Consolidates all prior work (formerly v1.0–v2.1). Full history archived in `docs/Archive/`. |
 | 0.2.3 | 2026-03-27 | CViper Project Team | Sandbox Gemini quota fix (permanent quota detection, circuit breaker force-open, user-facing fallback message). Alembic migration 013 batch fix for SQLite compatibility. CI pipeline upgraded to PostgreSQL 16 service container for schema drift checks. |
+| 0.5.1 | 2026-04-13 | CViper Project Team | Career Intelligence UI (role discovery, career progression, training plans), UK regional salary comparison, legal markdown rendering, AI provider settings redesign, progressive disclosure, wizard mode, E2E guards. All doc versions aligned to 0.5.1. |
+| 0.3.2 | 2026-04-10 | CViper Project Team | CV Optimisation Pipeline (keyword injection, ATS format validator, one-click optimise-for-job). Training Provider Foundation (8 providers, certification mapping, skill progress tracking). AI Ethics & Fairness (fairness guardrails in all AI prompts, confidence scores, Challenge This Score, AI transparency disclosure). Growth Readiness (Open Graph/Twitter meta tags, robots.txt/sitemap.xml, PWA install prompt, Plausible analytics). Cross-user Data Isolation (3-layer prevention: backend scoping, frontend state reset, userStorage namespacing). API Contract Tests (14 contract tests + shared schema for response shape validation). All P0 security items verified (CSP headers, CORS guards, secret encryption, ToS, subprocess hardening). |
 | 0.3.1 | 2026-04-07 | CViper Project Team | Phase 0 security hardening complete: encrypted `.env` secrets via Fernet master key, SecurityHeadersMiddleware (HSTS, CSP report-only, X-Frame-Options, Referrer-Policy, Permissions-Policy), fatal production guards for SECURE_COOKIES and CORS_ORIGINS wildcards, all `shell=True` removed from backend with AST ratchet test. OAuth providers extended to LinkedIn, Google, and Microsoft (Entra ID, common tenant). New `?tab=` deep-link support for external URLs (e.g. `/?tab=privacy`, `/?tab=terms`). Terms of Service document published. Public-route registry refactor (single source of truth for auth middleware allowlist). News Feed tab full-width layout fix. Stale chunk prevention: index.html always revalidates, lazyRetry wrapper on all React.lazy imports, Cloudflare CDN cache purge on deploy. PR-based backlog sync to respect branch protection. |
 
 > **Note:** Versions prior to 0.2.2 used an independent numbering scheme (v1.0–v2.1). Those documents are preserved in `docs/Archive/` for reference. From this version onward, document versions track the application version in `package.json`.
@@ -181,6 +183,13 @@ CViper addresses these pain points through automation, AI analysis, and a unifie
 | F-051 | PWA support with stale-while-revalidate service worker | Post-core |
 | F-052 | Landing page redesign: demo first, API key guide, login below | Post-core |
 | F-053 | Icon completeness test preventing missing icon text fallback | Post-core |
+| F-054 | CV Optimisation Pipeline: keyword injection suggestions, ATS format validator, one-click optimise-for-job | Post-core |
+| F-055 | Training Provider Foundation: 8 providers (4 free, 4 paid), certification mapping, skill progress tracking via Skills & Training tab | Post-core |
+| F-056 | AI Ethics & Fairness: fairness guardrails in AI prompts, confidence scores on all AI outputs, Challenge This Score button, AI transparency disclosure | Post-core |
+| F-057 | Growth Readiness: Open Graph/Twitter meta tags, robots.txt, sitemap.xml, PWA install prompt, Plausible analytics integration | Post-core |
+| F-058 | Cross-user Data Isolation: 3-layer prevention (backend user_id scoping, frontend state reset on user switch, userStorage namespacing per user) | Post-core |
+| F-059 | API Contract Tests: 14 contract tests with shared schema file for response shape validation across all major endpoints | Post-core |
+| F-060 | Security hardening verification: all P0 security items verified (CSP headers, CORS guards, secret encryption, Terms of Service, subprocess hardening) | Post-core |
 
 ### 4.2 Out-of-Scope Items
 
@@ -260,10 +269,10 @@ CViper addresses these pain points through automation, AI analysis, and a unifie
 | BR-037 | The system shall enforce per-user daily AI token budgets (configurable via `USER_DAILY_TOKEN_LIMIT`, default: 100,000 tokens), with root users exempt and clear error messaging when budgets are exceeded | Should Have | Security |
 | ~~BR-038~~ | *Consolidated into BR-013 (security panels and alert rules)* | — | — |
 | BR-039 | The CV Analysis page shall display AI provider status as a compact inline indicator next to the Analyze button, not as a full configuration card; provider configuration shall remain exclusively in Settings | Should Have | UX |
-| BR-040 | The system shall display a guided onboarding stepper (Upload CV → Review Profile → Find Jobs → Apply) to orient first-time users through the core workflow, with steps marking as complete based on user progress | Should Have | UX |
+| BR-040 | The system shall provide guided onboarding via WizardMode (auto-starts for first-visit/demo users, constrains tabs to one at a time, auto-advances on completion signals) and ProgressStepper (ambient 5-step tracker). Wizard uses separate step sets for registered users (Upload → Search → Score → Save) and demo users (Explore CV → See Scores → Try Search → Your Turn). Welcome modals enhance but do not gate the wizard. | Should Have | UX |
 | BR-041 | The Job Search tab shall surface data-flow links from CV Analysis (e.g., "Suggested from CV" badges, "analyze your CV" links) to make the connection between CV analysis and search criteria visible | Should Have | UX |
 | BR-042 | The Job Search form shall group Job Boards and Career Pages into a collapsible "Job Sources" section, auto-expanded when sources are loaded, to reduce cognitive overload on the primary search interface | Should Have | UX |
-| BR-043 | Developer-oriented tabs (Monitoring, Prompt Lab) shall be hidden from primary navigation by default and togglable via an "Advanced Mode" preference in Settings, persisted to localStorage and backend config | Should Have | UX |
+| BR-043 | Navigation uses progressive tab disclosure with 3 tiers: focused (4 core tabs for new users), standard (+ Companies, Insights, Skills after CV + search), full (all tabs after applying or "Show all tabs" toggle). Desktop tabs grouped into "Insights" and "More" dropdown menus. Developer tabs (Monitoring, Prompt Lab) additionally gated by Advanced Mode toggle. Both preferences persisted via `userStorage.getItemGlobal` and backend config. | Should Have | UX |
 | BR-044 | The Settings page shall use sub-navigation tabs (General, AI Providers, Search & Keywords, Preferences) to organise content into logical sections instead of a single scrollable page | Should Have | UX |
 | BR-045 | All primary tabs (CV Analysis, Job Search, Companies) shall display meaningful empty states with contextual icons, descriptive messages, and call-to-action buttons when no data is present | Should Have | UX |
 | BR-046 | The system shall prevent sandbox account abuse through a 5-layer strategy: browser fingerprinting (canvas + screen + timezone SHA-256), per-fingerprint daily session limits (50/day), per-IP daily session limits (100/day), dedicated sandbox provider routing (sandbox_google + sandbox_openrouter with daily quotas), AI response truncation for sandbox users (capped scores, skills, rationale), and 1-hour session auto-expiry with background cleanup | Must Have | Security |
@@ -291,6 +300,13 @@ CViper addresses these pain points through automation, AI analysis, and a unifie
 | BR-068 | The system shall maintain full backward compatibility with existing username/password authentication and session-cookie flow alongside the new JWT/OAuth system | Must Have | Security |
 | BR-069 | The system shall provide AI-powered guided base CV bullet optimization, analysing PROFESSIONAL EXPERIENCE bullet points and suggesting CAR-pattern rewrites with quantification and strong action verbs | Should Have | CV Analysis |
 | BR-070 | Service control endpoints (`/api/service/backend`, `/api/service/frontend`) shall enforce admin-only access via router-level `require_root` dependency, blocking both standard users and sandbox users. Advanced tabs (Monitoring, Prompt Lab) shall not auto-display for sandbox users; sandbox users must enable Advanced Mode like standard users | Must Have | Security |
+| BR-071 | The system shall provide a CV Optimisation Pipeline: keyword injection suggestions (identifying missing ATS keywords from job descriptions), ATS format validation (checking CV structure against ATS compatibility rules), and one-click optimise-for-job (automated CV tailoring for a specific role) | Should Have | CV Analysis |
+| BR-072 | The system shall provide a Training Provider Foundation with 8 curated providers (4 free: freeCodeCamp, Coursera Audit, edX Audit, Khan Academy; 4 paid: Udemy, Pluralsight, LinkedIn Learning, Codecademy Pro), certification mapping to skills, and skill progress tracking accessible via a Skills & Training tab | Should Have | Insights |
+| BR-073 | All AI-powered scoring and analysis features shall include fairness guardrails in prompts (preventing bias based on name, age, gender, ethnicity), display confidence scores alongside results, provide a "Challenge This Score" button allowing users to request a re-evaluation with reasoning, and include an AI transparency disclosure explaining how scores are generated | Must Have | AI |
+| BR-074 | The application shall include growth-readiness features: Open Graph and Twitter Card meta tags for social sharing, robots.txt and sitemap.xml for search engine discoverability, a PWA install prompt for mobile users, and Plausible analytics integration for privacy-respecting usage tracking | Should Have | UX |
+| BR-075 | The system shall enforce complete cross-user data isolation through a 3-layer prevention strategy: (1) backend repository functions filter all queries by `user_id`, (2) frontend React state resets all user-scoped data on user switch via `handleLogout` and `useEffect` watching `currentUser?.id`, (3) frontend localStorage values use `userStorage` namespacing (`cviper:u:<userId>:<key>`) with `purgeAllUserScopedStorage()` on user switch | Must Have | Security |
+| BR-076 | The system shall maintain API contract tests (14 tests minimum) with a shared schema file validating response shapes across all major endpoints, ensuring backward compatibility of API responses | Must Have | Quality |
+| BR-077 | All P0 security controls shall be verified and maintained: Content Security Policy headers, CORS origin guards, secret encryption at rest via Fernet master key, Terms of Service publication, and subprocess hardening (no `shell=True` in backend, enforced by AST ratchet test) | Must Have | Security |
 
 #### 5.1.1 RBAC Permission Matrix
 
@@ -357,6 +373,12 @@ The following matrix defines the authoritative access levels for all user roles.
 | BRL-027 | Per-session sandbox users are identified by provider="sandbox" and is_sandbox=True; expired sessions are purged by scheduled maintenance |
 | BRL-028 | Account migration (sandbox→real user) transfers all 14 user-scoped tables in dependency order, then deletes the sandbox user record |
 | BRL-029 | Sandbox users do not auto-see advanced tabs (Monitoring, Prompt Lab); they must enable Advanced Mode like standard users. Only admin (root) users see advanced tabs by default |
+| BRL-030 | All AI scoring prompts include fairness guardrails instructing the model to evaluate based on skills, experience, and qualifications only — not name, age, gender, ethnicity, or other protected characteristics |
+| BRL-031 | AI confidence scores (0-100) are displayed alongside every AI-generated result to indicate the model's certainty; low-confidence results are flagged for user review |
+| BRL-032 | The "Challenge This Score" feature triggers a fresh AI re-evaluation with explicit reasoning, using a different prompt variation to reduce single-evaluation bias |
+| BRL-033 | Training providers are categorised as free (no payment required for core content) or paid (subscription or per-course fee required), with provider URLs and certification details stored in seed data |
+| BRL-034 | Cross-user data isolation uses `userStorage` (namespaced `cviper:u:<userId>:<key>`) for all per-user localStorage values; `purgeAllUserScopedStorage()` wipes all namespaced keys plus legacy unprefixed keys on user switch |
+| BRL-035 | API contract tests validate response shape (required keys, value types) against a shared schema file; contract violations fail CI as a hard gate |
 
 ### 5.3 Compliance and Regulatory Needs
 
@@ -662,6 +684,17 @@ Infrastructure-level sequence diagrams for Grafana monitoring and Ollama local A
 | **Dynamic Viewport Height (dvh)** | A CSS unit (`100dvh`) that accounts for mobile browser chrome (address bar, toolbar) resizing, unlike `100vh` which uses the initial viewport size |
 | **PROVIDER_MODELS** | A hardcoded dictionary mapping each AI provider ID to its available model list (id, name, tier), used for model selection validation and dropdown population |
 | **Admin CLI Tools** | Standalone Python scripts (`reset_password.py`, `diagnose.py`) that operate directly against the database for administrative tasks without requiring the running web server |
+| **CV Optimisation Pipeline** | A multi-step workflow for improving CV quality: keyword injection (adding missing ATS keywords), format validation (checking structure), and one-click optimise (automated tailoring for a specific job) |
+| **Training Provider** | An online learning platform (e.g., freeCodeCamp, Udemy, Pluralsight) offering courses and certifications mapped to skills tracked by the platform |
+| **Fairness Guardrails** | Prompt-level instructions that prevent AI models from using protected characteristics (name, age, gender, ethnicity) when scoring or evaluating candidates |
+| **Confidence Score** | A 0-100 rating indicating the AI model's certainty in its output; displayed alongside fit scores, salary estimates, and other AI-generated results |
+| **Challenge This Score** | A user-initiated action that triggers a fresh AI re-evaluation of a score with explicit reasoning, using a different prompt variation |
+| **AI Transparency Disclosure** | An in-app notice explaining how AI-generated scores and recommendations are produced, which provider/model was used, and the limitations of AI analysis |
+| **userStorage** | A frontend utility that namespaces all per-user localStorage values under `cviper:u:<userId>:<key>` to prevent cross-user data leakage between accounts |
+| **API Contract Test** | A test that validates the response shape (required keys, value types, structure) of an API endpoint against a shared schema, ensuring backward compatibility |
+| **Plausible Analytics** | A privacy-respecting web analytics platform that tracks page views and usage patterns without cookies or personal data collection |
+| **PWA Install Prompt** | A browser-native prompt that allows users to install the web application as a standalone app on their device's home screen |
+| **Open Graph Tags** | HTML meta tags (`og:title`, `og:description`, `og:image`) that control how a page appears when shared on social media platforms |
 
 ---
 

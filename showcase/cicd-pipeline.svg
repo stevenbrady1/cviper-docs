@@ -39,7 +39,7 @@
     <text x="205" y="97" text-anchor="middle" font-size="9.5" font-weight="600" fill="#065f46">Backend Tests</text>
     <text x="205" y="111" text-anchor="middle" font-size="7.5" fill="#059669" font-weight="600">&#x2B24; HARD</text>
     <text x="205" y="124" text-anchor="middle" font-size="7" fill="#6b7280">9 test areas + coverage</text>
-    <text x="205" y="136" text-anchor="middle" font-size="6.5" fill="#94a3b8">pytest &#xB7; 3,400+ tests</text>
+    <text x="205" y="136" text-anchor="middle" font-size="6.5" fill="#94a3b8">pytest &#xB7; 4,700+ tests</text>
   </g>
 
   <!-- Frontend Tests -->
@@ -48,7 +48,7 @@
     <text x="205" y="177" text-anchor="middle" font-size="9.5" font-weight="600" fill="#065f46">Frontend Tests</text>
     <text x="205" y="191" text-anchor="middle" font-size="7.5" fill="#059669" font-weight="600">&#x2B24; HARD</text>
     <text x="205" y="204" text-anchor="middle" font-size="7" fill="#6b7280">5 test areas + coverage</text>
-    <text x="205" y="216" text-anchor="middle" font-size="6.5" fill="#94a3b8">Vitest &#xB7; 800+ tests</text>
+    <text x="205" y="216" text-anchor="middle" font-size="6.5" fill="#94a3b8">Vitest &#xB7; 1,800+ tests</text>
   </g>
 
   <!-- E2E Tests -->
@@ -76,7 +76,7 @@
     <rect x="305" y="138" width="150" height="50" rx="8" fill="#ecfdf5" stroke="#059669" stroke-width="1.5"/>
     <text x="380" y="156" text-anchor="middle" font-size="9.5" font-weight="600" fill="#065f46">Docs Drift</text>
     <text x="340" y="170" text-anchor="middle" font-size="7.5" fill="#059669" font-weight="600">&#x2B24; HARD</text>
-    <text x="418" y="170" text-anchor="middle" font-size="7" fill="#6b7280">stats &#xB7; dead exports &#xB7; deps</text>
+    <text x="400" y="170" text-anchor="middle" font-size="7" fill="#6b7280">stats &#xB7; exports &#xB7; deps</text>
   </g>
 
   <!-- Security SCA -->
@@ -143,19 +143,20 @@
   <path d="M 62 252 L 62 320 L 290 320 L 290 283 L 303 283" stroke="#94a3b8" stroke-width="0.9" fill="none" stroke-dasharray="4,2" marker-end="url(#arrow)"/>
   <text x="170" y="332" text-anchor="middle" font-size="6.5" fill="#94a3b8">parallel</text>
 
-  <!-- ARROWS: Stage 2 → Stage 4 (routed through top and bottom channels, avoiding Stage 3) -->
+  <!-- ARROW: Backend Tests → Integration Smoke (routed via top channel, avoiding Stage 3) -->
   <path d="M 270 112 L 282 112 L 282 72 L 488 72 L 488 189 L 496 189" stroke="#94a3b8" stroke-width="1.0" fill="none" marker-end="url(#arrow)"/>
-  <path d="M 270 272 L 282 272 L 282 382 L 488 382 L 488 269 L 496 269" stroke="#94a3b8" stroke-width="0.9" fill="none" marker-end="url(#arrow)"/>
+
+  <!-- ARROW: E2E → Docker Smoke + CI Summary (shared trunk via bottom channel, then split) -->
+  <path d="M 270 272 L 282 272 L 282 384 L 488 384 L 488 269 L 496 269" stroke="#94a3b8" stroke-width="0.9" fill="none" marker-end="url(#arrow)"/>
+  <path d="M 488 384 L 652 384 L 652 240 L 663 240" stroke="#94a3b8" stroke-width="0.9" fill="none" marker-end="url(#arrow)"/>
+  <circle cx="488" cy="384" r="2" fill="#94a3b8"/>
 
   <!-- ARROW: Stage 3 → Stage 5 (through the 12px gap between Integration Smoke and Docker Smoke) -->
   <path d="M 455 229 L 663 229" stroke="#94a3b8" stroke-width="0.9" fill="none" marker-end="url(#arrow)"/>
 
-  <!-- ARROWS: Stage 4 → Stage 5 -->
-  <line x1="622" y1="200" x2="663" y2="200" stroke="#94a3b8" stroke-width="1.1" marker-end="url(#arrow)"/>
-  <line x1="622" y1="255" x2="663" y2="255" stroke="#94a3b8" stroke-width="1.1" marker-end="url(#arrow)"/>
-
-  <!-- ARROW: E2E → Stage 5 (routed via bottom channel and up into CI Summary from below — avoids crossing Docker Smoke arrow) -->
-  <path d="M 270 296 L 282 296 L 282 386 L 722 386 L 722 255" stroke="#94a3b8" stroke-width="0.9" fill="none" marker-end="url(#arrow)"/>
+  <!-- ARROWS: Stage 4 → Stage 5 (shared trunk at x=636, then split) -->
+  <path d="M 622 200 L 636 200 L 636 227 L 663 227" stroke="#94a3b8" stroke-width="1.1" fill="none" marker-end="url(#arrow)"/>
+  <path d="M 622 255 L 636 255 L 636 227" stroke="#94a3b8" stroke-width="1.1" fill="none"/>
 
   <!-- ARROW: Stage 5 → Stage 6 (dashed, manual gate) -->
   <line x1="780" y1="227" x2="823" y2="227" stroke="#dc2626" stroke-width="1.5" stroke-dasharray="5,3" marker-end="url(#arrow-red)"/>
@@ -187,5 +188,5 @@
 
   <!-- Flow direction -->
   <text x="380" y="490" text-anchor="middle" font-size="7" fill="#cbd5e1">Commit &#x2192; Test &#x2192; Verify &#x2192; Gate &#x2192; Deploy</text>
-  <!-- stats-updated: 2026-04-08 -->
+  <!-- stats-updated: 2026-04-15 -->
 </svg>

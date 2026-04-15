@@ -93,6 +93,26 @@ Error budget burn rate alerts catch both sudden failures (fast burn) and gradual
 
 ---
 
+## SLO-4: Security Event Rate
+
+| Field | Value |
+|---|---|
+| **Target** | < 0.1 anomaly alerts per hour (30-day window) |
+| **Metric** | `cviper:anomaly_alert_rate:per_hour_30m` |
+| **Recording rule** | `cviper:security_health:ratio_30m` |
+| **Breach threshold** | > 5 alerts/hour sustained for 10m |
+
+### Alerts
+
+| Alert | Threshold | Window | Severity |
+|---|---|---|---|
+| Anomaly: High Read Rate | > 3 alerts in 5m | 1m evaluation | Warning |
+| Anomaly: IDOR Probing | > 1 alert in 5m | 1m evaluation | Critical |
+| Session Binding Rejections | > 5 rejections in 5m | 1m evaluation | Critical |
+| Audit Log Failures | Any failure in 5m | 5m evaluation | Critical |
+
+---
+
 ## Dashboard
 
 SLO compliance is visible on the `cviper-slo` Grafana dashboard:
@@ -100,3 +120,11 @@ SLO compliance is visible on the `cviper-slo` Grafana dashboard:
 - Error budget remaining (% and hours)
 - Burn rate timeline
 - AI success rate timeline
+
+Security observability is on the `cviper-security` Grafana dashboard:
+- Audit log rate by action and resource type
+- Anomaly alert timeline and log stream
+- Session binding events (valid/warned/rejected)
+- IDOR probe rate
+- Encryption operations
+- All security events combined log stream

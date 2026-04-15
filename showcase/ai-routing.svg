@@ -44,9 +44,9 @@
   <rect x="20" y="150" width="300" height="130" rx="10" fill="#fff1f2" stroke="#e11d48" stroke-width="1.5" filter="url(#shadow)"/>
   <text x="170" y="170" text-anchor="middle" font-size="12" font-weight="700" fill="#9f1239">Demo Routing</text>
   <rect x="35" y="180" width="270" height="24" rx="5" fill="#ffe4e6" stroke="#fda4af" stroke-width="0.8"/>
-  <text x="170" y="196" text-anchor="middle" font-size="9" fill="#881337">sandbox_google · Gemini Flash · 1000 req/day</text>
+  <text x="170" y="196" text-anchor="middle" font-size="9" fill="#881337">Google Gemini Flash · 1000 req/day</text>
   <rect x="35" y="212" width="270" height="24" rx="5" fill="#ffe4e6" stroke="#fda4af" stroke-width="0.8"/>
-  <text x="170" y="228" text-anchor="middle" font-size="9" fill="#881337">sandbox_openrouter · GPT-4o-mini · 50 req/day</text>
+  <text x="170" y="228" text-anchor="middle" font-size="9" fill="#881337">OpenRouter GPT-4o-mini · 50 req/day</text>
   <rect x="35" y="244" width="270" height="24" rx="5" fill="#dcfce7" stroke="#86efac" stroke-width="0.8"/>
   <text x="170" y="260" text-anchor="middle" font-size="9" fill="#14532d">keyword fallback · always available</text>
   <text x="170" y="277" text-anchor="middle" font-size="7" fill="#9f1239" font-style="italic">quota hit → falls through to next provider</text>
@@ -171,5 +171,5 @@
 
   <!-- Watermark -->
   <text x="425" y="748" text-anchor="middle" font-size="9" fill="#cbd5e1">CViper · AI Routing &amp; Fallback Architecture</text>
-  <!-- stats-updated: 2026-04-08 -->
+  <!-- stats-updated: 2026-04-15 -->
 </svg>

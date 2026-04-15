@@ -7,10 +7,10 @@
 | Field | Value |
 |-------|-------|
 | **Document ID** | TSA-CVIPER-001 |
-| **Version** | 0.2.3 |
+| **Version** | 0.2.4 |
 | **Status** | Pre-Release |
 | **Author** | CViper Project Team |
-| **Date** | 2026-03-27 |
+| **Date** | 2026-04-12 |
 | **Classification** | Internal |
 | **Related BRD** | BRD-CVIPER-001 v0.2.3 |
 | **Related FSD** | FSD-CVIPER-001 v0.2.3 |
@@ -19,6 +19,7 @@
 
 | Version | Date | Author | Changes |
 |---------|------|--------|---------|
+| 0.2.4 | 2026-04-12 | CViper Project Team | Added 7-row Test Design Checklist. Updated E2E to 50 specs (100% journey coverage). Added `@critical-regression` deploy gate (CV-180). Test Design Matrix CI enforcement (CV-172). Updated test counts to 4,400+ backend / 1,500+ frontend. Added `e2eCoverageParity.test.js` enforcement. |
 | 0.2.3 | 2026-03-27 | CViper Project Team | Updated gateway retry/circuit breaker test counts (+20 tests). CI schema drift check now uses PostgreSQL 16 service container. Alembic migration 013 batch fix for SQLite compat. |
 | 0.2.2 | 2026-03-27 | CViper Project Team | Version reset to align with application semver (pre-release). Consolidates v1.0 content with updated test counts, folder structure, and CI pipeline layout. Prior version archived in `docs/Archive/`. |
 
@@ -93,7 +94,7 @@ The test suite follows a classic test pyramid, with the majority of tests at the
 
 ## 3. Repository Folder Structure
 
-### Backend Tests (193 files)
+### Backend Tests (239 files)
 
 ```
 backend/tests/
@@ -112,7 +113,7 @@ backend/tests/
 └── security/                       # Auth, RBAC, GDPR, sandboxing (23 files)
 ```
 
-### Frontend Tests (59 files)
+### Frontend Tests (130 files)
 
 ```
 frontend/src/
@@ -129,19 +130,36 @@ frontend/src/
 
 ### E2E Tests (Playwright)
 
+50 specs providing 100% user journey coverage. Key specs include:
+
 ```
 frontend/e2e/
 ├── smoke.spec.js                   # Main paths after deployment
+├── deploy-smoke.spec.js            # Critical regression checks for deploy gate
 ├── cv-upload.spec.js               # CV upload workflows
+├── cv-upload-boundaries.spec.js    # Upload boundary/negative tests
+├── cv-analysis-ai.spec.js          # AI-powered CV analysis
+├── cv-editing-export.spec.js       # Edit + export generated documents
 ├── search-streaming.spec.js        # Real-time search updates
+├── job-search-flow.spec.js         # Full search user journey
+├── job-scoring.spec.js             # Fit scoring workflows
 ├── document-editing.spec.js        # Document editing workflows
-├── advanced-mode.spec.js           # Advanced search mode
+├── applications-lifecycle.spec.js  # Full applications CRUD lifecycle
+├── auth-register.spec.js           # Registration flow
+├── auth-negative.spec.js           # Auth negative/boundary tests
+├── email-verification.spec.js      # Email verification deep-link
+├── cross-user-isolation.spec.js    # Multi-user data isolation
+├── try-demo-fetch-storm.spec.js    # Demo login fetch-storm regression
 ├── about-showcase.spec.js          # About page and showcase gallery
 ├── company-salary.spec.js          # Company salary estimation flows
-├── faq-navigation.spec.js          # FAQ navigation and content
-├── onboarding-tour.spec.js         # Onboarding tour walkthrough
-└── settings-ai-config.spec.js      # AI provider settings configuration
+├── essential-controls.spec.js      # Close/Download always visible
+├── floating-layout.spec.js         # Floating element overlap checks
+├── gdpr-account.spec.js            # GDPR data export/erasure
+├── ... (50 specs total — see frontend/e2e/ for full list)
+└── visual-regression.spec.js       # Visual regression snapshots
 ```
+
+**Enforcement:** `e2eCoverageParity.test.js` fails CI if any tab or modal lacks a matching E2E spec.
 
 ### Structure Rationale
 
@@ -250,22 +268,33 @@ Every backend test file must have a `pytestmark` at module level:
 
 ### 5.5 E2E Tests (Playwright)
 
+50 specs providing 100% user journey coverage. Representative specs:
+
 | Spec | User journey |
 |------|-------------|
 | `smoke.spec.js` | Main paths after deployment |
+| `deploy-smoke.spec.js` | `@critical-regression` tagged — blocks deploys |
 | `cv-upload.spec.js` | Upload CV → see analysis results |
+| `cv-analysis-ai.spec.js` | AI-powered CV analysis workflow |
 | `search-streaming.spec.js` | Start search → see streaming results |
-| `document-editing.spec.js` | Edit generated document → save |
-| `advanced-mode.spec.js` | Toggle advanced features |
+| `applications-lifecycle.spec.js` | Full applications CRUD lifecycle |
+| `email-verification.spec.js` | Email verification deep-link flow |
+| `cross-user-isolation.spec.js` | Multi-user data isolation (P0 regression) |
+| `try-demo-fetch-storm.spec.js` | Demo login fetch-storm regression guard |
+| `essential-controls.spec.js` | Close/Download buttons always visible |
+| `gdpr-account.spec.js` | GDPR data export and erasure |
+| `job-scoring.spec.js` | Fit scoring workflows |
 | `about-showcase.spec.js` | About page renders, showcase gallery loads |
 | `company-salary.spec.js` | Company salary estimation flows |
-| `faq-navigation.spec.js` | FAQ navigation and content display |
-| `onboarding-tour.spec.js` | Onboarding tour walkthrough |
 | `settings-ai-config.spec.js` | AI provider settings configuration |
+
+See `frontend/e2e/` for all 50 specs and `frontend/e2e/test-plan-coverage.md` for the full coverage matrix.
 
 **Shared Helpers** (`e2e/helpers/`): `mocks.js` (route interception), `test-data.js` (users, jobs, documents), `actions.js` (navigation, login). All tests use Playwright route mocking — no real backend needed.
 
-**CI Integration:** Runs as a soft gate (`continue-on-error`) in GitHub Actions after frontend tests pass. Single Chromium worker, 2 retries, Playwright HTML report + JUnit XML uploaded as artifacts. Browser binaries cached across runs.
+**CI Integration:** E2E runs after frontend tests pass. Tests tagged `@critical-regression` act as a **hard gate on deploys** (CV-180) — deploy workflow fails if any critical regression test fails. Remaining E2E tests run as a soft gate (`continue-on-error`). Single Chromium worker, 2 retries, Playwright HTML report + JUnit XML uploaded as artifacts. Browser binaries cached across runs.
+
+**Enforcement:** `e2eCoverageParity.test.js` (CV-182) runs in CI and fails if any tab or modal lacks a matching E2E spec. Every new tab/modal must ship with E2E coverage.
 
 **Guidelines:** Test user journeys not implementation details. Use `data-testid` attributes. Each spec independent. Use Playwright auto-waiting — never `sleep()`.
 
@@ -330,6 +359,8 @@ Every backend test file must have a `pytestmark` at module level:
 | Security SCA | All | pip-audit, npm audit, Snyk | Soft gate |
 | Security SAST | All | Snyk Code, Aikido, secrets, SSRF | Soft gate |
 | Schema Drift Check | Backend changed | Alembic autogenerate against PostgreSQL 16 service container | Hard gate |
+| Test Design Matrix | PRs | Checks PRs for 7-row coverage matrix (CV-172) | Hard gate |
+| E2E (Playwright) | After frontend tests | 50 specs, `@critical-regression` subset blocks deploys (CV-180) | Soft (general) / Hard (deploy) |
 | Integration Smoke | After tests pass | Start backend, hit 5 endpoints | Hard gate |
 | CI Summary | Always | Aggregate results, JUnit XML report | Final gate |
 | Build & Push | Main push only | Docker images to ACR | N/A |
@@ -357,7 +388,7 @@ Every backend test file must have a `pytestmark` at module level:
 | Contract | Yes | Yes | Yes | — |
 | Security | Yes | Yes | Yes | — |
 | Integration | No (opt-in) | No | No | Yes |
-| E2E (Playwright) | No (opt-in) | Yes (soft gate) | Yes (soft gate) | Yes |
+| E2E (Playwright) | No (opt-in) | Yes (soft gate; `@critical-regression` = hard on deploy) | Yes (soft gate; `@critical-regression` = hard on deploy) | Yes |
 | Quality gate | No | No | No | Yes |
 | Coverage | No | Yes (3.12) | Yes (3.12) | — |
 | Lint | No (opt-in) | Yes | Yes | — |
@@ -578,14 +609,30 @@ npm run test:e2e:headed             # With browser
 | `_block_ai_gateway` | Function (autouse) | Blocks AI calls |
 | `_mock_outbound_http` | Function (autouse) | Blocks external HTTP |
 
-### Current Test Counts (as of v0.3.1)
+### Current Test Counts (as of v0.5.1)
 
 | Suite | Files | Tests |
 |-------|-------|-------|
-| Backend (pytest) | 184 | 3,300+ |
-| Frontend (Vitest) | 56 | 700+ |
-| E2E (Playwright) | 11 | 44 |
-| **Total** | **251** | **4,000+** |
+| Backend (pytest) | 220 | 4,400+ |
+| Frontend (Vitest) | 109 | 1,500+ |
+| E2E (Playwright) | 50 | 200+ |
+| **Total** | **379** | **6,100+** |
+
+### 7-Row Test Design Checklist (Mandatory)
+
+Every new feature or bug fix must consider all 7 test design approaches. The Test Design Matrix CI gate (CV-172) enforces this on PRs.
+
+| # | Type | When Required |
+|---|---|---|
+| 1 | **Happy-path** | Always |
+| 2 | **Negative** | Any user input or external boundary |
+| 3 | **Boundary** | Any numeric, length, size, count, or date limit |
+| 4 | **Edge cases** | User-supplied data, time, encoding, dual-environment |
+| 5 | **E2E** | Any workflow crossing ≥3 layers |
+| 6 | **Regression** | Any bug fix (mandatory) |
+| 7 | **Exploratory** | Manual, before release of significant features |
+
+QAE must flag PRs shipping only happy-path tests. CR must reject PRs missing boundary/negative coverage on user input.
 
 ---
 
