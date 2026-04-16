@@ -32,8 +32,8 @@
   <text x="425" y="105" text-anchor="middle" font-size="11" font-weight="500" fill="#334155">Demo</text>
   <text x="425" y="117" text-anchor="middle" font-size="11" font-weight="500" fill="#334155">user?</text>
 
-  <!-- Yes -> Demo Routing -->
-  <path d="M 340,108 L 200,108 L 200,148" stroke="#EF4444" stroke-width="1.2" fill="none" marker-end="url(#arrow-rose)"/>
+  <!-- Yes -> Demo Routing (diamond left x=340 → Demo panel top y=146) -->
+  <path d="M 340,108 L 200,108 L 200,146" stroke="#EF4444" stroke-width="1.2" fill="none" marker-end="url(#arrow-rose)"/>
   <text x="270" y="100" text-anchor="middle" font-size="10" font-weight="600" fill="#EF4444">Yes</text>
 
   <!-- No -> Decision 2 -->
@@ -60,9 +60,9 @@
   <text x="425" y="197" text-anchor="middle" font-size="11" font-weight="500" fill="#334155">Provider</text>
   <text x="425" y="209" text-anchor="middle" font-size="11" font-weight="500" fill="#334155">override?</text>
 
-  <!-- Yes -> Use specified provider -->
-  <path d="M 510,200 L 540,200" stroke="#64748b" stroke-width="1.2" fill="none" marker-end="url(#arrow)"/>
-  <text x="520" y="193" font-size="10" font-weight="600" fill="#64748b">Yes</text>
+  <!-- Yes -> Use specified provider (diamond right x=510 → box left x=542) -->
+  <path d="M 510,200 L 542,200" stroke="#64748b" stroke-width="1.2" fill="none" marker-end="url(#arrow)"/>
+  <text x="522" y="193" font-size="10" font-weight="600" fill="#64748b">Yes</text>
   <rect x="542" y="185" width="140" height="30" rx="6" fill="#eef2ff" stroke="#8B5CF6" stroke-width="1.2" filter="url(#shadow-sm)"/>
   <text x="612" y="204" text-anchor="middle" font-size="10" font-weight="500" fill="#3730a3">Use specified provider</text>
   <path d="M 682 200 L 822 200 L 822 496 L 500 496" stroke="#64748b" stroke-width="1.2" fill="none" marker-end="url(#arrow)"/>
@@ -76,18 +76,18 @@
   <text x="425" y="294" text-anchor="middle" font-size="11" font-weight="500" fill="#334155">Task group</text>
   <text x="425" y="306" text-anchor="middle" font-size="11" font-weight="500" fill="#334155">preference?</text>
 
-  <!-- Yes -> Group preferred -->
-  <path d="M 510,300 L 540,300" stroke="#64748b" stroke-width="1.2" fill="none" marker-end="url(#arrow)"/>
-  <text x="520" y="293" font-size="10" font-weight="600" fill="#64748b">Yes</text>
+  <!-- Yes -> Group preferred (diamond right x=510 → box left x=542) -->
+  <path d="M 510,300 L 542,300" stroke="#64748b" stroke-width="1.2" fill="none" marker-end="url(#arrow)"/>
+  <text x="522" y="293" font-size="10" font-weight="600" fill="#64748b">Yes</text>
   <rect x="542" y="285" width="160" height="30" rx="6" fill="#eef2ff" stroke="#8B5CF6" stroke-width="1.2" filter="url(#shadow-sm)"/>
   <text x="622" y="304" text-anchor="middle" font-size="10" font-weight="500" fill="#3730a3">Use group's preferred provider</text>
 
-  <!-- Unavailable -> Priority Chain -->
-  <path d="M 622,315 L 622,355 L 460,355 L 460,370" stroke="#10B981" stroke-width="1.4" fill="none" stroke-dasharray="5,3" marker-end="url(#arrow-green)"/>
+  <!-- Unavailable -> Priority Chain (enters Priority Chain top y=374) -->
+  <path d="M 622,315 L 622,355 L 460,355 L 460,374" stroke="#10B981" stroke-width="1.4" fill="none" stroke-dasharray="5,3" marker-end="url(#arrow-green)"/>
   <text x="632" y="340" font-size="9" font-style="italic" fill="#10B981">unavailable</text>
 
-  <!-- No -> Priority Chain -->
-  <line x1="425" y1="332" x2="425" y2="372" stroke="#64748b" stroke-width="1.2" marker-end="url(#arrow)"/>
+  <!-- No -> Priority Chain (diamond bottom y=332 → chain top y=374) -->
+  <line x1="425" y1="332" x2="425" y2="374" stroke="#64748b" stroke-width="1.2" marker-end="url(#arrow)"/>
   <text x="438" y="358" font-size="10" font-weight="600" fill="#64748b">No</text>
 
   <!-- PRIORITY CHAIN -->
@@ -122,14 +122,14 @@
   <line x1="610" y1="422" x2="620" y2="422" stroke="#a5b4fc" stroke-width="0.8"/>
   <line x1="710" y1="422" x2="720" y2="422" stroke="#a5b4fc" stroke-width="0.8"/>
 
-  <!-- CIRCUIT BREAKER — hexagon shape (not diamond) to distinguish from decision points -->
-  <line x1="425" y1="442" x2="425" y2="462" stroke="#64748b" stroke-width="1.2" marker-end="url(#arrow)"/>
+  <!-- CIRCUIT BREAKER — hexagon shape (chain bottom y=442 → hexagon top y=464) -->
+  <line x1="425" y1="442" x2="425" y2="464" stroke="#64748b" stroke-width="1.2" marker-end="url(#arrow)"/>
   <polygon points="425,464 478,480 478,512 425,528 372,512 372,480" fill="#fffbeb" stroke="#F59E0B" stroke-width="1.5" filter="url(#shadow)"/>
   <text x="425" y="494" text-anchor="middle" font-size="11" font-weight="600" fill="#92400e">Circuit</text>
   <text x="425" y="506" text-anchor="middle" font-size="11" font-weight="600" fill="#92400e">Breaker</text>
 
-  <!-- Closed -> Success -->
-  <line x1="425" y1="528" x2="425" y2="558" stroke="#10B981" stroke-width="1.2" marker-end="url(#arrow-green)"/>
+  <!-- Closed -> Success (hexagon bottom y=528 → AI Provider Call top y=560) -->
+  <line x1="425" y1="528" x2="425" y2="560" stroke="#10B981" stroke-width="1.2" marker-end="url(#arrow-green)"/>
   <text x="440" y="548" font-size="10" font-weight="600" fill="#10B981">Closed</text>
 
   <!-- Open -> Skip back to priority chain -->
@@ -140,8 +140,8 @@
   <rect x="350" y="560" width="150" height="36" rx="8" fill="#ecfdf5" stroke="#10B981" stroke-width="1.5" filter="url(#shadow)"/>
   <text x="425" y="583" text-anchor="middle" font-size="13" font-weight="600" fill="#065f46">AI Provider Call</text>
 
-  <!-- FALLBACK — with larger annotation text and red arrow -->
-  <path d="M 425,596 L 425,628" stroke="#EF4444" stroke-width="1.4" fill="none" stroke-dasharray="5,3" marker-end="url(#arrow-rose)"/>
+  <!-- FALLBACK — AI Provider Call bottom y=596 → Keyword Fallback top y=630 -->
+  <path d="M 425,596 L 425,630" stroke="#EF4444" stroke-width="1.4" fill="none" stroke-dasharray="5,3" marker-end="url(#arrow-rose)"/>
   <text x="470" y="617" font-size="11" font-weight="600" fill="#EF4444">all providers fail</text>
   <rect x="200" y="630" width="450" height="64" rx="10" fill="#dcfce7" stroke="#10B981" stroke-width="1.5" filter="url(#shadow)"/>
   <text x="425" y="652" text-anchor="middle" font-size="13" font-weight="700" fill="#065f46">Keyword Fallback Engine</text>

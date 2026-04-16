@@ -164,34 +164,34 @@
     <rect x="854" y="251" width="50" height="4" rx="2" fill="#fecaca"/>
   </g>
 
-  <!-- ARROWS: Stage 1 → Stage 2 (clean fan-out) -->
-  <path d="M 110 195 L 128 195 L 128 112 L 138 112" stroke="#94a3b8" stroke-width="1.1" fill="none" marker-end="url(#arrow)"/>
-  <line x1="110" y1="215" x2="138" y2="215" stroke="#94a3b8" stroke-width="1.1" marker-end="url(#arrow)"/>
-  <path d="M 110 235 L 128 235 L 128 272 L 138 272" stroke="#94a3b8" stroke-width="1.1" fill="none" marker-end="url(#arrow)"/>
+  <!-- ARROWS: Stage 1 → Stage 2 (fan-out, endpoints at box edges) -->
+  <path d="M 110 195 L 128 195 L 128 112 L 140 112" stroke="#94a3b8" stroke-width="1.1" fill="none" marker-end="url(#arrow)"/>
+  <line x1="110" y1="215" x2="140" y2="215" stroke="#94a3b8" stroke-width="1.1" marker-end="url(#arrow)"/>
+  <path d="M 110 235 L 128 235 L 128 272 L 140 272" stroke="#94a3b8" stroke-width="1.1" fill="none" marker-end="url(#arrow)"/>
 
   <!-- ARROW: Stage 1 → Stage 3 (routed below Tests column) -->
   <path d="M 62 252 L 62 320 L 290 320 L 290 283 L 303 283" stroke="#94a3b8" stroke-width="0.9" fill="none" stroke-dasharray="4,2" marker-end="url(#arrow)"/>
-  <!-- Parallel badge -->
-  <rect x="146" y="325" width="48" height="14" rx="4" fill="#8B5CF6" opacity="0.1" stroke="#8B5CF6" stroke-width="0.6"/>
-  <text x="170" y="335" text-anchor="middle" font-size="6.5" font-weight="600" fill="#7c3aed">parallel</text>
+  <!-- Parallel badge (above the dashed bracket path at y=320) -->
+  <rect x="146" y="306" width="48" height="14" rx="4" fill="#8B5CF6" opacity="0.1" stroke="#8B5CF6" stroke-width="0.6"/>
+  <text x="170" y="316" text-anchor="middle" font-size="6.5" font-weight="600" fill="#7c3aed">parallel</text>
 
-  <!-- ARROW: Backend Tests → Integration Smoke -->
-  <path d="M 270 112 L 282 112 L 282 72 L 488 72 L 488 189 L 496 189" stroke="#94a3b8" stroke-width="1.0" fill="none" marker-end="url(#arrow)"/>
+  <!-- ARROW: Backend Tests → Integration Smoke (right edge x=270 → left edge x=498) -->
+  <path d="M 270 112 L 282 112 L 282 72 L 488 72 L 488 189 L 498 189" stroke="#94a3b8" stroke-width="1.0" fill="none" marker-end="url(#arrow)"/>
 
   <!-- ARROW: E2E → Docker Smoke + CI Summary -->
-  <path d="M 270 272 L 282 272 L 282 384 L 488 384 L 488 269 L 496 269" stroke="#94a3b8" stroke-width="0.9" fill="none" marker-end="url(#arrow)"/>
-  <path d="M 488 384 L 652 384 L 652 240 L 663 240" stroke="#94a3b8" stroke-width="0.9" fill="none" marker-end="url(#arrow)"/>
+  <path d="M 270 272 L 282 272 L 282 384 L 488 384 L 488 269 L 498 269" stroke="#94a3b8" stroke-width="0.9" fill="none" marker-end="url(#arrow)"/>
+  <path d="M 488 384 L 652 384 L 652 240 L 665 240" stroke="#94a3b8" stroke-width="0.9" fill="none" marker-end="url(#arrow)"/>
   <circle cx="488" cy="384" r="2" fill="#94a3b8"/>
 
-  <!-- ARROW: Stage 3 → Stage 5 -->
-  <path d="M 455 229 L 663 229" stroke="#94a3b8" stroke-width="0.9" fill="none" marker-end="url(#arrow)"/>
+  <!-- ARROW: Stage 3 → Stage 5 (right edge x=455 → left edge x=665) -->
+  <path d="M 455 229 L 665 229" stroke="#94a3b8" stroke-width="0.9" fill="none" marker-end="url(#arrow)"/>
 
-  <!-- ARROWS: Stage 4 → Stage 5 -->
-  <path d="M 622 200 L 636 200 L 636 227 L 663 227" stroke="#94a3b8" stroke-width="1.1" fill="none" marker-end="url(#arrow)"/>
+  <!-- ARROWS: Stage 4 → Stage 5 (right edge x=622 → left edge x=665) -->
+  <path d="M 622 200 L 636 200 L 636 227 L 665 227" stroke="#94a3b8" stroke-width="1.1" fill="none" marker-end="url(#arrow)"/>
   <path d="M 622 255 L 636 255 L 636 227" stroke="#94a3b8" stroke-width="1.1" fill="none"/>
 
-  <!-- ARROW: Stage 5 → Stage 6 (dashed, manual gate) -->
-  <line x1="780" y1="227" x2="823" y2="227" stroke="#EF4444" stroke-width="1.5" stroke-dasharray="5,3" marker-end="url(#arrow-red)"/>
+  <!-- ARROW: Stage 5 → Stage 6 (dashed, right edge x=780 → left edge x=825) -->
+  <line x1="780" y1="227" x2="825" y2="227" stroke="#EF4444" stroke-width="1.5" stroke-dasharray="5,3" marker-end="url(#arrow-red)"/>
   <text x="801" y="221" text-anchor="middle" font-size="6" fill="#EF4444" font-weight="500">manual</text>
 
   <!-- Stage labels — 11px bold with coloured strip -->
