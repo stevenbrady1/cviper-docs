@@ -7,16 +7,17 @@
 | Field | Value |
 |-------|-------|
 | **Document ID** | BRD-CVIPER-001 |
-| **Version** | 0.5.1 |
+| **Version** | 0.5.2 |
 | **Status** | Pre-Release |
 | **Author** | CViper Project Team |
-| **Date** | 2026-04-13 |
+| **Date** | 2026-04-17 |
 | **Classification** | Internal |
 
 ### Version History
 
 | Version | Date | Author | Changes |
 |---------|------|--------|---------|
+| 0.5.2 | 2026-04-17 | CViper Project Team | Version bump (commit: 7baf4b18). Update this description with change details. |
 | 0.2.2 | 2026-03-27 | CViper Project Team | Version reset to align with application semver (pre-release). Consolidates all prior work (formerly v1.0–v2.1). Full history archived in `docs/Archive/`. |
 | 0.2.3 | 2026-03-27 | CViper Project Team | Sandbox Gemini quota fix (permanent quota detection, circuit breaker force-open, user-facing fallback message). Alembic migration 013 batch fix for SQLite compatibility. CI pipeline upgraded to PostgreSQL 16 service container for schema drift checks. |
 | 0.5.1 | 2026-04-13 | CViper Project Team | Career Intelligence UI (role discovery, career progression, training plans), UK regional salary comparison, legal markdown rendering, AI provider settings redesign, progressive disclosure, wizard mode, E2E guards. All doc versions aligned to 0.5.1. |

@@ -10,15 +10,16 @@
 | **Version** | 0.2.4 |
 | **Status** | Pre-Release |
 | **Author** | CViper Project Team |
-| **Date** | 2026-04-12 |
+| **Date** | 2026-04-17 |
 | **Classification** | Internal |
-| **Related BRD** | BRD-CVIPER-001 v0.2.3 |
-| **Related FSD** | FSD-CVIPER-001 v0.2.3 |
+| **Related BRD** | BRD-CVIPER-001 v0.5.2 |
+| **Related FSD** | FSD-CVIPER-001 v0.5.2 |
 
 ### Version History
 
 | Version | Date | Author | Changes |
 |---------|------|--------|---------|
+| 0.5.2 | 2026-04-17 | CViper Project Team | Version bump (commit: 7baf4b18). Update this description with change details. |
 | 0.2.4 | 2026-04-12 | CViper Project Team | Added 7-row Test Design Checklist. Updated E2E to 50 specs (100% journey coverage). Added `@critical-regression` deploy gate (CV-180). Test Design Matrix CI enforcement (CV-172). Updated test counts to 4,400+ backend / 1,500+ frontend. Added `e2eCoverageParity.test.js` enforcement. |
 | 0.2.3 | 2026-03-27 | CViper Project Team | Updated gateway retry/circuit breaker test counts (+20 tests). CI schema drift check now uses PostgreSQL 16 service container. Alembic migration 013 batch fix for SQLite compat. |
 | 0.2.2 | 2026-03-27 | CViper Project Team | Version reset to align with application semver (pre-release). Consolidates v1.0 content with updated test counts, folder structure, and CI pipeline layout. Prior version archived in `docs/Archive/`. |

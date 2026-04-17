@@ -7,17 +7,18 @@
 | Field | Value |
 |-------|-------|
 | **Document ID** | FSD-CVIPER-001 |
-| **Version** | 0.5.1 |
+| **Version** | 0.5.2 |
 | **Status** | Pre-Release |
 | **Author** | CViper Project Team |
-| **Date** | 2026-04-13 |
+| **Date** | 2026-04-17 |
 | **Classification** | Internal |
-| **Related BRD** | BRD-CVIPER-001 v0.5.1 |
+| **Related BRD** | BRD-CVIPER-001 v0.5.2 |
 
 ### Version History
 
 | Version | Date | Author | Changes |
 |---------|------|--------|---------|
+| 0.5.2 | 2026-04-17 | CViper Project Team | Version bump (commit: 7baf4b18). Update this description with change details. |
 | 0.5.1 | 2026-04-13 | CViper Project Team | Career Intelligence UI, UK salary comparison, legal markdown rendering, provider settings redesign, progressive disclosure, wizard mode, E2E guards. All doc versions aligned to 0.5.1. |
 | 0.3.2 | 2026-04-10 | CViper Project Team | CV Optimisation Pipeline (keyword injection, ATS format validator, one-click optimise). Training Provider Foundation (8 providers, certifications, skill progress). AI Ethics & Fairness (prompt guardrails, confidence scores, Challenge This Score). Growth Readiness (OG/Twitter meta, robots.txt, sitemap.xml, PWA install, Plausible). Cross-user Data Isolation (3-layer: backend scoping, frontend reset, userStorage). API Contract Tests (14 tests, shared schema). P0 security verified. |
 | 0.3.1 | 2026-04-07 | CViper Project Team | Phase 0 security hardening: encrypted `.env` secrets, SecurityHeadersMiddleware, fatal guards for SECURE_COOKIES + CORS wildcards, all `shell=True` removed from backend (AST ratchet test). OAuth extended to LinkedIn + Google + Microsoft. `?tab=` deep links for external URLs. Terms of Service published. Public-route registry (single source of truth for auth middleware). Stale chunk prevention (nginx cache headers + lazyRetry + Cloudflare purge). PR-based backlog sync. News Feed full-width fix. |

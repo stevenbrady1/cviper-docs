@@ -5,24 +5,42 @@ All notable changes to CViper are documented in this file.
 Format based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 This project uses [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [0.5.2] - 2026-04-15
+## [0.5.2] - 2026-04-17
 
 ### Added
 - **Usage tracking and Free/Pro tiers (CV-093).** Full-stack metering system: `User.tier` column, `UsageDailySummary` table, `UsageLimitMiddleware` enforcing daily limits on 15 AI endpoints, `GET /api/usage` with per-operation breakdown, `GET /api/usage/limits`, `UsageBadge` with per-operation tooltip, `UpgradeModal` on 429. Free tier: 10 AI calls, 3 CV scores, 5 salary estimates, 2 doc generations per day. Pro/Admin: unlimited. 75 tests.
 - **Job alerts — live search integration (CV-082).** `AlertService._run_profile_search()` now calls the real job search engine, filters via `seen_jobs` dedup, and creates in-app notifications via `NotificationBell`. Frontend alert toggle on active search profiles. Background loop runs every 900s. 18 tests.
-- **AI bias audit Phase 1 (CV-187).** 31 synthetic CV profiles across 5 bias dimensions (name origin, university prestige, career gaps, graduation year, gendered language). 17 prompt-level tests verify FAIRNESS_GUARDRAIL presence, prompt invariance across demographics, and job-relevant-only scoring dimensions. Audit report in `ClaudeReports/audits/`.
-- **API contract tests (LESSON-035).** `test_api_response_contracts.py` validates real endpoint response keys match frontend expectations — prevents mock-hiding-mismatch bugs.
-- **Benchmark separation guard (LESSON-036).** `test_benchmark_separation_guard.py` seeds both permanent + contract benchmarks and asserts filtered queries never leak the other type.
-- **14 E2E tests for UK Regional Salary Comparison.** Negative (empty salary, API error), boundary (zero, negative, large salary), edge (same location, API failure), regression (dropdown population).
-- **4 E2E tests for contract rate rendering.** Verifies day rate vs annual display, mixed contract+permanent, null rate_unit fallback.
+- **AI bias audit Phase 1 (CV-187).** 31 synthetic CV profiles across 5 bias dimensions (name origin, university prestige, career gaps, graduation year, gendered language). 17 prompt-level tests verify FAIRNESS_GUARDRAIL presence, prompt invariance across demographics, and job-relevant-only scoring dimensions.
+- **CV analysis result caching (15-minute TTL).** Content-based cache keys prevent redundant AI calls for the same CV+job pair. 7 backend tests.
+- **Inline progress card during CV analysis.** TaskProgressCard component shows real-time status of AI operations with provider attribution.
+- **Branded loader SVG** for all AI-driven loading states across the app.
+- **Contract rate display in Applications tab.** Day/hourly rates shown alongside annual equivalent for contractor roles. 2 contractor roles added to sandbox seed data.
+- **Professional showcase SVG overhaul.** All 6 architecture diagrams redesigned with orthogonal arrows, accurate stats, and brand-consistent styling. Screenshot gallery added.
+- **Real-backend E2E test suite.** 5 specs (login+CV, demo session, scoring, doc export, auth refresh) running against Docker Compose with SQLite. Soft CI gate.
+- **Critical E2E CI gate.** `@critical-regression` tagged specs now block PR merges.
+- **Auto-sync public docs** to cviper-docs repo via GitHub Actions.
+- **API contract tests (LESSON-035).** Validates real endpoint response keys match frontend expectations.
+- **Benchmark separation guard (LESSON-036).** Asserts filtered queries never leak cross-type benchmarks.
 
 ### Fixed
-- **Salary comparison dropdowns empty.** Backend `list_cost_of_living_locations()` returned `{"location": ...}` but frontend read `l.name`. Fixed key to `"name"`.
-- **Contractor rates returning blended data.** `get_benchmarks_for_role()` had no `role_type` filter, mixing permanent and contract benchmarks. Added SQL-level filtering, updated all 5 callers.
-- **CI stale branch noise.** Session-start hook reported failures from closed PR branches as actionable. Fixed: filter against open PRs, added `types: [opened, synchronize, reopened]` to CI workflow, enabled `delete_branch_on_merge`.
+- **Demo mode random redirect to Job Search.** Two race conditions in the wizard/DemoTour system forced tab changes after manual user navigation: signal-driven auto-advance called `onNavigateTab` when data loaded asynchronously, and 8-second timer-driven auto-advance yanked users to the next step's tab. Fix: auto-advance updates step counter only; DemoTour cancels timer on manual nav away.
+- **Salary comparison dropdowns empty.** Backend key mismatch (`"location"` vs `"name"`).
+- **Contractor rates returning blended data.** Missing `role_type` filter in `get_benchmarks_for_role()`.
+- **CI stale branch noise.** Session-start hook reported failures from closed PR branches.
+- **Docker E2E permission crash.** Self-healing entrypoint + tmpfs removal.
+- **CI gate jobs blocking on skipped checks.** Added gate jobs so conditional steps don't block PR merges.
 
 ### Changed
-- **DPIA updated** with bias audit Phase 1 results, usage tracking limits, solicitor action summary table (7 items), and Appendix A.
+- **Applications table polish.** Consolidated 5 header zones (stats, analytics, toolbar, add-job, reminders) into 2 cards. Row density reduced (~149px to ~120px), alternating row striping, sticky bulk selection bar inside table card, btn-compact conflict resolved (44px duplicate removed), pipeline status as coloured badges, ghost danger buttons for Archive/Delete.
+- **Page heading density.** All page headers reduced from 28px/700 to 18px/600 with tighter margins. Content-section and main-container vertical padding reduced.
+- **Wizard completion banner removed.** Auto-dismissed via useEffect — nav already provides Create Account CTA.
+- **Coin stack salary icon** replaces generic currency circle in Job Search filters.
+- **Navy gradient on floating buttons.** Help & Feedback FAB and AboutPill updated from teal to navy/blue colour scheme.
+- **Login page polish.** Preview banner, about card, demo CTA redesign.
+- **Feature branch policy relaxed** to soft warning until production launch.
+- **4 redundant E2E specs removed** (subsumed by -full counterparts). Coverage parity maintained.
+- **Full test suite audit.** 5,812 tests across 511 files reviewed. Audit report in `ClaudeReports/audits/`.
+- **DPIA updated** with bias audit Phase 1 results, usage tracking limits, solicitor action summary.
 
 ## [0.5.1] - 2026-04-13
 
