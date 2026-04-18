@@ -5,6 +5,21 @@ All notable changes to CViper are documented in this file.
 Format based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 This project uses [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.5.3] - 2026-04-18
+
+### Added
+- **CV Analysis progress card.** Animated full-width card with gradient header, CViper logo spinner, 5-stage step pills, and progress bar replaces the tiny status span during CV analysis. Auto-hides after completion.
+- **ATS Format Validator auto-file.** Validator now automatically uses the file loaded in the drag & drop zone instead of requiring a separate upload. One-click "Check Format" button.
+- **Shared job table components.** Extracted `SalaryDisplay`, `SourceBadge`, `DescriptionPreview`, and `StatusBadge` from duplicated inline rendering in `ApplicationCard` and `SearchResultsList`. Single source of truth prevents style drift between Search and Applications views.
+- **Contract rate display in Search Results.** Day/hourly rates with annual equivalent (e.g. "£450-£500/day / £104k-£115k equiv.") now shown in Job Search — matching Applications table format.
+
+### Fixed
+- **Check Listing Status always returning expired.** `_find_expired_signal()` scanned raw HTML including `<script>` tags where SPAs embed template strings like "this job is no longer available" even for active jobs. Fix: strip `<script>`/`<style>`/`<noscript>`/`<template>` blocks before scanning.
+- **Job Search vs Applications visual inconsistency.** Aligned salary (green text, rate conversion), source (inline styled, career page icon), date (`formatDate()`), company/location (overflow handling), title (flex layout, badges), and description preview between the two views.
+
+### Changed
+- **Badge styling centralised.** All inline badge styles (SCORED, Active, Expired, NEW, SAVED, contract type) replaced with `StatusBadge` component using variant/size/outline props and a centralised colour palette.
+
 ## [0.5.2] - 2026-04-17
 
 ### Added

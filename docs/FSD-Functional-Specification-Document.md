@@ -2149,6 +2149,20 @@ All primary tabs display contextual empty states when no data is present. Empty 
 - CTA buttons navigate to the relevant tab or action
 - Empty states are hidden immediately when data loads or user starts an action
 
+### 8.5 Shared Job Table Components
+
+Job data appears in two views (Job Search results table and Applications tracking table). To prevent visual drift, shared rendering logic is extracted into single-source components:
+
+| Component | Path | Purpose | Used by |
+|-----------|------|---------|---------|
+| `SalaryDisplay` | `src/components/SalaryDisplay.jsx` | Contract day/hourly rates with annual equivalent, raw salary, AI estimates | ApplicationCard, SearchResultsList |
+| `SourceBadge` | `src/components/SourceBadge.jsx` | Source name with career page icon, truncated with ellipsis | ApplicationCard, SearchResultsList |
+| `DescriptionPreview` | `src/components/DescriptionPreview.jsx` | Truncated job description (80 char default) for collapsed rows | ApplicationCard, SearchResultsList |
+| `StatusBadge` | `src/components/StatusBadge.jsx` | Coloured pill badges (SCORED, Active, Expired, NEW, SAVED, contract type) with variant/size/outline props | ApplicationCard, SearchResultsList |
+| `FitScoreBadge` | `src/components/FitScoreBadge.jsx` | Score badge with AI/keyword method indicator, click-to-expand analysis panel | ApplicationCard, SearchResultsList |
+
+**Rule**: Any rendering logic that appears in both job table views must be extracted into a shared component. Inline duplication between these files is a CI-time code review flag.
+
 ---
 
 ## 9. Non-Functional Requirements
