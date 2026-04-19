@@ -5,6 +5,36 @@ All notable changes to CViper are documented in this file.
 Format based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 This project uses [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.5.4] - 2026-04-19
+
+### Added
+- **WCAG 2.1 AA accessibility compliance + axe-core CI gate.** Automated accessibility testing against axe-core; CI fails on violations.
+- **Token usage pill in AI model indicator.** Real-time per-model token usage visible in page headers; hover tooltip explains calls vs tokens and includes efficiency recommendations.
+- **50 direct employer career pages across 9 new industries.** Expanded search coverage for employer-direct listings (previously ATS-routed).
+- **Consistent AI model indicator in page headers across all tabs.** Unified provider/tier chip formatting everywhere.
+- **Authenticated load-test profile.** New `AuthenticatedUser` class in `tests/loadtest/locustfile.py` exercising the real hot path with a bearer token; documented and bundled with the pre-launch audit.
+
+### Changed
+- **Registration closed to invite-only** (pre-launch). Public signup surface hidden; existing users unaffected.
+- **AI model links** in page-header indicators always open the AI Provider tab in Settings (consistent navigation).
+- **Post-deploy bundle verification** added to the deploy workflow — detects stale Docker images before accepting a revision.
+- **CDN cache purge** hardened to a hard failure if Cloudflare secrets are missing (prevents silent stale-asset drift).
+
+### Fixed
+- **Migration idempotency (030, 031)** — `audit_logs`, `anomaly_alerts`, and `usage_daily_summary` now use the dialect-split `IF NOT EXISTS` pattern. Prevents container crash-loop on fresh-environment deploys where `init_db()` runs `create_all()` before Alembic. New guard test `test_create_table_and_index_is_idempotent` in `test_schema_drift.py` enforces the pattern for all migrations from 025 onward.
+- **iPad login logo cropped + Applications header misaligned** at iPad-width breakpoints.
+- **Mobile horizontal overflow** and multiple component regressions from mobile screenshot audit.
+- **Lever / SmartRecruiters / Eightfold ATS handlers** — repaired parsers after provider-side HTML changes.
+- **NatWest** marked as dead in search dead-list; accompanied by ATS health-check test suite.
+- **Cross-screen drift** — dates, spelling, icons, and test references aligned across tabs.
+- **Login header tightened** — smaller logo, reduced spacing, cleaner hierarchy.
+- **Mobile P0 + P1 iPhone UX** — nav, FAB, labels, banner, dropzone text, safe-area padding, floating overlaps, toolbar overflow.
+
+### Infrastructure
+- **Grafana custom domain** (`grafana.cviper.uk`) wired up via Bicep (CV-190 follow-up).
+- **Staging Bicep** scaffolding added (note: staging ingress remains internal-only; see pre-launch audit).
+- **Revision management** extracted into a composite GitHub Action for reuse across deploy jobs.
+
 ## [0.5.3] - 2026-04-18
 
 ### Added
