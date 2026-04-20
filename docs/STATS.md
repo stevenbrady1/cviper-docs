@@ -8,12 +8,12 @@
 | API Endpoints | 265 |
 | Route Modules | 24 |
 | AI Providers | 9 |
-| Frontend Components | 65 |
+| Frontend Components | 66 |
 | Frontend Hooks | 28 |
 | Alembic Migrations | 31 |
-| Backend Test Files | 242 |
-| Frontend Test Files | 135 |
+| Backend Test Files | 243 |
+| Frontend Test Files | 136 |
 | Backend Tests (approx) | 4,800+ |
-| Frontend Tests (approx) | 1,800+ |
+| Frontend Tests (approx) | 1,900+ |
 | Total Tests (approx) | 6,700+ |
 | Phases Delivered | 10 |

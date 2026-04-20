@@ -69,7 +69,7 @@
     <circle cx="176" cy="189" r="4" fill="#10B981"/>
     <text x="186" y="193" font-size="8" fill="#10B981" font-weight="600">HARD</text>
     <text x="205" y="204" text-anchor="middle" font-size="7" fill="#6b7280">5 test areas + coverage</text>
-    <text x="205" y="216" text-anchor="middle" font-size="6.5" fill="#94a3b8">Vitest &#xB7; 1,800+ tests</text>
+    <text x="205" y="216" text-anchor="middle" font-size="6.5" fill="#94a3b8">Vitest &#xB7; 1,900+ tests</text>
   </g>
 
   <!-- E2E Tests -->
@@ -218,5 +218,5 @@
 
   <!-- Timestamp -->
   <text x="930" y="522" text-anchor="end" font-size="10" fill="#6B7280">Updated: 2026-04-15</text>
-  <!-- stats-updated: 2026-04-17 -->
+  <!-- stats-updated: 2026-04-20 -->
 </svg>
