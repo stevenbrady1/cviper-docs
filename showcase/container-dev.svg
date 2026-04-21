@@ -1,0 +1,288 @@
+<!-- HAND-CRAFTED: Do not regenerate — this SVG is manually styled, not Mermaid-rendered -->
+<!-- stats-updated: 2026-04-21 -->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 920 710" width="920" height="710" font-family="Inter, system-ui, -apple-system, sans-serif">
+  <defs>
+    <filter id="shadow" x="-4%" y="-4%" width="108%" height="112%">
+      <feDropShadow dx="0" dy="1" stdDeviation="2" flood-color="#000" flood-opacity="0.08"/>
+    </filter>
+    <filter id="shadowLight" x="-4%" y="-4%" width="108%" height="112%">
+      <feDropShadow dx="0" dy="1" stdDeviation="1.5" flood-color="#000" flood-opacity="0.05"/>
+    </filter>
+    <marker id="arrow" viewBox="0 0 10 7" refX="10" refY="3.5" markerWidth="8" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 3.5 L 0 7 Z" fill="#94a3b8"/>
+    </marker>
+    <marker id="arrowGreen" viewBox="0 0 10 7" refX="10" refY="3.5" markerWidth="8" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 3.5 L 0 7 Z" fill="#10B981"/>
+    </marker>
+    <marker id="arrowBlue" viewBox="0 0 10 7" refX="10" refY="3.5" markerWidth="8" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 3.5 L 0 7 Z" fill="#3B82F6"/>
+    </marker>
+    <marker id="arrowAmber" viewBox="0 0 10 7" refX="10" refY="3.5" markerWidth="8" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 3.5 L 0 7 Z" fill="#F59E0B"/>
+    </marker>
+    <marker id="arrowPurple" viewBox="0 0 10 7" refX="10" refY="3.5" markerWidth="8" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 3.5 L 0 7 Z" fill="#8B5CF6"/>
+    </marker>
+  </defs>
+
+  <!-- Background -->
+  <rect width="920" height="710" fill="#fafbfc" rx="0"/>
+
+  <!-- Title -->
+  <text x="460" y="28" text-anchor="middle" font-size="16" font-weight="700" fill="#1e293b" letter-spacing="0.5">Container &amp; Development Architecture</text>
+  <text x="460" y="43" text-anchor="middle" font-size="9" fill="#94a3b8" letter-spacing="0.3">Production (Azure)  vs  Local Development</text>
+
+  <!-- Divider line -->
+  <line x1="460" y1="56" x2="460" y2="478" stroke="#e2e8f0" stroke-width="1" stroke-dasharray="6,4"/>
+
+  <!-- ====== LEFT COLUMN: PRODUCTION ====== -->
+  <text x="230" y="68" text-anchor="middle" font-size="11" font-weight="700" fill="#10B981" letter-spacing="0.5">PRODUCTION (Azure)</text>
+
+  <!-- Cloudflare -->
+  <g filter="url(#shadowLight)">
+    <rect x="130" y="80" width="200" height="34" rx="6" fill="#fff7ed" stroke="#F97316" stroke-width="1.2"/>
+    <path d="M147 93 l4 -4 l4 4 l-2 0 l0 5 l-4 0 l0 -5 Z" fill="#F97316" opacity="0.7"/>
+    <text x="160" y="101" font-size="10" font-weight="600" fill="#c2410c">Cloudflare</text>
+    <text x="220" y="101" font-size="8" fill="#9a3412">WAF &#183; CDN &#183; TLS</text>
+  </g>
+
+  <line x1="230" y1="114" x2="230" y2="130" stroke="#94a3b8" stroke-width="1.2" marker-end="url(#arrow)"/>
+
+  <!-- Azure Container Apps Environment -->
+  <rect x="20" y="130" width="420" height="340" rx="10" fill="#10B981" opacity="0.04"/>
+  <rect x="20" y="130" width="420" height="340" rx="10" fill="none" stroke="#86efac" stroke-width="0.8"/>
+  <rect x="28" y="134" width="170" height="16" rx="8" fill="#10B981" opacity="0.12"/>
+  <text x="113" y="145" text-anchor="middle" font-size="7.5" font-weight="700" fill="#059669" letter-spacing="0.8">AZURE CONTAINER APPS ENV</text>
+
+  <!-- Frontend Container -->
+  <g filter="url(#shadow)">
+    <rect x="40" y="158" width="180" height="80" rx="8" fill="#eff6ff" stroke="#3B82F6" stroke-width="1.3"/>
+    <rect x="40" y="158" width="180" height="16" rx="8" fill="#3B82F6" opacity="0.08"/>
+    <text x="56" y="172" font-size="9" font-weight="700" fill="#3B82F6">cviper-frontend</text>
+    <text x="56" y="191" font-size="10" font-weight="600" fill="#1e40af">nginx + React SPA</text>
+    <text x="56" y="205" font-size="8" fill="#64748b">Vite build output</text>
+    <text x="56" y="218" font-size="8" fill="#64748b">Port 80</text>
+    <text x="56" y="230" font-size="7" fill="#94a3b8">VITE_API_BASE=/api</text>
+  </g>
+
+  <!-- Backend Container -->
+  <g filter="url(#shadow)">
+    <rect x="240" y="158" width="180" height="80" rx="8" fill="#ecfdf5" stroke="#10B981" stroke-width="1.3"/>
+    <rect x="240" y="158" width="180" height="16" rx="8" fill="#10B981" opacity="0.08"/>
+    <text x="256" y="172" font-size="9" font-weight="700" fill="#10B981">cviper-backend</text>
+    <text x="256" y="191" font-size="10" font-weight="600" fill="#047857">Gunicorn + FastAPI</text>
+    <text x="256" y="205" font-size="8" fill="#64748b">Uvicorn workers</text>
+    <text x="256" y="218" font-size="8" fill="#64748b">Port 8000</text>
+    <text x="256" y="230" font-size="7" fill="#94a3b8">AUTH_ENABLED=true</text>
+  </g>
+
+  <!-- Arrow: Frontend to Backend (right edge x=220 → left edge x=240) -->
+  <line x1="220" y1="198" x2="240" y2="198" stroke="#3B82F6" stroke-width="1.2" marker-end="url(#arrowGreen)"/>
+  <text x="226" y="194" font-size="6" fill="#94a3b8">/api</text>
+
+  <!-- Env Vars injection box -->
+  <g filter="url(#shadowLight)">
+    <rect x="40" y="252" width="380" height="50" rx="6" fill="#faf5ff" stroke="#a78bfa" stroke-width="0.8" stroke-dasharray="4,2"/>
+    <text x="56" y="268" font-size="8" font-weight="600" fill="#8B5CF6">Env Vars (from Bicep + Key Vault)</text>
+    <text x="56" y="282" font-size="7" fill="#6d28d9">DATABASE_URL &#183; JWT_SECRET_KEY &#183; OPENAI_API_KEY &#183; GOOGLE_API_KEY</text>
+    <text x="56" y="292" font-size="7" fill="#6d28d9">ANTHROPIC_API_KEY &#183; CLOUD_MODE=true &#183; AUTH_ENABLED=true</text>
+  </g>
+
+  <!-- Data: PostgreSQL -->
+  <g filter="url(#shadow)">
+    <rect x="40" y="316" width="160" height="48" rx="6" fill="#fffbeb" stroke="#F59E0B" stroke-width="1.2"/>
+    <ellipse cx="56" cy="334" rx="6" ry="3.5" fill="none" stroke="#F59E0B" stroke-width="1"/>
+    <line x1="50" y1="334" x2="50" y2="346" stroke="#F59E0B" stroke-width="1"/>
+    <line x1="62" y1="334" x2="62" y2="346" stroke="#F59E0B" stroke-width="1"/>
+    <ellipse cx="56" cy="346" rx="6" ry="3.5" fill="none" stroke="#F59E0B" stroke-width="1"/>
+    <text x="72" y="337" font-size="10" font-weight="600" fill="#92400e">PostgreSQL</text>
+    <text x="72" y="351" font-size="7" fill="#a16207">Azure Flex &#183; PgBouncer</text>
+    <text x="72" y="361" font-size="7" fill="#b45309">Private endpoint (VNet)</text>
+  </g>
+
+  <!-- Data: Blob Storage -->
+  <g filter="url(#shadow)">
+    <rect x="220" y="316" width="160" height="48" rx="6" fill="#fffbeb" stroke="#F59E0B" stroke-width="1.2"/>
+    <path d="M 234 340 q -6 0 -6 -6 q 0 -5 5 -6 q 1 -4 6 -4 q 5 0 6 4 q 5 1 5 6 q 0 6 -6 6 z" fill="none" stroke="#F59E0B" stroke-width="1"/>
+    <text x="252" y="337" font-size="10" font-weight="600" fill="#92400e">Blob Storage</text>
+    <text x="252" y="351" font-size="7" fill="#a16207">Generated docs &#183; 30d TTL</text>
+    <text x="252" y="361" font-size="7" fill="#b45309">Managed Identity auth</text>
+  </g>
+
+  <!-- Data: Key Vault -->
+  <g filter="url(#shadow)">
+    <rect x="40" y="378" width="160" height="42" rx="6" fill="#fef2f2" stroke="#EF4444" stroke-width="1"/>
+    <path d="M54 392 l0 -4 l3 0 l0 -3 a4 4 0 1 1 8 0 l0 3 l3 0 l0 12 l-14 0 Z" fill="none" stroke="#EF4444" stroke-width="0.8" transform="scale(0.7) translate(28, 530)"/>
+    <text x="72" y="397" font-size="10" font-weight="600" fill="#991b1b">Key Vault</text>
+    <text x="72" y="411" font-size="7" fill="#b91c1c">Secrets &#183; API keys &#183; JWT key</text>
+  </g>
+
+  <!-- Data: Log Analytics -->
+  <g filter="url(#shadow)">
+    <rect x="220" y="378" width="160" height="42" rx="6" fill="#fdf2f8" stroke="#EC4899" stroke-width="1"/>
+    <text x="236" y="397" font-size="10" font-weight="600" fill="#be185d">Log Analytics</text>
+    <text x="236" y="411" font-size="7" fill="#9d174d">Grafana &#183; Prometheus &#183; Loki</text>
+  </g>
+
+  <!-- Arrows: Backend to data stores (terminate at box top edges y=316) -->
+  <path d="M 330 238 L 330 248 L 430 248 L 430 316 L 300 316" fill="none" stroke="#F59E0B" stroke-width="1" marker-end="url(#arrowAmber)" stroke-dasharray="3,2"/>
+  <path d="M 120 238 L 120 248 L 32 248 L 32 316 L 40 316" fill="none" stroke="#F59E0B" stroke-width="1" marker-end="url(#arrowAmber)" stroke-dasharray="3,2"/>
+
+  <!-- Network badge — security emphasis with solid red border -->
+  <g filter="url(#shadowLight)">
+    <rect x="40" y="432" width="380" height="26" rx="5" fill="#EF4444" opacity="0.05" stroke="#EF4444" stroke-width="2"/>
+    <text x="230" y="450" text-anchor="middle" font-size="8" font-weight="700" fill="#dc2626">Azure VNet  &#183;  Private DNS  &#183;  No public DB access</text>
+  </g>
+
+  <!-- ====== RIGHT COLUMN: LOCAL DEV ====== -->
+  <text x="690" y="68" text-anchor="middle" font-size="11" font-weight="700" fill="#3B82F6" letter-spacing="0.5">LOCAL DEVELOPMENT</text>
+
+  <!-- Browser -->
+  <g filter="url(#shadowLight)">
+    <rect x="590" y="80" width="200" height="34" rx="6" fill="#f1f5f9" stroke="#64748b" stroke-width="1.2"/>
+    <rect x="605" y="87" width="14" height="10" rx="2" fill="none" stroke="#64748b" stroke-width="0.8"/>
+    <line x1="605" y1="90" x2="619" y2="90" stroke="#64748b" stroke-width="0.5"/>
+    <text x="626" y="101" font-size="10" font-weight="600" fill="#334155">Browser</text>
+    <text x="685" y="101" font-size="8" fill="#64748b">localhost:3000</text>
+  </g>
+
+  <line x1="690" y1="114" x2="690" y2="130" stroke="#94a3b8" stroke-width="1.2" marker-end="url(#arrow)"/>
+
+  <!-- Local Dev Environment -->
+  <rect x="480" y="130" width="420" height="340" rx="10" fill="#3B82F6" opacity="0.04"/>
+  <rect x="480" y="130" width="420" height="340" rx="10" fill="none" stroke="#93c5fd" stroke-width="0.8"/>
+  <rect x="488" y="134" width="170" height="16" rx="8" fill="#3B82F6" opacity="0.12"/>
+  <text x="573" y="145" text-anchor="middle" font-size="7.5" font-weight="700" fill="#3B82F6" letter-spacing="0.8">DEVELOPER MACHINE</text>
+
+  <!-- Vite Dev Server -->
+  <g filter="url(#shadow)">
+    <rect x="500" y="158" width="180" height="80" rx="8" fill="#eff6ff" stroke="#3B82F6" stroke-width="1.3"/>
+    <rect x="500" y="158" width="180" height="16" rx="8" fill="#3B82F6" opacity="0.08"/>
+    <text x="516" y="172" font-size="9" font-weight="700" fill="#3B82F6">Vite Dev Server</text>
+    <text x="516" y="191" font-size="10" font-weight="600" fill="#1e40af">npm run dev</text>
+    <text x="516" y="205" font-size="8" fill="#64748b">HMR &#183; React Fast Refresh</text>
+    <text x="516" y="218" font-size="8" fill="#64748b">Port 3000</text>
+    <text x="516" y="230" font-size="7" fill="#94a3b8">Proxy /api -> :8000</text>
+  </g>
+
+  <!-- Python Backend -->
+  <g filter="url(#shadow)">
+    <rect x="700" y="158" width="180" height="80" rx="8" fill="#ecfdf5" stroke="#10B981" stroke-width="1.3"/>
+    <rect x="700" y="158" width="180" height="16" rx="8" fill="#10B981" opacity="0.08"/>
+    <text x="716" y="172" font-size="9" font-weight="700" fill="#10B981">Python Backend</text>
+    <text x="716" y="191" font-size="10" font-weight="600" fill="#047857">python main.py</text>
+    <text x="716" y="205" font-size="8" fill="#64748b">Uvicorn &#183; Auto-reload</text>
+    <text x="716" y="218" font-size="8" fill="#64748b">Port 8000</text>
+    <text x="716" y="230" font-size="7" fill="#94a3b8">AUTH_ENABLED=false</text>
+  </g>
+
+  <!-- Arrow: Vite to Backend (right edge x=680 → left edge x=700) -->
+  <line x1="680" y1="198" x2="700" y2="198" stroke="#3B82F6" stroke-width="1.2" marker-end="url(#arrowGreen)"/>
+  <text x="686" y="194" font-size="6" fill="#94a3b8">/api</text>
+
+  <!-- .env file box -->
+  <g filter="url(#shadowLight)">
+    <rect x="500" y="252" width="380" height="44" rx="6" fill="#f5f3ff" stroke="#a78bfa" stroke-width="0.8" stroke-dasharray="4,2"/>
+    <text x="516" y="268" font-size="8" font-weight="600" fill="#8B5CF6">.env File (local secrets)</text>
+    <text x="516" y="282" font-size="7" fill="#6d28d9">OPENAI_API_KEY &#183; GOOGLE_API_KEY &#183; ANTHROPIC_API_KEY</text>
+    <text x="516" y="292" font-size="7" fill="#94a3b8">No DATABASE_URL needed &#183; No CLOUD_MODE &#183; No Key Vault</text>
+  </g>
+
+  <!-- Data: SQLite -->
+  <g filter="url(#shadow)">
+    <rect x="500" y="310" width="180" height="48" rx="6" fill="#fffbeb" stroke="#F59E0B" stroke-width="1.2"/>
+    <ellipse cx="516" cy="328" rx="6" ry="3.5" fill="none" stroke="#F59E0B" stroke-width="1"/>
+    <line x1="510" y1="328" x2="510" y2="340" stroke="#F59E0B" stroke-width="1"/>
+    <line x1="522" y1="328" x2="522" y2="340" stroke="#F59E0B" stroke-width="1"/>
+    <ellipse cx="516" cy="340" rx="6" ry="3.5" fill="none" stroke="#F59E0B" stroke-width="1"/>
+    <text x="532" y="331" font-size="10" font-weight="600" fill="#92400e">SQLite</text>
+    <text x="532" y="345" font-size="7" fill="#a16207">File-based (dev)</text>
+    <text x="532" y="355" font-size="7" fill="#b45309">In-memory (tests, StaticPool)</text>
+  </g>
+
+  <!-- Data: Local Filesystem -->
+  <g filter="url(#shadow)">
+    <rect x="700" y="310" width="180" height="48" rx="6" fill="#fffbeb" stroke="#F59E0B" stroke-width="1.2"/>
+    <rect x="714" y="322" width="10" height="12" rx="1" fill="none" stroke="#F59E0B" stroke-width="0.8"/>
+    <path d="M720 322 l4 -4 l0 12 l-4 0" fill="none" stroke="#F59E0B" stroke-width="0.8"/>
+    <text x="732" y="331" font-size="10" font-weight="600" fill="#92400e">Local Filesystem</text>
+    <text x="732" y="345" font-size="7" fill="#a16207">Generated docs in /tmp</text>
+    <text x="732" y="355" font-size="7" fill="#b45309">No Blob Storage fallback</text>
+  </g>
+
+  <!-- Arrows: Backend to data stores (terminate at box top edges y=310, left edges) -->
+  <path d="M 790 238 L 790 248 L 892 248 L 892 310 L 880 310" fill="none" stroke="#F59E0B" stroke-width="1" marker-end="url(#arrowAmber)" stroke-dasharray="3,2"/>
+  <path d="M 590 238 L 590 248 L 492 248 L 492 310 L 500 310" fill="none" stroke="#F59E0B" stroke-width="1" marker-end="url(#arrowAmber)" stroke-dasharray="3,2"/>
+
+  <!-- ORM badge -->
+  <g filter="url(#shadowLight)">
+    <rect x="500" y="372" width="380" height="24" rx="5" fill="#fef3c7" stroke="#F59E0B" stroke-width="0.8" stroke-dasharray="4,2"/>
+    <text x="690" y="388" text-anchor="middle" font-size="8" font-weight="600" fill="#b45309">SQLAlchemy ORM  &#183;  Dialect Abstraction  &#183;  Same codebase, different DB</text>
+  </g>
+
+  <!-- Ollama (optional local AI) -->
+  <g filter="url(#shadow)">
+    <rect x="500" y="410" width="180" height="48" rx="6" fill="#eef2ff" stroke="#8B5CF6" stroke-width="1"/>
+    <text x="516" y="431" font-size="10" font-weight="600" fill="#3730a3">Ollama (optional)</text>
+    <text x="516" y="445" font-size="7" fill="#4338ca">Local LLM &#183; localhost:11434</text>
+    <text x="516" y="455" font-size="7" fill="#64748b">Free AI for dev without API keys</text>
+  </g>
+
+  <!-- Test runner -->
+  <g filter="url(#shadow)">
+    <rect x="700" y="410" width="180" height="48" rx="6" fill="#f0fdf4" stroke="#16a34a" stroke-width="1"/>
+    <text x="716" y="431" font-size="10" font-weight="600" fill="#15803d">Test Runners</text>
+    <text x="716" y="445" font-size="7" fill="#166534">pytest &#183; Vitest &#183; Playwright</text>
+    <text x="716" y="455" font-size="7" fill="#64748b">In-memory SQLite (StaticPool)</text>
+  </g>
+
+  <!-- ====== COMPARISON TABLE with alternating row shading ====== -->
+  <rect x="20" y="486" width="880" height="192" rx="8" fill="#f8fafc" stroke="#e2e8f0" stroke-width="0.5"/>
+  <text x="460" y="506" text-anchor="middle" font-size="11" font-weight="700" fill="#1e293b">Key Differences</text>
+
+  <!-- Table header -->
+  <text x="60" y="526" font-size="9" font-weight="700" fill="#64748b">Concern</text>
+  <text x="240" y="526" font-size="9" font-weight="700" fill="#10B981">Production</text>
+  <text x="620" y="526" font-size="9" font-weight="700" fill="#3B82F6">Local Dev</text>
+  <line x1="40" y1="532" x2="880" y2="532" stroke="#e2e8f0" stroke-width="0.5"/>
+
+  <!-- Alternating rows -->
+  <rect x="36" y="534" width="852" height="18" rx="0" fill="#f9fafb"/>
+  <text x="60" y="548" font-size="8" font-weight="600" fill="#334155">Database</text>
+  <text x="240" y="548" font-size="8" fill="#64748b">PostgreSQL (Azure Flex, VNet private endpoint)</text>
+  <text x="620" y="548" font-size="8" fill="#64748b">SQLite file (dev) / in-memory (tests)</text>
+
+  <rect x="36" y="552" width="852" height="18" rx="0" fill="#ffffff"/>
+  <text x="60" y="566" font-size="8" font-weight="600" fill="#334155">Secrets</text>
+  <text x="240" y="566" font-size="8" fill="#64748b">Azure Key Vault + Managed Identity</text>
+  <text x="620" y="566" font-size="8" fill="#64748b">.env file (gitignored)</text>
+
+  <rect x="36" y="570" width="852" height="18" rx="0" fill="#f9fafb"/>
+  <text x="60" y="584" font-size="8" font-weight="600" fill="#334155">Documents</text>
+  <text x="240" y="584" font-size="8" fill="#64748b">Azure Blob Storage (30-day lifecycle)</text>
+  <text x="620" y="584" font-size="8" fill="#64748b">Local /tmp directory</text>
+
+  <rect x="36" y="588" width="852" height="18" rx="0" fill="#ffffff"/>
+  <text x="60" y="602" font-size="8" font-weight="600" fill="#334155">Auth</text>
+  <text x="240" y="602" font-size="8" fill="#64748b">AUTH_ENABLED=true, JWT, RBAC, email verify</text>
+  <text x="620" y="602" font-size="8" fill="#64748b">AUTH_ENABLED=false (optional)</text>
+
+  <rect x="36" y="606" width="852" height="18" rx="0" fill="#f9fafb"/>
+  <text x="60" y="620" font-size="8" font-weight="600" fill="#334155">Frontend</text>
+  <text x="240" y="620" font-size="8" fill="#64748b">nginx serving Vite build (static files)</text>
+  <text x="620" y="620" font-size="8" fill="#64748b">Vite dev server (HMR, proxy /api)</text>
+
+  <rect x="36" y="624" width="852" height="18" rx="0" fill="#ffffff"/>
+  <text x="60" y="638" font-size="8" font-weight="600" fill="#334155">Monitoring</text>
+  <text x="240" y="638" font-size="8" fill="#64748b">Grafana + Prometheus + Loki + Log Analytics</text>
+  <text x="620" y="638" font-size="8" fill="#64748b">Console logs only</text>
+
+  <rect x="36" y="642" width="852" height="18" rx="0" fill="#f9fafb"/>
+  <text x="60" y="656" font-size="8" font-weight="600" fill="#334155">AI Providers</text>
+  <text x="240" y="656" font-size="8" fill="#64748b">9 cloud providers (keys in Key Vault)</text>
+  <text x="620" y="656" font-size="8" fill="#64748b">Ollama (free) + cloud providers (.env keys)</text>
+
+  <!-- Timestamp -->
+  <text x="900" y="700" text-anchor="end" font-size="10" fill="#6B7280">Updated: 2026-04-15</text>
+
+</svg>
