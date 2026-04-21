@@ -7,19 +7,20 @@
 | Field | Value |
 |-------|-------|
 | **Document ID** | TSA-CVIPER-001 |
-| **Version** | 0.2.4 |
+| **Version** | 0.5.5 |
 | **Status** | Pre-Release |
 | **Author** | CViper Project Team |
-| **Date** | 2026-04-17 |
+| **Date** | 2026-04-21 |
 | **Classification** | Internal |
-| **Related BRD** | BRD-CVIPER-001 v0.5.2 |
-| **Related FSD** | FSD-CVIPER-001 v0.5.2 |
+| **Related BRD** | BRD-CVIPER-001 v0.5.5 |
+| **Related FSD** | FSD-CVIPER-001 v0.5.5 |
 
 ### Version History
 
 | Version | Date | Author | Changes |
 |---------|------|--------|---------|
-| 0.5.2 | 2026-04-17 | CViper Project Team | Version bump (commit: 7baf4b18). Update this description with change details. |
+| 0.5.5 | 2026-04-21 | CViper Project Team | Header version re-stamped from 0.2.4 to 0.5.5 — the 0.5.2 row below was added to the history table but the header metadata was never updated, producing doc-version drift that VERSION.md reported incorrectly for ~4 days. New regression-prevention tests documented: `test_regular_user_put_response_has_same_keys_as_get` + 8 aiPriorityReorder helper tests (Rule #36 / LESSON-035), `TestSearchAutoResolveFallback` with explicit `CLOUD_MODE=1` scenario (Rule #37 / LESSON-037), user-scope parity framework (CV-197, Rule #24 guard). Coverage closed for CV-192 through CV-201. Commit: 11778d0b. |
+| 0.5.2 | 2026-04-17 | CViper Project Team | History row added when BRD/FSD bumped to 0.5.2, but TSA header was not updated — drift introduced here, corrected at 0.5.5. No TSA content changes in this slot. |
 | 0.2.4 | 2026-04-12 | CViper Project Team | Added 7-row Test Design Checklist. Updated E2E to 50 specs (100% journey coverage). Added `@critical-regression` deploy gate (CV-180). Test Design Matrix CI enforcement (CV-172). Updated test counts to 4,400+ backend / 1,500+ frontend. Added `e2eCoverageParity.test.js` enforcement. |
 | 0.2.3 | 2026-03-27 | CViper Project Team | Updated gateway retry/circuit breaker test counts (+20 tests). CI schema drift check now uses PostgreSQL 16 service container. Alembic migration 013 batch fix for SQLite compat. |
 | 0.2.2 | 2026-03-27 | CViper Project Team | Version reset to align with application semver (pre-release). Consolidates v1.0 content with updated test counts, folder structure, and CI pipeline layout. Prior version archived in `docs/Archive/`. |
@@ -95,7 +96,7 @@ The test suite follows a classic test pyramid, with the majority of tests at the
 
 ## 3. Repository Folder Structure
 
-### Backend Tests (247 files)
+### Backend Tests (251 files)
 
 ```
 backend/tests/
@@ -114,7 +115,7 @@ backend/tests/
 └── security/                       # Auth, RBAC, GDPR, sandboxing (23 files)
 ```
 
-### Frontend Tests (142 files)
+### Frontend Tests (149 files)
 
 ```
 frontend/src/

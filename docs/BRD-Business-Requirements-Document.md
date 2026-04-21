@@ -7,17 +7,18 @@
 | Field | Value |
 |-------|-------|
 | **Document ID** | BRD-CVIPER-001 |
-| **Version** | 0.5.2 |
+| **Version** | 0.5.5 |
 | **Status** | Pre-Release |
 | **Author** | CViper Project Team |
-| **Date** | 2026-04-17 |
+| **Date** | 2026-04-21 |
 | **Classification** | Internal |
 
 ### Version History
 
 | Version | Date | Author | Changes |
 |---------|------|--------|---------|
-| 0.5.2 | 2026-04-17 | CViper Project Team | Version bump (commit: 7baf4b18). Update this description with change details. |
+| 0.5.5 | 2026-04-21 | CViper Project Team | Rejection Intelligence hero + SEO pivot, simplified AI Assistant card + provider health test endpoint, CV-157 public case study, CV-159 UK regulatory chips, CV-160 evidence-first rejection analysis, CV-163 recruiter-view one-page DOCX, CV-155 tier-gated progressive disclosure, CV-197 user-scope parity framework, cloud-mode search fallback (Rule #37 / LESSON-037), AI priority PUT/GET parity fix (Rule #36 / LESSON-035), SRE-grade status page upgrade with embedded Grafana panels, ConfirmDialog replaces browser dialogs, task-aware Powered-by chip, full UX consistency sweep across Applications/Documents/Career Insights. Doc versions re-aligned (TSA drift 0.2.4 → 0.5.5; Test-Plan 0.5.1 → 0.5.5). Commit: 11778d0b. |
+| 0.5.2 | 2026-04-17 | CViper Project Team | Usage tracking and Free/Pro tiers (CV-093), job alerts live search integration (CV-082), AI bias audit Phase 1 (CV-187), CV analysis caching, Applications UI overhaul, showcase SVG redesign, real-backend E2E, full test suite audit (5,812 tests). |
 | 0.2.2 | 2026-03-27 | CViper Project Team | Version reset to align with application semver (pre-release). Consolidates all prior work (formerly v1.0–v2.1). Full history archived in `docs/Archive/`. |
 | 0.2.3 | 2026-03-27 | CViper Project Team | Sandbox Gemini quota fix (permanent quota detection, circuit breaker force-open, user-facing fallback message). Alembic migration 013 batch fix for SQLite compatibility. CI pipeline upgraded to PostgreSQL 16 service container for schema drift checks. |
 | 0.5.1 | 2026-04-13 | CViper Project Team | Career Intelligence UI (role discovery, career progression, training plans), UK regional salary comparison, legal markdown rendering, AI provider settings redesign, progressive disclosure, wizard mode, E2E guards. All doc versions aligned to 0.5.1. |

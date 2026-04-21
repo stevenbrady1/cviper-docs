@@ -7,18 +7,19 @@
 | Field | Value |
 |-------|-------|
 | **Document ID** | FSD-CVIPER-001 |
-| **Version** | 0.5.2 |
+| **Version** | 0.5.5 |
 | **Status** | Pre-Release |
 | **Author** | CViper Project Team |
-| **Date** | 2026-04-17 |
+| **Date** | 2026-04-21 |
 | **Classification** | Internal |
-| **Related BRD** | BRD-CVIPER-001 v0.5.2 |
+| **Related BRD** | BRD-CVIPER-001 v0.5.5 |
 
 ### Version History
 
 | Version | Date | Author | Changes |
 |---------|------|--------|---------|
-| 0.5.2 | 2026-04-17 | CViper Project Team | Version bump (commit: 7baf4b18). Update this description with change details. |
+| 0.5.5 | 2026-04-21 | CViper Project Team | New endpoints: `POST /api/ai-providers/{id}/test` (provider health check). Response-shape changes: `PUT /api/ai-routing` now wraps through `pv.filter_routing_info()` to match GET (Rule #36 / LESSON-035). `/api/search` auto-resolves saved profile or saved CV-analysis for cloud-mode users without `cv_folder` (Rule #37 / LESSON-037). Admin scope extended to `PUT /api/jobs/{id}` to match DELETE parity. New frontend components: ConfirmDialog (replacing browser alert/confirm/prompt), task-aware Powered-by chip, Rejection Intelligence login hero, Public Case Study page (CV-157). Auto-correction rules #36 and #37 added. Commit: 11778d0b. |
+| 0.5.2 | 2026-04-17 | CViper Project Team | Usage tracking and Free/Pro tiers (CV-093): `User.tier`, `UsageDailySummary`, `UsageLimitMiddleware`, `GET /api/usage`. Job alerts live search integration (CV-082). AI bias audit Phase 1 (CV-187). CV analysis 15-minute result cache. Applications UI overhaul. Showcase SVG redesign. Real-backend E2E pipeline. |
 | 0.5.1 | 2026-04-13 | CViper Project Team | Career Intelligence UI, UK salary comparison, legal markdown rendering, provider settings redesign, progressive disclosure, wizard mode, E2E guards. All doc versions aligned to 0.5.1. |
 | 0.3.2 | 2026-04-10 | CViper Project Team | CV Optimisation Pipeline (keyword injection, ATS format validator, one-click optimise). Training Provider Foundation (8 providers, certifications, skill progress). AI Ethics & Fairness (prompt guardrails, confidence scores, Challenge This Score). Growth Readiness (OG/Twitter meta, robots.txt, sitemap.xml, PWA install, Plausible). Cross-user Data Isolation (3-layer: backend scoping, frontend reset, userStorage). API Contract Tests (14 tests, shared schema). P0 security verified. |
 | 0.3.1 | 2026-04-07 | CViper Project Team | Phase 0 security hardening: encrypted `.env` secrets, SecurityHeadersMiddleware, fatal guards for SECURE_COOKIES + CORS wildcards, all `shell=True` removed from backend (AST ratchet test). OAuth extended to LinkedIn + Google + Microsoft. `?tab=` deep links for external URLs. Terms of Service published. Public-route registry (single source of truth for auth middleware). Stale chunk prevention (nginx cache headers + lazyRetry + Cloudflare purge). PR-based backlog sync. News Feed full-width fix. |

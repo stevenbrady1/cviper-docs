@@ -5,6 +5,69 @@ All notable changes to CViper are documented in this file.
 Format based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 This project uses [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.5.5] - 2026-04-21
+
+### Added
+- **"Rejection Intelligence" login hero + SEO pivot** — new marketing-surface copy leading with the rejection-analysis value proposition; updated meta tags.
+- **Simplified AIAssistantCard + provider health test endpoint.** `POST /api/ai-providers/{id}/test` lets users verify a configured provider end-to-end from the UI.
+- **CV-157 Public Case Study page** — portfolio-grade case study accessible without login.
+- **CV-159 UK regulatory framework chips** on job cards (FCA, PRA, SRA, GDPR, etc.) for financial-services roles.
+- **CV-160 Rejection Analysis — evidence-first output.** Tightened prompt structure; every conclusion must cite a specific piece of the CV or JD.
+- **CV-163 Recruiter-view one-page CV DOCX export.** New condensed layout optimised for recruiter skim reads.
+- **CV-155 Tier-gated advanced features** for progressive disclosure (wizard/first-visit users see a focused surface).
+- **Job Boards favourites row** and promoted LinkedIn CTA on Search.
+- **Task-aware "Powered by" chip** — the chip in page headers now reflects the specific model that ran the most recent task, not just the tier default.
+- **Status page — SRE-grade upgrade.** Embedded live Grafana panels on the admin dashboard, Prometheus scraping wired up in Azure, CViper logo + favicon, restored Grafana/CI/staging deeplinks on `/?token=...` bookmarks.
+- **`@smoke` golden-path E2E spec** running against live demo.
+- **ConfirmDialog** component replacing browser `alert`/`confirm`/`prompt`.
+- **Structured 429 for token-budget exhaustion** + `ai_meta` attribution on AI error responses.
+- **CV Analysis auto-runs ATS Format Validator** using the already-loaded file (no second upload).
+- **Saved Analyses + Saved Job Searches** merged into a segmented card.
+- **User-scope parity framework (CV-197)** — repository-level guard for Rule #24 preventing cross-user data leaks via missing `user_id=` arguments.
+
+### Changed
+- **Applications density sweep** + cross-page UX consistency pass.
+- **Date column consistency** across Search, Applications, Posted Date.
+- **"View Job" → "View Original ↗"** with source-aware tooltip.
+- **"Application in Progress" → "In Progress"** in status labels.
+- **"KW" → "Keyword"** with clearer cost-vs-accuracy tooltip.
+- **AboutProject + About page** — AI partnership copy reframed; stuck diagram overlay fix.
+- **Documents + Career Insights** empty-states brought to gold-standard pattern.
+- **Search Source Results** collapsed into chip strip + expandable details.
+- **Saved badge + View →** merged into a single chip.
+- **Score display centralised** (`utils/scoreDisplay.js`) — contract test locks it in.
+- **AI Assistant priority list** now returns the same filtered shape on PUT as on GET — LESSON-035 (Rule #36).
+
+### Fixed
+- **Cloud-mode search without cv_folder (LESSON-037 / Rule #37)** — `/api/search` now auto-resolves a saved profile or saved CV-analysis when the frontend omits `cv_folder` in cloud mode; prevents a blocking "CV folder path is required" 400 on first search for any cloud-mode non-sandbox user.
+- **AI Priority reorder drops providers** — the ◀/▶ button in the AI Routing list no longer silently truncates hidden-but-present entries from `priority_order`; two-layer fix (backend PUT/GET parity + frontend reorder helper working on the full list).
+- **Admin cannot update cross-user jobs** — `PUT /api/jobs/{id}` now honours admin scope to match DELETE parity.
+- **500s leaking `str(e)`** in error responses — standardised redaction + silent-catch wiring on the frontend.
+- **AI-key actionable errors** — replaces generic failures with provider-specific guidance.
+- **"Configured implies model" contract** — both UI and HTTP layer now enforce that an AI key marked configured has a model populated (eliminates the `provider configured but model=null` limbo state).
+- **Grafana embedded dashboards unblocked** (CSP + iframe permissions).
+- **Mobile + demo UX sweep** — CV action row, card layout, demo Settings visibility, usage 404, model fallback display.
+- **More menu dismisses on tab change**, top hamburger hidden on mobile, StatusBar auto-hides when scrolling content.
+- **Provider display-name** consistency + DocumentCentre mobile layout repair.
+
+### Infrastructure
+- **Prometheus scraping** wired to `cviper-backend` in Azure.
+- **Cloudflare Workers** setup committed; showcase SVG stamps refreshed.
+- **`.env.example`** files committed at root, `backend/`, and `frontend/`.
+- **Pre-push hook** guards against untracked relative imports (`b76535b7`).
+- **Observability**: `event_type` + `exc_info` added to AI endpoint + AI routing GET error logs.
+- **Migration idempotency** guards maintained (030, 031 from 0.5.4 continue to pass).
+
+### Testing
+- **Coverage sweep** — closed 7 P2/P3 gaps from the 48h audit (CV-192 through CV-201).
+- **CLOUD_MODE explicit regression test** paired with Rule #37.
+- **User-scope parity framework** replaces ad-hoc per-endpoint isolation checks.
+
+### Docs
+- **Drift fix**: `Testing-Strategy-and-Architecture.md` header version corrected from `0.2.4` to `0.5.5` (history table had claimed 0.5.2 but header was never stamped).
+- **Test-Plan.md** stamped to `0.5.5` (had drifted to `0.5.1`).
+- **All doc versions aligned** — BRD/FSD/TSA/Test-Plan all now at `0.5.5`.
+
 ## [0.5.4] - 2026-04-19
 
 ### Added
