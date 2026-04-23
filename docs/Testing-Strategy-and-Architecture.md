@@ -7,18 +7,19 @@
 | Field | Value |
 |-------|-------|
 | **Document ID** | TSA-CVIPER-001 |
-| **Version** | 0.5.5 |
+| **Version** | 0.6.0 |
 | **Status** | Pre-Release |
 | **Author** | CViper Project Team |
-| **Date** | 2026-04-21 |
+| **Date** | 2026-04-23 |
 | **Classification** | Internal |
-| **Related BRD** | BRD-CVIPER-001 v0.5.5 |
-| **Related FSD** | FSD-CVIPER-001 v0.5.5 |
+| **Related BRD** | BRD-CVIPER-001 v0.6.0 |
+| **Related FSD** | FSD-CVIPER-001 v0.6.0 |
 
 ### Version History
 
 | Version | Date | Author | Changes |
 |---------|------|--------|---------|
+| 0.6.0 | 2026-04-23 | CViper Project Team | **New guard classes**: (1) **state-drift prevention registry** (`backend/tests/infrastructure/test_state_drift_prevention.py`) — contract test enumerating every (DB Config row ↔ in-memory state) pair; every declared read endpoint must call its hydrate method or the test fails, catching Azure Container Apps replica drift before CI (LESSON-048). (2) **Read-read parity registry** (`backend/tests/infrastructure/test_read_read_parity.py`) — every pair of GETs exposing the same field must add a `ReadPair` entry; mirrors `PARITY_PAIRS` (LESSON-035) for read-side consistency (LESSON-043). (3) **Live OpenRouter model tests** (`backend/tests/ai/test_openrouter_live_models.py`) — cached live fetch validation, 404 fallback to safety-net, PUT-side validation against live list (LESSON-049 / CV-232). (4) **Provider-model drift canary** (`scripts/check_provider_model_drift.py` + `.github/workflows/provider-drift-check.yml`) — nightly CI check + runtime self-heal (LESSON-050 / CV-233). (5) **Render-and-walk `\uXXXX` literal leak guard** (`frontend/src/components/noUnicodeEscapeLeak.test.jsx`) — catches JSX text-node escape mistakes that source-scanning can't (LESSON-046). (6) **Typography drift detector** — Tier 2 + pre-commit hook (Layer 9) catches inline style objects re-inventing existing surface/typography patterns. **New tests for the CV Optimisation Pipeline**: 21 unit + 11 endpoint + 10 component tests for the Bullet Quality Scorer (`test_bullet_scorer.py`, `test_score_bullets_endpoint.py`, `BulletScorer.test.jsx`) — full 7-row matrix (happy / negative / boundary / edge / unicode / metric variants / regression). **Pre-push Layer 8** (CV-225) — soft nudge when substantive fix commits lack a tracking reference. **Auto-correction rules added**: #43 (read-read parity), #44 (AI string sanitisation), #45 (cloud-user CV resolver). Commit: 9534f137. |
 | 0.5.5 | 2026-04-21 | CViper Project Team | Header version re-stamped from 0.2.4 to 0.5.5 — the 0.5.2 row below was added to the history table but the header metadata was never updated, producing doc-version drift that VERSION.md reported incorrectly for ~4 days. New regression-prevention tests documented: `test_regular_user_put_response_has_same_keys_as_get` + 8 aiPriorityReorder helper tests (Rule #36 / LESSON-035), `TestSearchAutoResolveFallback` with explicit `CLOUD_MODE=1` scenario (Rule #37 / LESSON-037), user-scope parity framework (CV-197, Rule #24 guard). Coverage closed for CV-192 through CV-201. Commit: 11778d0b. |
 | 0.5.2 | 2026-04-17 | CViper Project Team | History row added when BRD/FSD bumped to 0.5.2, but TSA header was not updated — drift introduced here, corrected at 0.5.5. No TSA content changes in this slot. |
 | 0.2.4 | 2026-04-12 | CViper Project Team | Added 7-row Test Design Checklist. Updated E2E to 50 specs (100% journey coverage). Added `@critical-regression` deploy gate (CV-180). Test Design Matrix CI enforcement (CV-172). Updated test counts to 4,400+ backend / 1,500+ frontend. Added `e2eCoverageParity.test.js` enforcement. |
@@ -96,7 +97,7 @@ The test suite follows a classic test pyramid, with the majority of tests at the
 
 ## 3. Repository Folder Structure
 
-### Backend Tests (285 files)
+### Backend Tests (287 files)
 
 ```
 backend/tests/

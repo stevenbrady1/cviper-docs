@@ -5,6 +5,41 @@ All notable changes to CViper are documented in this file.
 Format based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 This project uses [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.6.0] - 2026-04-23
+
+### Added
+- **CV Optimisation Pipeline complete** — the final feature of the pipeline ships: a **Bullet Quality Scorer** (heuristic CAR-pattern scorer on every CV bullet, deterministic, no AI calls, 0-100 score with weakness tags) rendered on the CV Analysis tab. Complements the AI-powered `optimize_base_cv_bullets` (which only rewrites weak bullets) by scoring *every* bullet with colour-coded feedback. New endpoint `POST /api/cv/score-bullets`.
+- **ATS Format Validator expanded** to 6 categories and 23 individual checks (up from the initial 5 checks). Each check returns a pass/warn/fail status with a targeted fix suggestion.
+- **One-click "Optimise for this job"** modal — `POST /api/cv/optimize-for-job` runs the full pipeline (health + keywords + bullets) and renders results across 4 tabs (Summary / Health / Keywords / Bullets) with prioritised actions.
+- **CV-219 Missing-field chip** — inline edit affordance for Unknown Company/Location on Applications. `PUT /api/saved-jobs/{id}` extended to accept `company` + `location`.
+- **CV-230 AI Configuration Simple/Advanced mode split** — new users land on `SimpleAICard` (one provider for every task, low decision load); power users can opt into `AdvancedAIConfig` (priority ordering, per-task tier routing, local Ollama relay) via Settings → Preferences → Interface. New endpoint `PUT /api/user/config-mode`.
+- **CV-207 Regional regulatory awareness** — CV tailoring now accounts for UK FCA/PRA/SRA/GDPR and equivalent regulatory frameworks when the target role is in a regulated sector.
+- **CV-228 Cloud-user CV resolver** — the app now persists the full CV text so cloud-mode users (who have no local filesystem) can search without the `cv_folder` parameter. Two-step fallback: saved profile → saved CV analysis. Removes "CV folder path is required" errors for cloud users.
+
+### Changed
+- **Live OpenRouter model fetching (LESSON-049 / CV-232)** — `fetch_openrouter_models()` now hits the live `/models` endpoint with a 1-hour cache instead of trusting a hardcoded slug list. When OpenRouter retires a slug (they rotate weekly), the dropdown reflects reality instead of handing out a dead id. Static list stays as a safety-net for network errors. Retired `google/gemini-2.0-flash-exp:free` from the hardcoded fallback.
+- **Provider-model drift — defence in depth (LESSON-050 / CV-233)** — nightly CI canary runs `scripts/check_provider_model_drift.py` against every configured provider and opens an issue on regression; runtime self-heal auto-swaps to the next-healthy model when a model returns a permanent error.
+- **AI routing — state-drift prevention registry (LESSON-048)** — every persistent config that drives runtime behaviour now re-hydrates at startup. Contract test in `test_state_drift_prevention.py` enumerates the registered pairs and fails if any read endpoint forgets the hydrate call.
+- **Typography registry** — 4 new tokens extracted to `utils/surfaces.js` (`LINK`, `HERO_STAT_*`, `PROGRESS_CARD_HEADING`); 9 call sites migrated to the shared `TYPOGRAPHY.LINK` token (Tier 3).
+
+### Security
+- **LESSON-044 Layer 1+2 AI-string sanitisation** — every user-renderable AI string field is sanitised at both the schema layer and the render layer. `POST /api/add-job-link` now strips HTML from AI-returned company/location fields; sibling surfaces updated.
+
+### Testing
+- **Read-read parity registry (LESSON-043 / CV-223 / CV-224)** — every pair of GETs that expose the same field must add a `ReadPair` entry in `test_read_read_parity.py`. Chip-propagation E2E verifies the model indicator stays in sync across CV Analysis, Applications, and Job Search after a model change.
+- **JSX `\uXXXX` literal leak guard (LESSON-046)** — new render-and-walk Vitest guard in `noUnicodeEscapeLeak.test.jsx` catches source-level `→`-style escapes that JSX text nodes treat as 6 literal characters instead of the intended unicode arrow.
+- **Typography drift detector + pre-commit hook (Layer 9)** — Tier 2 guard flags inline style objects that duplicate surface/typography patterns already in `utils/surfaces.js`.
+- **Pre-push Layer 8 soft nudge (CV-225)** — warns when a substantive fix commit (not ui/test/docs scope) ships without a tracking reference (`#NNN`, `CV-NNN`, or `LESSON-NNN`).
+- **Bullet Scorer test matrix** — 21 unit + 11 endpoint + 10 component tests, full 7-row coverage (happy / negative / boundary / edge / unicode / metric variants / regression).
+
+### Auto-correction rules added
+- **#43** state-drift prevention for (DB Config ↔ in-memory) pairs
+- **#44** user-renderable AI string sanitisation (Layer 1+2)
+- **#45** cloud-user CV resolver contract (full-text persistence + 2-step fallback)
+
+### Doc versions
+- BRD 0.6.0, FSD 0.6.0, TSA 0.6.0, Test-Plan 0.6.0 — all four aligned to app version.
+
 ## [0.5.5] - 2026-04-21
 
 ### Added

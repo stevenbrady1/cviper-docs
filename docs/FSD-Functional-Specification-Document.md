@@ -7,17 +7,18 @@
 | Field | Value |
 |-------|-------|
 | **Document ID** | FSD-CVIPER-001 |
-| **Version** | 0.5.5 |
+| **Version** | 0.6.0 |
 | **Status** | Pre-Release |
 | **Author** | CViper Project Team |
-| **Date** | 2026-04-21 |
+| **Date** | 2026-04-23 |
 | **Classification** | Internal |
-| **Related BRD** | BRD-CVIPER-001 v0.5.5 |
+| **Related BRD** | BRD-CVIPER-001 v0.6.0 |
 
 ### Version History
 
 | Version | Date | Author | Changes |
 |---------|------|--------|---------|
+| 0.6.0 | 2026-04-23 | CViper Project Team | **New endpoints**: `POST /api/cv/score-bullets` (heuristic CAR-pattern bullet scoring, no AI, 30/min rate), `POST /api/cv/optimize-for-job` (one-click pipeline — health + keywords + bullets), `POST /api/cv/keyword-suggestions` (placement hints + example rephrases), `POST /api/cv/ats-format-check` (ATS format validator, 6 categories / 23 checks), `POST /api/cv/optimize-bullets` (AI-powered rewrites for weak bullets), `PUT /api/user/config-mode` (AI setup mode — simple or advanced). **Extended endpoint**: `PUT /api/saved-jobs/{id}` accepts `company` + `location` for inline edits (CV-219). **Response-shape additions**: `ai_meta` attribution on pipeline results; keyword explanations now carry `suggested_sections[]` + `example_rephrases[]`. **New frontend components**: `BulletScorer.jsx` (per-bullet score pill + weakness tags), `OptimiseModal.jsx` (4-tab results view), `MissingFieldChip.jsx` (inline editor), `SimpleAICard.jsx` + `AdvancedAIConfig.jsx` (CV-230 mode split). **AI orchestration**: live OpenRouter `/models` fetch with 1h cache + static safety-net fallback (LESSON-049); admin provider-model preferences hydrated at startup via `Config` row (extends Rule #42). **Architecture**: read-read parity registry (`PARITY_PAIRS` pattern, LESSON-043) and state-drift prevention registry (LESSON-048) enforce that GETs exposing the same field share a source and that every persistent config re-hydrates at startup. Auto-correction rules #43, #44, #45 (state-drift, AI string sanitisation, cloud CV resolver). Commit: 9534f137. |
 | 0.5.5 | 2026-04-21 | CViper Project Team | New endpoints: `POST /api/ai-providers/{id}/test` (provider health check). Response-shape changes: `PUT /api/ai-routing` now wraps through `pv.filter_routing_info()` to match GET (Rule #36 / LESSON-035). `/api/search` auto-resolves saved profile or saved CV-analysis for cloud-mode users without `cv_folder` (Rule #37 / LESSON-037). Admin scope extended to `PUT /api/jobs/{id}` to match DELETE parity. New frontend components: ConfirmDialog (replacing browser alert/confirm/prompt), task-aware Powered-by chip, Rejection Intelligence login hero, Public Case Study page (CV-157). Auto-correction rules #36 and #37 added. Commit: 11778d0b. |
 | 0.5.2 | 2026-04-17 | CViper Project Team | Usage tracking and Free/Pro tiers (CV-093): `User.tier`, `UsageDailySummary`, `UsageLimitMiddleware`, `GET /api/usage`. Job alerts live search integration (CV-082). AI bias audit Phase 1 (CV-187). CV analysis 15-minute result cache. Applications UI overhaul. Showcase SVG redesign. Real-backend E2E pipeline. |
 | 0.5.1 | 2026-04-13 | CViper Project Team | Career Intelligence UI, UK salary comparison, legal markdown rendering, provider settings redesign, progressive disclosure, wizard mode, E2E guards. All doc versions aligned to 0.5.1. |

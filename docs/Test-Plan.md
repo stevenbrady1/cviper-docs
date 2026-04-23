@@ -7,10 +7,10 @@
 | Field | Value |
 |-------|-------|
 | **Document ID** | TP-CVIPER-001 |
-| **Version** | 0.5.5 |
+| **Version** | 0.6.0 |
 | **Status** | Active |
 | **Author** | CViper Project Team |
-| **Date** | 2026-04-21 |
+| **Date** | 2026-04-23 |
 | **Classification** | Internal |
 | **Owner Persona** | QAE |
 | **Related** | Testing-Strategy-and-Architecture.md (the *how*) |
@@ -19,6 +19,7 @@
 
 | Version | Date | Changes |
 |---------|------|---------|
+| 0.6.0 | 2026-04-23 | **CV Optimisation Pipeline journeys** — Bullet Quality Scorer (on CV Analysis tab, scores every bullet deterministically), one-click "Optimise for job" modal (Health + Keywords + Bullets + Summary tabs), ATS Format Validator (6 categories / 23 checks). **New regression scenarios documented**: OpenRouter slug retirement fallback to safety-net list (LESSON-049), read-read parity for every pair of GETs exposing the same field (LESSON-043), state-drift prevention for every (DB Config ↔ in-memory) pair at startup (LESSON-048), JSX `\uXXXX` literal leak render-walk (LESSON-046), inline Missing-field editor on Applications (CV-219), Simple/Advanced AI mode toggle (CV-230), regional regulatory awareness in CV tailoring (CV-207), cloud-user CV text resolver (LESSON-045). Coverage closed for CV-207 through CV-233. Commit: 9534f137. |
 | 0.5.5 | 2026-04-21 | Stamped to match app v0.5.5 (doc version had drifted to 0.5.1 while app advanced through 0.5.2, 0.5.3, 0.5.4). New regression scenarios documented: AI Priority reorder preserves hidden entries (Rule #36 / LESSON-035), cloud-mode search auto-resolves saved profile / CV-analysis when no cv_folder is provided (Rule #37 / LESSON-037), admin cross-user job update parity, ConfirmDialog replaces browser alert/confirm/prompt across the app. `@smoke` golden-path spec running against live demo added. User-scope parity framework (CV-197, Rule #24) documented as generative coverage framework rather than per-endpoint tests. Commit: 11778d0b. |
 | 0.5.1 | 2026-04-14 | Aligned with app v0.5.1. Added formal test plans for Search (35 cases), Applications (38), Registration (19), Settings (16), Companies (14), Documents (13). Added cross-cutting suites: accessibility, responsive, GDPR, AI failover, cross-browser, localisation, performance, PWA. Total E2E specs: 106. RTM created. |
 | 0.1.0 | 2026-04-11 | Initial test plan — 7 journeys, 48 scenarios, 100% E2E coverage. |
