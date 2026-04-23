@@ -86,7 +86,6 @@ If a primitive's one-line purpose here is wrong, fix its first JSDoc / leading c
 | `AIResultBadge` | [components/AIResultBadge.jsx](../frontend/src/components/AIResultBadge.jsx) | AIResultBadge — result-attribution badge rendered alongside AI output. |
 | `ATSFeedbackPanel` | [components/ATSFeedbackPanel.jsx](../frontend/src/components/ATSFeedbackPanel.jsx) | ATSFeedbackPanel — Interactive ATS keyword feedback. |
 | `ATSFormatCheck` | [components/ATSFormatCheck.jsx](../frontend/src/components/ATSFormatCheck.jsx) | — |
-| `CaseStudy` | [components/CaseStudy.jsx](../frontend/src/components/CaseStudy.jsx) | — |
 | `CollapsibleSection` | [components/CollapsibleSection.jsx](../frontend/src/components/CollapsibleSection.jsx) | — |
 | `ConsentBanner` | [components/ConsentBanner.jsx](../frontend/src/components/ConsentBanner.jsx) | — |
 | `CVAnalysisProgressCard` | [components/CVAnalysisProgressCard.jsx](../frontend/src/components/CVAnalysisProgressCard.jsx) | — |
