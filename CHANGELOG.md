@@ -5,6 +5,19 @@ All notable changes to CViper are documented in this file.
 Format based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 This project uses [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [Unreleased]
+
+### Added
+- **Pro tier rollout — Phase 1 (CV-236)** — admin-assigned Pro promotion ahead of Phase 2 Stripe integration. The MON-recommended `free → pro` tier now has a user-facing path:
+  - New `PATCH /api/admin/users/{id}/tier` endpoint. Admin-only, sandbox users rejected with 400, audit-logged, idempotent. 13 backend tests covering happy / negative / boundary / edge.
+  - **Admin Users tab** gains a "Plan" column with Free / Pro badges and an inline "Set Plan" picker; sandbox rows intentionally have no picker (backend rejects them).
+  - **TopNav** displays a small gold "PRO" badge next to the user name when `currentUser.tier === 'pro'`.
+  - `tier` and `tier_expires_at` now flow through all three auth response builders (`/api/auth/status`, `/api/auth/me`, `/api/auth/me/profile`) with regression-guard tests.
+  - Closes the LESSON-054 anti-pattern: CV-093 shipped the data layer + gating logic in February 2026 but no user-facing path existed for ~2 months.
+
+### Fixed
+- **`backlog_sync.py pull` adds missing GitHub issues** — `cmd_pull` previously warned-and-skipped any GitHub issue without a matching YAML id, producing 82-item drift since 2026-04-10. Pull now derives a new item from the issue and appends it. Live re-pull added 83 items; 234 YAML == 234 GitHub. 6 unit tests cover add-path, update-path, closed-issue=done, no-duplicates, category default, title-prefix stripping.
+
 ## [0.6.0] - 2026-04-23
 
 ### Added
