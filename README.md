@@ -34,7 +34,8 @@ CViper is a professional career management tool that helps you discover job oppo
 - **CV Optimisation** — guided bullet improvement with AI suggestions
 - **AI Disclaimer** — transparent attribution: all AI results come from the user's chosen model, with accuracy warnings in-app and in the privacy policy
 - **PWA Support** — service worker with stale-while-revalidate caching, installable on mobile
-- **Infrastructure Resilience** — pre-deploy config validation, server path redaction, 17 lessons-learned with automated prevention guards
+- **Pro Tier (Phase 1)** — admin-assigned `Free → Pro` promotion via `PATCH /api/admin/users/{id}/tier`, "PRO" badge in TopNav, tier-aware daily AI token budgets (Pro 5×, Sandbox 0.5×), nightly demotion sweep for expired Pros (Stripe Phase 2 scaffolding in place)
+- **Infrastructure Resilience** — pre-deploy config validation, server path redaction, 55 lessons-learned with 46 automated auto-correction rules and prevention guards
 
 ---
 
@@ -312,7 +313,7 @@ npm run test:e2e           # headless Chromium
 npm run test:e2e:headed    # with visible browser
 ```
 
-E2E tests use route mocking — no backend needed. 50 specs providing 100% E2E journey coverage across all tabs, modals, and user workflows.
+E2E tests use route mocking — no backend needed. 144 specs providing 100% E2E journey coverage across all tabs, modals, and user workflows.
 
 ---
 

@@ -7,16 +7,56 @@ This project uses [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
 
+_No unreleased changes — see [0.6.1] below._
+
+## [0.6.1] - 2026-04-26
+
 ### Added
-- **Pro tier rollout — Phase 1 (CV-236)** — admin-assigned Pro promotion ahead of Phase 2 Stripe integration. The MON-recommended `free → pro` tier now has a user-facing path:
+- **Pro tier — Phase 1 user-facing path (CV-236)** — admin-assigned Pro promotion ahead of Phase 2 Stripe integration. The MON-recommended `free → pro` tier now has a user-facing path:
   - New `PATCH /api/admin/users/{id}/tier` endpoint. Admin-only, sandbox users rejected with 400, audit-logged, idempotent. 13 backend tests covering happy / negative / boundary / edge.
   - **Admin Users tab** gains a "Plan" column with Free / Pro badges and an inline "Set Plan" picker; sandbox rows intentionally have no picker (backend rejects them).
   - **TopNav** displays a small gold "PRO" badge next to the user name when `currentUser.tier === 'pro'`.
   - `tier` and `tier_expires_at` now flow through all three auth response builders (`/api/auth/status`, `/api/auth/me`, `/api/auth/me/profile`) with regression-guard tests.
   - Closes the LESSON-054 anti-pattern: CV-093 shipped the data layer + gating logic in February 2026 but no user-facing path existed for ~2 months.
+- **Pro tier — Phase 2 Stripe scaffolding** — initial billing plumbing landed behind the existing tier gating:
+  - `feat(billing): Stripe checkout-session scaffold` (CV-239 / #408) — server-side checkout-session creation endpoint.
+  - `feat(billing): Stripe webhook handler scaffold` (CV-240 / #410) — webhook receiver for subscription lifecycle events.
+  - `feat(billing): nightly demotion job for expired Pros` (CV-241 / #412) — cron job demotes `tier='pro'` users whose `tier_expires_at` has passed back to `tier='free'`.
+  - `feat(billing): tier-aware token budget — Pro 5x, Sandbox 0.5x` (CV-244 / #421) — daily AI token budgets now scale with tier.
+  - `fix(billing): read-time expiry guard for Pro tier` (CV-238 / #406) — per-request expiry check so a paused subscription stops conferring Pro features even before the nightly demotion runs.
+- **CV-237 Style preset dropdown on CV tailoring** — Conservative / Balanced / Creative presets steer the tailoring prompt without exposing the full prompt template. Includes 4-test coverage close-out (cover-letter regression, route helper, source-scan contract, frontend invalid-userStorage).
+- **Login landing redesign** — full landing page + Sign In modal (replaces the inline split layout):
+  - Two-column split on desktop with mobile-first brand hero, larger CViper logo (desktop 72→104px, mobile 108→144px on landing; 72→108px in the brand hero).
+  - "What you get" benefits moved into the navy hero column to kill wasted space.
+  - Visual mass on navy hero — 3-tile stat grid + AI-routing diagram backdrop.
+  - "Get Started" micro-heading + bigger icon on the white column.
+  - Founder bio broadened — industry-specific framing dropped.
+- **Settings — Model dropdown for disconnected AI providers** — pre-select a model before connecting a key.
+- **Usage — BYO-key quota exemption + binding counter in usage pill** — users on their own API key are exempt from CViper's daily AI quota; the pill now reflects this clearly.
+- **Diagnostic redaction helper for user diagnostic bundles (CV-235, commit 1/4)** — redacts PII before bundles are exported.
+
+### Changed
+- **AI fallback loop respects user-configured providers (LESSON-051 / Auto-correction Rule #44)** — for non-admin users with personal keys, the gateway no longer iterates the full admin registry. User-facing error chains, fallback attempts, and billing all stay scoped to the user's own provider set, never silently billing the admin on a successful fallback. Forbid-list contract test in `backend/tests/infrastructure/test_admin_registry_leaks.py` source-scans `gateway.py` and fails CI if a `for X in self.registry.clients` loop in user-facing code drops the filter.
+- **AI gateway detects max_tokens truncation + retries at 2x budget (LESSON-053)** — refactored to a class-level truncation closure shared across all 5 provider paths, with opt-in retry. Avoids silently shipping a half-completed CV optimisation when the model hits its token cap.
+- **AI gateway detects empty provider content at source + JSON-mode + BulletScorer soft-hide** — empty-content detection moved upstream so a single guard catches every provider; BulletScorer renders a soft hide rather than a broken card when the upstream payload is empty.
+- **Marketing copy: replaced "Know why you're being rejected" overclaim** — switched to a warmer, outcome-focused framing per the user-saved feedback note (no accusatory marketing copy).
 
 ### Fixed
+- **Personal-key users get the live model from the registry, not the stale env-var (LESSON-055 / Auto-correction Rule #46)** — `ProviderRegistry.build_client_config` previously read each provider's model directly from `os.getenv("X_MODEL", default)`, bypassing every runtime model-update mechanism (`PUT /api/ai-provider-model/{id}`, `handle_retired_model` autoheal, `hydrate_model_preferences` multi-replica sync). For any user with their own API key, Settings could show the autoheal'd model while every CV analysis call kept hitting the retired slug — producing `model_not_found` 404s and silent fallback to keyword matching. Fix: every branch in `build_client_config` now sources `model` via `self._resolve_model_for(provider_id)`. AST forbid-list contract test in `test_provider_model_source.py` fails CI if any factory writes `os.getenv("..._MODEL", ...)` directly. 28 tests including end-to-end autoheal-then-rebuild simulation.
+- **Simple AI card — Active + Not Connected cannot coexist on a provider card (LESSON-052 / Auto-correction Rule #45)** — for ~24 hours, `SimpleAISetupCard` showed Google with both badges simultaneously because the "Active" badge was wired to `/api/ai-priority.active_provider` (admin-scoped) while the "Connected" chip read `/api/ai-keys[i].configured` (user-scoped). For an asymmetric scope (admin-only key + user has only a different one), the two endpoints' fields disagreed with no cross-check. Fix: badge derivation reconciles the user-scoped field with the backend value as a constraint. Vitest contract `describe('contract: Active + Not Connected cannot coexist on the same card')` fuzzes the realistic prop combinations and asserts the contradiction class cannot recur.
+- **`/api/ai-keys` "Remove" button no longer reports phantom "failed to activate" error (CV-234)** — the post-remove auto-rotate logic ran a redundant activate call that always 404'd because the just-removed key was already gone.
 - **`backlog_sync.py pull` adds missing GitHub issues** — `cmd_pull` previously warned-and-skipped any GitHub issue without a matching YAML id, producing 82-item drift since 2026-04-10. Pull now derives a new item from the issue and appends it. Live re-pull added 83 items; 234 YAML == 234 GitHub. 6 unit tests cover add-path, update-path, closed-issue=done, no-duplicates, category default, title-prefix stripping.
+
+### Infrastructure
+- **Empty-commit guard** — `chore(infra)` pre-push check rejects commits whose tree is identical to the parent (catches the multi-agent double-commit pattern documented in `project_multi_agent_double_commit_pattern`).
+
+### Auto-correction rules added
+- **#44** user-facing enumerations must not leak admin-scoped internal state (LESSON-051)
+- **#45** UI status badge derived from two independent API responses requires a contradiction-class contract test (LESSON-052)
+- **#46** per-user provider client builder must read `model` from the canonical helper, not from `os.getenv` (LESSON-055)
+
+### Doc versions
+- BRD 0.6.1, FSD 0.6.1, TSA 0.6.1, Test-Plan 0.6.1 — all four aligned to app version.
 
 ## [0.6.0] - 2026-04-23
 

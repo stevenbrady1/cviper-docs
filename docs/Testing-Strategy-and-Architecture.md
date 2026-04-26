@@ -7,18 +7,19 @@
 | Field | Value |
 |-------|-------|
 | **Document ID** | TSA-CVIPER-001 |
-| **Version** | 0.6.0 |
+| **Version** | 0.6.1 |
 | **Status** | Pre-Release |
 | **Author** | CViper Project Team |
-| **Date** | 2026-04-23 |
+| **Date** | 2026-04-26 |
 | **Classification** | Internal |
-| **Related BRD** | BRD-CVIPER-001 v0.6.0 |
-| **Related FSD** | FSD-CVIPER-001 v0.6.0 |
+| **Related BRD** | BRD-CVIPER-001 v0.6.1 |
+| **Related FSD** | FSD-CVIPER-001 v0.6.1 |
 
 ### Version History
 
 | Version | Date | Author | Changes |
 |---------|------|--------|---------|
+| 0.6.1 | 2026-04-26 | CViper Project Team | **New guard classes**: (1) **Admin-registry leak forbid-list** (`backend/tests/infrastructure/test_admin_registry_leaks.py`) — AST/source scan of `gateway.py`; every `for X in self.registry.clients` loop in user-facing code (identified by `provider_errors.append` / `fb_display` in the body) must show a filter-call indicator in the 30 lines preceding it, or the test fails (LESSON-051 / Rule #44). (2) **Per-user provider model source forbid-list** (`backend/tests/infrastructure/test_provider_model_source.py`) — AST scan of every branch in `ProviderRegistry.build_client_config`; reading `os.getenv("..._MODEL", ...)` directly is forbidden, builders must source the `model` field via `self._resolve_model_for(provider_id)` (LESSON-055 / Rule #46). (3) **Personal-key live-model E2E** (`backend/tests/ai/test_personal_key_uses_live_model.py`) — 28 tests including an autoheal-then-rebuild simulation that does NOT mock `build_client_config` (proves the next personal-key build returns the new model). (4) **Contradiction-class UI contract** (`SimpleAISetupCard.test.jsx::describe('contract: Active + Not Connected cannot coexist on the same card')`) — fuzz across realistic prop combinations including the asymmetric scope case (admin-only key + user has only a different one), proves the LESSON-052 contradiction cannot recur (Rule #45). (5) **Truncation-detect-and-retry tests** (LESSON-053) — class-level closure shared across all 5 provider paths; retry at 2× budget is opt-in. **Backend test count** — 6,000+ tests across 302 files; **frontend** 2,300+ tests across 171 files; **E2E** 144 specs (up from 50 at v0.5.5). **Auto-correction rules added**: #44 (admin-registry leak guard), #45 (contradiction-class contract test), #46 (per-user model source forbid-list). Commit: a32272f6. |
 | 0.6.0 | 2026-04-23 | CViper Project Team | **New guard classes**: (1) **state-drift prevention registry** (`backend/tests/infrastructure/test_state_drift_prevention.py`) — contract test enumerating every (DB Config row ↔ in-memory state) pair; every declared read endpoint must call its hydrate method or the test fails, catching Azure Container Apps replica drift before CI (LESSON-048). (2) **Read-read parity registry** (`backend/tests/infrastructure/test_read_read_parity.py`) — every pair of GETs exposing the same field must add a `ReadPair` entry; mirrors `PARITY_PAIRS` (LESSON-035) for read-side consistency (LESSON-043). (3) **Live OpenRouter model tests** (`backend/tests/ai/test_openrouter_live_models.py`) — cached live fetch validation, 404 fallback to safety-net, PUT-side validation against live list (LESSON-049 / CV-232). (4) **Provider-model drift canary** (`scripts/check_provider_model_drift.py` + `.github/workflows/provider-drift-check.yml`) — nightly CI check + runtime self-heal (LESSON-050 / CV-233). (5) **Render-and-walk `\uXXXX` literal leak guard** (`frontend/src/components/noUnicodeEscapeLeak.test.jsx`) — catches JSX text-node escape mistakes that source-scanning can't (LESSON-046). (6) **Typography drift detector** — Tier 2 + pre-commit hook (Layer 9) catches inline style objects re-inventing existing surface/typography patterns. **New tests for the CV Optimisation Pipeline**: 21 unit + 11 endpoint + 10 component tests for the Bullet Quality Scorer (`test_bullet_scorer.py`, `test_score_bullets_endpoint.py`, `BulletScorer.test.jsx`) — full 7-row matrix (happy / negative / boundary / edge / unicode / metric variants / regression). **Pre-push Layer 8** (CV-225) — soft nudge when substantive fix commits lack a tracking reference. **Auto-correction rules added**: #43 (read-read parity), #44 (AI string sanitisation), #45 (cloud-user CV resolver). Commit: 9534f137. |
 | 0.5.5 | 2026-04-21 | CViper Project Team | Header version re-stamped from 0.2.4 to 0.5.5 — the 0.5.2 row below was added to the history table but the header metadata was never updated, producing doc-version drift that VERSION.md reported incorrectly for ~4 days. New regression-prevention tests documented: `test_regular_user_put_response_has_same_keys_as_get` + 8 aiPriorityReorder helper tests (Rule #36 / LESSON-035), `TestSearchAutoResolveFallback` with explicit `CLOUD_MODE=1` scenario (Rule #37 / LESSON-037), user-scope parity framework (CV-197, Rule #24 guard). Coverage closed for CV-192 through CV-201. Commit: 11778d0b. |
 | 0.5.2 | 2026-04-17 | CViper Project Team | History row added when BRD/FSD bumped to 0.5.2, but TSA header was not updated — drift introduced here, corrected at 0.5.5. No TSA content changes in this slot. |
@@ -133,7 +134,7 @@ frontend/src/
 
 ### E2E Tests (Playwright)
 
-50 specs providing 100% user journey coverage. Key specs include:
+144 specs providing 100% user journey coverage. Key specs include:
 
 ```
 frontend/e2e/
@@ -271,7 +272,7 @@ Every backend test file must have a `pytestmark` at module level:
 
 ### 5.5 E2E Tests (Playwright)
 
-50 specs providing 100% user journey coverage. Representative specs:
+144 specs providing 100% user journey coverage. Representative specs:
 
 | Spec | User journey |
 |------|-------------|
@@ -363,7 +364,7 @@ See `frontend/e2e/` for all 50 specs and `frontend/e2e/test-plan-coverage.md` fo
 | Security SAST | All | Snyk Code, Aikido, secrets, SSRF | Soft gate |
 | Schema Drift Check | Backend changed | Alembic autogenerate against PostgreSQL 16 service container | Hard gate |
 | Test Design Matrix | PRs | Checks PRs for 7-row coverage matrix (CV-172) | Hard gate |
-| E2E (Playwright) | After frontend tests | 50 specs, `@critical-regression` subset blocks deploys (CV-180) | Soft (general) / Hard (deploy) |
+| E2E (Playwright) | After frontend tests | 144 specs, `@critical-regression` subset blocks deploys (CV-180) | Soft (general) / Hard (deploy) |
 | Integration Smoke | After tests pass | Start backend, hit 5 endpoints | Hard gate |
 | CI Summary | Always | Aggregate results, JUnit XML report | Final gate |
 | Build & Push | Main push only | Docker images to ACR | N/A |
@@ -612,14 +613,17 @@ npm run test:e2e:headed             # With browser
 | `_block_ai_gateway` | Function (autouse) | Blocks AI calls |
 | `_mock_outbound_http` | Function (autouse) | Blocks external HTTP |
 
-### Current Test Counts (as of v0.5.1)
+### Current Test Counts (as of v0.6.1)
 
 | Suite | Files | Tests |
 |-------|-------|-------|
-| Backend (pytest) | 220 | 4,400+ |
-| Frontend (Vitest) | 109 | 1,500+ |
-| E2E (Playwright) | 50 | 200+ |
-| **Total** | **379** | **6,100+** |
+| Backend (pytest) | 302 | 6,000+ |
+| Frontend (Vitest) | 171 | 2,300+ |
+| E2E (Playwright) | 144 | 400+ |
+| **Total** | **617** | **8,700+** |
+
+> Source: `python scripts/generate_stats.py` (refreshes `frontend/src/data/stats.json` and `docs/STATS.md`).
+> About-page stats hydrate from `stats.json` so on-page counters stay aligned with this table.
 
 ### 7-Row Test Design Checklist (Mandatory)
 
