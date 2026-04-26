@@ -1,8 +1,8 @@
 # Requirements Traceability Matrix (RTM)
 
 **Document ID**: RTM-CVIPER-001
-**Version**: 0.5.1
-**Date**: 2026-04-14
+**Version**: 0.6.1
+**Date**: 2026-04-26
 **Status**: Active
 
 > Maps every Business Requirement → Functional Spec → Test Plan Journey → E2E Test Case.
@@ -45,6 +45,19 @@ Formal Test Plan (TC-XXX) → Backend + E2E test cases
 | BR-046 | Sandbox abuse prevention | FR-020, FR-030 | 1.1 Login (Demo) | `smoke.spec.js`, `demo-mode-navigation.spec.js`, `try-demo-fetch-storm.spec.js` | — | **Covered** |
 | BR-048 | 7-step onboarding registration | FR-022 | 1.1 Login | `auth-register.spec.js`, `login-registration-full.spec.js` TC-LR-13–17 | CA-70–72, CA-90 | **Covered** |
 | BR-062 | Hybrid JWT authentication | FR-027 | 1.1 Login | `login-registration-full.spec.js`, `auth-refresh.spec.js` (real-backend) | CA-50–52 | **Covered** |
+| BR-093 | Free / Pro tier system + per-tier daily quotas | FR-093 | 1.6 Job Tracker / Settings | `usage-tracking.spec.js`, `pro-tier-*.spec.js` | — | **Covered** (CV-093, CV-236, CV-244) |
+| BR-219 | Inline edit affordance for Unknown Company/Location on Applications | FR-219 | 1.6 Job Tracker | `applications-missing-field.spec.js` | — | **Covered** (CV-219) |
+| BR-228 | Cloud-user CV resolver — full-text persistence + 2-step fallback | FR-228 | 1.7 Job Search | `cloud-mode-search-fallback.spec.js` | — | **Covered** (CV-228, LESSON-045, Rule #45) |
+| BR-230 | AI Configuration Simple/Advanced mode split | FR-230 | Settings | `ai-config-mode.spec.js` | — | **Covered** (CV-230) |
+| BR-234 | AI provider key remove flow without phantom errors | FR-234 | Settings | `ai-keys-remove.spec.js` | — | **Covered** (CV-234) |
+| BR-235 | Diagnostic bundle redaction (PII) | FR-235 | Settings / Admin | Backend: `test_diagnostic_redaction.py` | — | **Covered** (CV-235) |
+| BR-236 | Pro tier — admin-assigned promotion (Phase 1) | FR-236 | 1.1 Login / Admin | `admin-set-tier.spec.js`, `topnav-pro-badge.spec.js` | — | **Covered** (CV-236, LESSON-054) |
+| BR-237 | Style preset on CV tailoring (Conservative / Balanced / Creative) | FR-237 | 1.4 CV Editing | `cv-tailoring-style-preset.spec.js` | — | **Covered** (CV-237) |
+| BR-238 | Pro tier — read-time expiry guard | FR-238 | (Backend gate) | Backend: `test_pro_expiry_guard.py` | — | **Covered** (CV-238) |
+| BR-239 | Stripe checkout-session endpoint | FR-239 | Settings / Billing | Backend: `test_billing_checkout.py` | — | **Covered** (CV-239) |
+| BR-240 | Stripe webhook handler (subscription lifecycle) | FR-240 | (Backend) | Backend: `test_billing_webhook.py` | — | **Covered** (CV-240) |
+| BR-241 | Nightly demotion job for expired Pros | FR-241 | (Scheduled) | Backend: `test_pro_demotion_job.py` | — | **Covered** (CV-241) |
+| BR-244 | Tier-aware token budgets (Pro 5×, Sandbox 0.5×) | FR-244 | (Cross-cutting) | Backend: `test_tier_token_budget.py` | — | **Covered** (CV-244) |
 
 ---
 
@@ -195,17 +208,19 @@ Formal Test Plan (TC-XXX) → Backend + E2E test cases
 
 | Metric | Value |
 |---|---|
-| BRD requirements mapped | 30+ (all Must Have + Should Have) |
-| FSD features mapped | 39 |
+| BRD requirements mapped | 40+ (all Must Have + Should Have, incl. Pro tier surface) |
+| FSD features mapped | 50+ |
 | Test Plan journeys | 7 + 5 multi-journey = 12 |
 | E2E scenarios | 48/48 = **100%** |
-| E2E spec files | 106 |
-| Backend test files | 226 |
-| Frontend test files | 122 |
-| Total automated tests | **6,500+** |
+| E2E spec files | 144 |
+| Backend test files | 302 |
+| Frontend test files | 171 |
+| Total automated tests | **8,700+** |
 | Formal test plans (page-level) | 6 pages covered |
 | Cross-cutting suites | 10 categories |
-| Critical regression guards | 13 tests (deploy gate) |
-| Lessons with prevention | 36 (all applied) |
+| Critical regression guards | 13+ tests (deploy gate, `@critical-regression`) |
+| Lessons with prevention | 55 (all applied; 46 auto-correction rules in CLAUDE.md) |
+
+> Counts auto-sourced from `python scripts/generate_stats.py` (`frontend/src/data/stats.json`). Last refreshed at v0.6.1.
 
 **Full traceability maintained from BRD → FSD → Test Plan → E2E → Test Cases.**
