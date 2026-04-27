@@ -7,7 +7,19 @@ This project uses [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
 
-_No unreleased changes — see [0.6.1] below._
+### Fixed
+- **LESSON-057 — AI routing for personal-key users** *(code landed in commit `906dd897` under a UI-titled message; this entry restores attribution)*. user2's CV Analysis silently fell back to keyword matching despite a valid OpenRouter key because three downstream surfaces bypassed the LESSON-056 router/gateway union fix:
+  - **33 service-layer callers** across `cv_analysis.py`, `career_insights.py`, `document_gen.py`, `job_matching.py`, `scoring.py`, `search_helpers.py` called `self.router.select_provider("task", provider)` with NO `user_id` — the router's `_available_providers_for(uid)` fell through to admin-only mode, and user2's personal-key providers were invisible. Fixed: every caller now passes `user_id=user_id`.
+  - **Service post-checks** (`if provider not in self._registry.clients: provider = list(...)[0]`) were admin-scoped and would silently swap a user-only provider for admin's first client. Replaced with `if not provider:` (router has already validated against the user-aware union).
+  - **Gateway fallback loop** ([`backend/ai/gateway.py`](backend/ai/gateway.py)) reached user-only providers via the LESSON-056 `candidate_ids` union but called `_call_provider` without a `client_config`. `_call_provider` did `config = client_config or self.registry.clients[provider]` — KeyError for user-only providers (admin has no entry). Fixed: fallback now resolves `client_config` from the per-user resolver before each `_call_with_retry` attempt.
+  - **Cross-page chip mismatch** (Bug A) — `/api/ai-routing` returned admin-scoped `active_provider` so chips on Applications/Job Search showed "Powered by Google Gemini" while CV Analysis correctly showed OpenRouter. Fixed: `_build_filtered_routing_info` recomputes `active_provider` user-scoped via `select_provider(user_id=...)` for non-admin/non-sandbox users.
+- **Regression guards added (3 layers)**:
+  - [`backend/tests/infrastructure/test_services_pass_user_id.py`](backend/tests/infrastructure/test_services_pass_user_id.py) — AST forbid-list source-scan over `backend/ai/services/*.py` requiring `user_id=` kwarg on every `self.router.select_provider(...)` call. Adversarially verified.
+  - [`backend/tests/ai/test_user_provider_selection.py::TestGatewayFallbackResolvesUserOnlyClientConfig`](backend/tests/ai/test_user_provider_selection.py) — uses REAL `_call_provider` with SDK-level mock so the `clients[provider]` KeyError branch executes for real (no mocks at the bug surface, fixing the LESSON-056 test gap).
+  - [`backend/tests/api/test_analyze_cv_user_routing.py::test_full_pipeline_user2_scenario_no_keyerror`](backend/tests/api/test_analyze_cv_user_routing.py) — full HTTP → route → service → gateway → resolver → SDK pipeline via TestClient. Asserts OpenRouter SDK is actually invoked AND returns real analysis (not keyword fallback).
+- **CLAUDE.md auto-correction rule #48** added — names all three required behaviours (user_id threading, gateway fallback `client_config` resolution, service post-check removal) so future contributors catch the regression at PR time.
+- **Verification**: 1951 of 1951 backend AI + infra + integration tests pass, 0 failures.
+- **Multi-agent attribution note**: this fix and a parallel UI session committed simultaneously, and the parallel session's `git add` swept up these staged files into commit `906dd897` (titled `ui(login): restructure right panel into 7 zones per v0.6.2 spec`). The pattern is documented in [`memory/project_multi_agent_double_commit_pattern.md`](memory/project_multi_agent_double_commit_pattern.md). All LESSON-057 code lives in that commit; this CHANGELOG entry restores discoverability for `git log --grep="LESSON-057"` audits.
 
 ## [0.6.1] - 2026-04-26
 
