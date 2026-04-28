@@ -336,7 +336,7 @@
 
   <!-- Stats footer -->
   <line x1="40" y1="690" x2="860" y2="690" stroke="#e2e8f0" stroke-width="0.3"/>
-  <text x="450" y="702" text-anchor="middle" font-size="6.5" fill="#cbd5e1">9 AI Providers  &#183;  274 API Endpoints  &#183;  73 Components  &#183;  6,300+ Backend Tests  &#183;  2,400+ Frontend Tests</text>
+  <text x="450" y="702" text-anchor="middle" font-size="6.5" fill="#cbd5e1">9 AI Providers  &#183;  274 API Endpoints  &#183;  73 Components  &#183;  6,400+ Backend Tests  &#183;  2,400+ Frontend Tests</text>
   <text x="450" y="714" text-anchor="middle" font-size="6.5" fill="#cbd5e1">cviper.uk &#183; 2026</text>
 
   <!-- Timestamp -->
