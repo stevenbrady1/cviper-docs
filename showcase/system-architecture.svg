@@ -91,7 +91,7 @@
     <rect x="40" y="200" width="400" height="18" rx="8" fill="#3B82F6" opacity="0.08"/>
     <text x="56" y="214" font-size="9" font-weight="700" fill="#3B82F6">Frontend Container</text>
     <text x="56" y="232" font-size="10" font-weight="600" fill="#1e40af">React 18 + Vite</text>
-    <text x="56" y="248" font-size="8" fill="#64748b">SPA  &#183;  Tab Navigation  &#183;  75 Components</text>
+    <text x="56" y="248" font-size="8" fill="#64748b">SPA  &#183;  Tab Navigation  &#183;  76 Components</text>
   </g>
 
   <!-- Backend Container -->
@@ -336,7 +336,7 @@
 
   <!-- Stats footer -->
   <line x1="40" y1="690" x2="860" y2="690" stroke="#e2e8f0" stroke-width="0.3"/>
-  <text x="450" y="702" text-anchor="middle" font-size="6.5" fill="#cbd5e1">9 AI Providers  &#183;  279 API Endpoints  &#183;  75 Components  &#183;  6,600+ Backend Tests  &#183;  2,600+ Frontend Tests</text>
+  <text x="450" y="702" text-anchor="middle" font-size="6.5" fill="#cbd5e1">9 AI Providers  &#183;  279 API Endpoints  &#183;  76 Components  &#183;  6,600+ Backend Tests  &#183;  2,700+ Frontend Tests</text>
   <text x="450" y="714" text-anchor="middle" font-size="6.5" fill="#cbd5e1">cviper.uk &#183; 2026</text>
 
   <!-- Timestamp -->
