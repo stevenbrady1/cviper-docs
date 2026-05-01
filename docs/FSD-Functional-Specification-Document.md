@@ -179,10 +179,10 @@ CViper is a full-stack web application consisting of:
      │ AI Providers │ │ Job     │ │ Infrastructure Services         │
      │ OpenAI       │ │ Boards  │ │                                 │
      │ Anthropic    │ │ Reed    │ │ ┌─────────────────────────────┐ │
-     │ Google       │ │ Indeed  │ │ │ Grafana (Docker :3001)      │ │
-     │ OpenRouter   │ │ LinkedIn│ │ │ - Infinity datasource       │ │
-     │ Mistral      │ │ CWJobs  │ │ │ - cviper-unified dashboard  │ │
-     │ Grok (xAI)   │ │ etc.   │ │ │ - Auto-provisioned on start │ │
+     │ Google       │ │ Adzuna  │ │ │ Grafana (Docker :3001)      │ │
+     │ OpenRouter   │ │ Jooble  │ │ │ - Infinity datasource       │ │
+     │ Mistral      │ │ Remotive│ │ │ - cviper-unified dashboard  │ │
+     │ Grok (xAI)   │ │ etc.    │ │ │ - Auto-provisioned on start │ │
      │ GitHub       │ └─────────┘ │ └─────────────────────────────┘ │
      │ Pluribus *   │             │  * local gateway only           │
      └──────────────┘             │ ┌─────────────────────────────┐ │

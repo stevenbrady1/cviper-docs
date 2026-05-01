@@ -8,7 +8,7 @@ CViper is a professional career management tool that helps you discover job oppo
 
 ## What It Does
 
-- **Multi-Site Job Search** — searches LinkedIn, CWJobs, Reed, Indeed UK, eFinancialCareers, and Totaljobs via SSE streaming
+- **Multi-Site Job Search** — searches 9 job boards (Reed, Adzuna, Jooble, Remotive, Findwork, Freelancer via official APIs; LinkedIn, eFinancialCareers, Jobserve via scrapers) plus 200+ direct employer career pages, via SSE streaming
 - **AI CV Analysis** — extracts skills, experience, and profile from PDF/DOCX files with multi-provider comparison
 - **Multi-Provider AI** — supports 9 providers: OpenAI, Anthropic Claude, Google Gemini, Grok, GitHub Models, Mistral, OpenRouter, Pluribus (local), and Ollama. Run providers in parallel and compare results side-by-side with Prompt Lab.
 - **Priority-Based AI Routing** — configurable provider priority chain with automatic failover, circuit breakers, and keyword fallback

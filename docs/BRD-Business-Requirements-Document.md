@@ -49,7 +49,7 @@ This document defines the business requirements for **CViper**, an AI-powered jo
 
 The UK technology and financial services job market is characterised by:
 
-- **Fragmented job sources**: Roles are spread across 15+ job boards (Reed, Indeed, LinkedIn, CWJobs, eFinancialCareers) and 80+ individual company career pages, each with different ATS platforms (Workday, Greenhouse, Lever, SmartRecruiters, etc.)
+- **Fragmented job sources**: Roles are spread across 9 supported job boards (Reed, Adzuna, Jooble, Remotive, Findwork, Freelancer, LinkedIn, eFinancialCareers, Jobserve) and 200+ individual company career pages, each with different ATS platforms (Workday, Greenhouse, Lever, SmartRecruiters, etc.)
 - **High application overhead**: Tailoring a CV and cover letter for a single role takes 30-60 minutes; professionals applying to 10+ roles per week spend 5-10 hours on document preparation alone
 - **Opaque market data**: Salary ranges, skill demand trends, and company hiring patterns are not easily accessible in a consolidated view
 - **ATS gatekeeping**: 75% of CVs are rejected by Applicant Tracking Systems before a human reviews them, often due to keyword mismatches rather than candidate quality
