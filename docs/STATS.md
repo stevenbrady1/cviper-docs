@@ -5,7 +5,7 @@
 
 | Metric | Value |
 |--------|-------|
-| API Endpoints | 279 |
+| API Endpoints | 280 |
 | Route Modules | 25 |
 | AI Providers | 9 |
 | Frontend Components | 76 |
