@@ -1,181 +1,181 @@
-<!-- HAND-CRAFTED: Do not regenerate — this SVG is manually styled, not Mermaid-rendered -->
+<!-- HAND-CRAFTED: Do not regenerate — generated from docs/diagrams/ai-routing.json by scripts/diagram_gen.py -->
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 850 780" font-family="Inter, system-ui, -apple-system, sans-serif">
   <defs>
     <marker id="arrow" viewBox="0 0 10 7" refX="10" refY="3.5" markerWidth="8" markerHeight="6" orient="auto-start-reverse">
-      <path d="M 0 0 L 10 3.5 L 0 7 z" fill="#64748b"/>
+      <path d="M 0 0 L 10 3.5 L 0 7 z" fill="#94a3b8"/>
+    </marker>
+    <marker id="arrow-red" viewBox="0 0 10 7" refX="10" refY="3.5" markerWidth="8" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 3.5 L 0 7 z" fill="#EF4444"/>
+    </marker>
+    <marker id="arrow-blue" viewBox="0 0 10 7" refX="10" refY="3.5" markerWidth="8" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 3.5 L 0 7 z" fill="#3B82F6"/>
     </marker>
     <marker id="arrow-green" viewBox="0 0 10 7" refX="10" refY="3.5" markerWidth="8" markerHeight="6" orient="auto-start-reverse">
       <path d="M 0 0 L 10 3.5 L 0 7 z" fill="#10B981"/>
     </marker>
     <marker id="arrow-amber" viewBox="0 0 10 7" refX="10" refY="3.5" markerWidth="8" markerHeight="6" orient="auto-start-reverse">
-      <path d="M 0 0 L 10 3.5 L 0 7 z" fill="#F59E0B"/>
+      <path d="M 0 0 L 10 3.5 L 0 7 z" fill="#F97316"/>
     </marker>
-    <marker id="arrow-rose" viewBox="0 0 10 7" refX="10" refY="3.5" markerWidth="8" markerHeight="6" orient="auto-start-reverse">
-      <path d="M 0 0 L 10 3.5 L 0 7 z" fill="#EF4444"/>
+    <marker id="arrow-purple" viewBox="0 0 10 7" refX="10" refY="3.5" markerWidth="8" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 3.5 L 0 7 z" fill="#8B5CF6"/>
     </marker>
-    <filter id="shadow" x="-4%" y="-4%" width="108%" height="112%">
-      <feDropShadow dx="0" dy="1" stdDeviation="2" flood-opacity="0.08" flood-color="#000"/>
+    <filter id="shadow">
+      <feDropShadow dx="0" dy="1" stdDeviation="2" flood-color="#000" flood-opacity="0.06"/>
     </filter>
-    <filter id="shadow-sm" x="-2%" y="-4%" width="104%" height="112%">
-      <feDropShadow dx="0" dy="1" stdDeviation="1.5" flood-opacity="0.06" flood-color="#000"/>
+    <filter id="shadow-lg">
+      <feDropShadow dx="0" dy="2" stdDeviation="3.5" flood-color="#000" flood-opacity="0.09"/>
+    </filter>
+    <filter id="shadow-light">
+      <feDropShadow dx="0" dy="1" stdDeviation="1.5" flood-color="#000" flood-opacity="0.05"/>
     </filter>
   </defs>
-  <rect width="850" height="780" fill="#fafbfc" rx="0"/>
 
-  <!-- ENTRY -->
-  <rect x="335" y="18" width="180" height="40" rx="8" fill="#eff6ff" stroke="#3B82F6" stroke-width="1.5" filter="url(#shadow)"/>
-  <text x="425" y="43" text-anchor="middle" font-size="13" font-weight="600" fill="#1e40af">AI Task Request</text>
-  <line x1="425" y1="58" x2="425" y2="76" stroke="#64748b" stroke-width="1.2" marker-end="url(#arrow)"/>
-
-  <!-- DECISION 1: Demo user? -->
-  <polygon points="425,76 510,108 425,140 340,108" fill="#f8fafc" stroke="#64748b" stroke-width="1.5" filter="url(#shadow)"/>
-  <text x="425" y="105" text-anchor="middle" font-size="11" font-weight="500" fill="#334155">Demo</text>
-  <text x="425" y="117" text-anchor="middle" font-size="11" font-weight="500" fill="#334155">user?</text>
-
-  <!-- Yes -> Demo Routing (diamond left x=340 → Demo panel top y=146) -->
-  <path d="M 340,108 L 200,108 L 200,146" stroke="#EF4444" stroke-width="1.2" fill="none" marker-end="url(#arrow-rose)"/>
-  <text x="270" y="100" text-anchor="middle" font-size="10" font-weight="600" fill="#EF4444">Yes</text>
-
-  <!-- No -> Decision 2 -->
-  <line x1="425" y1="140" x2="425" y2="168" stroke="#64748b" stroke-width="1.2" marker-end="url(#arrow)"/>
-  <text x="438" y="156" font-size="10" font-weight="600" fill="#64748b">No</text>
-
-  <!-- DEMO ROUTING — swimlane panel with DEMO PATH label -->
-  <rect x="20" y="146" width="300" height="140" rx="10" fill="#EF4444" opacity="0.06"/>
-  <rect x="20" y="146" width="300" height="140" rx="10" fill="none" stroke="#EF4444" stroke-width="1.5" filter="url(#shadow)"/>
-  <!-- DEMO PATH badge -->
-  <rect x="28" y="150" width="68" height="16" rx="4" fill="#EF4444" opacity="0.15"/>
-  <text x="62" y="161" text-anchor="middle" font-size="7.5" font-weight="700" fill="#dc2626" letter-spacing="0.5">DEMO PATH</text>
-  <text x="170" y="170" text-anchor="middle" font-size="12" font-weight="700" fill="#9f1239">Demo Routing</text>
-  <rect x="35" y="180" width="270" height="24" rx="5" fill="#ffe4e6" stroke="#fda4af" stroke-width="0.8"/>
-  <text x="170" y="196" text-anchor="middle" font-size="9" fill="#881337">Google Gemini Flash · 1000 req/day</text>
-  <rect x="35" y="212" width="270" height="24" rx="5" fill="#ffe4e6" stroke="#fda4af" stroke-width="0.8"/>
-  <text x="170" y="228" text-anchor="middle" font-size="9" fill="#881337">OpenRouter GPT-4o-mini · 50 req/day</text>
-  <rect x="35" y="244" width="270" height="24" rx="5" fill="#dcfce7" stroke="#86efac" stroke-width="0.8"/>
-  <text x="170" y="260" text-anchor="middle" font-size="9" fill="#14532d">keyword fallback · always available</text>
-  <text x="170" y="280" text-anchor="middle" font-size="7" fill="#9f1239" font-style="italic">quota hit → falls through to next provider</text>
-
-  <!-- DECISION 2: Provider override? -->
-  <polygon points="425,168 510,200 425,232 340,200" fill="#f8fafc" stroke="#64748b" stroke-width="1.5" filter="url(#shadow)"/>
-  <text x="425" y="197" text-anchor="middle" font-size="11" font-weight="500" fill="#334155">Provider</text>
-  <text x="425" y="209" text-anchor="middle" font-size="11" font-weight="500" fill="#334155">override?</text>
-
-  <!-- Yes -> Use specified provider (diamond right x=510 → box left x=542) -->
-  <path d="M 510,200 L 542,200" stroke="#64748b" stroke-width="1.2" fill="none" marker-end="url(#arrow)"/>
-  <text x="522" y="193" font-size="10" font-weight="600" fill="#64748b">Yes</text>
-  <rect x="542" y="185" width="140" height="30" rx="6" fill="#eef2ff" stroke="#8B5CF6" stroke-width="1.2" filter="url(#shadow-sm)"/>
-  <text x="612" y="204" text-anchor="middle" font-size="10" font-weight="500" fill="#3730a3">Use specified provider</text>
-  <path d="M 682 200 L 822 200 L 822 496 L 500 496" stroke="#64748b" stroke-width="1.2" fill="none" marker-end="url(#arrow)"/>
-
-  <!-- No -> Decision 3 -->
-  <line x1="425" y1="232" x2="425" y2="268" stroke="#64748b" stroke-width="1.2" marker-end="url(#arrow)"/>
-  <text x="438" y="252" font-size="10" font-weight="600" fill="#64748b">No</text>
-
-  <!-- DECISION 3: Task group preference? -->
-  <polygon points="425,268 510,300 425,332 340,300" fill="#f8fafc" stroke="#64748b" stroke-width="1.5" filter="url(#shadow)"/>
-  <text x="425" y="294" text-anchor="middle" font-size="11" font-weight="500" fill="#334155">Task group</text>
-  <text x="425" y="306" text-anchor="middle" font-size="11" font-weight="500" fill="#334155">preference?</text>
-
-  <!-- Yes -> Group preferred (diamond right x=510 → box left x=542) -->
-  <path d="M 510,300 L 542,300" stroke="#64748b" stroke-width="1.2" fill="none" marker-end="url(#arrow)"/>
-  <text x="522" y="293" font-size="10" font-weight="600" fill="#64748b">Yes</text>
-  <rect x="542" y="285" width="160" height="30" rx="6" fill="#eef2ff" stroke="#8B5CF6" stroke-width="1.2" filter="url(#shadow-sm)"/>
-  <text x="622" y="304" text-anchor="middle" font-size="10" font-weight="500" fill="#3730a3">Use group's preferred provider</text>
-
-  <!-- Unavailable -> Priority Chain (enters Priority Chain top y=374) -->
-  <path d="M 622,315 L 622,355 L 460,355 L 460,374" stroke="#10B981" stroke-width="1.4" fill="none" stroke-dasharray="5,3" marker-end="url(#arrow-green)"/>
-  <text x="632" y="340" font-size="9" font-style="italic" fill="#10B981">unavailable</text>
-
-  <!-- No -> Priority Chain (diamond bottom y=332 → chain top y=374) -->
-  <line x1="425" y1="332" x2="425" y2="374" stroke="#64748b" stroke-width="1.2" marker-end="url(#arrow)"/>
-  <text x="438" y="358" font-size="10" font-weight="600" fill="#64748b">No</text>
-
-  <!-- PRIORITY CHAIN -->
-  <rect x="32" y="374" width="786" height="68" rx="10" fill="#eef2ff" stroke="#8B5CF6" stroke-width="1.5" filter="url(#shadow)"/>
-  <text x="425" y="392" text-anchor="middle" font-size="12" font-weight="700" fill="#3730a3">Priority Chain</text>
-  <text x="425" y="403" text-anchor="middle" font-size="9" fill="#6366f1" font-style="italic">User-configurable order</text>
-
-  <!-- 8 provider boxes -->
-  <rect x="50" y="410" width="85" height="24" rx="5" fill="#e0e7ff" stroke="#818cf8" stroke-width="0.8"/>
-  <text x="92" y="426" text-anchor="middle" font-size="9" font-weight="600" fill="#3730a3">① Anthropic</text>
-  <rect x="145" y="410" width="85" height="24" rx="5" fill="#e0e7ff" stroke="#818cf8" stroke-width="0.8"/>
-  <text x="187" y="426" text-anchor="middle" font-size="9" font-weight="600" fill="#3730a3">② Google</text>
-  <rect x="240" y="410" width="85" height="24" rx="5" fill="#e0e7ff" stroke="#818cf8" stroke-width="0.8"/>
-  <text x="282" y="426" text-anchor="middle" font-size="9" font-weight="600" fill="#3730a3">③ OpenAI</text>
-  <rect x="335" y="410" width="85" height="24" rx="5" fill="#e0e7ff" stroke="#818cf8" stroke-width="0.8"/>
-  <text x="377" y="426" text-anchor="middle" font-size="9" font-weight="600" fill="#3730a3">④ Grok</text>
-  <rect x="430" y="410" width="85" height="24" rx="5" fill="#e0e7ff" stroke="#818cf8" stroke-width="0.8"/>
-  <text x="472" y="426" text-anchor="middle" font-size="9" font-weight="600" fill="#3730a3">⑤ OpenRouter</text>
-  <rect x="525" y="410" width="85" height="24" rx="5" fill="#e0e7ff" stroke="#818cf8" stroke-width="0.8"/>
-  <text x="567" y="426" text-anchor="middle" font-size="9" font-weight="600" fill="#3730a3">⑥ Mistral</text>
-  <rect x="620" y="410" width="90" height="24" rx="5" fill="#e0e7ff" stroke="#818cf8" stroke-width="0.8"/>
-  <text x="665" y="426" text-anchor="middle" font-size="9" font-weight="600" fill="#3730a3">⑦ GitHub</text>
-  <rect x="720" y="410" width="85" height="24" rx="5" fill="#e0e7ff" stroke="#818cf8" stroke-width="0.8"/>
-  <text x="762" y="426" text-anchor="middle" font-size="9" font-weight="600" fill="#3730a3">⑧ Ollama</text>
-
-  <!-- Chain connectors -->
-  <line x1="135" y1="422" x2="145" y2="422" stroke="#a5b4fc" stroke-width="0.8"/>
-  <line x1="230" y1="422" x2="240" y2="422" stroke="#a5b4fc" stroke-width="0.8"/>
-  <line x1="325" y1="422" x2="335" y2="422" stroke="#a5b4fc" stroke-width="0.8"/>
-  <line x1="420" y1="422" x2="430" y2="422" stroke="#a5b4fc" stroke-width="0.8"/>
-  <line x1="515" y1="422" x2="525" y2="422" stroke="#a5b4fc" stroke-width="0.8"/>
-  <line x1="610" y1="422" x2="620" y2="422" stroke="#a5b4fc" stroke-width="0.8"/>
-  <line x1="710" y1="422" x2="720" y2="422" stroke="#a5b4fc" stroke-width="0.8"/>
-
-  <!-- CIRCUIT BREAKER — hexagon shape (chain bottom y=442 → hexagon top y=464) -->
-  <line x1="425" y1="442" x2="425" y2="464" stroke="#64748b" stroke-width="1.2" marker-end="url(#arrow)"/>
-  <polygon points="425,464 478,480 478,512 425,528 372,512 372,480" fill="#fffbeb" stroke="#F59E0B" stroke-width="1.5" filter="url(#shadow)"/>
-  <text x="425" y="494" text-anchor="middle" font-size="11" font-weight="600" fill="#92400e">Circuit</text>
-  <text x="425" y="506" text-anchor="middle" font-size="11" font-weight="600" fill="#92400e">Breaker</text>
-
-  <!-- Closed -> Success (hexagon bottom y=528 → AI Provider Call top y=560) -->
-  <line x1="425" y1="528" x2="425" y2="560" stroke="#10B981" stroke-width="1.2" marker-end="url(#arrow-green)"/>
-  <text x="440" y="548" font-size="10" font-weight="600" fill="#10B981">Closed</text>
-
-  <!-- Open -> Skip back to priority chain -->
-  <path d="M 372,496 L 22,496 L 22,422 L 32,422" stroke="#F59E0B" stroke-width="1.2" fill="none" stroke-dasharray="5,3" marker-end="url(#arrow-amber)"/>
-  <text x="180" y="488" font-size="10" font-weight="600" fill="#F59E0B">Open — skip, try next</text>
-
-  <!-- SUCCESS -->
-  <rect x="350" y="560" width="150" height="36" rx="8" fill="#ecfdf5" stroke="#10B981" stroke-width="1.5" filter="url(#shadow)"/>
-  <text x="425" y="583" text-anchor="middle" font-size="13" font-weight="600" fill="#065f46">AI Provider Call</text>
-
-  <!-- FALLBACK — AI Provider Call bottom y=596 → Keyword Fallback top y=630 -->
-  <path d="M 425,596 L 425,630" stroke="#EF4444" stroke-width="1.4" fill="none" stroke-dasharray="5,3" marker-end="url(#arrow-rose)"/>
-  <text x="470" y="617" font-size="11" font-weight="600" fill="#EF4444">all providers fail</text>
-  <rect x="200" y="630" width="450" height="64" rx="10" fill="#dcfce7" stroke="#10B981" stroke-width="1.5" filter="url(#shadow)"/>
-  <text x="425" y="652" text-anchor="middle" font-size="13" font-weight="700" fill="#065f46">Keyword Fallback Engine</text>
-  <text x="425" y="670" text-anchor="middle" font-size="10" fill="#166534">26 template methods · covers every AI operation · no API key needed</text>
-  <text x="425" y="684" text-anchor="middle" font-size="10" font-weight="600" fill="#166534">Always works</text>
-
-  <!-- TASK GROUPS — aligned baseline with Legend -->
-  <rect x="20" y="660" width="168" height="110" rx="10" fill="#f5f3ff" stroke="#8B5CF6" stroke-width="1.5" filter="url(#shadow)"/>
-  <text x="104" y="680" text-anchor="middle" font-size="12" font-weight="700" fill="#5b21b6">Task Groups</text>
-  <rect x="32" y="690" width="68" height="22" rx="4" fill="#ede9fe" stroke="#a78bfa" stroke-width="0.7"/>
-  <text x="66" y="705" text-anchor="middle" font-size="9" font-weight="500" fill="#5b21b6">Writing (4)</text>
-  <rect x="108" y="690" width="68" height="22" rx="4" fill="#ede9fe" stroke="#a78bfa" stroke-width="0.7"/>
-  <text x="142" y="705" text-anchor="middle" font-size="9" font-weight="500" fill="#5b21b6">Analysis (8)</text>
-  <rect x="32" y="720" width="68" height="22" rx="4" fill="#ede9fe" stroke="#a78bfa" stroke-width="0.7"/>
-  <text x="66" y="735" text-anchor="middle" font-size="9" font-weight="500" fill="#5b21b6">Research (7)</text>
-  <rect x="108" y="720" width="68" height="22" rx="4" fill="#ede9fe" stroke="#a78bfa" stroke-width="0.7"/>
-  <text x="142" y="735" text-anchor="middle" font-size="9" font-weight="500" fill="#5b21b6">Quick (5)</text>
-  <text x="104" y="760" text-anchor="middle" font-size="8" fill="#8B5CF6" font-style="italic">24 tasks across 4 groups</text>
-
-  <!-- LEGEND — aligned baseline with Task Groups, consistent border style -->
-  <rect x="662" y="660" width="170" height="110" rx="10" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1.5"/>
-  <text x="747" y="680" text-anchor="middle" font-size="11" font-weight="700" fill="#1e293b">Legend</text>
-  <line x1="680" y1="694" x2="710" y2="694" stroke="#64748b" stroke-width="1.2"/>
-  <text x="718" y="698" font-size="9" fill="#475569">Synchronous flow</text>
-  <line x1="680" y1="712" x2="710" y2="712" stroke="#10B981" stroke-width="1.2" stroke-dasharray="5,3"/>
-  <text x="718" y="716" font-size="9" fill="#475569">Fallback path</text>
-  <line x1="680" y1="730" x2="710" y2="730" stroke="#F59E0B" stroke-width="1.2" stroke-dasharray="5,3"/>
-  <text x="718" y="734" font-size="9" fill="#475569">Circuit breaker skip</text>
-  <polygon points="695,742 701,748 695,754 689,748" fill="#f8fafc" stroke="#64748b" stroke-width="1"/>
-  <text x="718" y="752" font-size="9" fill="#475569">Decision point</text>
-  <polygon points="695,758 700,762 695,766 690,762" fill="#fffbeb" stroke="#F59E0B" stroke-width="0.8" transform="scale(1.5) translate(-229,-252)"/>
-
-  <!-- Watermark + Timestamp -->
-  <text x="425" y="776" text-anchor="middle" font-size="9" fill="#cbd5e1">CViper · AI Routing &amp; Fallback Architecture</text>
-  <text x="832" y="776" text-anchor="end" font-size="10" fill="#6B7280">Updated: 2026-04-15</text>
-  <!-- stats-updated: 2026-05-01 -->
+  <rect width="850" height="780" fill="#fafbfc"/>
+  <text x="425" y="28" text-anchor="middle" font-size="16" font-weight="700" fill="#1e293b" letter-spacing="0.4"></text>
+  <text x="425" y="43" text-anchor="middle" font-size="9.5" fill="#64748b"></text>
+  <g filter="url(#shadow)">
+    <rect x="335" y="18" width="180" height="40" rx="8" fill="#eff6ff" stroke="#3B82F6" stroke-width="1.5"/>
+    <text x="425" y="41" text-anchor="middle" font-size="13" font-weight="600" fill="#1e40af">AI Task Request</text>
+  </g>
+  <g filter="url(#shadow)">
+    <polygon points="425,76 510,108 425,140 340,108" fill="#f1f5f9" stroke="#64748b" stroke-width="1.2"/>
+    <text x="425" y="102" text-anchor="middle" font-size="8" font-weight="600" fill="#334155">Demo</text>
+    <text x="425" y="114" text-anchor="middle" font-size="8" font-weight="600" fill="#334155">user?</text>
+  </g>
+  <g filter="url(#shadow)">
+    <rect x="20" y="146" width="300" height="140" rx="8" fill="#fef2f2" stroke="#EF4444" stroke-width="1.5"/>
+    <rect x="28" y="150" width="68" height="16" rx="4" fill="#EF4444" opacity="0.15"/>
+    <text x="62" y="161" text-anchor="middle" font-size="7.5" font-weight="700" fill="#EF4444" letter-spacing="0.5">DEMO PATH</text>
+    <text x="170" y="170" text-anchor="middle" font-size="12" font-weight="700" fill="#9f1239">Demo Routing</text>
+  </g>
+  <g filter="url(#shadow)">
+    <rect x="35" y="180" width="270" height="24" rx="8" fill="#f1f5f9" stroke="#64748b" stroke-width="1.5"/>
+    <text x="170" y="195" text-anchor="middle" font-size="9" font-weight="500" fill="#334155">Google Gemini Flash · 1000 req/day</text>
+  </g>
+  <g filter="url(#shadow)">
+    <rect x="35" y="212" width="270" height="24" rx="8" fill="#f1f5f9" stroke="#64748b" stroke-width="1.5"/>
+    <text x="170" y="227" text-anchor="middle" font-size="9" font-weight="500" fill="#334155">OpenRouter GPT-4o-mini · 50 req/day</text>
+  </g>
+  <g filter="url(#shadow)">
+    <rect x="35" y="244" width="270" height="24" rx="8" fill="#ecfdf5" stroke="#10B981" stroke-width="1.5"/>
+    <text x="170" y="259" text-anchor="middle" font-size="9" font-weight="500" fill="#065f46">keyword fallback · always available</text>
+  </g>
+  <g filter="url(#shadow)">
+    <polygon points="425,168 510,200 425,232 340,200" fill="#f1f5f9" stroke="#64748b" stroke-width="1.2"/>
+    <text x="425" y="194" text-anchor="middle" font-size="8" font-weight="600" fill="#334155">Provider</text>
+    <text x="425" y="206" text-anchor="middle" font-size="8" font-weight="600" fill="#334155">override?</text>
+  </g>
+  <g filter="url(#shadow)">
+    <rect x="542" y="185" width="140" height="30" rx="8" fill="#eef2ff" stroke="#8B5CF6" stroke-width="1.5"/>
+    <text x="612" y="203" text-anchor="middle" font-size="10" font-weight="500" fill="#3730a3">Use specified provider</text>
+  </g>
+  <g filter="url(#shadow)">
+    <polygon points="425,268 510,300 425,332 340,300" fill="#f1f5f9" stroke="#64748b" stroke-width="1.2"/>
+    <text x="425" y="294" text-anchor="middle" font-size="8" font-weight="600" fill="#334155">Task group</text>
+    <text x="425" y="306" text-anchor="middle" font-size="8" font-weight="600" fill="#334155">preference?</text>
+  </g>
+  <g filter="url(#shadow)">
+    <rect x="542" y="285" width="160" height="30" rx="8" fill="#eef2ff" stroke="#8B5CF6" stroke-width="1.5"/>
+    <text x="622" y="303" text-anchor="middle" font-size="10" font-weight="500" fill="#3730a3">Use group's preferred provider</text>
+  </g>
+  <g filter="url(#shadow)">
+    <rect x="32" y="374" width="786" height="68" rx="8" fill="#eef2ff" stroke="#8B5CF6" stroke-width="1.5"/>
+    <text x="425" y="392" text-anchor="middle" font-size="12" font-weight="700" fill="#3730a3">Priority Chain</text>
+    <text x="425" y="403" text-anchor="middle" font-size="9" fill="#6366f1" font-style="italic">User-configurable order</text>
+  </g>
+  <g filter="url(#shadow)">
+    <rect x="50" y="410" width="85" height="24" rx="8" fill="#eef2ff" stroke="#8B5CF6" stroke-width="1.5"/>
+    <text x="92.5" y="425" text-anchor="middle" font-size="9" font-weight="600" fill="#3730a3">① Anthropic</text>
+  </g>
+  <g filter="url(#shadow)">
+    <rect x="145" y="410" width="85" height="24" rx="8" fill="#eef2ff" stroke="#8B5CF6" stroke-width="1.5"/>
+    <text x="187.5" y="425" text-anchor="middle" font-size="9" font-weight="600" fill="#3730a3">② Google</text>
+  </g>
+  <g filter="url(#shadow)">
+    <rect x="240" y="410" width="85" height="24" rx="8" fill="#eef2ff" stroke="#8B5CF6" stroke-width="1.5"/>
+    <text x="282.5" y="425" text-anchor="middle" font-size="9" font-weight="600" fill="#3730a3">③ OpenAI</text>
+  </g>
+  <g filter="url(#shadow)">
+    <rect x="335" y="410" width="85" height="24" rx="8" fill="#eef2ff" stroke="#8B5CF6" stroke-width="1.5"/>
+    <text x="377.5" y="425" text-anchor="middle" font-size="9" font-weight="600" fill="#3730a3">④ Grok</text>
+  </g>
+  <g filter="url(#shadow)">
+    <rect x="430" y="410" width="85" height="24" rx="8" fill="#eef2ff" stroke="#8B5CF6" stroke-width="1.5"/>
+    <text x="472.5" y="425" text-anchor="middle" font-size="9" font-weight="600" fill="#3730a3">⑤ OpenRouter</text>
+  </g>
+  <g filter="url(#shadow)">
+    <rect x="525" y="410" width="85" height="24" rx="8" fill="#eef2ff" stroke="#8B5CF6" stroke-width="1.5"/>
+    <text x="567.5" y="425" text-anchor="middle" font-size="9" font-weight="600" fill="#3730a3">⑥ Mistral</text>
+  </g>
+  <g filter="url(#shadow)">
+    <rect x="620" y="410" width="90" height="24" rx="8" fill="#eef2ff" stroke="#8B5CF6" stroke-width="1.5"/>
+    <text x="665" y="425" text-anchor="middle" font-size="9" font-weight="600" fill="#3730a3">⑦ GitHub</text>
+  </g>
+  <g filter="url(#shadow)">
+    <rect x="720" y="410" width="85" height="24" rx="8" fill="#eef2ff" stroke="#8B5CF6" stroke-width="1.5"/>
+    <text x="762.5" y="425" text-anchor="middle" font-size="9" font-weight="600" fill="#3730a3">⑧ Ollama</text>
+  </g>
+  <g filter="url(#shadow)">
+    <polygon points="425,464 462.1,496 425,528 387.9,528 372,496 387.9,464" fill="#fffbeb" stroke="#F59E0B" stroke-width="1.2"/>
+    <text x="425" y="490" text-anchor="middle" font-size="8" font-weight="600" fill="#92400e">Circuit</text>
+    <text x="425" y="502" text-anchor="middle" font-size="8" font-weight="600" fill="#92400e">Breaker</text>
+  </g>
+  <g filter="url(#shadow)">
+    <rect x="350" y="560" width="150" height="36" rx="8" fill="#ecfdf5" stroke="#10B981" stroke-width="1.5"/>
+    <text x="425" y="581" text-anchor="middle" font-size="13" font-weight="600" fill="#065f46">AI Provider Call</text>
+  </g>
+  <g filter="url(#shadow)">
+    <rect x="200" y="630" width="450" height="64" rx="8" fill="#ecfdf5" stroke="#10B981" stroke-width="1.5"/>
+    <text x="425" y="652" text-anchor="middle" font-size="13" font-weight="700" fill="#065f46">Keyword Fallback Engine</text>
+    <text x="425" y="670" text-anchor="middle" font-size="9" fill="#6366f1" font-style="italic">26 template methods · covers every AI operation · no API key needed</text>
+  </g>
+  <g filter="url(#shadow)">
+    <rect x="20" y="660" width="168" height="110" rx="8" fill="#f5f3ff" stroke="#8B5CF6" stroke-width="2"/>
+    <text x="104" y="680" text-anchor="middle" font-size="12" font-weight="700" fill="#5b21b6">Task Groups</text>
+  </g>
+  <g filter="url(#shadow)">
+    <rect x="32" y="690" width="68" height="22" rx="8" fill="#f5f3ff" stroke="#8B5CF6" stroke-width="2"/>
+    <text x="66" y="704" text-anchor="middle" font-size="9" font-weight="500" fill="#5b21b6">Writing (4)</text>
+  </g>
+  <g filter="url(#shadow)">
+    <rect x="108" y="690" width="68" height="22" rx="8" fill="#f5f3ff" stroke="#8B5CF6" stroke-width="2"/>
+    <text x="142" y="704" text-anchor="middle" font-size="9" font-weight="500" fill="#5b21b6">Analysis (8)</text>
+  </g>
+  <g filter="url(#shadow)">
+    <rect x="32" y="720" width="68" height="22" rx="8" fill="#f5f3ff" stroke="#8B5CF6" stroke-width="2"/>
+    <text x="66" y="734" text-anchor="middle" font-size="9" font-weight="500" fill="#5b21b6">Research (7)</text>
+  </g>
+  <g filter="url(#shadow)">
+    <rect x="108" y="720" width="68" height="22" rx="8" fill="#f5f3ff" stroke="#8B5CF6" stroke-width="2"/>
+    <text x="142" y="734" text-anchor="middle" font-size="9" font-weight="500" fill="#5b21b6">Quick (5)</text>
+  </g>
+  <g filter="url(#shadow)">
+    <rect x="662" y="660" width="170" height="110" rx="8" fill="#f1f5f9" stroke="#64748b" stroke-width="1.5"/>
+    <text x="747" y="680" text-anchor="middle" font-size="11" font-weight="700" fill="#334155">Legend</text>
+    <text x="747" y="720" text-anchor="middle" font-size="9" fill="#6366f1" font-style="italic">(see colour-coded arrows above)</text>
+  </g>
+  <path d="M 424 58 L 424 76" stroke="#94a3b8" stroke-width="1.0" fill="none" marker-end="url(#arrow)"/>
+  <path d="M 340 108 L 200 108 L 200 146" stroke="#EF4444" stroke-width="1.2" fill="none" marker-end="url(#arrow-red)"/>
+  <text x="270" y="102" text-anchor="middle" font-size="6" fill="#EF4444" font-weight="500">Yes</text>
+  <path d="M 424 140 L 424 168" stroke="#94a3b8" stroke-width="1.0" fill="none" marker-end="url(#arrow)"/>
+  <text x="425" y="134" text-anchor="middle" font-size="6" fill="#94a3b8" font-weight="500">No</text>
+  <path d="M 510 200 L 542 200" stroke="#94a3b8" stroke-width="1.0" fill="none" marker-end="url(#arrow)"/>
+  <text x="526" y="194" text-anchor="middle" font-size="6" fill="#94a3b8" font-weight="500">Yes</text>
+  <path d="M 682 200 L 822 200 L 822 578 L 500 578" stroke="#94a3b8" stroke-width="1.0" fill="none" marker-end="url(#arrow)"/>
+  <path d="M 424 232 L 424 268" stroke="#94a3b8" stroke-width="1.0" fill="none" marker-end="url(#arrow)"/>
+  <text x="425" y="226" text-anchor="middle" font-size="6" fill="#94a3b8" font-weight="500">No</text>
+  <path d="M 510 300 L 542 300" stroke="#94a3b8" stroke-width="1.0" fill="none" marker-end="url(#arrow)"/>
+  <text x="526" y="294" text-anchor="middle" font-size="6" fill="#94a3b8" font-weight="500">Yes</text>
+  <path d="M 622 316 L 622 356 L 460 356 L 460 374" stroke="#10B981" stroke-width="1.2" fill="none" marker-end="url(#arrow-green)"/>
+  <text x="622" y="309" text-anchor="middle" font-size="6" fill="#10B981" font-weight="500">unavailable</text>
+  <path d="M 424 332 L 424 374" stroke="#94a3b8" stroke-width="1.0" fill="none" marker-end="url(#arrow)"/>
+  <text x="425" y="326" text-anchor="middle" font-size="6" fill="#94a3b8" font-weight="500">No</text>
+  <path d="M 424 442 L 424 464" stroke="#94a3b8" stroke-width="1.0" fill="none" marker-end="url(#arrow)"/>
+  <path d="M 424 528 L 424 560" stroke="#10B981" stroke-width="1.2" fill="none" marker-end="url(#arrow-green)"/>
+  <text x="425" y="522" text-anchor="middle" font-size="6" fill="#10B981" font-weight="500">Closed</text>
+  <path d="M 424 596 L 424 630" stroke="#EF4444" stroke-width="1.0" fill="none" stroke-dasharray="4,2" marker-end="url(#arrow-red)"/>
+  <text x="425" y="590" text-anchor="middle" font-size="6" fill="#EF4444" font-weight="500">all providers fail</text>
+  <text x="425" y="750" text-anchor="middle" font-size="7" fill="#cbd5e1">CViper · AI Routing &amp; Fallback Architecture</text>
+  <text x="830" y="772" text-anchor="end" font-size="10" fill="#6B7280">Updated: 2026-04-15</text>
+  <!-- stats-updated: 2026-05-06 -->
 </svg>

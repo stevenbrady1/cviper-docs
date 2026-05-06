@@ -1,269 +1,152 @@
-<!-- HAND-CRAFTED: Do not regenerate — this SVG is manually styled, not Mermaid-rendered -->
-<!-- stats-updated: 2026-05-01 -->
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 780" width="960" height="780" font-family="Inter, system-ui, -apple-system, sans-serif">
+<!-- HAND-CRAFTED: Do not regenerate — generated from docs/diagrams/auth-rbac-flow.json by scripts/diagram_gen.py -->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 780" font-family="Inter, system-ui, -apple-system, sans-serif">
   <defs>
-    <filter id="shadow" x="-4%" y="-4%" width="108%" height="112%">
-      <feDropShadow dx="0" dy="1" stdDeviation="2" flood-color="#000" flood-opacity="0.08"/>
+    <marker id="arrow" viewBox="0 0 10 7" refX="10" refY="3.5" markerWidth="8" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 3.5 L 0 7 z" fill="#94a3b8"/>
+    </marker>
+    <marker id="arrow-red" viewBox="0 0 10 7" refX="10" refY="3.5" markerWidth="8" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 3.5 L 0 7 z" fill="#EF4444"/>
+    </marker>
+    <marker id="arrow-blue" viewBox="0 0 10 7" refX="10" refY="3.5" markerWidth="8" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 3.5 L 0 7 z" fill="#3B82F6"/>
+    </marker>
+    <marker id="arrow-green" viewBox="0 0 10 7" refX="10" refY="3.5" markerWidth="8" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 3.5 L 0 7 z" fill="#10B981"/>
+    </marker>
+    <marker id="arrow-amber" viewBox="0 0 10 7" refX="10" refY="3.5" markerWidth="8" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 3.5 L 0 7 z" fill="#F97316"/>
+    </marker>
+    <marker id="arrow-purple" viewBox="0 0 10 7" refX="10" refY="3.5" markerWidth="8" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 3.5 L 0 7 z" fill="#8B5CF6"/>
+    </marker>
+    <filter id="shadow">
+      <feDropShadow dx="0" dy="1" stdDeviation="2" flood-color="#000" flood-opacity="0.06"/>
     </filter>
-    <filter id="shadowLight" x="-4%" y="-4%" width="108%" height="112%">
+    <filter id="shadow-lg">
+      <feDropShadow dx="0" dy="2" stdDeviation="3.5" flood-color="#000" flood-opacity="0.09"/>
+    </filter>
+    <filter id="shadow-light">
       <feDropShadow dx="0" dy="1" stdDeviation="1.5" flood-color="#000" flood-opacity="0.05"/>
     </filter>
-    <marker id="arrow" viewBox="0 0 10 7" refX="10" refY="3.5" markerWidth="8" markerHeight="6" orient="auto-start-reverse">
-      <path d="M 0 0 L 10 3.5 L 0 7 Z" fill="#94a3b8"/>
-    </marker>
-    <marker id="arrowGreen" viewBox="0 0 10 7" refX="10" refY="3.5" markerWidth="8" markerHeight="6" orient="auto-start-reverse">
-      <path d="M 0 0 L 10 3.5 L 0 7 Z" fill="#10B981"/>
-    </marker>
-    <marker id="arrowRed" viewBox="0 0 10 7" refX="10" refY="3.5" markerWidth="8" markerHeight="6" orient="auto-start-reverse">
-      <path d="M 0 0 L 10 3.5 L 0 7 Z" fill="#EF4444"/>
-    </marker>
-    <marker id="arrowBlue" viewBox="0 0 10 7" refX="10" refY="3.5" markerWidth="8" markerHeight="6" orient="auto-start-reverse">
-      <path d="M 0 0 L 10 3.5 L 0 7 Z" fill="#3B82F6"/>
-    </marker>
-    <marker id="arrowPurple" viewBox="0 0 10 7" refX="10" refY="3.5" markerWidth="8" markerHeight="6" orient="auto-start-reverse">
-      <path d="M 0 0 L 10 3.5 L 0 7 Z" fill="#8B5CF6"/>
-    </marker>
-    <marker id="arrowAmber" viewBox="0 0 10 7" refX="10" refY="3.5" markerWidth="8" markerHeight="6" orient="auto-start-reverse">
-      <path d="M 0 0 L 10 3.5 L 0 7 Z" fill="#F59E0B"/>
-    </marker>
   </defs>
 
-  <!-- Background -->
-  <rect width="960" height="780" fill="#fafbfc" rx="0"/>
-
-  <!-- Title -->
-  <text x="480" y="28" text-anchor="middle" font-size="16" font-weight="700" fill="#1e293b" letter-spacing="0.5">Authentication &amp; RBAC Flow</text>
-  <text x="480" y="43" text-anchor="middle" font-size="9" fill="#94a3b8" letter-spacing="0.3">Registration  &#183;  Email Verification  &#183;  Login  &#183;  JWT Bearer  &#183;  Role-Based Access</text>
-
-  <!-- ====== SECTION 1: Three Entry Paths ====== -->
-  <text x="480" y="68" text-anchor="middle" font-size="9" font-weight="700" fill="#64748b" letter-spacing="1">ENTRY PATHS</text>
-
-  <!-- Path 1: Register -->
+  <rect width="960" height="780" fill="#fafbfc"/>
+  <text x="480" y="28" text-anchor="middle" font-size="16" font-weight="700" fill="#1e293b" letter-spacing="0.4">Authentication &amp; RBAC Flow</text>
+  <text x="480" y="43" text-anchor="middle" font-size="9.5" fill="#64748b">Registration · Email Verification · Login · JWT Bearer · Role-Based Access</text>
+  <text x="480" y="68" text-anchor="middle" font-size="8.5" font-weight="600" fill="#475569" letter-spacing="0.4">ENTRY PATHS</text>
+  <text x="480" y="340" text-anchor="middle" font-size="8.5" font-weight="600" fill="#475569" letter-spacing="0.4">REQUEST AUTHENTICATION PIPELINE</text>
   <g filter="url(#shadow)">
-    <rect x="30" y="80" width="260" height="68" rx="8" fill="#eff6ff" stroke="#3B82F6" stroke-width="1.3"/>
+    <rect x="30" y="80" width="260" height="68" rx="8" fill="#eff6ff" stroke="#3B82F6" stroke-width="1.5"/>
     <rect x="30" y="80" width="260" height="18" rx="8" fill="#3B82F6" opacity="0.08"/>
     <text x="46" y="94" font-size="9" font-weight="700" fill="#3B82F6">1. Register</text>
     <text x="46" y="112" font-size="7.5" fill="#334155">POST /api/auth/register</text>
-    <text x="46" y="124" font-size="7" fill="#64748b">Email pre-check &#8594; Create account &#8594; Send verification email</text>
-    <text x="46" y="136" font-size="7" fill="#64748b">6-step wizard: credentials &#8594; CV &#8594; role &#8594; boards &#8594; career pages</text>
+    <text x="46" y="124" font-size="7" fill="#6b7280">Email pre-check → Create account → Send verification email</text>
+    <text x="46" y="136" font-size="7" fill="#6b7280">6-step wizard: credentials → CV → role → boards → career pages</text>
   </g>
-
-  <!-- Path 2: Login -->
   <g filter="url(#shadow)">
-    <rect x="350" y="80" width="260" height="68" rx="8" fill="#ecfdf5" stroke="#10B981" stroke-width="1.3"/>
+    <rect x="350" y="80" width="260" height="68" rx="8" fill="#ecfdf5" stroke="#10B981" stroke-width="1.5"/>
     <rect x="350" y="80" width="260" height="18" rx="8" fill="#10B981" opacity="0.08"/>
     <text x="366" y="94" font-size="9" font-weight="700" fill="#10B981">2. Login</text>
     <text x="366" y="112" font-size="7.5" fill="#334155">POST /api/auth/login</text>
-    <text x="366" y="124" font-size="7" fill="#64748b">Credentials &#8594; Account lockout check (5 attempts)</text>
-    <text x="366" y="136" font-size="7" fill="#64748b">Also: OAuth (Google, LinkedIn, Microsoft)</text>
+    <text x="366" y="124" font-size="7" fill="#6b7280">Credentials → Account lockout check (5 attempts)</text>
+    <text x="366" y="136" font-size="7" fill="#6b7280">Also: OAuth (Google, LinkedIn, Microsoft)</text>
   </g>
-
-  <!-- Path 3: Try Demo -->
   <g filter="url(#shadow)">
-    <rect x="670" y="80" width="260" height="68" rx="8" fill="#fff7ed" stroke="#F97316" stroke-width="1.3"/>
+    <rect x="670" y="80" width="260" height="68" rx="8" fill="#fff7ed" stroke="#F97316" stroke-width="1.5"/>
     <rect x="670" y="80" width="260" height="18" rx="8" fill="#F97316" opacity="0.08"/>
-    <text x="686" y="94" font-size="9" font-weight="700" fill="#ea580c">3. Try Demo</text>
+    <text x="686" y="94" font-size="9" font-weight="700" fill="#F97316">3. Try Demo</text>
     <text x="686" y="112" font-size="7.5" fill="#334155">POST /api/auth/sandbox</text>
-    <text x="686" y="124" font-size="7" fill="#64748b">Creates temporary sandbox user (30-min session)</text>
-    <text x="686" y="136" font-size="7" fill="#64748b">Per-fingerprint rate limit &#183; Sandbox-only providers</text>
+    <text x="686" y="124" font-size="7" fill="#6b7280">Creates temporary sandbox user (30-min session)</text>
+    <text x="686" y="136" font-size="7" fill="#6b7280">Per-fingerprint rate limit · Sandbox-only providers</text>
   </g>
-
-  <!-- Arrow: Register down to email verification (bottom y=148 → top y=172) -->
-  <line x1="160" y1="148" x2="160" y2="172" stroke="#3B82F6" stroke-width="1.2" marker-end="url(#arrowBlue)"/>
-
-  <!-- Arrow: Login down to completeAuthentication (bottom y=148 → top y=236) -->
-  <line x1="480" y1="148" x2="480" y2="236" stroke="#10B981" stroke-width="1.2" marker-end="url(#arrowGreen)"/>
-
-  <!-- Arrow: Demo down to completeAuthentication (bottom y=148 → top y=236) -->
-  <path d="M800 148 L800 200 L580 200 L580 236" fill="none" stroke="#F97316" stroke-width="1.2" marker-end="url(#arrowAmber)"/>
-
-  <!-- ====== Email Verification (Register-only branch) ====== -->
   <g filter="url(#shadow)">
-    <rect x="30" y="172" width="260" height="56" rx="8" fill="#fef2f2" stroke="#EF4444" stroke-width="1"/>
+    <rect x="30" y="172" width="260" height="56" rx="8" fill="#fef2f2" stroke="#EF4444" stroke-width="1.5"/>
     <rect x="30" y="172" width="260" height="18" rx="8" fill="#EF4444" opacity="0.06"/>
     <text x="46" y="186" font-size="8" font-weight="700" fill="#EF4444">Email Verification</text>
-    <text x="46" y="202" font-size="7" fill="#334155">GET /api/auth/verify-email/{token}</text>
-    <text x="46" y="214" font-size="7" fill="#64748b">Single-use token &#183; Time-limited expiry &#183; HTTPS deep-link</text>
+    <text x="46" y="204" font-size="7.5" fill="#334155">GET /api/auth/verify-email/{token}</text>
+    <text x="46" y="216" font-size="7" fill="#6b7280">Single-use token · Time-limited expiry · HTTPS deep-link</text>
     <text x="46" y="222" font-size="6" fill="#EF4444">Required for password reset gate</text>
   </g>
-
-  <!-- Arrow: email verification to completeAuthentication (bottom y=228 → left edge x=350) -->
-  <path d="M 160 228 L 160 260 L 350 260" fill="none" stroke="#EF4444" stroke-width="1.2" marker-end="url(#arrowRed)"/>
-
-  <!-- ====== completeAuthentication (the funnel) ====== -->
   <g filter="url(#shadow)">
     <rect x="350" y="236" width="260" height="70" rx="8" fill="#f5f3ff" stroke="#8B5CF6" stroke-width="1.5"/>
     <rect x="350" y="236" width="260" height="18" rx="8" fill="#8B5CF6" opacity="0.08"/>
     <text x="366" y="250" font-size="9" font-weight="700" fill="#8B5CF6">completeAuthentication()</text>
-    <text x="366" y="268" font-size="7" fill="#334155">All 3 paths funnel through this single helper</text>
-    <text x="366" y="280" font-size="7" fill="#64748b">1. Store JWT bearer token (setAuthTokenGetter)</text>
-    <text x="366" y="292" font-size="7" fill="#64748b">2. Set isAuthenticated + currentUser &#8594; 3. Flush + fetch storm</text>
+    <text x="366" y="268" font-size="7" fill="#6b7280">All 3 paths funnel through this single helper</text>
+    <text x="366" y="280" font-size="7" fill="#6b7280">1. Store JWT bearer token (setAuthTokenGetter)</text>
+    <text x="366" y="292" font-size="7" fill="#6b7280">2. Set isAuthenticated + currentUser → 3. Flush + fetch storm</text>
   </g>
-
-  <!-- Post-login fetch storm note -->
-  <g filter="url(#shadowLight)">
-    <rect x="670" y="250" width="260" height="44" rx="6" fill="#fef3c7" stroke="#F59E0B" stroke-width="0.8"/>
-    <text x="686" y="266" font-size="7" font-weight="600" fill="#b45309">Post-Login Fetch Storm Protection</text>
-    <text x="686" y="280" font-size="6.5" fill="#92400e">suspendAuthInterceptorFor(5000) before first fetch</text>
-    <text x="686" y="290" font-size="6.5" fill="#92400e">/api/auth/refresh exempt from 401 interceptor</text>
+  <g filter="url(#shadow-light)">
+    <rect x="670" y="250" width="260" height="44" rx="8" fill="#fef3c7" stroke="#F59E0B" stroke-width="1.5"/>
+    <rect x="670" y="250" width="260" height="0" rx="8" fill="#F59E0B" opacity="0.08"/>
+    <text x="686" y="264" font-size="7" font-weight="600" fill="#F59E0B">Post-Login Fetch Storm Protection</text>
+    <text x="686" y="264" font-size="7" fill="#6b7280">suspendAuthInterceptorFor(5000) before first fetch</text>
+    <text x="686" y="276" font-size="7" fill="#6b7280">/api/auth/refresh exempt from 401 interceptor</text>
   </g>
-
-  <!-- Arrow: completeAuthentication down to authFetch -->
-  <line x1="480" y1="306" x2="480" y2="326" stroke="#8B5CF6" stroke-width="1.2" marker-end="url(#arrowPurple)"/>
-
-  <!-- ====== SECTION 2: Request Authentication Pipeline ====== -->
-  <text x="480" y="340" text-anchor="middle" font-size="9" font-weight="700" fill="#64748b" letter-spacing="1">REQUEST AUTHENTICATION PIPELINE</text>
-
-  <!-- authFetch (frontend) -->
   <g filter="url(#shadow)">
-    <rect x="130" y="352" width="280" height="56" rx="8" fill="#eff6ff" stroke="#3B82F6" stroke-width="1.3"/>
+    <rect x="130" y="352" width="280" height="56" rx="8" fill="#eff6ff" stroke="#3B82F6" stroke-width="1.5"/>
     <rect x="130" y="352" width="280" height="18" rx="8" fill="#3B82F6" opacity="0.08"/>
     <text x="146" y="366" font-size="9" font-weight="700" fill="#3B82F6">authFetch() — Frontend</text>
     <text x="146" y="384" font-size="7.5" fill="#334155">Wraps every API call with Authorization: Bearer {jwt}</text>
-    <text x="146" y="396" font-size="7" fill="#64748b">ESLint enforced — plain fetch() is banned</text>
+    <text x="146" y="396" font-size="7" fill="#6b7280">ESLint enforced — plain fetch() is banned</text>
   </g>
-
-  <!-- Arrow: authFetch to AuthMiddleware -->
-  <line x1="410" y1="380" x2="490" y2="380" stroke="#94a3b8" stroke-width="1.2" marker-end="url(#arrow)"/>
-  <text x="448" y="374" font-size="6" fill="#94a3b8">HTTPS</text>
-
-  <!-- AuthMiddleware (backend) -->
   <g filter="url(#shadow)">
-    <rect x="490" y="352" width="280" height="56" rx="8" fill="#ecfdf5" stroke="#10B981" stroke-width="1.3"/>
+    <rect x="490" y="352" width="280" height="56" rx="8" fill="#ecfdf5" stroke="#10B981" stroke-width="1.5"/>
     <rect x="490" y="352" width="280" height="18" rx="8" fill="#10B981" opacity="0.08"/>
     <text x="506" y="366" font-size="9" font-weight="700" fill="#10B981">AuthMiddleware — Backend</text>
-    <text x="506" y="384" font-size="7.5" fill="#334155">Extracts JWT &#8594; get_current_user() &#8594; validate session</text>
-    <text x="506" y="396" font-size="7" fill="#64748b">On failure: 401 + X-Auth-Status: session-expired header</text>
+    <text x="506" y="384" font-size="7.5" fill="#334155">Extracts JWT → get_current_user() → validate session</text>
+    <text x="506" y="396" font-size="7" fill="#6b7280">On failure: 401 + X-Auth-Status: session-expired header</text>
   </g>
-
-  <!-- Arrow: AuthMiddleware down to decision diamond -->
-  <line x1="630" y1="408" x2="630" y2="428" stroke="#10B981" stroke-width="1.2" marker-end="url(#arrowGreen)"/>
-
-  <!-- ====== 401 Interceptor Branch — connected with labelled dashed bracket ====== -->
-  <g filter="url(#shadowLight)">
-    <rect x="130" y="420" width="280" height="48" rx="6" fill="#EF4444" opacity="0.08"/>
-    <rect x="130" y="420" width="280" height="48" rx="6" fill="none" stroke="#EF4444" stroke-width="1"/>
-    <text x="146" y="438" font-size="8" font-weight="600" fill="#EF4444">Header-Gated 401 Interceptor</text>
-    <text x="146" y="452" font-size="7" fill="#334155">Only fires global logout when 401 carries X-Auth-Status: session-expired</text>
-    <text x="146" y="462" font-size="6.5" fill="#64748b">Per-endpoint 401s returned locally without triggering logout</text>
+  <g filter="url(#shadow-light)">
+    <rect x="130" y="420" width="280" height="48" rx="8" fill="#fef2f2" stroke="#EF4444" stroke-width="1.5"/>
+    <rect x="130" y="420" width="280" height="0" rx="8" fill="#EF4444" opacity="0"/>
+    <text x="146" y="434" font-size="8" font-weight="600" fill="#EF4444">Header-Gated 401 Interceptor</text>
+    <text x="146" y="434" font-size="7" fill="#6b7280">Only fires global logout when 401 carries X-Auth-Status: session-expired</text>
+    <text x="146" y="446" font-size="7" fill="#6b7280">Per-endpoint 401s returned locally without triggering logout</text>
   </g>
-
-  <!-- Dashed bracket: AuthMiddleware left edge x=490 at bottom → 401 box right edge x=410 -->
-  <path d="M490 408 L470 408 L470 444 L410 444" fill="none" stroke="#EF4444" stroke-width="1" marker-end="url(#arrowRed)" stroke-dasharray="4,2"/>
-  <rect x="434" y="410" width="28" height="14" rx="3" fill="#fef2f2" stroke="#EF4444" stroke-width="0.5"/>
-  <text x="448" y="420" text-anchor="middle" font-size="6.5" font-weight="600" fill="#EF4444">401</text>
-
-  <!-- ====== SECTION 3: Role Check ====== -->
   <g filter="url(#shadow)">
-    <polygon points="630,430 710,460 630,490 550,460" fill="#f8fafc" stroke="#64748b" stroke-width="1.2"/>
+    <polygon points="630,430 710,460 630,490 550,460" fill="#f1f5f9" stroke="#64748b" stroke-width="1.2"/>
     <text x="630" y="458" text-anchor="middle" font-size="8" font-weight="600" fill="#334155">User Role?</text>
-    <text x="630" y="468" text-anchor="middle" font-size="7" fill="#64748b">is_admin / is_sandbox</text>
+    <text x="630" y="468" text-anchor="middle" font-size="7" fill="#6b7280">is_admin / is_sandbox</text>
   </g>
-
-  <!-- Three role branches — wider spacing to prevent line crossing -->
-  <!-- Demo User (leftmost) -->
   <g filter="url(#shadow)">
-    <rect x="200" y="506" width="200" height="64" rx="8" fill="#fff7ed" stroke="#F97316" stroke-width="1.2"/>
+    <rect x="200" y="506" width="200" height="64" rx="8" fill="#fff7ed" stroke="#F97316" stroke-width="1.5"/>
     <rect x="200" y="506" width="200" height="18" rx="8" fill="#F97316" opacity="0.08"/>
-    <text x="216" y="520" font-size="9" font-weight="700" fill="#ea580c">Demo User</text>
-    <text x="216" y="538" font-size="7" fill="#334155">Sandbox providers only</text>
-    <text x="216" y="550" font-size="7" fill="#334155">30-min session &#183; Read-heavy &#183; No export</text>
-    <text x="216" y="562" font-size="7" fill="#64748b">Auto-logout on expiry &#183; Per-fingerprint rate limit</text>
+    <text x="216" y="520" font-size="9" font-weight="700" fill="#F97316">Demo User</text>
+    <text x="216" y="538" font-size="7" fill="#6b7280">Sandbox providers only</text>
+    <text x="216" y="550" font-size="7" fill="#6b7280">30-min session · Read-heavy · No export</text>
+    <text x="216" y="562" font-size="7" fill="#6b7280">Auto-logout on expiry · Per-fingerprint rate limit</text>
   </g>
-
-  <!-- Authenticated User (centre) -->
   <g filter="url(#shadow)">
-    <rect x="450" y="506" width="200" height="64" rx="8" fill="#eff6ff" stroke="#3B82F6" stroke-width="1.2"/>
+    <rect x="450" y="506" width="200" height="64" rx="8" fill="#eff6ff" stroke="#3B82F6" stroke-width="1.5"/>
     <rect x="450" y="506" width="200" height="18" rx="8" fill="#3B82F6" opacity="0.08"/>
     <text x="466" y="520" font-size="9" font-weight="700" fill="#3B82F6">Authenticated User</text>
-    <text x="466" y="538" font-size="7" fill="#334155">Own data only (user_id scoped)</text>
-    <text x="466" y="550" font-size="7" fill="#334155">All tabs &#183; All AI providers &#183; Full CRUD</text>
-    <text x="466" y="562" font-size="7" fill="#64748b">Requires email verification for password reset</text>
+    <text x="466" y="538" font-size="7" fill="#6b7280">Own data only (user_id scoped)</text>
+    <text x="466" y="550" font-size="7" fill="#6b7280">All tabs · All AI providers · Full CRUD</text>
+    <text x="466" y="562" font-size="7" fill="#6b7280">Requires email verification for password reset</text>
   </g>
-
-  <!-- Admin (rightmost) -->
   <g filter="url(#shadow)">
-    <rect x="710" y="506" width="200" height="64" rx="8" fill="#fef2f2" stroke="#EF4444" stroke-width="1.2"/>
+    <rect x="710" y="506" width="200" height="64" rx="8" fill="#fef2f2" stroke="#EF4444" stroke-width="1.5"/>
     <rect x="710" y="506" width="200" height="18" rx="8" fill="#EF4444" opacity="0.08"/>
     <text x="726" y="520" font-size="9" font-weight="700" fill="#EF4444">Admin</text>
-    <text x="726" y="538" font-size="7" fill="#334155">Full access to all endpoints</text>
-    <text x="726" y="550" font-size="7" fill="#334155">Admin panel &#183; Audit logs &#183; User mgmt</text>
-    <text x="726" y="562" font-size="7" fill="#64748b">Can view all user data</text>
+    <text x="726" y="538" font-size="7" fill="#6b7280">Full access to all endpoints</text>
+    <text x="726" y="550" font-size="7" fill="#6b7280">Admin panel · Audit logs · User mgmt</text>
+    <text x="726" y="562" font-size="7" fill="#6b7280">Can view all user data</text>
   </g>
-
-  <!-- Arrows from diamond to roles (terminate at role box top edges y=506) -->
-  <path d="M 550 460 L 300 460 L 300 506" fill="none" stroke="#F97316" stroke-width="1" marker-end="url(#arrowAmber)"/>
-  <text x="420" y="455" font-size="6.5" fill="#ea580c">is_sandbox</text>
-
-  <line x1="630" y1="490" x2="630" y2="506" stroke="#3B82F6" stroke-width="1" marker-end="url(#arrowBlue)"/>
-  <text x="646" y="500" font-size="6.5" fill="#3B82F6">user</text>
-
-  <path d="M 710 460 L 810 460 L 810 506" fill="none" stroke="#EF4444" stroke-width="1" marker-end="url(#arrowRed)"/>
-  <text x="760" y="455" font-size="6.5" fill="#EF4444">is_admin</text>
-
-  <!-- ====== BOTTOM: Data Isolation — P0 critical, bold red border ====== -->
-  <g filter="url(#shadow)">
-    <rect x="200" y="590" width="500" height="42" rx="8" fill="#EF4444" opacity="0.06"/>
-    <rect x="200" y="590" width="500" height="42" rx="8" fill="none" stroke="#EF4444" stroke-width="2"/>
-    <rect x="200" y="590" width="500" height="18" rx="8" fill="#EF4444" opacity="0.08"/>
-    <text x="450" y="604" text-anchor="middle" font-size="10" font-weight="700" fill="#dc2626">Data Isolation (P0 Rule)</text>
-    <text x="450" y="622" text-anchor="middle" font-size="7.5" fill="#334155">repo.get_*/list_* scoped by user_id  &#183;  State resets on switch  &#183;  localStorage per user</text>
-  </g>
-
-  <!-- Arrows from roles down to data isolation (bottom y=570 → top y=590, right edge x=700) -->
-  <line x1="300" y1="570" x2="300" y2="590" stroke="#94a3b8" stroke-width="0.8" marker-end="url(#arrow)"/>
-  <line x1="550" y1="570" x2="550" y2="590" stroke="#94a3b8" stroke-width="0.8" marker-end="url(#arrow)"/>
-  <line x1="810" y1="570" x2="810" y2="620" stroke="#94a3b8" stroke-width="0.8" stroke-dasharray="3,2"/>
-  <path d="M 810 620 L 700 620" fill="none" stroke="#94a3b8" stroke-width="0.8" marker-end="url(#arrow)" stroke-dasharray="3,2"/>
-
-  <!-- ====== BOTTOM: Security Controls Summary — unified colour with legend ====== -->
-  <rect x="20" y="646" width="920" height="100" rx="8" fill="#f8fafc" stroke="#e2e8f0" stroke-width="0.5"/>
-  <text x="480" y="666" text-anchor="middle" font-size="11" font-weight="700" fill="#1e293b">Security Controls</text>
-
-  <!-- All controls use consistent Security red at 15% opacity background -->
-  <g filter="url(#shadowLight)">
-    <rect x="36" y="678" width="126" height="50" rx="6" fill="#EF4444" opacity="0.08" stroke="#EF4444" stroke-width="0.8"/>
-    <text x="99" y="696" text-anchor="middle" font-size="8" font-weight="600" fill="#dc2626">Account Lockout</text>
-    <text x="99" y="710" text-anchor="middle" font-size="7" fill="#64748b">5 failed attempts</text>
-    <text x="99" y="722" text-anchor="middle" font-size="7" fill="#64748b">15-min cooldown</text>
-  </g>
-
-  <g filter="url(#shadowLight)">
-    <rect x="176" y="678" width="126" height="50" rx="6" fill="#EF4444" opacity="0.08" stroke="#EF4444" stroke-width="0.8"/>
-    <text x="239" y="696" text-anchor="middle" font-size="8" font-weight="600" fill="#dc2626">Rate Limiting</text>
-    <text x="239" y="710" text-anchor="middle" font-size="7" fill="#64748b">Login: 5/min</text>
-    <text x="239" y="722" text-anchor="middle" font-size="7" fill="#64748b">AI: 30/min</text>
-  </g>
-
-  <g filter="url(#shadowLight)">
-    <rect x="316" y="678" width="126" height="50" rx="6" fill="#EF4444" opacity="0.08" stroke="#EF4444" stroke-width="0.8"/>
-    <text x="379" y="696" text-anchor="middle" font-size="8" font-weight="600" fill="#dc2626">CSRF Protection</text>
-    <text x="379" y="710" text-anchor="middle" font-size="7" fill="#64748b">Double-submit cookie</text>
-    <text x="379" y="722" text-anchor="middle" font-size="7" fill="#64748b">On all mutations</text>
-  </g>
-
-  <g filter="url(#shadowLight)">
-    <rect x="456" y="678" width="126" height="50" rx="6" fill="#EF4444" opacity="0.08" stroke="#EF4444" stroke-width="0.8"/>
-    <text x="519" y="696" text-anchor="middle" font-size="8" font-weight="600" fill="#dc2626">Session Mgmt</text>
-    <text x="519" y="710" text-anchor="middle" font-size="7" fill="#64748b">JWT + refresh token</text>
-    <text x="519" y="722" text-anchor="middle" font-size="7" fill="#64748b">Token hash in DB</text>
-  </g>
-
-  <g filter="url(#shadowLight)">
-    <rect x="596" y="678" width="126" height="50" rx="6" fill="#EF4444" opacity="0.08" stroke="#EF4444" stroke-width="0.8"/>
-    <text x="659" y="696" text-anchor="middle" font-size="8" font-weight="600" fill="#dc2626">Audit Logging</text>
-    <text x="659" y="710" text-anchor="middle" font-size="7" fill="#64748b">All API mutations</text>
-    <text x="659" y="722" text-anchor="middle" font-size="7" fill="#64748b">Structured events</text>
-  </g>
-
-  <g filter="url(#shadowLight)">
-    <rect x="736" y="678" width="126" height="50" rx="6" fill="#EF4444" opacity="0.08" stroke="#EF4444" stroke-width="0.8"/>
-    <text x="799" y="696" text-anchor="middle" font-size="8" font-weight="600" fill="#dc2626">Anomaly Detection</text>
-    <text x="799" y="710" text-anchor="middle" font-size="7" fill="#64748b">Login velocity</text>
-    <text x="799" y="722" text-anchor="middle" font-size="7" fill="#64748b">Fingerprint mismatch</text>
-  </g>
-
-  <!-- Timestamp -->
-  <text x="940" y="770" text-anchor="end" font-size="10" fill="#6B7280">Updated: 2026-04-15</text>
-
+  <path d="M 160 148 L 160 172" stroke="#3B82F6" stroke-width="1.2" fill="none" marker-end="url(#arrow-blue)"/>
+  <path d="M 480 148 L 480 236" stroke="#10B981" stroke-width="1.2" fill="none" marker-end="url(#arrow-green)"/>
+  <path d="M 800 148 L 800 200 L 580 200 L 580 236" stroke="#F97316" stroke-width="1.2" fill="none" marker-end="url(#arrow-amber)"/>
+  <path d="M 160 228 L 160 260 L 350 260" stroke="#EF4444" stroke-width="1.2" fill="none" marker-end="url(#arrow-red)"/>
+  <path d="M 480 306 L 480 326" stroke="#8B5CF6" stroke-width="1.2" fill="none" marker-end="url(#arrow-purple)"/>
+  <path d="M 410 380 L 490 380" stroke="#94a3b8" stroke-width="1.0" fill="none" marker-end="url(#arrow)"/>
+  <text x="450" y="374" text-anchor="middle" font-size="6" fill="#94a3b8" font-weight="500">HTTPS</text>
+  <path d="M 630 408 L 630 428" stroke="#10B981" stroke-width="1.2" fill="none" marker-end="url(#arrow-green)"/>
+  <path d="M 490 408 L 470 408 L 470 444 L 410 444" stroke="#EF4444" stroke-width="1.0" fill="none" stroke-dasharray="4,2" marker-end="url(#arrow-red)"/>
+  <path d="M 630 490 L 630 498 L 300 498 L 300 506" stroke="#F97316" stroke-width="1.2" fill="none" marker-end="url(#arrow-amber)"/>
+  <text x="630" y="484" text-anchor="middle" font-size="6" fill="#F97316" font-weight="500">is_sandbox</text>
+  <path d="M 630 490 L 630 498 L 550 498 L 550 506" stroke="#3B82F6" stroke-width="1.2" fill="none" marker-end="url(#arrow-blue)"/>
+  <text x="590" y="484" text-anchor="middle" font-size="6" fill="#3B82F6" font-weight="500">user</text>
+  <path d="M 630 490 L 630 498 L 810 498 L 810 506" stroke="#EF4444" stroke-width="1.2" fill="none" marker-end="url(#arrow-red)"/>
+  <text x="630" y="484" text-anchor="middle" font-size="6" fill="#EF4444" font-weight="500">is_admin</text>
+  <text x="940" y="772" text-anchor="end" font-size="10" fill="#6B7280">Updated: 2026-04-15</text>
+  <!-- stats-updated: 2026-05-06 -->
 </svg>

@@ -1,4 +1,4 @@
-<!-- HAND-CRAFTED: Do not regenerate — this SVG is manually styled, not Mermaid-rendered -->
+<!-- HAND-CRAFTED: Do not regenerate — generated from docs/diagrams/cicd-pipeline.json by scripts/diagram_gen.py -->
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 950 530" font-family="Inter, system-ui, -apple-system, sans-serif">
   <defs>
     <marker id="arrow" viewBox="0 0 10 7" refX="10" refY="3.5" markerWidth="8" markerHeight="6" orient="auto-start-reverse">
@@ -7,154 +7,118 @@
     <marker id="arrow-red" viewBox="0 0 10 7" refX="10" refY="3.5" markerWidth="8" markerHeight="6" orient="auto-start-reverse">
       <path d="M 0 0 L 10 3.5 L 0 7 z" fill="#EF4444"/>
     </marker>
+    <marker id="arrow-blue" viewBox="0 0 10 7" refX="10" refY="3.5" markerWidth="8" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 3.5 L 0 7 z" fill="#3B82F6"/>
+    </marker>
+    <marker id="arrow-green" viewBox="0 0 10 7" refX="10" refY="3.5" markerWidth="8" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 3.5 L 0 7 z" fill="#10B981"/>
+    </marker>
+    <marker id="arrow-amber" viewBox="0 0 10 7" refX="10" refY="3.5" markerWidth="8" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 3.5 L 0 7 z" fill="#F97316"/>
+    </marker>
+    <marker id="arrow-purple" viewBox="0 0 10 7" refX="10" refY="3.5" markerWidth="8" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 3.5 L 0 7 z" fill="#8B5CF6"/>
+    </marker>
     <filter id="shadow">
       <feDropShadow dx="0" dy="1" stdDeviation="2" flood-color="#000" flood-opacity="0.06"/>
     </filter>
     <filter id="shadow-lg">
       <feDropShadow dx="0" dy="2" stdDeviation="3.5" flood-color="#000" flood-opacity="0.09"/>
     </filter>
+    <filter id="shadow-light">
+      <feDropShadow dx="0" dy="1" stdDeviation="1.5" flood-color="#000" flood-opacity="0.05"/>
+    </filter>
   </defs>
 
   <rect width="950" height="530" fill="#fafbfc"/>
-
-  <!-- Title -->
   <text x="475" y="28" text-anchor="middle" font-size="16" font-weight="700" fill="#1e293b" letter-spacing="0.4">CViper CI/CD Pipeline</text>
   <text x="475" y="43" text-anchor="middle" font-size="9.5" fill="#64748b">Automated quality gates from commit to deployment</text>
-
-  <!-- Gate Types Legend — top-right, larger -->
-  <g transform="translate(698, 54)">
-    <rect x="0" y="0" width="240" height="62" rx="6" fill="#ffffff" stroke="#e2e8f0" stroke-width="1" filter="url(#shadow)"/>
-    <text x="120" y="15" text-anchor="middle" font-size="9" font-weight="700" fill="#1e293b" letter-spacing="0.4">GATE TYPES</text>
-    <line x1="10" y1="22" x2="230" y2="22" stroke="#f1f5f9" stroke-width="1"/>
-    <circle cx="20" cy="34" r="4" fill="#10B981"/>
-    <text x="30" y="38" font-size="8" font-weight="600" fill="#065f46">HARD</text>
-    <text x="62" y="38" font-size="7.5" fill="#6b7280">blocks merge</text>
-    <circle cx="130" cy="34" r="4" fill="none" stroke="#F59E0B" stroke-width="1.5"/>
-    <text x="140" y="38" font-size="8" font-weight="600" fill="#92400e">SOFT</text>
-    <text x="170" y="38" font-size="7.5" fill="#6b7280">warns only</text>
-    <polygon points="20,48 24,52 20,56 16,52" fill="none" stroke="#8B5CF6" stroke-width="1.2"/>
-    <text x="30" y="55" font-size="8" font-weight="600" fill="#3730a3">ADVISORY</text>
-    <text x="82" y="55" font-size="7.5" fill="#6b7280">informational</text>
-  </g>
-
-  <!-- Horizontal swim-lane line across full width -->
   <line x1="14" y1="230" x2="936" y2="230" stroke="#e2e8f0" stroke-width="0.5" stroke-dasharray="6,3"/>
-
-  <!-- STAGE 1: Detect Changes -->
+  <text x="205" y="68" text-anchor="middle" font-size="8.5" font-weight="600" fill="#475569" letter-spacing="0.4">TESTS</text>
+  <text x="380" y="68" text-anchor="middle" font-size="8.5" font-weight="600" fill="#475569" letter-spacing="0.4">QUALITY &amp; SECURITY</text>
+  <text x="560" y="145" text-anchor="middle" font-size="8.5" font-weight="600" fill="#475569" letter-spacing="0.4">INTEGRATION</text>
   <g filter="url(#shadow)">
     <rect x="14" y="178" width="96" height="74" rx="8" fill="#f1f5f9" stroke="#64748b" stroke-width="1.5"/>
-    <text x="62" y="199" text-anchor="middle" font-size="9.5" font-weight="600" fill="#334155">Detect Changes</text>
-    <line x1="28" y1="205" x2="96" y2="205" stroke="#cbd5e1" stroke-width="0.5"/>
-    <text x="62" y="220" text-anchor="middle" font-size="8" fill="#64748b">paths-filter</text>
-    <text x="62" y="233" text-anchor="middle" font-size="7" fill="#94a3b8">backend / frontend</text>
+    <text x="62" y="197" text-anchor="middle" font-size="9.5" font-weight="600" fill="#334155">Detect Changes</text>
+    <text x="62" y="214" text-anchor="middle" font-size="7" fill="#6b7280">paths-filter</text>
+    <text x="62" y="226" text-anchor="middle" font-size="6.5" fill="#94a3b8">backend / frontend</text>
   </g>
-
-  <!-- STAGE 2: Tests -->
-  <text x="205" y="68" text-anchor="middle" font-size="8.5" font-weight="600" fill="#475569" letter-spacing="0.4">TESTS</text>
-
-  <!-- Backend Tests -->
   <g filter="url(#shadow)">
     <rect x="140" y="78" width="130" height="68" rx="8" fill="#ecfdf5" stroke="#10B981" stroke-width="1.5"/>
     <text x="205" y="97" text-anchor="middle" font-size="9.5" font-weight="600" fill="#065f46">Backend Tests</text>
     <circle cx="176" cy="109" r="4" fill="#10B981"/>
-    <text x="186" y="113" font-size="8" fill="#10B981" font-weight="600">HARD</text>
+    <text x="186" y="113" font-size="8" font-weight="600" fill="#10B981">HARD</text>
     <text x="205" y="124" text-anchor="middle" font-size="7" fill="#6b7280">9 test areas + coverage</text>
-    <text x="205" y="136" text-anchor="middle" font-size="6.5" fill="#94a3b8">pytest &#xB7; 6,700+ tests</text>
+    <text x="205" y="136" text-anchor="middle" font-size="6.5" fill="#94a3b8">pytest · 6,800+ tests</text>
   </g>
-
-  <!-- Frontend Tests -->
   <g filter="url(#shadow)">
     <rect x="140" y="158" width="130" height="68" rx="8" fill="#ecfdf5" stroke="#10B981" stroke-width="1.5"/>
     <text x="205" y="177" text-anchor="middle" font-size="9.5" font-weight="600" fill="#065f46">Frontend Tests</text>
     <circle cx="176" cy="189" r="4" fill="#10B981"/>
-    <text x="186" y="193" font-size="8" fill="#10B981" font-weight="600">HARD</text>
+    <text x="186" y="193" font-size="8" font-weight="600" fill="#10B981">HARD</text>
     <text x="205" y="204" text-anchor="middle" font-size="7" fill="#6b7280">5 test areas + coverage</text>
-    <text x="205" y="216" text-anchor="middle" font-size="6.5" fill="#94a3b8">Vitest &#xB7; 2,700+ tests</text>
+    <text x="205" y="216" text-anchor="middle" font-size="6.5" fill="#94a3b8">Vitest · 2,700+ tests</text>
   </g>
-
-  <!-- E2E Tests -->
   <g filter="url(#shadow)">
     <rect x="140" y="238" width="130" height="68" rx="8" fill="#fffbeb" stroke="#F59E0B" stroke-width="1.5"/>
     <text x="205" y="257" text-anchor="middle" font-size="9.5" font-weight="600" fill="#92400e">E2E Tests</text>
-    <circle cx="176" cy="269" r="4" fill="none" stroke="#F59E0B" stroke-width="1.5"/>
-    <text x="186" y="273" font-size="8" fill="#F59E0B" font-weight="600">SOFT</text>
-    <text x="205" y="284" text-anchor="middle" font-size="7" fill="#6b7280">Playwright &#xB7; Chromium</text>
+    <circle cx="176" cy="269" r="4" fill="#F59E0B" stroke="#F59E0B" stroke-width="1.5"/>
+    <text x="186" y="273" font-size="8" font-weight="600" fill="#F59E0B">SOFT</text>
+    <text x="205" y="284" text-anchor="middle" font-size="7" fill="#6b7280">Playwright · Chromium</text>
     <text x="205" y="296" text-anchor="middle" font-size="6.5" fill="#94a3b8">warns on failure</text>
   </g>
-
-  <!-- STAGE 3: Quality and Security -->
-  <text x="380" y="68" text-anchor="middle" font-size="8.5" font-weight="600" fill="#475569" letter-spacing="0.4">QUALITY &amp; SECURITY</text>
-
-  <!-- Code Quality -->
   <g filter="url(#shadow)">
     <rect x="305" y="78" width="150" height="50" rx="8" fill="#eef2ff" stroke="#8B5CF6" stroke-width="1.5"/>
     <text x="380" y="96" text-anchor="middle" font-size="9.5" font-weight="600" fill="#3730a3">Code Quality</text>
-    <polygon points="338,107 342,111 338,115 334,111" fill="none" stroke="#8B5CF6" stroke-width="1.2"/>
-    <text x="348" y="114" font-size="8" fill="#8B5CF6" font-weight="600">ADV</text>
-    <text x="415" y="114" text-anchor="middle" font-size="7" fill="#6b7280">flake8 &#xB7; ESLint &#xB7; depcheck</text>
+    <polygon points="336,104 340,108 336,112 332,108" fill="#8B5CF6" stroke="#8B5CF6" stroke-width="1.2"/>
+    <text x="346" y="112" font-size="8" font-weight="600" fill="#8B5CF6">ADV</text>
+    <text x="450" y="112" text-anchor="end" font-size="7" fill="#6b7280">flake8 · ESLint · depcheck</text>
   </g>
-
-  <!-- Docs Drift -->
   <g filter="url(#shadow)">
     <rect x="305" y="138" width="150" height="50" rx="8" fill="#ecfdf5" stroke="#10B981" stroke-width="1.5"/>
     <text x="380" y="156" text-anchor="middle" font-size="9.5" font-weight="600" fill="#065f46">Docs Drift</text>
     <circle cx="336" cy="168" r="4" fill="#10B981"/>
-    <text x="346" y="172" font-size="8" fill="#10B981" font-weight="600">HARD</text>
-    <text x="415" y="172" text-anchor="middle" font-size="7" fill="#6b7280">stats &#xB7; exports &#xB7; deps</text>
+    <text x="346" y="172" font-size="8" font-weight="600" fill="#10B981">HARD</text>
+    <text x="450" y="172" text-anchor="end" font-size="7" fill="#6b7280">stats · exports · deps</text>
   </g>
-
-  <!-- Security SCA -->
   <g filter="url(#shadow)">
     <rect x="305" y="198" width="150" height="50" rx="8" fill="#fef2f2" stroke="#EF4444" stroke-width="1.5"/>
     <text x="380" y="216" text-anchor="middle" font-size="9.5" font-weight="600" fill="#9f1239">Security SCA</text>
     <circle cx="336" cy="228" r="4" fill="none" stroke="#EF4444" stroke-width="1.5"/>
-    <text x="346" y="232" font-size="8" fill="#EF4444" font-weight="600">SOFT</text>
-    <text x="420" y="232" text-anchor="middle" font-size="7" fill="#6b7280">pip-audit &#xB7; npm audit</text>
+    <text x="346" y="232" font-size="8" font-weight="600" fill="#EF4444">SOFT</text>
+    <text x="450" y="232" text-anchor="end" font-size="7" fill="#6b7280">pip-audit · npm audit</text>
   </g>
-
-  <!-- Security SAST -->
   <g filter="url(#shadow)">
     <rect x="305" y="258" width="150" height="50" rx="8" fill="#fef2f2" stroke="#EF4444" stroke-width="1.5"/>
     <text x="380" y="276" text-anchor="middle" font-size="9.5" font-weight="600" fill="#9f1239">Security SAST</text>
     <circle cx="336" cy="288" r="4" fill="none" stroke="#EF4444" stroke-width="1.5"/>
-    <text x="346" y="292" font-size="8" fill="#EF4444" font-weight="600">SOFT</text>
-    <text x="420" y="292" text-anchor="middle" font-size="7" fill="#6b7280">Snyk &#xB7; secrets &#xB7; SSRF</text>
+    <text x="346" y="292" font-size="8" font-weight="600" fill="#EF4444">SOFT</text>
+    <text x="450" y="292" text-anchor="end" font-size="7" fill="#6b7280">Snyk · secrets · SSRF</text>
   </g>
-
-  <!-- STAGE 4: Integration -->
-  <text x="560" y="145" text-anchor="middle" font-size="8.5" font-weight="600" fill="#475569" letter-spacing="0.4">INTEGRATION</text>
-
-  <!-- Integration Smoke -->
   <g filter="url(#shadow)">
     <rect x="498" y="155" width="124" height="68" rx="8" fill="#eff6ff" stroke="#3B82F6" stroke-width="1.5"/>
     <text x="560" y="174" text-anchor="middle" font-size="9.5" font-weight="600" fill="#1e40af">Integration Smoke</text>
-    <circle cx="534" cy="186" r="4" fill="#10B981"/>
-    <text x="544" y="190" font-size="8" fill="#10B981" font-weight="600">HARD</text>
-    <text x="560" y="201" text-anchor="middle" font-size="7" fill="#6b7280">start backend &#xB7; hit endpoints</text>
+    <circle cx="531" cy="186" r="4" fill="#10B981"/>
+    <text x="541" y="190" font-size="8" font-weight="600" fill="#10B981">HARD</text>
+    <text x="560" y="201" text-anchor="middle" font-size="7" fill="#6b7280">start backend · hit endpoints</text>
     <text x="560" y="213" text-anchor="middle" font-size="6.5" fill="#94a3b8">live API verification</text>
   </g>
-
-  <!-- Docker Smoke -->
   <g filter="url(#shadow)">
     <rect x="498" y="235" width="124" height="68" rx="8" fill="#eff6ff" stroke="#3B82F6" stroke-width="1.5"/>
     <text x="560" y="254" text-anchor="middle" font-size="9.5" font-weight="600" fill="#1e40af">Docker Smoke</text>
-    <circle cx="534" cy="266" r="4" fill="#10B981"/>
-    <text x="544" y="270" font-size="8" fill="#10B981" font-weight="600">HARD</text>
-    <text x="560" y="281" text-anchor="middle" font-size="7" fill="#6b7280">build &#xB7; boot container</text>
+    <circle cx="531" cy="266" r="4" fill="#10B981"/>
+    <text x="541" y="270" font-size="8" font-weight="600" fill="#10B981">HARD</text>
+    <text x="560" y="281" text-anchor="middle" font-size="7" fill="#6b7280">build · boot container</text>
     <text x="560" y="293" text-anchor="middle" font-size="6.5" fill="#94a3b8">container health check</text>
   </g>
-
-  <!-- STAGE 5: Summary -->
   <g filter="url(#shadow-lg)">
     <rect x="665" y="193" width="115" height="68" rx="8" fill="#f5f3ff" stroke="#8B5CF6" stroke-width="2"/>
-    <text x="722" y="215" text-anchor="middle" font-size="10" font-weight="700" fill="#5b21b6">CI Summary</text>
-    <circle cx="696" cy="227" r="4" fill="#10B981"/>
-    <text x="706" y="231" font-size="8" fill="#10B981" font-weight="600">HARD</text>
-    <text x="722" y="242" text-anchor="middle" font-size="7" fill="#6b7280">aggregate all results</text>
-    <text x="722" y="254" text-anchor="middle" font-size="6.5" fill="#94a3b8">merge gate</text>
+    <text x="722.5" y="212" text-anchor="middle" font-size="9.5" font-weight="600" fill="#5b21b6">CI Summary</text>
+    <circle cx="693.5" cy="224" r="4" fill="#10B981"/>
+    <text x="703.5" y="228" font-size="8" font-weight="600" fill="#10B981">HARD</text>
+    <text x="722.5" y="239" text-anchor="middle" font-size="7" fill="#6b7280">aggregate all results</text>
+    <text x="722.5" y="251" text-anchor="middle" font-size="6.5" fill="#94a3b8">merge gate</text>
   </g>
-
-  <!-- STAGE 6: Deploy — with MANUAL GATE badge -->
   <g filter="url(#shadow-lg)">
     <rect x="825" y="193" width="108" height="68" rx="8" fill="#fef2f2" stroke="#EF4444" stroke-width="2.5"/>
     <rect x="840" y="198" width="78" height="14" rx="4" fill="#EF4444" opacity="0.15"/>
@@ -163,60 +127,30 @@
     <text x="879" y="245" text-anchor="middle" font-size="6.5" fill="#94a3b8">Container Apps</text>
     <rect x="854" y="251" width="50" height="4" rx="2" fill="#fecaca"/>
   </g>
-
-  <!-- ARROWS: Stage 1 → Stage 2 (fan-out, endpoints at box edges) -->
-  <path d="M 110 195 L 128 195 L 128 112 L 140 112" stroke="#94a3b8" stroke-width="1.1" fill="none" marker-end="url(#arrow)"/>
-  <line x1="110" y1="215" x2="140" y2="215" stroke="#94a3b8" stroke-width="1.1" marker-end="url(#arrow)"/>
-  <path d="M 110 235 L 128 235 L 128 272 L 140 272" stroke="#94a3b8" stroke-width="1.1" fill="none" marker-end="url(#arrow)"/>
-
-  <!-- ARROW: Stage 1 → Stage 3 (routed below Tests column) -->
-  <path d="M 62 252 L 62 320 L 290 320 L 290 283 L 303 283" stroke="#94a3b8" stroke-width="0.9" fill="none" stroke-dasharray="4,2" marker-end="url(#arrow)"/>
-  <!-- Parallel badge (above the dashed bracket path at y=320) -->
-  <rect x="146" y="306" width="48" height="14" rx="4" fill="#8B5CF6" opacity="0.1" stroke="#8B5CF6" stroke-width="0.6"/>
-  <text x="170" y="316" text-anchor="middle" font-size="6.5" font-weight="600" fill="#7c3aed">parallel</text>
-
-  <!-- ARROW: Backend Tests → Integration Smoke (right edge x=270 → left edge x=498) -->
-  <path d="M 270 112 L 282 112 L 282 72 L 488 72 L 488 189 L 498 189" stroke="#94a3b8" stroke-width="1.0" fill="none" marker-end="url(#arrow)"/>
-
-  <!-- ARROW: E2E → Docker Smoke + CI Summary -->
-  <path d="M 270 272 L 282 272 L 282 384 L 488 384 L 488 269 L 498 269" stroke="#94a3b8" stroke-width="0.9" fill="none" marker-end="url(#arrow)"/>
-  <path d="M 488 384 L 652 384 L 652 240 L 665 240" stroke="#94a3b8" stroke-width="0.9" fill="none" marker-end="url(#arrow)"/>
-  <circle cx="488" cy="384" r="2" fill="#94a3b8"/>
-
-  <!-- ARROW: Stage 3 → Stage 5 (right edge x=455 → left edge x=665) -->
-  <path d="M 455 229 L 665 229" stroke="#94a3b8" stroke-width="0.9" fill="none" marker-end="url(#arrow)"/>
-
-  <!-- ARROWS: Stage 4 → Stage 5 (right edge x=622 → left edge x=665) -->
-  <path d="M 622 200 L 636 200 L 636 227 L 665 227" stroke="#94a3b8" stroke-width="1.1" fill="none" marker-end="url(#arrow)"/>
-  <path d="M 622 255 L 636 255 L 636 227" stroke="#94a3b8" stroke-width="1.1" fill="none"/>
-
-  <!-- ARROW: Stage 5 → Stage 6 (dashed, right edge x=780 → left edge x=825) -->
-  <line x1="780" y1="227" x2="825" y2="227" stroke="#EF4444" stroke-width="1.5" stroke-dasharray="5,3" marker-end="url(#arrow-red)"/>
-  <text x="801" y="221" text-anchor="middle" font-size="6" fill="#EF4444" font-weight="500">manual</text>
-
-  <!-- Stage labels — 11px bold with coloured strip -->
+  <path d="M 110 216 L 124 216 L 124 112 L 140 112" stroke="#94a3b8" stroke-width="1.1" fill="none" marker-end="url(#arrow)"/>
+  <path d="M 110 216 L 124 216 L 124 192 L 140 192" stroke="#94a3b8" stroke-width="1.1" fill="none" marker-end="url(#arrow)"/>
+  <path d="M 110 216 L 124 216 L 124 272 L 140 272" stroke="#94a3b8" stroke-width="1.1" fill="none" marker-end="url(#arrow)"/>
+  <path d="M 62 252 L 62 320 L 290 320 L 290 284 L 304 284" stroke="#94a3b8" stroke-width="0.9" fill="none" stroke-dasharray="4,2" marker-end="url(#arrow)"/>
+  <path d="M 270 112 L 282 112 L 282 72 L 488 72 L 488 188 L 498 188" stroke="#94a3b8" stroke-width="1.0" fill="none" marker-end="url(#arrow)"/>
+  <path d="M 270 272 L 282 272 L 282 384 L 488 384 L 488 268 L 498 268" stroke="#94a3b8" stroke-width="0.9" fill="none" marker-end="url(#arrow)"/>
+  <path d="M 456 228 L 560 228 L 560 228 L 664 228" stroke="#94a3b8" stroke-width="0.9" fill="none" marker-end="url(#arrow)"/>
+  <path d="M 622 200 L 636 200 L 636 228 L 664 228" stroke="#94a3b8" stroke-width="1.1" fill="none" marker-end="url(#arrow)"/>
+  <path d="M 622 256 L 628 256 L 628 228 L 636 228" stroke="#94a3b8" stroke-width="1.1" fill="none"/>
+  <path d="M 780 228 L 824 228" stroke="#EF4444" stroke-width="1.5" fill="none" stroke-dasharray="5,3" marker-end="url(#arrow-red)"/>
+  <text x="802.5" y="221" text-anchor="middle" font-size="6" fill="#EF4444" font-weight="500">manual</text>
   <rect x="14" y="410" width="96" height="3" rx="1.5" fill="#64748b" opacity="0.3"/>
   <text x="62" y="428" text-anchor="middle" font-size="7.5" font-weight="700" fill="#475569" letter-spacing="0.4">STAGE 1</text>
-
   <rect x="140" y="410" width="130" height="3" rx="1.5" fill="#10B981" opacity="0.3"/>
   <text x="205" y="428" text-anchor="middle" font-size="7.5" font-weight="700" fill="#475569" letter-spacing="0.4">STAGE 2</text>
-
   <rect x="305" y="410" width="150" height="3" rx="1.5" fill="#EF4444" opacity="0.3"/>
   <text x="380" y="428" text-anchor="middle" font-size="7.5" font-weight="700" fill="#475569" letter-spacing="0.4">STAGE 3</text>
-
   <rect x="498" y="410" width="124" height="3" rx="1.5" fill="#3B82F6" opacity="0.3"/>
   <text x="560" y="428" text-anchor="middle" font-size="7.5" font-weight="700" fill="#475569" letter-spacing="0.4">STAGE 4</text>
-
   <rect x="665" y="410" width="115" height="3" rx="1.5" fill="#8B5CF6" opacity="0.3"/>
-  <text x="722" y="428" text-anchor="middle" font-size="7.5" font-weight="700" fill="#475569" letter-spacing="0.4">STAGE 5</text>
-
+  <text x="722.5" y="428" text-anchor="middle" font-size="7.5" font-weight="700" fill="#475569" letter-spacing="0.4">STAGE 5</text>
   <rect x="825" y="410" width="108" height="3" rx="1.5" fill="#EF4444" opacity="0.3"/>
   <text x="879" y="428" text-anchor="middle" font-size="7.5" font-weight="700" fill="#475569" letter-spacing="0.4">STAGE 6</text>
-
-  <!-- Flow direction -->
-  <text x="380" y="500" text-anchor="middle" font-size="7" fill="#cbd5e1">Commit &#x2192; Test &#x2192; Verify &#x2192; Gate &#x2192; Deploy</text>
-
-  <!-- Timestamp -->
+  <text x="475" y="500" text-anchor="middle" font-size="7" fill="#cbd5e1">Commit → Test → Verify → Gate → Deploy</text>
   <text x="930" y="522" text-anchor="end" font-size="10" fill="#6B7280">Updated: 2026-04-15</text>
-  <!-- stats-updated: 2026-05-01 -->
+  <!-- stats-updated: 2026-05-06 -->
 </svg>
