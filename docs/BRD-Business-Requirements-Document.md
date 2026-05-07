@@ -267,7 +267,7 @@ CViper addresses these pain points through automation, AI analysis, and a unifie
 | BR-028 | The production database shall use Azure Database for PostgreSQL Flexible Server to support concurrent multi-user access, managed backups, and horizontal scalability | Must Have | Infrastructure |
 | BR-029 | All cloud infrastructure shall be defined as Infrastructure-as-Code using Azure Bicep templates, enabling repeatable, auditable deployments from a single command | Must Have | DevOps |
 | BR-030 | Production deployments shall require manual approval via a workflow_dispatch-triggered GitHub Actions workflow, with a preflight check that verifies CI has passed on the target commit | Must Have | DevOps |
-| BR-031 | The application shall be accessible via a custom domain (cviper.uk) with a managed SSL certificate, deployed to Azure Container Apps in UK South for data residency compliance | Must Have | Infrastructure |
+| BR-031 | The application shall be accessible via a custom domain (cviper.ai) with a managed SSL certificate, deployed to Azure Container Apps in UK South for data residency compliance | Must Have | Infrastructure |
 | BR-032 | The system shall enforce complete data isolation between users: every data table with a `user_id` column shall filter queries by the authenticated user, preventing cross-user data leakage | Must Have | Security |
 | BR-033 | User sessions shall enforce idle timeout (default: 60 minutes) in addition to absolute expiry, and cookies shall support the `Secure` flag for HTTPS deployments | Must Have | Security |
 | BR-034 | Users shall be able to configure their own AI provider API keys, which are resolved per-request (user key → server default fallback) without affecting other users | Should Have | Security |

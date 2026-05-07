@@ -2,7 +2,7 @@
 
 **Version:** 1.0
 **Effective date:** April 2026
-**Service:** CViper — https://cviper.uk
+**Service:** CViper — https://cviper.ai
 
 > **⚠️ This document has not yet been reviewed by a qualified solicitor.**
 > It is a good-faith template written by the service operator to describe
@@ -21,7 +21,7 @@
 
 By creating an account, signing in via an OAuth provider (Google, Microsoft, LinkedIn), or using the demo mode, you agree to these Terms of Service (the **"Terms"**) and the [Privacy Policy](./PRIVACY_POLICY.md). If you do not agree, do not use the service.
 
-These Terms apply to **CViper** (the **"Service"**), operated from the United Kingdom and accessed via https://cviper.uk.
+These Terms apply to **CViper** (the **"Service"**), operated from the United Kingdom and accessed via https://cviper.ai.
 
 ## 2. Who Can Use the Service
 
@@ -35,7 +35,7 @@ You are responsible for:
 
 - Keeping your password and API keys confidential.
 - All activity that occurs under your account.
-- Notifying us immediately if you suspect unauthorised access: [security@cviper.uk](mailto:security@cviper.uk).
+- Notifying us immediately if you suspect unauthorised access: [security@cviper.ai](mailto:security@cviper.ai).
 
 We may suspend or terminate accounts that violate these Terms, attempt to bypass rate limits, or put other users at risk.
 
@@ -142,6 +142,6 @@ These Terms are governed by the laws of **England and Wales**. Any dispute arisi
 
 ## 15. Contact
 
-For questions about these Terms, contact us at [support@cviper.uk](mailto:support@cviper.uk).
+For questions about these Terms, contact us at [support@cviper.ai](mailto:support@cviper.ai).
 
 Complaints about data handling should be directed to the Information Commissioner's Office (ICO) at [ico.org.uk](https://ico.org.uk) — see the [Privacy Policy](./PRIVACY_POLICY.md) for details.

@@ -1785,7 +1785,7 @@ User ──1:N──> SandboxEvent
 ### 7.1 Base URL
 
 - **Development**: `http://localhost:8000/api`
-- **Production**: `https://cviper.uk/api` (proxied via frontend nginx to internal backend)
+- **Production**: `https://cviper.ai/api` (proxied via frontend nginx to internal backend)
 - **Frontend Config**: `VITE_API_BASE` environment variable
 
 ### 7.2 Authentication
@@ -2594,7 +2594,7 @@ key_source, username, role
 |-------------|---------|-----|--------|
 | **Local Dev** | Development and testing | localhost:3000 (FE) / localhost:8000 (BE) | .env file, SQLite local |
 | **CI** | Automated testing | GitHub Actions runners | In-memory SQLite (unit tests), PostgreSQL 16 service container (schema drift checks), mocked AI |
-| **Production** | Live deployment | https://cviper.uk | Azure Container Apps, PostgreSQL, Bicep IaC |
+| **Production** | Live deployment | https://cviper.ai | Azure Container Apps, PostgreSQL, Bicep IaC |
 
 ### 11.2 Docker Configuration
 
@@ -2649,7 +2649,7 @@ key_source, username, role
 
 **Infrastructure-as-Code**: `azure/container-apps.bicep` — single Bicep template defining all resources, deployed via `az deployment group create`.
 
-**Custom Domain**: `cviper.uk` with Azure-managed SSL certificate (auto-renewing), bound to frontend Container App.
+**Custom Domain**: `cviper.ai` with Azure-managed SSL certificate (auto-renewing), bound to frontend Container App.
 
 **Database Migrations**: Alembic (`backend/alembic/`) manages PostgreSQL schema. Migrations use `batch_alter_table()` context manager for SQLite compatibility (copy-and-move strategy for ALTER TABLE operations). Schema drift is validated in CI via a PostgreSQL 16 service container running `alembic upgrade head` followed by `alembic check`. Production migrations run from GitHub Actions with temporary firewall rules for runner IP access.
 

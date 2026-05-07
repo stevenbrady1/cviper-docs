@@ -400,7 +400,7 @@ kill -9 <PID>
 - **[Privacy Policy](docs/PRIVACY_POLICY.md)** — data collection, lawful bases, GDPR rights, AI disclaimer
 - **[Terms of Service](docs/TERMS_OF_SERVICE.md)** — acceptable use, third-party services, limitation of liability
 
-Both documents are also reachable in-app via **Settings → Privacy & Data** or directly at `https://cviper.uk/?tab=privacy` and `https://cviper.uk/?tab=terms`.
+Both documents are also reachable in-app via **Settings → Privacy & Data** or directly at `https://cviper.ai/?tab=privacy` and `https://cviper.ai/?tab=terms`.
 
 ## License
 

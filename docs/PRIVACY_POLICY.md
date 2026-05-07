@@ -2,7 +2,7 @@
 
 **Version:** 1.1
 **Last updated:** April 2026
-**Service:** CViper — https://cviper.uk
+**Service:** CViper — https://cviper.ai
 
 > This document is the canonical Privacy Policy for CViper. The in-app
 > copy at [`frontend/src/components/PrivacyPolicy.jsx`](../frontend/src/components/PrivacyPolicy.jsx)
@@ -16,7 +16,7 @@
 
 CViper is a job search management application. When you use CViper, you are the data controller for the personal data you enter. The application operator provides the infrastructure and processing capabilities.
 
-**Contact:** [support@cviper.uk](mailto:support@cviper.uk)
+**Contact:** [support@cviper.ai](mailto:support@cviper.ai)
 
 ## 2. Data We Collect
 
@@ -105,6 +105,6 @@ We will update this policy when our data practices change. The version number an
 
 ## 12. Contact & Complaints
 
-For privacy questions or to exercise your rights, contact us at [privacy@cviper.uk](mailto:privacy@cviper.uk).
+For privacy questions or to exercise your rights, contact us at [privacy@cviper.ai](mailto:privacy@cviper.ai).
 
 You also have the right to lodge a complaint with the Information Commissioner's Office (ICO) at [ico.org.uk](https://ico.org.uk).
