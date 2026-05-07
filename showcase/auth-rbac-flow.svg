@@ -132,6 +132,52 @@
     <text x="726" y="550" font-size="7" fill="#6b7280">Admin panel · Audit logs · User mgmt</text>
     <text x="726" y="562" font-size="7" fill="#6b7280">Can view all user data</text>
   </g>
+  <g filter="url(#shadow)">
+    <rect x="200" y="590" width="500" height="42" rx="8" fill="#fef2f2" stroke="#EF4444" stroke-width="1.5"/>
+    <rect x="200" y="590" width="500" height="18" rx="8" fill="#EF4444" opacity="0.08"/>
+    <text x="216" y="604" font-size="10" font-weight="700" fill="#EF4444">Data Isolation (P0 Rule)</text>
+    <text x="216" y="622" font-size="7" fill="#6b7280">repo.get_*/list_* scoped by user_id  ·  State resets on switch  ·  localStorage per user</text>
+  </g>
+  <g filter="url(#shadow-light)">
+    <rect x="20" y="646" width="920" height="100" rx="8" fill="#f1f5f9" stroke="#64748b" stroke-width="1.5"/>
+    <text x="480" y="666" text-anchor="middle" font-size="11" font-weight="700" fill="#334155">Security Controls</text>
+  </g>
+  <g filter="url(#shadow-light)">
+    <rect x="36" y="678" width="126" height="50" rx="8" fill="#fef2f2" stroke="#EF4444" stroke-width="1.5"/>
+    <text x="99" y="697" text-anchor="middle" font-size="9.5" font-weight="600" fill="#9f1239">Account Lockout</text>
+    <text x="99" y="714" text-anchor="middle" font-size="7" fill="#6b7280">5 failed attempts</text>
+    <text x="99" y="726" text-anchor="middle" font-size="6.5" fill="#94a3b8">15-min cooldown</text>
+  </g>
+  <g filter="url(#shadow-light)">
+    <rect x="176" y="678" width="126" height="50" rx="8" fill="#fef2f2" stroke="#EF4444" stroke-width="1.5"/>
+    <text x="239" y="697" text-anchor="middle" font-size="9.5" font-weight="600" fill="#9f1239">Rate Limiting</text>
+    <text x="239" y="714" text-anchor="middle" font-size="7" fill="#6b7280">Login: 5/min</text>
+    <text x="239" y="726" text-anchor="middle" font-size="6.5" fill="#94a3b8">AI: 30/min</text>
+  </g>
+  <g filter="url(#shadow-light)">
+    <rect x="316" y="678" width="126" height="50" rx="8" fill="#fef2f2" stroke="#EF4444" stroke-width="1.5"/>
+    <text x="379" y="697" text-anchor="middle" font-size="9.5" font-weight="600" fill="#9f1239">CSRF Protection</text>
+    <text x="379" y="714" text-anchor="middle" font-size="7" fill="#6b7280">Double-submit cookie</text>
+    <text x="379" y="726" text-anchor="middle" font-size="6.5" fill="#94a3b8">On all mutations</text>
+  </g>
+  <g filter="url(#shadow-light)">
+    <rect x="456" y="678" width="126" height="50" rx="8" fill="#fef2f2" stroke="#EF4444" stroke-width="1.5"/>
+    <text x="519" y="697" text-anchor="middle" font-size="9.5" font-weight="600" fill="#9f1239">Session Mgmt</text>
+    <text x="519" y="714" text-anchor="middle" font-size="7" fill="#6b7280">JWT + refresh token</text>
+    <text x="519" y="726" text-anchor="middle" font-size="6.5" fill="#94a3b8">Token hash in DB</text>
+  </g>
+  <g filter="url(#shadow-light)">
+    <rect x="596" y="678" width="126" height="50" rx="8" fill="#fef2f2" stroke="#EF4444" stroke-width="1.5"/>
+    <text x="659" y="697" text-anchor="middle" font-size="9.5" font-weight="600" fill="#9f1239">Audit Logging</text>
+    <text x="659" y="714" text-anchor="middle" font-size="7" fill="#6b7280">All API mutations</text>
+    <text x="659" y="726" text-anchor="middle" font-size="6.5" fill="#94a3b8">Structured events</text>
+  </g>
+  <g filter="url(#shadow-light)">
+    <rect x="736" y="678" width="126" height="50" rx="8" fill="#fef2f2" stroke="#EF4444" stroke-width="1.5"/>
+    <text x="799" y="697" text-anchor="middle" font-size="9.5" font-weight="600" fill="#9f1239">Anomaly Detection</text>
+    <text x="799" y="714" text-anchor="middle" font-size="7" fill="#6b7280">Login velocity</text>
+    <text x="799" y="726" text-anchor="middle" font-size="6.5" fill="#94a3b8">Fingerprint mismatch</text>
+  </g>
   <path d="M 160 148 L 160 172" stroke="#3B82F6" stroke-width="1.2" fill="none" marker-end="url(#arrow-blue)"/>
   <path d="M 480 148 L 480 236" stroke="#10B981" stroke-width="1.2" fill="none" marker-end="url(#arrow-green)"/>
   <path d="M 800 148 L 800 200 L 580 200 L 580 236" stroke="#F97316" stroke-width="1.2" fill="none" marker-end="url(#arrow-amber)"/>
@@ -148,5 +194,5 @@
   <path d="M 630 490 L 630 498 L 810 498 L 810 506" stroke="#EF4444" stroke-width="1.2" fill="none" marker-end="url(#arrow-red)"/>
   <text x="630" y="484" text-anchor="middle" font-size="6" fill="#EF4444" font-weight="500">is_admin</text>
   <text x="940" y="772" text-anchor="end" font-size="10" fill="#6B7280">Updated: 2026-04-15</text>
-  <!-- stats-updated: 2026-05-06 -->
+  <!-- stats-updated: 2026-05-07 -->
 </svg>
