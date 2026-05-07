@@ -1,7 +1,7 @@
 # Requirements Traceability Matrix (RTM)
 
 **Document ID**: RTM-CVIPER-001
-**Version**: 0.6.3
+**Version**: 0.6.4
 **Date**: 2026-05-07
 **Status**: Active
 

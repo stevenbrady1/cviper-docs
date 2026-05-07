@@ -7,6 +7,54 @@ This project uses [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
 
+## [0.6.4] - 2026-05-07
+
+### Changed
+
+- **Cross-app header consistency — single source of truth** (commit `f1882618`). Every standardised top-level tab (CV Analysis, Job Search, Applications, Settings, Admin, Companies, Career Insights, Skills, News Feed, FAQ, My Requests — 11 in total) now renders its title / subtitle / AI-pill via a single `<PageHeader>` component at [`frontend/src/components/PageHeader.jsx`](frontend/src/components/PageHeader.jsx). Replaces ~10-25 lines of hand-rolled JSX per tab with one element. Drift becomes structurally impossible because the rendering is owned by one component. Pattern parallels Rule #57 (showcase SVGs are JSON-generated) and Rule #56 (`_*_to_dict` serialiser contracts) — structural fix + forbid-list contract.
+
+- **Insights tabs cleanup completed** (commits `edd2cfd2`, `3bfc6040`, `f7a3963b`, `0dccfdb3`, `a6c92f17`).
+  - Companies & Salary Estimates: AI provider attribution standardised on the slim `Powered by …` pill (replacing the legacy fat radio-tile picker — last surviving caller of that legacy component, now removed); UK Regional Salary Comparison normalised to standard `.card` markup (NOT AI-powered, no AI star added); filter selects + bulk actions merged into the Estimates Table card-header (was a floating sibling card); Market Benchmarks moved to the bottom of the page (reference data, hoisted via `marketBenchmarksBlock` const).
+  - Career Insights / Skills / News Feed: standard `<PageHeader>` pattern. News Feed compact gradient strip removed; Refresh button absolute-positioned top-right (`rightSlot` prop); generated-at footer caption restored.
+  - Skills hero is dismissible (localStorage `cviper_skills_hero_dismissed`) with a "What's this?" inline link in the subtitle to restore. Reclaims ~250px above the fold for returning users.
+  - FAQ + My Requests headers standardised.
+
+- **Mobile experience cleanup** (commits `a5e1effc`, `9e12aa81`, `e79a2baf`). StatusBar pinned to bottom on mobile (above mobile-bottom-nav with `safe-area-inset-bottom`); Search action buttons inline side-by-side; Search Source Results detail card default-collapsed; Help & Feedback FAB visually recedes (0.7 opacity, full on hover/focus/tap); tighter mobile card padding; redundant "search complete" success toast removed (sticky in-page banner already conveys this); duplicate "Search LinkedIn" header button removed.
+
+- **Job Search structural overhaul** (commits `4f530bf3`, `6558fdff`). Search Criteria card split into three structurally honest cards: Search Criteria (location, salary, titles, filters that drive the search), Match Scoring (CV Skills used to rank returned jobs, with explicit "does not affect what's searched" sub-line), Job Sources (boards + direct employers). Asymmetric default behaviour between Job Titles (opt-in) and CV Skills (opt-out) is now self-documenting via purpose-lines. Health-dot legend hoisted to Job Sources level so a single key serves both grids.
+
+- **Direct Employers parity fixes** (commits `80c65d6d`, `2cf0f1ab`). Favourites now sort to the top of the grid (mirrors Job Boards behaviour); industry-dropdown count matches the rendered grid for any combination of filter flags (single-source-of-truth predicate in `companyBoardVisibility.js` + 15-permutation parity contract).
+
+- **Readiness badge labels** (commit `2e3684d8`). Apply Now → Strong Match, Tailor CV → Needs Tailoring, Upskill → Skills Gap. Purely descriptive adjective phrases; no longer reads as a clickable button.
+
+### Fixed
+
+- **Empty env-var crash class — 22 sites + CI contract** (commit `6921a085`). The CV-241 nightly tier-expiry cron failed for 5 nights because `int(os.environ.get("SMTP_PORT", "587"))` returned `int("")` → ValueError. The second-arg default fires only when the key is ABSENT from the environment, not when it's present-but-empty — exactly what GitHub Actions / Azure / docker-compose do for unset secrets. email_service.py was patched at the time of the RCA, but the RCA's "Open items" listed 15+ sibling sites with the same anti-pattern. All 22 vulnerable sites now use the safe `or` form (`int(os.environ.get(NAME) or "DEFAULT")`). New `backend/tests/infrastructure/test_env_var_default_pattern.py` is a forbid-list contract scanning the production source tree; the contract caught 2 sites in `monitoring.py` (`float(os.environ.get(...))` calls) that the RCA's hand-listed audit missed.
+
+  **Out of scope**: the cron is still failing in production due to Issue #479 (Azure PG firewall blocks GitHub Actions runner IPs). That fix requires Azure CLI / Bicep / self-hosted runner — outside code-only PR scope.
+
+- **`docs/version-docs.sh` bug-fixes** (commit `a1dd2d8c`). Two bugs preventing the script from producing a correct VERSION.md:
+  1. Version-to-Commit map was wiped on every run because `cat > "$VERSION_FILE" <<EOF` truncated the file before the inline `$(grep ... "$VERSION_FILE")` command-substitution ran. Fix: read the existing map into a shell variable BEFORE the heredoc.
+  2. `App Version: unknown` because `node -p require('$ROOT_DIR/package.json').version` looked at the repo root, but `package.json` lives at `frontend/package.json`. Fix: corrected path + three-tier fallback (`node` → `python` → `grep`) so the manifest stamps a real version regardless of which tools are on PATH.
+
+### Added
+
+- **`<PageHeader>` component + 13 unit tests** + the registry-driven consistency contract (22 tests). Documented exemption set covers the 9 legitimate special-cases (About landing page, Privacy/Terms via MarkdownLegal, public Status page, Monitoring multi-panel, Prompts Lab admin tool, AdminDatabase + FeedbackAdmin nested sub-components).
+
+- **Companies tab utilities + tests** (commits `80c65d6d`, `2cf0f1ab`). `companyBoardSort.js` (`favouritesFirstByCompany` comparator + 6 unit tests) and `companyBoardVisibility.js` (visibility predicate + 32 tests including a 15-permutation parity matrix). Single source of truth shared between `App.jsx` and `SearchForm.jsx` industry-dropdown count.
+
+- **GitHub Issue #501** opened to track the favourites-sort and dropdown-count fixes (post-hoc — Issue created after the commits landed because branch protection blocked the amend). Linkage lives issue-side; commit messages don't carry `Closes #501` for this pair.
+
+### Removed
+
+- **Legacy `<AIProviderCard>` and `<AIMultiProviderCard>` components** (commit `8835f0b4`). Last call site (CompaniesTab) migrated to the slim `<ActiveModelIndicator>` pill. Removed 4 files (component + test for each), 379 lines deleted.
+
+### Stats
+
+- Components: 75 → 76 (+1 `PageHeader`)
+- Backend test files: 342 → 343 (+1 env-var contract)
+- Frontend test files: 199 → 200 (+1 PageHeader test, +1 page-header-consistency contract; some prior commits also rolled in)
+
 ## [0.6.3] - 2026-05-07
 
 ### Changed
