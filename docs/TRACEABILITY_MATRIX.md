@@ -1,8 +1,8 @@
 # Requirements Traceability Matrix (RTM)
 
 **Document ID**: RTM-CVIPER-001
-**Version**: 0.6.2
-**Date**: 2026-04-30
+**Version**: 0.6.3
+**Date**: 2026-05-07
 **Status**: Active
 
 > Maps every Business Requirement → Functional Spec → Test Plan Journey → E2E Test Case.
