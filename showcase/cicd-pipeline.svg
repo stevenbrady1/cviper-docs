@@ -57,7 +57,7 @@
     <circle cx="176" cy="189" r="4" fill="#10B981"/>
     <text x="186" y="193" font-size="8" font-weight="600" fill="#10B981">HARD</text>
     <text x="205" y="204" text-anchor="middle" font-size="7" fill="#6b7280">5 test areas + coverage</text>
-    <text x="205" y="216" text-anchor="middle" font-size="6.5" fill="#94a3b8">Vitest · 2,700+ tests</text>
+    <text x="205" y="216" text-anchor="middle" font-size="6.5" fill="#94a3b8">Vitest · 2,800+ tests</text>
   </g>
   <g filter="url(#shadow)">
     <rect x="140" y="238" width="130" height="68" rx="8" fill="#fffbeb" stroke="#F59E0B" stroke-width="1.5"/>
@@ -152,5 +152,5 @@
   <text x="879" y="428" text-anchor="middle" font-size="7.5" font-weight="700" fill="#475569" letter-spacing="0.4">STAGE 6</text>
   <text x="475" y="500" text-anchor="middle" font-size="7" fill="#cbd5e1">Commit → Test → Verify → Gate → Deploy</text>
   <text x="930" y="522" text-anchor="end" font-size="10" fill="#6B7280">Updated: 2026-04-15</text>
-  <!-- stats-updated: 2026-05-06 -->
+  <!-- stats-updated: 2026-05-08 -->
 </svg>
