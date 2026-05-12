@@ -152,5 +152,5 @@
   <text x="879" y="428" text-anchor="middle" font-size="7.5" font-weight="700" fill="#475569" letter-spacing="0.4">STAGE 6</text>
   <text x="475" y="500" text-anchor="middle" font-size="7" fill="#cbd5e1">Commit → Test → Verify → Gate → Deploy</text>
   <text x="930" y="522" text-anchor="end" font-size="10" fill="#6B7280">Updated: 2026-04-15</text>
-  <!-- stats-updated: 2026-05-08 -->
+  <!-- stats-updated: 2026-05-12 -->
 </svg>
