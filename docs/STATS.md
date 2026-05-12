@@ -12,7 +12,7 @@
 | Frontend Hooks | 29 |
 | Alembic Migrations | 37 |
 | Backend Test Files | 350 |
-| Frontend Test Files | 204 |
+| Frontend Test Files | 205 |
 | Backend Tests (approx) | 7,000+ |
 | Frontend Tests (approx) | 2,800+ |
 | Total Tests (approx) | 9,800+ |
