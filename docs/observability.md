@@ -109,11 +109,13 @@ Container Apps natively exposes these in the Azure portal at zero extra cost (Co
 
 | Metric | What the old Grafana panel showed |
 |---|---|
-| `CpuUsageNanoCores` | CPU utilisation per replica |
-| `MemoryWorkingSetBytes` | Memory pressure |
+| `UsageNanoCores` | CPU utilisation per replica (Container Apps' metric name — `CpuUsageNanoCores` does NOT exist) |
+| `WorkingSetBytes` | Memory pressure (note: not `MemoryWorkingSetBytes`) |
 | `Requests` | Request count (split on `statusCodeCategory` dimension for 2xx/4xx/5xx) |
-| `ReplicaCount` | Current running replicas (scaling visibility) |
+| `Replicas` | Current running replicas (note: not `ReplicaCount`) |
 | `RestartCount` | Container restart frequency (crashloop detector) |
+| `ResponseTime` | Server-side request latency — eligible for a metric-based p95 alert (cheaper than KQL scheduled queries) |
+| `CpuPercentage` / `MemoryPercentage` | Pre-computed percentages of the allocated SKU — easier to threshold than raw byte counts |
 
 For p95/p99 latency, the previous Prometheus histogram was synthesised from the `duration_ms` field — query that directly in Log Analytics using `percentile()` on the KQL above.
 

@@ -7,6 +7,31 @@ This project uses [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
 
+## [0.6.6] - 2026-05-13
+
+### Fixed
+
+- **P1 regression — AI model attribution mismatch** (commits `b608d09e`, `ba863ed4`, `f18b4b03`). Personal-key users changing a provider's model in Settings kept seeing the OLD model attributed to freshly-generated CVs/cover letters for up to 5 minutes — chip on My Applications said `Google Gemini · gemini-3.1-pro-preview` while Document Centre showed `Gemini · gemini-2.5-flash-lite`. Root cause: `UserKeyResolver._cache` snapshotted the model field at build time alongside the SDK client object, with no eviction on model change. Sister to CV-252. Three-layer fix: (1) `_on_model_change` callback fires from `ProviderRegistry.set_provider_model`, AIService wires it to invalidate the resolver cache per provider — covers PUT, autoheal, and multi-replica hydrate paths uniformly (LESSON-087, CLAUDE.md rule #60); (2) structural — `resolve_client` overlays the live model from `_resolve_model_for` on every call, making the bug class impossible even if layer 1 is unwired or bypassed; (3) cleanup — folded autoheal's duplicated inline invalidation into the hook (single writer, single invalidator). 8 new regression tests across `test_provider_model_resolver_cache_invalidation.py` (behavioural + idempotent + source-scan + structural overlay).
+
+### Changed
+
+- **Observability stack disabled** (commit `158760c6`, CV-272). Grafana / Loki / Prometheus container apps scaled to zero replicas. Azure Monitor + Log Analytics workbook scaffolded as the replacement path (commits `3be49b1e`, `4c03dae9`). Bicep `maxReplicas` constraint enforced at >=1 (`f78b392a`) since ARM API rejects 0.
+
+- **Mobile fixes — 4 waves**. Wave 1.4–1.7 user-reported screenshot bugs (commits `960e05d9`, `0f5f050e`, `1fcc5a39`, `f4098df8`, `0d57c773`): stacked Search row panels on mobile (#5), 4 pre-existing 375px bugs found in proactive sweep, 5 + 6 + 7 user-reported regressions across density/chips/responsive layout. iOS Safari quirks documentation registered (`ae030a95`).
+
+### Added
+
+- **Resend SMTP outbound email wired into backend Container App** (commit `9298dd86`).
+- **Visual regression baselines at 390×844** for mobile flows (commit `0012b50b`).
+- **PR template — 375px screenshot requirement for frontend changes** (commit `5c733c1f`).
+- **E2E — flow-aware post-action CTA assertions + bounding-box overlap detector at 375px** (commits `ff04fb5d`, `f004e34b`).
+- **Pre-commit hook — block non-main commits by default** (commit `8ad6a64b`).
+
+### Internal
+
+- Self-hosted GitHub Actions runner runbook (`52c0e190`, `f592b30f`).
+- Login CTA copy refinement (`97cb463d`).
+
 ## [0.6.5] - 2026-05-07
 
 ### Changed
