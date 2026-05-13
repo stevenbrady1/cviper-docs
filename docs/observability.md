@@ -190,7 +190,7 @@ There's a copy-pasteable Claude Code prompt at [`docs/prompts/activate-observabi
 
 An Azure Monitor Workbook is checked in at [`azure/workbooks/cviper-overview.json`](../azure/workbooks/cviper-overview.json). It's the closest thing to the old Grafana overview — request volume, 5xx rate, latency percentiles, errors-by-path, AI gateway events, and a request-ID trace helper, all driven by KQL queries against `cviper-logs`. Time range and target Container App are both parameters at the top.
 
-### One-time import
+### Imported 2026-05-13 — live at cviper-logs → Workbooks → CViper Overview
 
 1. Portal → search "Log Analytics workspaces" → `cviper-logs`
 2. Left blade → **Workbooks** (under Monitoring)
@@ -208,7 +208,7 @@ Edit the JSON in the repo, then in the Portal: open the saved Workbook → Edit 
 
 ## Alerting — `azure/monitor-alerts.bicep`
 
-Three Azure Monitor alert rules are defined in [`azure/monitor-alerts.bicep`](../azure/monitor-alerts.bicep) and route to an action group (`cviper-alerts`) with one email receiver. **The file is not deployed automatically** — it sits separate from `azure/container-apps.bicep` so tuning the thresholds doesn't risk the main infrastructure deploy.
+Three Azure Monitor alert rules are defined in [`azure/monitor-alerts.bicep`](../azure/monitor-alerts.bicep) and route to an action group (`cviper-alerts`) with one email receiver. **Deployed 2026-05-13** (3 alert rules live, routing to steven.brady1@gmail.com). The file — it sits separahte from `azure/container-apps.bicep` so tuning the thresholds doesn't risk the main infrastructure deploy.
 
 ### Alerts created (when deployed)
 
