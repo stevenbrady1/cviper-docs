@@ -182,6 +182,26 @@ The following files exist solely so the stack can be re-enabled without rebuildi
 
 ---
 
+## Dashboards — `azure/workbooks/cviper-overview.json`
+
+An Azure Monitor Workbook is checked in at [`azure/workbooks/cviper-overview.json`](../azure/workbooks/cviper-overview.json). It's the closest thing to the old Grafana overview — request volume, 5xx rate, latency percentiles, errors-by-path, AI gateway events, and a request-ID trace helper, all driven by KQL queries against `cviper-logs`. Time range and target Container App are both parameters at the top.
+
+### One-time import
+
+1. Portal → search "Log Analytics workspaces" → `cviper-logs`
+2. Left blade → **Workbooks** (under Monitoring)
+3. Click **+ New** → top-right toolbar → **Advanced Editor** (`</>` icon)
+4. Replace the template content with the contents of `azure/workbooks/cviper-overview.json`
+5. Click **Apply** → **Done Editing** → **Save** (give it a name like "CViper Overview"; choose `cviper-rg` as the resource group so it's discoverable later)
+
+Pin individual charts to an Azure dashboard by hovering each chart → **⋯** menu → **Pin to dashboard**.
+
+### Updating
+
+Edit the JSON in the repo, then in the Portal: open the saved Workbook → Edit → Advanced Editor → paste the new JSON → Apply → Save. Workbooks don't have a "redeploy from file" path the way Bicep does, so this is a manual sync. If that becomes painful, we can wrap the JSON in a `Microsoft.Insights/workbooks` Bicep resource for one-click deploys (deferred — works fine via the portal for now).
+
+---
+
 ## Alerting — `azure/monitor-alerts.bicep`
 
 Three Azure Monitor alert rules are defined in [`azure/monitor-alerts.bicep`](../azure/monitor-alerts.bicep) and route to an action group (`cviper-alerts`) with one email receiver. **The file is not deployed automatically** — it sits separate from `azure/container-apps.bicep` so tuning the thresholds doesn't risk the main infrastructure deploy.
