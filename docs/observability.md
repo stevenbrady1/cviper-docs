@@ -182,10 +182,50 @@ The following files exist solely so the stack can be re-enabled without rebuildi
 
 ---
 
+## Alerting — `azure/monitor-alerts.bicep`
+
+Three Azure Monitor alert rules are defined in [`azure/monitor-alerts.bicep`](../azure/monitor-alerts.bicep) and route to an action group (`cviper-alerts`) with one email receiver. **The file is not deployed automatically** — it sits separate from `azure/container-apps.bicep` so tuning the thresholds doesn't risk the main infrastructure deploy.
+
+### Alerts created (when deployed)
+
+| # | Name | Severity | Type | Condition (defaults) | Replaces |
+|---|---|---|---|---|---|
+| 1 | `cviper-backend-5xx-rate` | 1 (error) | metric | >10 HTTP 5xx responses in 5 min | Grafana 5xx panel |
+| 2 | `cviper-backend-cpu-sustained` | 3 (info) | metric | CPU >200M nanocores (~80% of 0.25 vCPU) sustained 15 min | Prometheus CPU panel |
+| 3 | `cviper-ai-provider-errors` | 2 (warning) | KQL (Log Analytics) | >20 AI gateway ERROR events in 15 min | Grafana `cviper_ai_call_total{status="error"}` |
+
+p95 latency was descoped from the first pass — KQL with `percentile()` is straightforward but the threshold needs operational data to calibrate. Add as a follow-up alert when there's a known baseline.
+
+DB connection saturation also descoped — it lives on a different resource (PostgreSQL Flexible Server) with a different metric provider. Add separately when needed.
+
+### Deploying
+
+```bash
+az deployment group create \
+  --resource-group cviper-rg \
+  --template-file azure/monitor-alerts.bicep \
+  --parameters notificationEmail='steven.brady1@gmail.com'
+```
+
+Parameters worth knowing:
+- `notificationEmail` (required) — recipient for the action group's email receiver
+- `alertsEnabled` (bool, default `true`) — set to `false` to deploy alerts in disabled state for soak testing
+- `threshold5xxPer5Min` / `thresholdCpuNanocores` / `thresholdAiErrorsPer15Min` — tune without code edits
+
+To extend the action group with SMS, Teams, or webhook receivers: edit the `emailReceivers` block in `monitor-alerts.bicep` or add `smsReceivers` / `webhookReceivers` arrays alongside it. Re-run the deploy command; Azure Monitor handles the action group update idempotently.
+
+### Maintenance
+
+- The `cviper-ai-provider-errors` KQL query depends on backend log shape (`payload.event_type startswith "ai_"` or `payload.component == "ai_gateway"`). If `backend/monitoring.py` JSON log keys change, update the KQL accordingly.
+- Metric alerts query Container Apps' built-in `Requests` / `CpuUsageNanoCores` metrics — these are stable Azure-side, no code dependency.
+
+---
+
 ## Future work
 
 Tracked under CV-272 follow-ups:
 
-- Add Azure Monitor alert rules to replace the most important Grafana alerts (5xx rate, AI provider error rate, queue depth, DB connection saturation). Until these land, the system is observable but **not alertable**.
-- Decide whether to keep the `/metrics` Prometheus endpoint exposed (currently kept — zero cost when unscraped, useful if someone runs a one-off scrape).
-- Once the alerts are in place, consider removing the `monitoring/grafana/dashboards/*.json` files — they are not referenced by any runtime path and represent ~5000 lines of duplicate "look at metrics" intent now covered by KQL.
+- Calibrate alert thresholds once a few weeks of operational data are in Log Analytics
+- Add p95 latency alert and DB connection saturation alert (deferred from first pass)
+- Decide whether to keep the `/metrics` Prometheus endpoint exposed (currently kept — zero cost when unscraped, useful if someone runs a one-off scrape)
+- Once the alerts are in place and tuned, consider removing the `monitoring/grafana/dashboards/*.json` files — they are not referenced by any runtime path and represent ~5000 lines of duplicate "look at metrics" intent now covered by KQL
