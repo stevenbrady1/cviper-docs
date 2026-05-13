@@ -206,6 +206,20 @@ Pin individual charts to an Azure dashboard by hovering each chart → **⋯** m
 
 Edit the JSON in the repo, then in the Portal: open the saved Workbook → Edit → Advanced Editor → paste the new JSON → Apply → Save. Workbooks don't have a "redeploy from file" path the way Bicep does, so this is a manual sync. If that becomes painful, we can wrap the JSON in a `Microsoft.Insights/workbooks` Bicep resource for one-click deploys (deferred — works fine via the portal for now).
 
+### Sibling DevOps workbook — `azure/workbooks/cviper-devops-overview.json`
+
+The original **CViper Overview** focuses on HTTP / AI quality signals — the on-call incident-response view. For daily steady-state operations there is a companion workbook at [`azure/workbooks/cviper-devops-overview.json`](../azure/workbooks/cviper-devops-overview.json) covering:
+
+- **Service resource saturation** — CPU %, memory %, replicas, restart count, network I/O (built-in Container Apps metrics)
+- **Recent system events** — deploys, restarts, scaling activity from `ContainerAppSystemLogs_CL`
+- **AI pipeline volume + fallback economics** — calls by provider, fallback events, circuit-breaker state, token consumption when logged
+- **Security signals** — auth failures, rate-limit rejections, sandbox abuse, IDOR probes, anomaly alerts
+- **PostgreSQL health** — CPU %, memory %, active connections, storage %, IOPS on `cviper-pg-z6oivrnnuqsvy`
+
+Import the same way as the primary workbook — Portal → `cviper-logs` → Workbooks → New → Advanced Editor → paste → Apply → Save as "CViper DevOps Overview" in `cviper-rg`.
+
+If any **type 10 metric chart** shows "No data" after import (a common Workbook quirk after JSON paste), open the panel → Edit → click the metric dropdown → re-select the same metric → Done Editing. The data source binding sometimes needs a Portal-side rebind on first load.
+
 ---
 
 ## Alerting — `azure/monitor-alerts.bicep`

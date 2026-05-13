@@ -7,12 +7,12 @@
 | Field | Value |
 |-------|-------|
 | **Document ID** | FSD-CVIPER-001 |
-| **Version** | 0.6.4 |
+| **Version** | 0.6.6 |
 | **Status** | Pre-Release |
 | **Author** | CViper Project Team |
-| **Date** | 2026-05-07 |
+| **Date** | 2026-05-13 |
 | **Classification** | Internal |
-| **Related BRD** | BRD-CVIPER-001 v0.6.4 |
+| **Related BRD** | BRD-CVIPER-001 v0.6.6 |
 
 ### Version History
 
