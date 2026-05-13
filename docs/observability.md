@@ -182,6 +182,10 @@ The following files exist solely so the stack can be re-enabled without rebuildi
 
 ---
 
+## Activating both at once
+
+There's a copy-pasteable Claude Code prompt at [`docs/prompts/activate-observability.md`](prompts/activate-observability.md) that walks a fresh session through deploying the alert rules + importing the Workbook in one go (audit → plan → deploy → verify, with a test email at the end to confirm receipt). Reach for that when you're ready rather than doing the steps below by hand.
+
 ## Dashboards — `azure/workbooks/cviper-overview.json`
 
 An Azure Monitor Workbook is checked in at [`azure/workbooks/cviper-overview.json`](../azure/workbooks/cviper-overview.json). It's the closest thing to the old Grafana overview — request volume, 5xx rate, latency percentiles, errors-by-path, AI gateway events, and a request-ID trace helper, all driven by KQL queries against `cviper-logs`. Time range and target Container App are both parameters at the top.
