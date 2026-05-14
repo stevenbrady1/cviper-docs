@@ -192,19 +192,35 @@ There's a copy-pasteable Claude Code prompt at [`docs/prompts/activate-observabi
 
 An Azure Monitor Workbook is checked in at [`azure/workbooks/cviper-overview.json`](../azure/workbooks/cviper-overview.json). It's the closest thing to the old Grafana overview — request volume, 5xx rate, latency percentiles, errors-by-path, AI gateway events, and a request-ID trace helper, all driven by KQL queries against `cviper-logs`. Time range and target Container App are both parameters at the top.
 
-### Imported 2026-05-13 — live at cviper-logs → Workbooks → CViper Overview
+### Deployed via [`azure/workbook-deploy.bicep`](../azure/workbook-deploy.bicep) — both workbooks live in `cviper-rg`
 
-1. Portal → search "Log Analytics workspaces" → `cviper-logs`
-2. Left blade → **Workbooks** (under Monitoring)
-3. Click **+ New** → top-right toolbar → **Advanced Editor** (`</>` icon)
-4. Replace the template content with the contents of `azure/workbooks/cviper-overview.json`
-5. Click **Apply** → **Done Editing** → **Save** (give it a name like "CViper Overview"; choose `cviper-rg` as the resource group so it's discoverable later)
+Both `CViper Overview` and `CViper DevOps Overview` are deployed declaratively. Workbook resource names are stable GUIDs so re-running the deploy **updates them in place** rather than creating duplicates.
 
-Pin individual charts to an Azure dashboard by hovering each chart → **⋯** menu → **Pin to dashboard**.
+**Deploy / redeploy (after editing the source JSON in `azure/workbooks/`)**:
 
-### Updating
+```bash
+az deployment group create \
+  --resource-group cviper-rg \
+  --template-file azure/workbook-deploy.bicep
+```
 
-Edit the JSON in the repo, then in the Portal: open the saved Workbook → Edit → Advanced Editor → paste the new JSON → Apply → Save. Workbooks don't have a "redeploy from file" path the way Bicep does, so this is a manual sync. If that becomes painful, we can wrap the JSON in a `Microsoft.Insights/workbooks` Bicep resource for one-click deploys (deferred — works fine via the portal for now).
+**Dry-run** (preview what the deploy would change):
+
+```bash
+az deployment group what-if \
+  --resource-group cviper-rg \
+  --template-file azure/workbook-deploy.bicep
+```
+
+_Note: `what-if` output rendering has a Unicode bug on some Windows shells (`charmap codec can't encode character '\u2192'`). The actual deploy is unaffected — it's a stdout-rendering issue, not a template issue._
+
+**Direct Portal links** (also discoverable from `cviper-logs` → Workbooks → Recently modified):
+- CViper Overview — workbook GUID `d20a5e45-02c3-4d31-b8af-983c9a0ea04f`
+- CViper DevOps Overview — workbook GUID `3cc0d05c-2d81-509f-85d7-21cda837f6a3`
+
+**Pinning charts to an Azure dashboard**: in the Portal, hover any chart → **⋯** menu → **Pin to dashboard**.
+
+**If a `type: 10` metric chart shows "No data" on first open**: open the panel → Edit → re-select the metric from the dropdown (same name) → Done Editing. A known Azure Workbook quirk after JSON import — once rebound, it sticks.
 
 ### Sibling DevOps workbook — `azure/workbooks/cviper-devops-overview.json`
 
