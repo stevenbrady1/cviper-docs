@@ -69,14 +69,14 @@
     <rect x="40" y="200" width="400" height="18" rx="8" fill="#3B82F6" opacity="0.08"/>
     <text x="56" y="214" font-size="9" font-weight="700" fill="#3B82F6">Frontend Container</text>
     <text x="56" y="232" font-size="7" fill="#6b7280">React 18 + Vite</text>
-    <text x="56" y="244" font-size="7" fill="#6b7280">SPA  ·  Tab Navigation  ·  80 Components</text>
+    <text x="56" y="244" font-size="7" fill="#6b7280">SPA  ·  Tab Navigation  ·  81 Components</text>
   </g>
   <g filter="url(#shadow)">
     <rect x="460" y="200" width="400" height="60" rx="8" fill="#ecfdf5" stroke="#10B981" stroke-width="1.5"/>
     <rect x="460" y="200" width="400" height="18" rx="8" fill="#10B981" opacity="0.08"/>
     <text x="476" y="214" font-size="9" font-weight="700" fill="#10B981">Backend Container</text>
     <text x="476" y="232" font-size="7" fill="#6b7280">FastAPI</text>
-    <text x="476" y="244" font-size="7" fill="#6b7280">280 Endpoints  ·  Rate Limiting  ·  Session Auth  ·  RBAC</text>
+    <text x="476" y="244" font-size="7" fill="#6b7280">281 Endpoints  ·  Rate Limiting  ·  Session Auth  ·  RBAC</text>
   </g>
   <g filter="url(#shadow)">
     <rect x="120" y="280" width="660" height="105" rx="8" fill="#f5f3ff" stroke="#8B5CF6" stroke-width="2"/>
@@ -198,7 +198,7 @@
   <path d="M 440 230 L 460 230" stroke="#10B981" stroke-width="1.2" fill="none" marker-end="url(#arrow-green)"/>
   <path d="M 660 260 L 660 280" stroke="#8B5CF6" stroke-width="1.2" fill="none" marker-end="url(#arrow-purple)"/>
   <path d="M 450 384 L 450 398 L 550 398 L 550 532 L 550 540" stroke="#8B5CF6" stroke-width="1.2" fill="none" marker-end="url(#arrow-purple)"/>
-  <text x="450" y="726" text-anchor="middle" font-size="7" fill="#cbd5e1">9 AI Providers  ·  280 API Endpoints  ·  80 Components  ·  7,000+ Backend Tests  ·  2,800+ Frontend Tests</text>
+  <text x="450" y="726" text-anchor="middle" font-size="7" fill="#cbd5e1">9 AI Providers  ·  281 API Endpoints  ·  81 Components  ·  7,000+ Backend Tests  ·  2,900+ Frontend Tests</text>
   <text x="880" y="748" text-anchor="end" font-size="10" fill="#6B7280">Updated: 2026-04-15</text>
-  <!-- stats-updated: 2026-05-13 -->
+  <!-- stats-updated: 2026-05-16 -->
 </svg>
