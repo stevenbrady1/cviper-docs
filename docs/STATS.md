@@ -10,7 +10,7 @@
 | AI Providers | 9 |
 | Frontend Components | 82 |
 | Frontend Hooks | 29 |
-| Alembic Migrations | 39 |
+| Alembic Migrations | 40 |
 | Backend Test Files | 354 |
 | Frontend Test Files | 209 |
 | Backend Tests (approx) | 7,000+ |
