@@ -7,6 +7,54 @@ This project uses [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
 
+## [0.7.0] - 2026-05-17
+
+### Added
+
+- **Phase 1 of iterative CV authoring (ADR-008)** — every legacy generation now lands in a persistent draft DAG with version history, fabrication metadata, drift-score, and provider attribution. Nine cards from CV-318 through CV-326:
+  - **CV-318** — `cv_drafts` table (migration 040), repository layer, serialiser-completeness contract, and ADR-008 written.
+  - **CV-319** — REST surface: `GET /api/cv-drafts?job_id=…`, `GET /api/cv-drafts/{id}`, `POST /api/cv-drafts`, `POST /api/cv-drafts/{id}/promote`. Pydantic v2 with `extra="forbid"` on inputs, `extra="allow"` on responses, `func.max() + 1` auto-versioning.
+  - **CV-320** — fabrication + drift check on the new POST path. AI verdict persisted on the draft row; provider attribution from `ai_meta` (LESSON-038 pattern).
+  - **CV-321** — non-blocking adapter-write on `/api/apply-single` + `/api/documents/{id}/update-cv`. Linear lineage, auto-promote. Failures swallowed with `event_type=draft_dual_write_failed` log line; user response never breaks.
+  - **CV-322** — `<DraftTimeline>` component in DocumentCentre. Vertical card list with version, provider, ATS score, drift, fabrication verdict, Promote button. Lazy-loads `<DraftCompare>` only on first compare click.
+  - **CV-323** — adapter-write extended to `/api/alternative` + `/api/multi-generate`. Sibling style: `parent_draft_id` set, `auto_promote=False` — preserves the user's original "current" draft when they generate alternatives.
+  - **CV-324** — `<DraftCompare>` picker + extracted DiffView. Word-level diff between any two drafts or any draft vs base CV. Smart defaults: Left=Base CV (if available), Right=current. Swap button, same-selection guard, overlay-click-to-close.
+  - **CV-325** — fabrication retrofit on the legacy adapter-write path. `CV_FABRICATION_STRICT` env var (default off): in observation mode, verdict is persisted but never blocks; in strict mode, high-risk verdicts skip persistence and emit `event_type=draft_blocked_high_fabrication`. Filesystem write of the CV/cover-letter is unaffected either way. Sentinels in the verdict (`no_base_cv`, `check_raised`, `check_malformed`) let the UI label outcomes explicitly.
+  - **CV-326** — Phase 1 closeout: 7-row test coverage matrix (`docs/cv-drafts-coverage-matrix.md`) per QAE rubric, plus Playwright lifecycle E2E spec (`frontend/e2e/cv-drafts-lifecycle.spec.js`).
+  Aggregate: 75 backend pass / 1 skip · 22 frontend component+contract · 1 lifecycle E2E.
+
+- **Native authentication** — App Store and Play Store prerequisites:
+  - **CV-329 — Sign in with Apple** (`/api/auth/apple`). Verifies Apple `id_token` and mints a CViper JWT.
+  - **CV-330 — Native Google sign-in** (`/api/auth/google`). Verifies Google `id_token` and mints a CViper JWT. `oauth_native` module shipped with deploy chain + tests.
+
+- **Mobile native rollout — Capacitor scaffolding** (CV-327, CV-332). iOS + Android wrappers, gitignore hygiene, native build CI workflows, JDK 21 / Node 22 bump for Capacitor 8. Universal links wired for iOS Universal Links + Android App Links. iOS Xcode scaffold restored after CI workflow consolidation.
+
+- **Push notifications backend foundation** (CV-331a). `device_tokens` table + `POST /api/devices/register`, `GET /api/devices`, `DELETE /api/devices/{id}` endpoints. APNs + FCM sender service (CV-348) tracked separately.
+
+- **Landing FAQ refresh** (commit `d39fe7dd`). Replaced the two engineering-flavoured items ("Which job boards are supported", "Do you fetch from company career pages") with the two trust signals a CV-tool visitor actually scans for: pricing (free + no card) and AI fabrication (no invention). Privacy answer expanded to cover both no-sell AND no-recruiter/employer-visibility reassurances. New forbid-list content contract (`LoginScreen.landingFaqContent.contract.test.jsx`) pins topic + load-bearing signals without freezing wording.
+
+### Changed
+
+- **GDPR — `cv_text` TTL + Pattern A/B/C wiring across 5 features** (CV-328). 7-day idle expiry on `cv_text` with profile preserved; Refresh CV prompt drives re-upload; Pattern A (full content), Pattern B (degraded with placeholder), Pattern C (block + prompt) wired across the 5 features that depend on `cv_text`. Privacy policy refreshed to v1.2 to reflect the TTL + CV-329 hygiene sweep.
+
+- **Native JSON refresh tokens** (CV-328 follow-up). Refresh-token issuance gated by `X-Client-Type` header: cookie for web, JSON body for native clients. Capacitor cannot read `HttpOnly` cookies cross-origin, so the JSON path is required for Sign-in-with-Apple/Google flows on iOS + Android.
+
+- **Login landing — helper button → FAQ spacing** (commit `d39fe7dd`). The action panel's flex container uses `gap: 32px` between every zone, which produced ~65px of dead vertical space between the "Not sure where to start?" helper CTA and the FAQ block — enough to force a scrollbar at first paint on common 768–820px laptop viewports. HR `margin: 0 → -16px 0` eats 32px of that gap. Visible span drops to ~33px; HR remains visible to mark the purpose change.
+
+### Fixed
+
+- **`DraftTimeline.jsx:338` used bare `toLocaleString()`** (commit `3897037d`). Anti-pattern flagged by the surfaces contract test on push; swapped to `formatDateTime()` from `utils/formatters.js` for consistent locale-aware formatting across pages.
+
+- **Auth event log redactions** (CV-354 prep work). Username field redacted from structured `auth_*` event_type log lines — only `user_id` retained. Stops PII bleeding into observability stacks.
+
+- **Drift banner for stale profile `cv_snapshot`** (commit `f9867ca1`, ADR-007). Saved-search profile snapshot was being auto-loaded over the latest CV analysis on tab switch — Search results scored against a stale CV. Now: latest analysis wins; stale snapshot surfaces a drift banner instead.
+
+### Internal
+
+- **Stats refresh** — Backend tests 364→365 files, Frontend tests 212→215 files, Frontend components 84→86 (DraftTimeline, DraftCompare). Architecture SVG, Testing-Strategy-and-Architecture.md, stats.json, STATS.md all in sync.
+
+- **CHANGELOG / VERSION / BRD / FSD / TSA** archived at v0.6.6 and stamped at v0.7.0.
+
 ## [0.6.6] - 2026-05-13
 
 ### Fixed
