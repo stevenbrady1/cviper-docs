@@ -1,14 +1,24 @@
 # Privacy Policy
 
-**Version:** 1.1
-**Last updated:** April 2026
+**Version:** 1.2
+**Last updated:** May 2026
 **Service:** CViper — https://cviper.ai
 
-> This document is the canonical Privacy Policy for CViper. The in-app
-> copy at [`frontend/src/components/PrivacyPolicy.jsx`](../frontend/src/components/PrivacyPolicy.jsx)
-> must be kept in sync with this file. If the two drift, this markdown
-> version takes precedence for legal review; the component should be
-> updated to match.
+> This document is the canonical Privacy Policy for CViper. The public
+> copy at [`frontend/public/legal/privacy-policy.md`](../frontend/public/legal/privacy-policy.md)
+> is rendered to users and must stay identical to this file. If the
+> two drift, this markdown version takes precedence for legal review.
+
+---
+
+## At a glance
+
+- **Your CV text is deleted automatically after 7 days of inactivity.** Your skills + job title profile is kept so job search keeps working — you can re-upload your CV any time to bring it back.
+- **Demo / Try CViper sessions leave nothing behind.** Demo accounts auto-expire within an hour; we never persist their prompts or AI responses.
+- **You can delete your account in two clicks** from Settings → Privacy & Data. Everything — including AI prompts derived from your CV — is removed.
+- **We never sell your data** and don't run analytics, tracking pixels, or third-party ads.
+
+The rest of this document explains what we collect, what we send to AI providers, and the rights you have over your data.
 
 ---
 
@@ -23,10 +33,10 @@ CViper is a job search management application. When you use CViper, you are the 
 We collect and process the following categories of personal data:
 
 - **Account data:** Username, email address, display name, and encrypted password hash.
-- **CV and career data:** CV text, skills, qualifications, work history, and AI-generated analyses.
+- **CV and career data:** Full CV text (deleted automatically after 7 days of inactivity — see §6), structured profile (skills, job title, summary — kept indefinitely), and AI-generated analyses.
 - **Job application data:** Job titles, companies, locations, salaries, application status, notes, and fit scores.
 - **Search data:** Search keywords, location preferences, and salary expectations.
-- **AI interaction logs:** Prompts sent to and responses received from AI providers (for debugging and quality).
+- **AI interaction logs:** Prompts sent to and responses received from AI providers (kept for debugging and quality; auto-deleted with your account and never stored for demo/sandbox sessions).
 - **Technical data:** Anonymised IP addresses, browser type, and error reports (with URLs redacted).
 
 ## 3. Lawful Basis for Processing
@@ -39,15 +49,19 @@ We process your data under the following lawful bases (GDPR Article 6):
 
 ## 4. Third-Party AI Providers
 
-When you use AI-powered features (CV analysis, job scoring, document generation), your CV text and job descriptions are sent to one or more AI providers:
+When you use AI-powered features (CV analysis, job scoring, document generation), your CV text and job descriptions are sent to one or more AI providers — only the providers **you** have configured in Settings → AI:
 
 - OpenAI (USA)
 - Anthropic (USA)
 - Google Gemini (Global)
 - Mistral (France/EU)
+- Grok / xAI (USA)
+- OpenRouter (USA — gateway routing to multiple model providers)
+- GitHub Models (USA)
+- Pluribus (sandbox/demo provider, used only for hosted demo sessions)
 - Ollama (self-hosted, no data leaves your infrastructure)
 
-These providers act as data processors. Data sent to US-based providers is protected by Standard Contractual Clauses (SCCs) and each provider's Data Processing Agreement. You can avoid cross-border transfers entirely by using Ollama (self-hosted) or Mistral (EU-based).
+These providers act as data processors. Data sent to US-based providers is protected by Standard Contractual Clauses (SCCs) and each provider's Data Processing Agreement. You can avoid cross-border transfers entirely by using Ollama (self-hosted) or Mistral (EU-based). The full list of providers active on your account is always visible in Settings → AI.
 
 ## 5. AI-Generated Content Disclaimer
 
@@ -61,12 +75,32 @@ CViper uses third-party AI models (selected by you or your administrator) to gen
 
 ## 6. Data Retention
 
-- **Account and job data:** Retained until you delete your account.
-- **Search history:** Automatically archived and deleted after 180 days.
-- **AI prompt logs:** Automatically archived and deleted after 180 days.
-- **Score history:** Automatically archived and deleted after 180 days.
-- **Session data:** Expires after 24 hours (or 30 days with "remember me").
-- **Database backups:** Retained for 7 days, then automatically deleted.
+We keep your data only as long as we need it.
+
+**Auto-deleted on a schedule:**
+
+| Data | When it's deleted |
+|---|---|
+| **Full CV text** (the raw document content) | **7 days after you last open CViper.** Your skills + job title profile is kept so job search keeps working; re-uploading your CV at any time brings the full text back. |
+| **Tailored CV drafts** (per-job versions you generated) | 30 days after creation, OR immediately when you archive/reject the matching job (whichever comes first). |
+| **Saved-search CV snapshots** | 7 days after you last open the saved search. |
+| **Demo / Try CViper data** | Demo accounts and all their data are deleted within ~1 hour of session start. AI prompts from demo sessions are never persisted to the database. |
+| Search history | 180 days |
+| AI prompt logs (paid accounts) | 180 days, or immediately when you delete your account |
+| Score history | 180 days |
+| Failed login attempts | 90 days |
+| Sandbox event analytics | 90 days |
+| Database backups | 7 days |
+| Session cookies | 24 hours (or 30 days with "remember me") |
+
+**Kept until you delete your account:**
+
+- Account data (username, email, hashed password)
+- Saved jobs, companies, applications, notes
+- Skills and job-title profile (small structured data)
+- Salary estimates and insights you've generated
+
+**When you delete your account**, every row referencing you — including all AI prompts and responses derived from your CV — is removed at the same time. This is enforced at the database level, not by a cleanup job.
 
 ## 7. Your Rights
 
@@ -89,9 +123,9 @@ We do not use analytics cookies, tracking pixels, or third-party advertising.
 ## 9. Security
 
 - Passwords are hashed with bcrypt and per-user salt.
-- Sensitive data (CV analyses, API keys) is encrypted at rest using AES-128 (Fernet).
+- Sensitive data (CV analyses, AI prompts, API keys) is encrypted at rest using AES-128 (Fernet). The encryption key is validated at production startup — the service refuses to boot with a missing or malformed key, so data-at-rest protection cannot silently fall back to plaintext.
 - All connections use HTTPS with TLS 1.2+.
-- IP addresses are anonymised in application logs.
+- IP addresses are anonymised in application logs. Email addresses are redacted to domain-only (`<redacted>@example.com`) in operational logs.
 - Rate limiting protects against abuse.
 - Regular security scanning (OWASP ZAP, Snyk, dependency audits).
 
