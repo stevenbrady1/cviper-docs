@@ -5,13 +5,13 @@
 
 | Metric | Value |
 |--------|-------|
-| API Endpoints | 290 |
+| API Endpoints | 291 |
 | Route Modules | 27 |
 | AI Providers | 9 |
 | Frontend Components | 83 |
 | Frontend Hooks | 30 |
 | Alembic Migrations | 42 |
-| Backend Test Files | 361 |
+| Backend Test Files | 362 |
 | Frontend Test Files | 211 |
 | Backend Tests (approx) | 7,200+ |
 | Frontend Tests (approx) | 2,900+ |
