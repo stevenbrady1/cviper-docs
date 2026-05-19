@@ -63,6 +63,8 @@ When you use AI-powered features (CV analysis, job scoring, document generation)
 
 These providers act as data processors. Data sent to US-based providers is protected by Standard Contractual Clauses (SCCs) and each provider's Data Processing Agreement. You can avoid cross-border transfers entirely by using Ollama (self-hosted) or Mistral (EU-based). The full list of providers active on your account is always visible in Settings → AI.
 
+For the complete index of every sub-processor (including infrastructure, OAuth, and transactional-email providers) and the legal basis for each cross-border transfer, contact [privacy@cviper.ai](mailto:privacy@cviper.ai) or see [`docs/SUB_PROCESSORS.md`](./SUB_PROCESSORS.md) in our public documentation.
+
 ## 5. AI-Generated Content Disclaimer
 
 CViper uses third-party AI models (selected by you or your administrator) to generate content including CV analysis, job fit scores, salary estimates, interview preparation, and tailored documents. This content is produced by the AI model, not by CViper.
