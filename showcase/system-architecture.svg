@@ -200,5 +200,5 @@
   <path d="M 450 384 L 450 398 L 550 398 L 550 532 L 550 540" stroke="#8B5CF6" stroke-width="1.2" fill="none" marker-end="url(#arrow-purple)"/>
   <text x="450" y="726" text-anchor="middle" font-size="7" fill="#cbd5e1">9 AI Providers  ·  297 API Endpoints  ·  86 Components  ·  7,400+ Backend Tests  ·  3,100+ Frontend Tests</text>
   <text x="880" y="748" text-anchor="end" font-size="10" fill="#6B7280">Updated: 2026-04-15</text>
-  <!-- stats-updated: 2026-05-21 -->
+  <!-- stats-updated: 2026-05-25 -->
 </svg>
