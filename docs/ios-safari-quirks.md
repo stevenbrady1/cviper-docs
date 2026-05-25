@@ -130,6 +130,72 @@ Or set explicit `font-size` on every button. Don't rely on inheritance.
 
 ---
 
+## 7. Programmatic `<input type="file">` cancellation cannot rely on window.focus on iOS WKWebView
+
+**Symptom**: A click-handler that creates a transient `<input type="file">`,
+calls `.click()`, and resolves a promise based on `change` or a `window`
+focus-return + setTimeout fallback — silently loses the user's pick on
+iOS when the file comes from iCloud Drive. The dropzone never shows the
+file and the upload appears not to have happened.
+
+**First hit**: CV-341 / TestFlight Build 22 (2026-05-19). The dropzone in
+`CVAnalysisTab.jsx` was migrated from `document.getElementById('cv-file-input').click()`
+to `platform.pickFile()`, whose web fallback used:
+
+```js
+const onFocus = () => {
+  setTimeout(() => {
+    if (settled) return;
+    settled = true;
+    resolve([]);   // ← treated as "user cancelled"
+  }, 300);
+};
+window.addEventListener('focus', onFocus, { once: true });
+```
+
+**Why it breaks on iOS**: On iOS WKWebView, when the user dismisses the iCloud
+Drive picker, `focus` fires immediately on `window`. The `change` event,
+however, only fires after WKWebView materialises the file from iCloud — which
+can take >300ms for files that need to download. The setTimeout wins the
+race, settles the promise with `[]`, and when `change` finally arrives the
+handler bails on `settled === true`. The file is silently discarded; the
+calling component sees the same state as if the user had cancelled.
+
+**Doesn't apply on**: jsdom (no real picker), Playwright Chromium (deterministic
+event ordering), Capacitor with `@capacitor-community/file-picker` installed
+(native plugin bridge bypasses the issue entirely).
+
+**Fix**: Don't use window.focus as a cancellation signal. Two acceptable patterns:
+
+1. **Direct DOM click on a hidden `<input>` with `onChange={handler}`** (preferred
+   when a hidden input already exists in the JSX):
+   ```jsx
+   <div onClick={() => document.getElementById('cv-file-input').click()}>
+     {/* dropzone UI */}
+     <input id="cv-file-input" type="file" accept=".pdf,.doc,.docx,.txt"
+            onChange={handleFileInput} style={{ display: 'none' }} />
+   </div>
+   ```
+   This is what the codebase reverted to in LESSON-094's fix commit.
+
+2. **HTML5 `cancel` event** (for transient-input utilities that need a real
+   Promise-returning facade):
+   ```js
+   input.addEventListener('change', () => resolve(Array.from(input.files)));
+   input.addEventListener('cancel', () => resolve([]));  // iOS Safari 16.4+
+   ```
+   On older browsers without `cancel`, the promise stays pending on user
+   cancellation — acceptable because the calling UI keeps its current state
+   and the user can re-tap.
+
+**Guard**: `frontend/src/utils/cv-upload-pickfile-gate.contract.test.js` —
+forbid-list source-scan that prevents the CV upload click paths from
+re-routing through `platform.pickFile()` until `@capacitor-community/file-picker`
+lands in package.json. Plus `platform.test.js` "does NOT resolve on window
+focus alone" regression guard against re-introducing the heuristic.
+
+---
+
 ## Process: before shipping ANY mobile fix
 
 1. Open the changed surface in browser DevTools at 375×667 (iPhone 8 / SE 2nd width)

@@ -122,7 +122,7 @@ backend/tests/
 └── security/                       # Auth, RBAC, GDPR, sandboxing (23 files)
 ```
 
-### Frontend Tests (229 files)
+### Frontend Tests (230 files)
 
 ```
 frontend/src/
