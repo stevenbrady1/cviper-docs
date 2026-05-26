@@ -207,3 +207,44 @@ focus alone" regression guard against re-introducing the heuristic.
 The automated visual regression workflow catches "different from baseline"
 post-merge. This doc catches the BEFORE — the known quirks that produce
 "different from desktop" in the first place.
+
+---
+
+## Process: before merging any commit touching `frontend/src/utils/platform.js`
+
+`platform.js` is the facade that dispatches between web fallbacks and
+Capacitor native plugins. Its methods run on every iOS user and they
+exercise WebKit code paths that no jsdom test and no Chromium Playwright
+run can simulate. Every change MUST clear this checklist before merge:
+
+1. **Does the new code use `setTimeout` paired with a Promise `resolve()`
+   to detect a missing event?** If yes → ban (rule #64). Use the
+   HTML5 native event on the underlying element (`cancel`, `change`,
+   `error`, `load`) or fail-open (unresolved promise on cancellation).
+2. **Does the new code use `window.addEventListener('focus' | 'blur' |
+   'visibilitychange', ...)` as a state-change signal?** If yes → ban
+   (rule #64). On iOS WKWebView these events fire on app/picker focus
+   transitions, but their timing relative to the actual state change
+   (e.g. picker dismissed → change event fired) is unreliable. See
+   quirk #7 above.
+3. **Have you cut a TestFlight build with this change and physically
+   verified the changed method on an iPhone, OR confirmed that the
+   `ios-build.yml` simulator-smoke step still passes with the new
+   code?** Hot-path changes auto-trigger TestFlight upload via
+   ios-build.yml; verify the resulting build before declaring the
+   change done. See Defect Health Check Q10.
+
+The contract test
+`frontend/src/utils/platform-timing-heuristics.contract.test.js`
+enforces questions 1 and 2 automatically. Question 3 is operator-side
+and surfaces in the Q10 cycle audit.
+
+**Why this exists**: LESSON-094 — a `window.focus + setTimeout(300)`
+heuristic in `platform.pickFile()` raced against the iOS WKWebView
+change event from the iCloud-Drive picker and silently discarded
+user file picks. The bug shipped to TestFlight Build 22 (2026-05-19),
+was undetected by 27 passing platform.test.js tests, and was only
+caught when the operator manually installed the build 7 days later.
+The merge gates above are designed so a sibling regression in
+`pickCamera`, `share`, `openExternal`, or any future facade method
+can't take the same path to production.
