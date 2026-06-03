@@ -7,6 +7,39 @@ This project uses [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
 
+## [0.9.0] - 2026-06-03
+
+### Added
+
+- **Cross-border consent system (CV-353)** — GDPR Art. 44-49 region map plus two consent modals (special-category data + cross-border processor). A new `ConsentGate` gates every AI call and CV upload, prompting the user before their data leaves for a non-EU provider. The cross-border modal shows the provider's display name rather than its internal id (CV-353 follow-up).
+- **Push notifications (CV-348)** — unified `push_service` dispatch layer, FCM HTTP v1 send module (Android), a daily-digest method + cron endpoint, and a saved-search trigger. Deploy parity added for `FCM_SERVICE_ACCOUNT_JSON`.
+- **Status enums API (CV-370)** — `/api/enums` exposes status values as a single source of truth, with a frontend↔backend membership-aware parity guard so the two can never silently drift.
+- **Per-user circuit breaker (CV-250)** — the AI circuit breaker is now scoped per-user for personal-key calls, so one user's provider outage can't trip the breaker for everyone.
+
+### Changed
+
+- **App.jsx god-component de-drilling (Pilots A + B)** — `configMode` extracted into `ConfigContext`; `advancedMode` and `showAllTabs` extracted into `UIPrefsContext`. Context-per-domain strategy with no behaviour change; reduces prop-drilling out of the ~5,200-line `App.jsx`.
+
+### Security
+
+- **CV-202** — admin-gate global AI-routing writes, closing a non-admin RBAC hole.
+- **CV-354** — redact username/email PII from auth and GDPR structured logs.
+- **CV-257** — surface a `decrypt_failed` signal when a user's personal key is corrupt (instead of a silent admin-key fallthrough).
+- **CV-253** — acceptance guards for personal-key provider visibility and `ai-providers ⊇ ai-routing` parity.
+- **CV-288** — companies write paths (bulk-estimate, salary-check) wrapped in a collision-safe helper; forbid-list guard against unwrapped `repo.save_company` in routes.
+
+### Fixed
+
+- **Migration 042** — SQLite branch now drops the real FK name (`fk_prompt_log_user`), unblocking the Docker production-smoke test on fresh SQLite.
+- **CI Docker smoke** — valid Fernet `MASTER_KEY` supplied to the production-guard check.
+- **Critical Regression E2E gate** — unblocked: `cloud-mode-cv-search` now dismisses the cross-border consent modal; `@mobile` specs excluded from the chromium gate (they belong to the mobile-safari project).
+- **CV-241** — tier-expiry cron failure alert excludes the current run from its prev-run lookup (LESSON-095).
+- Schema-drift, event-type-registry, and slow-test-gating CI fixes.
+
+### Known Issues
+
+- **CV-372 / #640** — the `cv-analysis-refresh-prompt` mobile visual baseline is quarantined (`test.fixme`) on mobile-safari. Root cause (data-backed): Playwright + WebKit drops a fraction of in-flight intercepted `/api/*` requests under the boot fetch-burst. The real fix (app-side retry on boot data-loaders) is tracked as a follow-up; the test still runs on chromium.
+
 ## [0.7.0] - 2026-05-17
 
 ### Added
