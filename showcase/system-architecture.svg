@@ -57,7 +57,7 @@
     <rect x="250" y="121" width="400" height="28" rx="8" fill="#fff7ed" stroke="#F97316" stroke-width="1.5"/>
     <rect x="250" y="121" width="400" height="0" rx="8" fill="#F97316" opacity="0.08"/>
     <text x="266" y="135" font-size="10" font-weight="600" fill="#F97316">Cloudflare</text>
-    <text x="266" y="135" font-size="7" fill="#6b7280">DNS  ·  TLS  ·  WAF  ·  CDN</text>
+    <text x="266" y="147" font-size="7" fill="#6b7280">DNS  ·  TLS  ·  WAF  ·  CDN</text>
   </g>
   <g filter="url(#shadow)">
     <rect x="20" y="174" width="860" height="228" rx="8" fill="#ecfdf5" stroke="#10B981" stroke-width="1.5"/>
@@ -85,26 +85,26 @@
   <g filter="url(#shadow-light)">
     <rect x="140" y="306" width="185" height="64" rx="8" fill="#f5f3ff" stroke="#8B5CF6" stroke-width="2"/>
     <rect x="140" y="306" width="185" height="0" rx="8" fill="#8B5CF6" opacity="0.08"/>
-    <text x="156" y="320" font-size="9" font-weight="700" fill="#8B5CF6">TaskRouter</text>
-    <text x="156" y="320" font-size="7" fill="#6b7280">Priority Chain</text>
-    <text x="156" y="332" font-size="7" fill="#6b7280">Premium  ·  Standard  ·  Light</text>
-    <text x="156" y="344" font-size="7" fill="#6b7280">Per-provider preference ordering</text>
+    <text x="156" y="320" font-size="9" font-weight="700" fill="#8B5CF6">Task Router</text>
+    <text x="156" y="332" font-size="7" fill="#6b7280">Priority Chain</text>
+    <text x="156" y="344" font-size="7" fill="#6b7280">Premium  ·  Standard  ·  Light</text>
+    <text x="156" y="356" font-size="7" fill="#6b7280">Per-provider preference ordering</text>
   </g>
   <g filter="url(#shadow-light)">
     <rect x="340" y="306" width="185" height="64" rx="8" fill="#f5f3ff" stroke="#8B5CF6" stroke-width="2"/>
     <rect x="340" y="306" width="185" height="0" rx="8" fill="#8B5CF6" opacity="0.08"/>
-    <text x="356" y="320" font-size="9" font-weight="700" fill="#8B5CF6">AIGateway</text>
-    <text x="356" y="320" font-size="7" fill="#6b7280">Circuit Breakers</text>
-    <text x="356" y="332" font-size="7" fill="#6b7280">Universal call() dispatcher</text>
-    <text x="356" y="344" font-size="7" fill="#6b7280">JSON extraction &amp; safe parsing</text>
+    <text x="356" y="320" font-size="9" font-weight="700" fill="#8B5CF6">AI Gateway</text>
+    <text x="356" y="332" font-size="7" fill="#6b7280">Circuit Breakers</text>
+    <text x="356" y="344" font-size="7" fill="#6b7280">Universal call() dispatcher</text>
+    <text x="356" y="356" font-size="7" fill="#6b7280">JSON extraction &amp; safe parsing</text>
   </g>
   <g filter="url(#shadow-light)">
     <rect x="540" y="306" width="220" height="64" rx="8" fill="#f5f3ff" stroke="#8B5CF6" stroke-width="2"/>
     <rect x="540" y="306" width="220" height="0" rx="8" fill="#8B5CF6" opacity="0.08"/>
-    <text x="556" y="320" font-size="9" font-weight="700" fill="#8B5CF6">KeywordFallback</text>
-    <text x="556" y="320" font-size="7" fill="#6b7280">26-method Fallback Service</text>
-    <text x="556" y="332" font-size="7" fill="#6b7280">Non-AI scoring &amp; analysis</text>
-    <text x="556" y="344" font-size="7" fill="#6b7280">Synonym lookup · Keyword expansion</text>
+    <text x="556" y="320" font-size="9" font-weight="700" fill="#8B5CF6">Keyword Fallback</text>
+    <text x="556" y="332" font-size="7" fill="#6b7280">26-method Fallback Service</text>
+    <text x="556" y="344" font-size="7" fill="#6b7280">Non-AI scoring &amp; analysis</text>
+    <text x="556" y="356" font-size="7" fill="#6b7280">Synonym lookup · Keyword expansion</text>
   </g>
   <g filter="url(#shadow)">
     <rect x="20" y="410" width="520" height="118" rx="8" fill="#fef3c7" stroke="#F59E0B" stroke-width="1.5"/>
@@ -115,19 +115,19 @@
     <rect x="30" y="434" width="160" height="42" rx="8" fill="#fef3c7" stroke="#F59E0B" stroke-width="1.5"/>
     <rect x="30" y="434" width="160" height="0" rx="8" fill="#F59E0B" opacity="0"/>
     <text x="46" y="448" font-size="9" font-weight="700" fill="#F59E0B">PostgreSQL</text>
-    <text x="46" y="448" font-size="7" fill="#6b7280">Azure Flex  ·  PgBouncer</text>
+    <text x="46" y="460" font-size="7" fill="#6b7280">Azure Flex  ·  PgBouncer</text>
   </g>
   <g filter="url(#shadow)">
     <rect x="200" y="434" width="160" height="42" rx="8" fill="#fef3c7" stroke="#F59E0B" stroke-width="1.5"/>
     <rect x="200" y="434" width="160" height="0" rx="8" fill="#F59E0B" opacity="0"/>
     <text x="216" y="448" font-size="9" font-weight="700" fill="#F59E0B">SQLite</text>
-    <text x="216" y="448" font-size="7" fill="#6b7280">Dev / CI fixtures</text>
+    <text x="216" y="460" font-size="7" fill="#6b7280">Dev / CI fixtures</text>
   </g>
   <g filter="url(#shadow)">
     <rect x="370" y="434" width="160" height="42" rx="8" fill="#fef3c7" stroke="#F59E0B" stroke-width="1.5"/>
     <rect x="370" y="434" width="160" height="0" rx="8" fill="#F59E0B" opacity="0"/>
     <text x="386" y="448" font-size="9" font-weight="700" fill="#F59E0B">Blob Storage</text>
-    <text x="386" y="448" font-size="7" fill="#6b7280">Generated docs  ·  30d TTL</text>
+    <text x="386" y="460" font-size="7" fill="#6b7280">Generated docs  ·  30d TTL</text>
   </g>
   <g filter="url(#shadow-light)">
     <rect x="60" y="488" width="300" height="28" rx="8" fill="#fef3c7" stroke="#F59E0B" stroke-width="1.5"/>
@@ -179,7 +179,7 @@
   <g filter="url(#shadow)">
     <rect x="560" y="410" width="320" height="118" rx="8" fill="#f1f5f9" stroke="#64748b" stroke-width="1.5"/>
     <rect x="568" y="414" width="150" height="16" rx="4" fill="#64748b" opacity="0.15"/>
-    <text x="643" y="425" text-anchor="middle" font-size="7.5" font-weight="700" fill="#64748b" letter-spacing="0.5">OBSERVABILITY · DISABLED</text>
+    <text x="643" y="425" text-anchor="middle" font-size="7.5" font-weight="700" fill="#64748b" letter-spacing="0.5">OBSERVABILITY</text>
   </g>
   <g filter="url(#shadow-light)">
     <rect x="580" y="438" width="90" height="34" rx="8" fill="#f1f5f9" stroke="#64748b" stroke-width="1.5"/>
@@ -198,7 +198,7 @@
   <path d="M 440 230 L 460 230" stroke="#10B981" stroke-width="1.2" fill="none" marker-end="url(#arrow-green)"/>
   <path d="M 660 260 L 660 280" stroke="#8B5CF6" stroke-width="1.2" fill="none" marker-end="url(#arrow-purple)"/>
   <path d="M 450 384 L 450 398 L 550 398 L 550 532 L 550 540" stroke="#8B5CF6" stroke-width="1.2" fill="none" marker-end="url(#arrow-purple)"/>
-  <text x="450" y="726" text-anchor="middle" font-size="7" fill="#cbd5e1">9 AI Providers  ·  299 API Endpoints  ·  86 Components  ·  7,800+ Backend Tests  ·  3,400+ Frontend Tests</text>
+  <text x="450" y="726" text-anchor="middle" font-size="7" fill="#94a3b8">9 AI Providers  ·  299 API Endpoints  ·  86 Components  ·  7,800+ Backend Tests  ·  3,400+ Frontend Tests</text>
   <text x="880" y="748" text-anchor="end" font-size="10" fill="#6B7280">Updated: 2026-04-15</text>
-  <!-- stats-updated: 2026-06-14 -->
+  <!-- stats-updated: 2026-06-15 -->
 </svg>
