@@ -85,7 +85,7 @@
   <g filter="url(#shadow-light)">
     <rect x="140" y="306" width="185" height="64" rx="8" fill="#f5f3ff" stroke="#8B5CF6" stroke-width="2"/>
     <rect x="140" y="306" width="185" height="0" rx="8" fill="#8B5CF6" opacity="0.08"/>
-    <text x="156" y="320" font-size="9" font-weight="700" fill="#8B5CF6">Task Router</text>
+    <text x="156" y="320" font-size="9" font-weight="700" fill="#8B5CF6">TaskRouter</text>
     <text x="156" y="332" font-size="7" fill="#6b7280">Priority Chain</text>
     <text x="156" y="344" font-size="7" fill="#6b7280">Premium  ·  Standard  ·  Light</text>
     <text x="156" y="356" font-size="7" fill="#6b7280">Per-provider preference ordering</text>
@@ -93,7 +93,7 @@
   <g filter="url(#shadow-light)">
     <rect x="340" y="306" width="185" height="64" rx="8" fill="#f5f3ff" stroke="#8B5CF6" stroke-width="2"/>
     <rect x="340" y="306" width="185" height="0" rx="8" fill="#8B5CF6" opacity="0.08"/>
-    <text x="356" y="320" font-size="9" font-weight="700" fill="#8B5CF6">AI Gateway</text>
+    <text x="356" y="320" font-size="9" font-weight="700" fill="#8B5CF6">AIGateway</text>
     <text x="356" y="332" font-size="7" fill="#6b7280">Circuit Breakers</text>
     <text x="356" y="344" font-size="7" fill="#6b7280">Universal call() dispatcher</text>
     <text x="356" y="356" font-size="7" fill="#6b7280">JSON extraction &amp; safe parsing</text>
@@ -198,7 +198,7 @@
   <path d="M 440 230 L 460 230" stroke="#10B981" stroke-width="1.2" fill="none" marker-end="url(#arrow-green)"/>
   <path d="M 660 260 L 660 280" stroke="#8B5CF6" stroke-width="1.2" fill="none" marker-end="url(#arrow-purple)"/>
   <path d="M 450 384 L 450 398 L 550 398 L 550 532 L 550 540" stroke="#8B5CF6" stroke-width="1.2" fill="none" marker-end="url(#arrow-purple)"/>
-  <text x="450" y="726" text-anchor="middle" font-size="7" fill="#94a3b8">9 AI Providers  ·  299 API Endpoints  ·  86 Components  ·  7,800+ Backend Tests  ·  3,400+ Frontend Tests</text>
-  <text x="880" y="748" text-anchor="end" font-size="10" fill="#6B7280">Updated: 2026-04-15</text>
+  <text x="450" y="726" text-anchor="middle" font-size="7" fill="#94a3b8">9 AI Providers  ·  299 API Endpoints  ·  86 Components  ·  7,900+ Backend Tests  ·  3,500+ Frontend Tests</text>
+  <text x="880" y="748" text-anchor="end" font-size="10" fill="#6B7280">Updated: 2026-06-15</text>
   <!-- stats-updated: 2026-06-15 -->
 </svg>
