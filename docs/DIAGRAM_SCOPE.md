@@ -8,16 +8,18 @@ CViper maintains a set of architecture diagrams for three audiences: technical r
 
 | Rule | Detail |
 |------|--------|
-| **Format** | Hand-crafted SVG in `frontend/public/showcase/` |
+| **Source of truth** | JSON specs in `docs/diagrams/*.json` — edit these, never the SVG |
+| **Generator** | `python scripts/diagram_gen.py` renders `docs/diagrams/*.json` → `frontend/public/showcase/*.svg`. Commit the JSON + SVG together |
+| **Styling tokens** | `frontend/src/utils/diagram-tokens.json` — shared palette, fonts, status badges, and connector styles. The single source that keeps the whole set visually consistent |
 | **Rendering** | Displayed on the About page via `AboutProject.jsx` |
-| **Structural reference** | `.mmd` (Mermaid) files in `docs/diagrams/` — reference only, never rendered |
-| **Sentinel** | Every SVG must contain `<!-- HAND-CRAFTED: Do not regenerate -->` |
-| **Stats sync** | `python scripts/generate_stats.py` patches numeric stats into SVGs automatically |
-| **Drift check** | `python scripts/docs_drift_check.py` verifies provider exclusions, stat accuracy, and sentinels |
+| **Structural reference** | `.mmd` (Mermaid) files in `docs/diagrams/` — optional human-readable topology reference, NOT the generation source |
+| **Sentinel** | Every generated SVG carries `<!-- HAND-CRAFTED: Do not regenerate — generated from docs/diagrams/<name>.json by scripts/diagram_gen.py -->` (emitted by the generator; verified by the drift check) |
+| **Stats sync** | Numeric stats use `@stats.<key>` references in the JSON; `python scripts/generate_stats.py` keeps them current — never hardcode counts |
+| **Drift check** | `python scripts/docs_drift_check.py` verifies provider exclusions, stat accuracy, sentinels, and orthogonal connectors |
 | **Local-only providers** | `pluribus` and `ollama_relay` must NEVER appear as labelled boxes in showcase SVGs |
-| **Auto-correction** | CLAUDE.md rules #12 (no SVG overwrite) and #16 (validation before commit) |
+| **Auto-correction** | CLAUDE.md rule #57 (SVGs are generated, not hand-edited — supersedes #12→#16→#29, LESSON-081) and #58 (cache-buster chain intact) |
 
-**Important**: Never auto-generate SVGs from `.mmd` files. The `.mmd` files are kept as structural reference for developers who want to understand the diagram topology in text form. The SVGs are hand-crafted with custom colours, layout, and styling for professional presentation.
+**Important**: Showcase SVGs are **generated** from the JSON specs — never hand-edit the SVG (direct SVG edits fail CI, rule #57). Edit `docs/diagrams/<name>.json`, run `python scripts/diagram_gen.py`, and commit the JSON + regenerated SVG together. The `.mmd` files are an optional Mermaid reference for reading the topology in text form; they are not rendered and are not the generation source. All colours, fonts, and connector styles live in `frontend/src/utils/diagram-tokens.json` so the whole set stays visually consistent.
 
 ## Diagram Registry
 
@@ -49,8 +51,8 @@ CViper maintains a set of architecture diagrams for three audiences: technical r
 - Request flow: User -> Cloudflare -> Frontend -> Backend API -> DB / AI Providers
 
 **Stats to keep current** (auto-synced by `generate_stats.py`):
-- Endpoint count (currently 259)
-- Component count (currently 44)
+- Endpoint count (currently 299)
+- Component count (currently 86)
 - Fallback method count (currently 26)
 
 ### 2. CI/CD Deployment Pipeline
@@ -89,7 +91,7 @@ CViper maintains a set of architecture diagrams for three audiences: technical r
 **Stats to keep current** (auto-synced):
 - Fallback template count (currently 26)
 
-### 4. Container & Local Dev Architecture (Planned)
+### 4. Container & Local Dev Architecture
 
 **Purpose**: C4 Level 3 view for developer onboarding.
 
@@ -107,7 +109,7 @@ CViper maintains a set of architecture diagrams for three audiences: technical r
   - Database: SQLite (file-based for dev, in-memory for tests)
   - No Key Vault / Blob Storage (graceful fallback)
 
-### 5. Data Model / ERD (Planned)
+### 5. Data Model / ERD
 
 **Purpose**: Show database table relationships and the dual-database strategy.
 
@@ -115,10 +117,10 @@ CViper maintains a set of architecture diagrams for three audiences: technical r
 - Core tables: users, jobs, searches, companies, salary_estimates, salary_benchmarks, cv_analyses, cv_versions, search_profiles, seen_jobs, skill_trends, config
 - Relationships and cardinality (users 1->N jobs, jobs 1->N cv_analyses, etc.)
 - Dual-database note: PostgreSQL (production) vs SQLite (dev/CI) via SQLAlchemy dialect abstraction
-- Alembic migration chain (30 migrations)
+- Alembic migration chain (44 migrations)
 - Key constraints: partial unique index on email, user_id scoping on all user-owned tables
 
-### 6. Auth & RBAC Flow (Planned)
+### 6. Auth & RBAC Flow
 
 **Purpose**: Document the full authentication and authorization lifecycle.
 
@@ -145,24 +147,26 @@ CViper maintains a set of architecture diagrams for three audiences: technical r
 | Database table added/removed | Update ERD (when created) |
 | Auth flow changed | Update Auth & RBAC Flow (when created) |
 
-### Update Checklist (CLAUDE.md rule #16)
+### Update Checklist (CLAUDE.md rule #57)
 
-When editing any showcase SVG:
-1. Verify connector lines/paths do NOT cross through any box they are not connecting to
-2. Run `python scripts/generate_stats.py` to auto-sync numeric stats
-3. Run `python scripts/docs_drift_check.py` to verify no drift
-4. Verify no `LOCAL_ONLY_PROVIDERS` (pluribus, ollama_relay) appear as labelled boxes
-5. Verify the `<!-- HAND-CRAFTED: Do not regenerate -->` sentinel is present
+When changing any diagram, edit the JSON spec (never the SVG), then:
+1. Run `python scripts/diagram_gen.py` to regenerate the SVG(s)
+2. Verify connector lines/paths do NOT cross through any box they are not connecting to
+3. Run `python scripts/generate_stats.py` to sync numeric stats (if counts changed)
+4. Run `python scripts/docs_drift_check.py` to verify no drift
+5. Verify no `LOCAL_ONLY_PROVIDERS` (pluribus, ollama_relay) appear as labelled boxes
+6. Commit the JSON spec + regenerated SVG together
 
 ### Creating a New Diagram
 
-1. Create the SVG in `frontend/public/showcase/` with the hand-crafted sentinel
-2. Create a `.mmd` structural reference in `docs/diagrams/`
-3. Add the SVG to `AboutProject.jsx` (if it should appear on the About page)
-4. Add a row to the Diagram Registry table above
-5. Add any auto-syncable stats to `generate_stats.py`
-6. Add any drift checks to `docs_drift_check.py`
-7. Update this document
+1. Write the JSON spec in `docs/diagrams/<name>.json` (reuse styles/connectors from `diagram-tokens.json`)
+2. Run `python scripts/diagram_gen.py <name>` to generate `frontend/public/showcase/<name>.svg`
+3. (Optional) Add a `.mmd` topology reference in `docs/diagrams/`
+4. Add the SVG to `AboutProject.jsx` (if it should appear on the About page)
+5. Register it in `frontend/e2e/diagram-visual-regression.spec.js` (`DIAGRAMS`) and capture baselines
+6. Add a row to the Diagram Registry table above
+7. Add any auto-syncable stats to `generate_stats.py` and any drift checks to `docs_drift_check.py`
+8. Update this document
 
 ## Owner
 

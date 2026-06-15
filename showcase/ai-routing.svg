@@ -148,7 +148,6 @@
   <g filter="url(#shadow)">
     <rect x="662" y="660" width="170" height="110" rx="8" fill="#f1f5f9" stroke="#64748b" stroke-width="1.5"/>
     <text x="747" y="680" text-anchor="middle" font-size="11" font-weight="700" fill="#334155">Legend</text>
-    <text x="747" y="720" text-anchor="middle" font-size="9" fill="#6366f1" font-style="italic">(see colour-coded arrows above)</text>
   </g>
   <path d="M 424 58 L 424 76" stroke="#94a3b8" stroke-width="1.0" fill="none" marker-end="url(#arrow)"/>
   <path d="M 340 108 L 200 108 L 200 146" stroke="#EF4444" stroke-width="1.2" fill="none" marker-end="url(#arrow-red)"/>
@@ -171,6 +170,14 @@
   <text x="425" y="522" text-anchor="middle" font-size="6" fill="#10B981" font-weight="500">Closed</text>
   <path d="M 424 596 L 424 630" stroke="#EF4444" stroke-width="1.0" fill="none" stroke-dasharray="4,2" marker-end="url(#arrow-red)"/>
   <text x="425" y="590" text-anchor="middle" font-size="6" fill="#EF4444" font-weight="500">all providers fail</text>
+  <line x1="676" y1="700" x2="698" y2="700" stroke="#94a3b8" stroke-width="1" marker-end="url(#arrow)"/>
+  <text x="706" y="703" font-size="7" fill="#6b7280">Standard flow</text>
+  <line x1="676" y1="717" x2="698" y2="717" stroke="#10B981" stroke-width="1.2" marker-end="url(#arrow-green)"/>
+  <text x="706" y="720" font-size="7" fill="#6b7280">Success path</text>
+  <line x1="676" y1="734" x2="698" y2="734" stroke="#EF4444" stroke-width="1.2" marker-end="url(#arrow-red)"/>
+  <text x="706" y="737" font-size="7" fill="#6b7280">Demo path</text>
+  <line x1="676" y1="751" x2="698" y2="751" stroke="#EF4444" stroke-width="1" stroke-dasharray="4,2" marker-end="url(#arrow-red)"/>
+  <text x="706" y="754" font-size="7" fill="#6b7280">Keyword fallback</text>
   <text x="425" y="750" text-anchor="middle" font-size="7" fill="#94a3b8">CViper · AI Routing &amp; Fallback Architecture</text>
   <text x="830" y="772" text-anchor="end" font-size="10" fill="#6B7280">Updated: 2026-04-15</text>
   <!-- stats-updated: 2026-06-15 -->
