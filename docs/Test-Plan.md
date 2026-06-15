@@ -171,7 +171,10 @@ gate (tagged `@critical-regression` in Playwright specs).
 | AI prompt regressions / fallback | LESSON-022 (sandbox providers) | 1.3.3 |
 | Job tracker data persistence | rule #24 (per-user scoping) | 1.6.6, 1.6.8 |
 | Essential controls always visible | rule #25 | 1.5.5 |
-| PWA installability | (when enabled) | TBD |
+| PWA installability / offline | manifest, SW registration, precache, offline shell | `pwa-install.spec.js` (manifest + SW + offline shell). NOTE: full offline re-hydration + "graceful no-cache" messaging need a production *preview* server — the dev-server webServer cannot serve the SPA offline reliably (unhashed `/src/main.jsx` is not precached). |
+| iOS Safari WebKit quirks | docs/ios-safari-quirks.md #1–#7 | `src/utils/ios-safari-quirks.contract.test.js` (#2 100dvh, #4 safe-area, #6 button font-size, #7 file-pick). GAPS reported: #3 hover not gated behind `@media (hover:hover)` (38 rules); #1/#5 date-input appearance reset missing in AdminPanel.jsx:601. |
+| CV-drafts promote convergence + no user_id leak | rule #24, ADR-008 | `test_cv_drafts_promote_race.py`, `test_cv_drafts_no_userid_leak.py` |
+| AI resilience (per-user circuit breaker, keyword fallback) | CV-250 | `test_ai_resilience_quality.py` (@quality, manual gate) |
 
 ---
 

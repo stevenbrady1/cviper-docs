@@ -156,4 +156,12 @@ Apply [CLAUDE.md Test Design Checklist](../CLAUDE.md) — happy / negative / bou
 | Per-section structured diff (DiffView) | Phase 2 — `structured_changes` column ships unused in Phase 1 per ADR-008 |
 | `superseded_at` GC job | Phase 2 — no GC sweep in Phase 1; drafts persist indefinitely |
 | `CV_FABRICATION_STRICT=true` rollout in production | Operational — flip after observing real-world high-risk rate via `event_type=draft_dual_write_ok` logs |
-| Concurrent `promote_cv_draft` race | Phase 2 — single-user single-tab assumption; SQLAlchemy's row-level lock is adequate for Phase 1 |
+| Concurrent `promote_cv_draft` race — true multi-connection | Phase 2 — single-user single-tab assumption. The **convergence invariant** (back-to-back promotes → exactly one `is_current`) is now COVERED by `test_cv_drafts_promote_race.py`; a genuine two-Postgres-session row-lock contention test is still deferred (the in-memory SQLite StaticPool serialises writes on one connection, so OS-thread concurrency is not reproducible in-suite). |
+
+### Phase-2 coverage added (test-scope extension, 2026-06-15)
+
+| Gap | Now covered by |
+|---|---|
+| Concurrent promote convergence invariant (exactly-one-current) | `tests/data/test_cv_drafts_promote_race.py` |
+| `user_id` never leaks in list/get/promote responses (end-to-end) | `tests/api/test_cv_drafts_no_userid_leak.py` |
+| v2 promotion demotes v1 in the timeline (API boundary) | `tests/api/test_cv_drafts_no_userid_leak.py::TestV2DemotesV1Timeline` (the timeline *UI* assertion remains a frontend concern) |
