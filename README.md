@@ -26,7 +26,7 @@ CViper is a professional career management tool that helps you discover job oppo
 - **Banking-Grade Security** — security observability dashboards, structured audit logging, and anomaly detection for sensitive operations
 - **Data Retention & GDPR** — automated data retention schedules with configurable policies and email token cleanup for GDPR compliance
 - **Feedback System** — in-app feedback collection with image attachments and admin triage panel
-- **FAQ & Help** — searchable FAQ across 10 categories including AI explainers (tokens, accuracy, API keys)
+- **FAQ & Help** — searchable FAQ across 12 categories including AI explainers (tokens, accuracy, API keys)
 - **Career Insights** — rejection pattern analysis, application strategy, and skills gap roadmap
 - **Job Alerts** — automatic new-job notifications from saved search profiles with deduplication, daily/weekly frequency, and in-app notification bell
 - **Usage Tracking & Tiers** — Free/Pro tier system with per-operation daily limits (AI calls, CV scores, salary estimates, document generation), upgrade prompts, and usage dashboard
