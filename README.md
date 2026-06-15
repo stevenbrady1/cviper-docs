@@ -35,7 +35,7 @@ CViper is a professional career management tool that helps you discover job oppo
 - **AI Disclaimer** — transparent attribution: all AI results come from the user's chosen model, with accuracy warnings in-app and in the privacy policy
 - **PWA Support** — service worker with stale-while-revalidate caching, installable on mobile
 - **Pro Tier (Phase 1)** — admin-assigned `Free → Pro` promotion via `PATCH /api/admin/users/{id}/tier`, "PRO" badge in TopNav, tier-aware daily AI token budgets (Pro 5×, Sandbox 0.5×), nightly demotion sweep for expired Pros (Stripe Phase 2 scaffolding in place)
-- **Infrastructure Resilience** — pre-deploy config validation, server path redaction, 55 lessons-learned with 46 automated auto-correction rules and prevention guards
+- **Infrastructure Resilience** — pre-deploy config validation, server path redaction, 90+ lessons-learned with 64 automated auto-correction rules and prevention guards
 
 ---
 
@@ -260,7 +260,7 @@ cviper/
 │   │   ├── router.py           #   Priority-based provider routing
 │   │   ├── gateway.py          #   Universal call dispatcher
 │   │   └── services/           #   Domain services (CV, matching, docs, scoring)
-│   ├── routes/                 # 20 route modules (search, jobs, auth, admin, etc.)
+│   ├── routes/                 # 30 route modules (search, jobs, auth, admin, etc.)
 │   ├── migrations/             # Alembic migrations (PostgreSQL)
 │   ├── requirements.txt
 │   └── Dockerfile
@@ -278,8 +278,8 @@ cviper/
 │   ├── container-apps.bicep    # Azure Container Apps + networking
 │   └── deploy.sh               # Deployment script with secret management
 ├── docs/                       # Project documentation
-│   ├── runbooks/               # 9 operational runbooks
-│   └── adr/                    # 5 architecture decision records
+│   ├── runbooks/               # 13 operational runbooks
+│   └── adr/                    # 9 architecture decision records
 ├── docker-compose.yml          # Local container orchestration
 ├── .github/workflows/          # CI (automatic) + Deploy (manual gate)
 ├── .env                        # API keys (not committed)
@@ -313,7 +313,7 @@ npm run test:e2e           # headless Chromium
 npm run test:e2e:headed    # with visible browser
 ```
 
-E2E tests use route mocking — no backend needed. 144 specs providing 100% E2E journey coverage across all tabs, modals, and user workflows.
+E2E tests use route mocking — no backend needed. 154 specs providing 100% E2E journey coverage across all tabs, modals, and user workflows.
 
 ---
 
