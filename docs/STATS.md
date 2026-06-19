@@ -9,10 +9,10 @@
 | Route Modules | 30 |
 | AI Providers | 9 |
 | Frontend Components | 86 |
-| Frontend Hooks | 32 |
+| Frontend Hooks | 31 |
 | Alembic Migrations | 44 |
 | Backend Test Files | 405 |
-| Frontend Test Files | 277 |
+| Frontend Test Files | 275 |
 | Backend Tests (approx) | 8,100+ |
 | Frontend Tests (approx) | 3,800+ |
 | Total Tests (approx) | 11,900+ |
