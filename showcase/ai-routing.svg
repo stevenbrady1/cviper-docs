@@ -123,7 +123,7 @@
   <g filter="url(#shadow)">
     <rect x="200" y="630" width="450" height="64" rx="8" fill="#ecfdf5" stroke="#10B981" stroke-width="1.5"/>
     <text x="425" y="652" text-anchor="middle" font-size="13" font-weight="700" fill="#065f46">Keyword Fallback Engine</text>
-    <text x="425" y="670" text-anchor="middle" font-size="9" fill="#6366f1" font-style="italic">26 template methods · covers every AI operation · no API key needed</text>
+    <text x="425" y="670" text-anchor="middle" font-size="9" fill="#6366f1" font-style="italic">27 template methods · covers every AI operation · no API key needed</text>
   </g>
   <g filter="url(#shadow)">
     <rect x="20" y="660" width="168" height="110" rx="8" fill="#f5f3ff" stroke="#8B5CF6" stroke-width="2"/>
@@ -180,5 +180,5 @@
   <text x="706" y="754" font-size="7" fill="#6b7280">Keyword fallback</text>
   <text x="425" y="750" text-anchor="middle" font-size="7" fill="#94a3b8">CViper · AI Routing &amp; Fallback Architecture</text>
   <text x="830" y="772" text-anchor="end" font-size="10" fill="#6B7280">Updated: 2026-04-15</text>
-  <!-- stats-updated: 2026-06-19 -->
+  <!-- stats-updated: 2026-06-22 -->
 </svg>
