@@ -11,9 +11,9 @@
 | Frontend Components | 86 |
 | Frontend Hooks | 32 |
 | Alembic Migrations | 44 |
-| Backend Test Files | 424 |
+| Backend Test Files | 427 |
 | Frontend Test Files | 278 |
-| Backend Tests (approx) | 8,400+ |
+| Backend Tests (approx) | 8,500+ |
 | Frontend Tests (approx) | 3,800+ |
-| Total Tests (approx) | 12,300+ |
+| Total Tests (approx) | 12,400+ |
 | Phases Delivered | 10 |
