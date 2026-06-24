@@ -56,7 +56,7 @@
     <rect x="670" y="80" width="260" height="18" rx="8" fill="#F97316" opacity="0.08"/>
     <text x="686" y="94" font-size="9" font-weight="700" fill="#F97316">3. Try Demo</text>
     <text x="686" y="112" font-size="7.5" fill="#334155">POST /api/auth/sandbox</text>
-    <text x="686" y="124" font-size="7" fill="#6b7280">Creates temporary sandbox user (30-min session)</text>
+    <text x="686" y="124" font-size="7" fill="#6b7280">Creates temporary sandbox user (~1 hr session)</text>
     <text x="686" y="136" font-size="7" fill="#6b7280">Per-fingerprint rate limit · Sandbox-only providers</text>
   </g>
   <g filter="url(#shadow)">
@@ -113,7 +113,7 @@
     <rect x="200" y="506" width="200" height="18" rx="8" fill="#F97316" opacity="0.08"/>
     <text x="216" y="520" font-size="9" font-weight="700" fill="#F97316">Demo User</text>
     <text x="216" y="538" font-size="7" fill="#6b7280">Sandbox providers only</text>
-    <text x="216" y="550" font-size="7" fill="#6b7280">30-min session · Read-heavy · No export</text>
+    <text x="216" y="550" font-size="7" fill="#6b7280">~1 hr session · Read-heavy · No export</text>
     <text x="216" y="562" font-size="7" fill="#6b7280">Auto-logout on expiry · Per-fingerprint rate limit</text>
   </g>
   <g filter="url(#shadow)">

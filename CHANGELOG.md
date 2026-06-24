@@ -44,6 +44,37 @@ This project uses [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 - **CV-372 / #640** — the `cv-analysis-refresh-prompt` mobile visual baseline is quarantined (`test.fixme`) on mobile-safari. Root cause (data-backed): Playwright + WebKit drops a fraction of in-flight intercepted `/api/*` requests under the boot fetch-burst. The real fix (app-side retry on boot data-loaders) is tracked as a follow-up; the test still runs on chromium.
 
+## [0.8.0] - 2026-05-21
+
+> Backfilled 2026-06-24 — this release shipped at commit `1821b5bd` and was recorded in the BRD/FSD/VERSION manifests, but its changelog entry was omitted at the time.
+
+### Added
+
+- **Public-rollout Phase D — legal docs** — `docs/SUB_PROCESSORS.md` (transitive processor index for GDPR Art. 28 DPAs), `docs/DPIA-AI-Processing.md` (AI Data Protection Impact Assessment across the model providers), and `docs/SOLICITOR_BRIEF_TOS_REVIEW.md` (one-shot brief for external Terms-of-Service review before public launch). All three registered in the Documentation Registry under the DPO persona.
+- **Public-rollout Phase E — private-beta invite gate** — feature flag + invite-code table check on `/api/auth/register`, with an admin-only bypass; the gate releases on the go-live signal.
+- **Admin System Health tab (`SystemHealthTab`)** — three panels: Live Health (consumes `/api/health/detailed`), Secrets Inventory (read-only Azure Key Vault secret names + last-modified, never values), and Logs (recent structured log events). New E2E spec `frontend/e2e/admin-system-health.spec.js`.
+- **Tier-expiry cron endpoint (CV-241)** — `POST /api/admin/cron/run-tier-expiry`, shared-secret Bearer auth via `require_cron_secret` (`hmac.compare_digest` against `CRON_SECRET`). Wrapped in `register_public()` so `AuthMiddleware` doesn't pre-empt the dependency in prod (LESSON-091). Returns `{demoted: N}`; 503 when `CRON_SECRET` is unset, 401 on a missing/wrong-scheme/invalid token. Replaces the direct-DB script that broke when Postgres moved behind the VNet private endpoint. Daily cron at 03:00 UTC (`.github/workflows/tier-expiry.yml`).
+- **Mobile — iOS TestFlight Build 16** — full Apple credential chain: Team `TT8K4YT4TQ`, manual signing with Distribution profile `UMAHD524CU` + certificate `8W7UH8F2LS`, `ExportOptions.plist` locked to `signingStyle: manual`, `ITSAppUsesNonExemptEncryption=NO` for auto-pass export compliance, Xcode 26+ runner. `APPLE_*` + APNs env vars wired into `container-apps.bicep` + the staging Bicep. `CapacitorHttp` plugin enabled to bypass WKWebView fetch quirks.
+- **Push notifications (CV-343-2)** — foreground toast component + tap deep-link routing in the iOS and Android wrappers (the `device_tokens` table already existed from CV-331a — no new migration).
+- **Three Japanese-bank career boards** added to `COMPANY_BOARDS_SEED` (226 → 229): Mizuho EMEA (SuccessFactors), MUFG (Workday tenant `mufgub`), SMBC EMEA (SuccessFactors EU) — each verified via a live registry probe.
+
+### Changed
+
+- **Cross-app header standardisation** — all top-level tabs render their title/subtitle/AI-pill through the canonical `<PageHeader>` component, pinned by a registry-driven contract test (22 tests across 11 standardised + 9 exempt tabs).
+- **AI routing chip fix** — `ActiveModelIndicator` now resolves the per-group model from `aiPriority.resolved_models[providerId][group]` (mirrors `AIGateway._resolve_quality_override` at call-time) instead of showing the provider's configured default while a different quality-preset model actually ran. LESSON-038 family — single source of truth via `ai_meta`. Google AI timeout bumped for `gemini-2.5-flash-lite` 95th-percentile latency.
+- **Backend version surface** — `_APP_VERSION` reads from `frontend/package.json` (now 0.8.0); exposed at `GET /` and `GET /api/health`.
+- **Empty env-var crash class** — `int(os.environ.get(NAME, "DEFAULT"))` migrated to the `or` form across 22 sites, with a CI contract scanning for the vulnerable form.
+
+### Fixed
+
+- **Schema-drift recogniser hardening (LESSON-090)** — multi-line `Column(...)` declarations no longer break column extraction (balanced-paren matching); the idempotency-guard recogniser now accepts `dialect.name`, `IF NOT EXISTS`, and `inspector.has_table()`.
+- **CI ACR login resilience** — `az acr login` wrapped in a 3-attempt retry with linear backoff (5s, 10s) to survive transient TLS resets, with fail-fast preserved for real auth errors.
+- **Visual-regression mobile route-storm resilience** — the `cv-analysis-refresh-prompt` baseline reload-and-retries once when the prompt is missing, rescuing from WebKit's parallel-fetch burst on `initializeApp()` overflowing Playwright's interception queue.
+
+### Internal
+
+- 57 commits since 0.7.0. Coverage closed for LESSON-091 (the `AUTH_ENABLED=false` test env had masked `AuthMiddleware` gating of shared-secret admin endpoints in prod) — 3 new prod-middleware regression tests. Operator action pending at release time: set `CRON_SECRET` in GitHub Actions + Azure Key Vault.
+
 ## [0.7.0] - 2026-05-17
 
 ### Added

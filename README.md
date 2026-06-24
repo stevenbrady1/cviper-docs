@@ -35,7 +35,7 @@ CViper is a professional career management tool that helps you discover job oppo
 - **AI Disclaimer** — transparent attribution: all AI results come from the user's chosen model, with accuracy warnings in-app and in the privacy policy
 - **PWA Support** — service worker with stale-while-revalidate caching, installable on mobile
 - **Pro Tier (Phase 1)** — admin-assigned `Free → Pro` promotion via `PATCH /api/admin/users/{id}/tier`, "PRO" badge in TopNav, tier-aware daily AI token budgets (Pro 5×, Sandbox 0.5×), nightly demotion sweep for expired Pros (Stripe Phase 2 scaffolding in place)
-- **Infrastructure Resilience** — pre-deploy config validation, server path redaction, 90+ lessons-learned with 64 automated auto-correction rules and prevention guards
+- **Infrastructure Resilience** — pre-deploy config validation, server path redaction, 90+ lessons-learned with 60+ automated auto-correction rules and prevention guards
 
 ---
 
@@ -197,7 +197,9 @@ CViper supports multiple AI providers. You only need **one** to get started.
 | GitHub Models | `GITHUB_TOKEN` | github.com/settings/tokens |
 | Mistral | `MISTRAL_API_KEY` | console.mistral.ai |
 | OpenRouter | `OPENROUTER_API_KEY` | openrouter.ai |
+| Grok (xAI) | `GROK_API_KEY` | console.x.ai |
 | Ollama (local) | `OLLAMA_ENABLED=true` | ollama.com (free, runs locally) |
+| Pluribus (local) | `PLURIBUS_SECRET` | Anthropic-compatible localhost gateway |
 
 Add keys to your `.env` file and restart the backend. The Settings tab in the UI shows which providers are active.
 
@@ -256,7 +258,7 @@ cviper/
 │   ├── repositories.py         # CRUD operations
 │   ├── ai_service.py           # AI facade → ai/ package
 │   ├── ai/                     # AI subpackage
-│   │   ├── providers.py        #   Provider registry (8 cloud + 2 local providers + 2 sandbox)
+│   │   ├── providers.py        #   Provider registry (7 cloud + 2 local providers + 2 demo keys)
 │   │   ├── router.py           #   Priority-based provider routing
 │   │   ├── gateway.py          #   Universal call dispatcher
 │   │   └── services/           #   Domain services (CV, matching, docs, scoring)
@@ -383,7 +385,7 @@ kill -9 <PID>
 |-------|-----------|
 | Frontend | React 18, Vite, CSS (custom design system) |
 | Backend | Python, FastAPI, Uvicorn |
-| AI | OpenAI, Anthropic, Google Gemini, GitHub Models, Mistral, OpenRouter, Ollama |
+| AI | OpenAI, Anthropic, Google Gemini, Grok, GitHub Models, Mistral, OpenRouter, Pluribus, Ollama |
 | CV Parsing | PyPDF2, python-docx |
 | Database | PostgreSQL (production via Azure Flexible Server), SQLite (local dev) |
 | ORM | SQLAlchemy 2.0 + Alembic migrations |

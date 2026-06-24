@@ -35,18 +35,28 @@
   <text x="450" y="43" text-anchor="middle" font-size="9.5" fill="#64748b">Job Search Platform  ·  Production Deployment</text>
   <g filter="url(#shadow-light)">
     <rect x="20" y="54" width="860" height="52" rx="8" fill="#eff6ff" stroke="#3B82F6" stroke-width="1.5"/>
-    <rect x="28" y="58" width="52" height="16" rx="4" fill="#3B82F6" opacity="0.15"/>
-    <text x="54" y="69" text-anchor="middle" font-size="7.5" font-weight="700" fill="#3B82F6" letter-spacing="0.5">USERS</text>
+    <rect x="28" y="58" width="130" height="16" rx="4" fill="#3B82F6" opacity="0.15"/>
+    <text x="93" y="69" text-anchor="middle" font-size="7.5" font-weight="700" fill="#3B82F6" letter-spacing="0.5">USERS &amp; CLIENTS</text>
   </g>
   <g filter="url(#shadow-light)">
-    <rect x="290" y="64" width="140" height="34" rx="8" fill="#f1f5f9" stroke="#64748b" stroke-width="1.5"/>
-    <rect x="290" y="64" width="140" height="0" rx="8" fill="#64748b" opacity="0.08"/>
-    <text x="306" y="78" font-size="9" font-weight="600" fill="#64748b">Authenticated</text>
+    <rect x="170" y="64" width="140" height="34" rx="8" fill="#f1f5f9" stroke="#64748b" stroke-width="1.5"/>
+    <rect x="170" y="64" width="140" height="0" rx="8" fill="#64748b" opacity="0.08"/>
+    <text x="186" y="78" font-size="9" font-weight="600" fill="#64748b">Authenticated</text>
   </g>
   <g filter="url(#shadow-light)">
-    <rect x="470" y="64" width="140" height="34" rx="8" fill="#f1f5f9" stroke="#64748b" stroke-width="1.5"/>
-    <rect x="470" y="64" width="140" height="0" rx="8" fill="#64748b" opacity="0.08"/>
-    <text x="486" y="78" font-size="9" font-weight="600" fill="#64748b">Demo User</text>
+    <rect x="325" y="64" width="140" height="34" rx="8" fill="#f1f5f9" stroke="#64748b" stroke-width="1.5"/>
+    <rect x="325" y="64" width="140" height="0" rx="8" fill="#64748b" opacity="0.08"/>
+    <text x="341" y="78" font-size="9" font-weight="600" fill="#64748b">Demo User</text>
+  </g>
+  <g filter="url(#shadow-light)">
+    <rect x="480" y="64" width="120" height="34" rx="8" fill="#eff6ff" stroke="#3B82F6" stroke-width="1.5"/>
+    <rect x="480" y="64" width="120" height="0" rx="8" fill="#3B82F6" opacity="0.08"/>
+    <text x="496" y="78" font-size="8.5" font-weight="600" fill="#3B82F6">Web Browser</text>
+  </g>
+  <g filter="url(#shadow-light)">
+    <rect x="615" y="64" width="250" height="34" rx="8" fill="#eff6ff" stroke="#3B82F6" stroke-width="1.5"/>
+    <rect x="615" y="64" width="250" height="0" rx="8" fill="#3B82F6" opacity="0.08"/>
+    <text x="631" y="78" font-size="8" font-weight="600" fill="#3B82F6">iOS · Android (Capacitor wrap of the SPA)</text>
   </g>
   <g filter="url(#shadow-light)">
     <rect x="20" y="114" width="860" height="42" rx="8" fill="#fff7ed" stroke="#F97316" stroke-width="1.5"/>
