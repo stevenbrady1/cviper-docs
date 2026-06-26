@@ -32,7 +32,7 @@
 
   <rect width="1100" height="880" fill="#fafbfc"/>
   <text x="550" y="28" text-anchor="middle" font-size="16" font-weight="700" fill="#1e293b" letter-spacing="0.4">CViper Data Model</text>
-  <text x="550" y="43" text-anchor="middle" font-size="9.5" fill="#64748b">37 Tables  ·  PostgreSQL (Production) + SQLite (Dev/CI)  ·  @stats.migrations Alembic Migrations</text>
+  <text x="550" y="43" text-anchor="middle" font-size="9.5" fill="#64748b">38 Tables  ·  PostgreSQL (Production) + SQLite (Dev/CI)  ·  @stats.migrations Alembic Migrations</text>
   <g filter="url(#shadow)">
     <rect x="420" y="80" width="260" height="130" rx="8" fill="#fef2f2" stroke="#EF4444" stroke-width="1.5"/>
     <rect x="420" y="80" width="260" height="20" rx="8" fill="#EF4444" opacity="0.08"/>
@@ -342,6 +342,13 @@
     <text x="572" y="752" font-size="7" fill="#6b7280">id PK · admin_user_id FK SET NULL</text>
     <text x="572" y="764" font-size="7" fill="#6b7280">table_name · record_id · old/new_values (JSON)</text>
   </g>
+  <g filter="url(#shadow-light)">
+    <rect x="822" y="722" width="254" height="52" rx="8" fill="#f5f3ff" stroke="#8B5CF6" stroke-width="2"/>
+    <rect x="822" y="722" width="254" height="16" rx="8" fill="#8B5CF6" opacity="0.08"/>
+    <text x="838" y="736" font-size="8.5" font-weight="700" fill="#8B5CF6">api_keys</text>
+    <text x="838" y="752" font-size="7" fill="#6b7280">id PK · user_id FK CASCADE</text>
+    <text x="838" y="764" font-size="7" fill="#6b7280">key_prefix (idx) · key_hash · scopes · revoked_at</text>
+  </g>
   <text x="1080" y="872" text-anchor="end" font-size="10" fill="#6B7280">Updated: 2026-04-15</text>
-  <!-- stats-updated: 2026-06-24 -->
+  <!-- stats-updated: 2026-06-26 -->
 </svg>

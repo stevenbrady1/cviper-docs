@@ -213,5 +213,5 @@
   <text x="240" y="656" font-size="8" font-weight="400" fill="#64748b">9 cloud providers (keys in Key Vault)</text>
   <text x="620" y="656" font-size="8" font-weight="400" fill="#64748b">Ollama (free) + cloud providers (.env keys)</text>
   <text x="900" y="702" text-anchor="end" font-size="10" fill="#6B7280">Updated: 2026-04-15</text>
-  <!-- stats-updated: 2026-06-24 -->
+  <!-- stats-updated: 2026-06-26 -->
 </svg>
