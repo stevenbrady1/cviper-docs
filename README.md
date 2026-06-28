@@ -23,8 +23,10 @@ CViper is a professional career management tool that helps you discover job oppo
 - **Guided Onboarding** — step-by-step tour for new users (including demo mode) with nudge banners and progress tracking
 - **Demo Mode** — restricted sandbox with sample data, guided tour, and a step-by-step API key guide for non-technical users
 - **RBAC & Auth** — JWT-based authentication with admin, standard, and sandbox user roles, with email verification via deep-link after registration
+- **Personal API Keys** — self-service scoped API keys (`cvk_`) so users can call the API with their own credentials, resolved per-owner with scope enforcement
 - **Banking-Grade Security** — security observability dashboards, structured audit logging, and anomaly detection for sensitive operations
 - **Data Retention & GDPR** — automated data retention schedules with configurable policies and email token cleanup for GDPR compliance
+- **Cross-Border Consent** — GDPR special-category and cross-border data-transfer consent gate shown before AI processing routes personal data to overseas providers
 - **Feedback System** — in-app feedback collection with image attachments and admin triage panel
 - **FAQ & Help** — searchable FAQ across 12 categories including AI explainers (tokens, accuracy, API keys)
 - **Career Insights** — rejection pattern analysis, application strategy, and skills gap roadmap

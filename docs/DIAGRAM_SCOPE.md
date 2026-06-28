@@ -51,8 +51,8 @@ CViper maintains a set of architecture diagrams for three audiences: technical r
 - Request flow: User -> Cloudflare -> Frontend -> Backend API -> DB / AI Providers
 
 **Stats to keep current** (auto-synced by `generate_stats.py`):
-- Endpoint count (currently 299)
-- Component count (currently 86)
+- Endpoint count (currently 307)
+- Component count (currently 87)
 - Fallback method count (currently 26)
 
 ### 2. CI/CD Deployment Pipeline
