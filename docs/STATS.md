@@ -11,9 +11,9 @@
 | Frontend Components | 87 |
 | Frontend Hooks | 37 |
 | Alembic Migrations | 45 |
-| AI Package Modules | 32 |
+| AI Package Modules | 33 |
 | AI Domain Services | 7 |
-| Backend Test Files | 440 |
+| Backend Test Files | 444 |
 | Frontend Test Files | 293 |
 | Backend Tests (approx) | 8,800+ |
 | Frontend Tests (approx) | 4,100+ |
