@@ -32,7 +32,7 @@
 
   <rect width="1100" height="880" fill="#fafbfc"/>
   <text x="550" y="28" text-anchor="middle" font-size="16" font-weight="700" fill="#1e293b" letter-spacing="0.4">CViper Data Model</text>
-  <text x="550" y="43" text-anchor="middle" font-size="9.5" fill="#64748b">38 Tables  ·  PostgreSQL (Production) + SQLite (Dev/CI)  ·  @stats.migrations Alembic Migrations</text>
+  <text x="550" y="43" text-anchor="middle" font-size="9.5" fill="#64748b">38 Tables  ·  PostgreSQL (Production) + SQLite (Dev/CI)  ·  46 Alembic Migrations</text>
   <g filter="url(#shadow)">
     <rect x="420" y="80" width="260" height="130" rx="8" fill="#fef2f2" stroke="#EF4444" stroke-width="1.5"/>
     <rect x="420" y="80" width="260" height="20" rx="8" fill="#EF4444" opacity="0.08"/>
@@ -41,7 +41,7 @@
     <text x="436" y="126" font-size="7" fill="#6b7280">username  (str unique)</text>
     <text x="436" y="138" font-size="7" fill="#6b7280">email  (text · partial unique)</text>
     <text x="436" y="150" font-size="7" fill="#6b7280">role · is_admin · is_sandbox · email_verified</text>
-    <text x="436" y="162" font-size="7" fill="#6b7280">provider  (local | linkedin | google | sandbox)</text>
+    <text x="436" y="162" font-size="7" fill="#6b7280">provider  (local | linkedin | google | microsoft | sandbox)</text>
     <text x="436" y="174" font-size="7" fill="#6b7280">password_hash · salt · avatar_url</text>
     <text x="436" y="186" font-size="7" fill="#6b7280">created_at · updated_at</text>
     <text x="436" y="204" font-size="6.5" fill="#94a3b8">Central hub: nearly all tables FK here</text>
@@ -99,10 +99,9 @@
     <text x="40" y="348" font-size="7" fill="#6b7280">id  (str PK) · title · company · url</text>
     <text x="40" y="360" font-size="7" fill="#6b7280">user_id FK → users CASCADE</text>
     <text x="40" y="372" font-size="7" fill="#6b7280">cv_version_id FK → cv_versions SET NULL</text>
-    <text x="40" y="384" font-size="7" fill="#6b7280">match_score (0-100) · ai_score · keyword_score</text>
-    <text x="40" y="396" font-size="7" fill="#6b7280">sub_scores (JSON) · status (idx)</text>
-    <text x="40" y="408" font-size="7" fill="#6b7280">deep_analysis · blob_keys · archived</text>
-    <text x="40" y="412" font-size="6" fill="#94a3b8">~45 columns — most column-heavy table</text>
+    <text x="40" y="384" font-size="7" fill="#6b7280">match_score · ai_score · keyword_score · sub_scores</text>
+    <text x="40" y="396" font-size="7" fill="#6b7280">status (idx) · deep_analysis · blob_keys · archived</text>
+    <text x="40" y="412" font-size="6" fill="#94a3b8">~69 columns — most column-heavy table</text>
   </g>
   <g filter="url(#shadow-light)">
     <rect x="24" y="428" width="170" height="50" rx="8" fill="#eff6ff" stroke="#3B82F6" stroke-width="1.5"/>
@@ -201,7 +200,7 @@
     <rect x="710" y="378" width="170" height="58" rx="8" fill="#f5f3ff" stroke="#8B5CF6" stroke-width="2"/>
     <rect x="710" y="378" width="170" height="16" rx="8" fill="#8B5CF6" opacity="0.08"/>
     <text x="726" y="392" font-size="8.5" font-weight="700" fill="#8B5CF6">ai_prompt_logs</text>
-    <text x="726" y="408" font-size="7" fill="#6b7280">user_id (no FK — kept on delete)</text>
+    <text x="726" y="408" font-size="7" fill="#6b7280">user_id FK CASCADE (GDPR erasure)</text>
     <text x="726" y="420" font-size="7" fill="#6b7280">task · provider · model</text>
     <text x="726" y="432" font-size="7" fill="#6b7280">input/output/total_tokens</text>
   </g>
@@ -349,6 +348,6 @@
     <text x="838" y="752" font-size="7" fill="#6b7280">id PK · user_id FK CASCADE</text>
     <text x="838" y="764" font-size="7" fill="#6b7280">key_prefix (idx) · key_hash · scopes · revoked_at</text>
   </g>
-  <text x="1080" y="872" text-anchor="end" font-size="10" fill="#6B7280">Updated: 2026-04-15</text>
+  <text x="1080" y="872" text-anchor="end" font-size="10" fill="#6B7280">Updated: 2026-07-03</text>
   <!-- stats-updated: 2026-07-03 -->
 </svg>

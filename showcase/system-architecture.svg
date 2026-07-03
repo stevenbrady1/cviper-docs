@@ -49,14 +49,14 @@
     <text x="341" y="78" font-size="9" font-weight="600" fill="#64748b">Demo User</text>
   </g>
   <g filter="url(#shadow-light)">
-    <rect x="480" y="64" width="120" height="34" rx="8" fill="#eff6ff" stroke="#3B82F6" stroke-width="1.5"/>
-    <rect x="480" y="64" width="120" height="0" rx="8" fill="#3B82F6" opacity="0.08"/>
+    <rect x="480" y="64" width="140" height="34" rx="8" fill="#eff6ff" stroke="#3B82F6" stroke-width="1.5"/>
+    <rect x="480" y="64" width="140" height="0" rx="8" fill="#3B82F6" opacity="0.08"/>
     <text x="496" y="78" font-size="8.5" font-weight="600" fill="#3B82F6">Web Browser</text>
   </g>
   <g filter="url(#shadow-light)">
-    <rect x="615" y="64" width="250" height="34" rx="8" fill="#eff6ff" stroke="#3B82F6" stroke-width="1.5"/>
-    <rect x="615" y="64" width="250" height="0" rx="8" fill="#3B82F6" opacity="0.08"/>
-    <text x="631" y="78" font-size="8" font-weight="600" fill="#3B82F6">iOS · Android (Capacitor wrap of the SPA)</text>
+    <rect x="635" y="64" width="230" height="34" rx="8" fill="#eff6ff" stroke="#3B82F6" stroke-width="1.5"/>
+    <rect x="635" y="64" width="230" height="0" rx="8" fill="#3B82F6" opacity="0.08"/>
+    <text x="651" y="78" font-size="8" font-weight="600" fill="#3B82F6">iOS · Android (Capacitor wrap of the SPA)</text>
   </g>
   <g filter="url(#shadow-light)">
     <rect x="20" y="114" width="860" height="42" rx="8" fill="#fff7ed" stroke="#F97316" stroke-width="1.5"/>
@@ -112,7 +112,7 @@
     <rect x="540" y="306" width="220" height="64" rx="8" fill="#f5f3ff" stroke="#8B5CF6" stroke-width="2"/>
     <rect x="540" y="306" width="220" height="0" rx="8" fill="#8B5CF6" opacity="0.08"/>
     <text x="556" y="320" font-size="9" font-weight="700" fill="#8B5CF6">Keyword Fallback</text>
-    <text x="556" y="332" font-size="7" fill="#6b7280">27-method Fallback Service</text>
+    <text x="556" y="332" font-size="7" fill="#6b7280">Covers all 27 AI task operations</text>
     <text x="556" y="344" font-size="7" fill="#6b7280">Non-AI scoring &amp; analysis</text>
     <text x="556" y="356" font-size="7" fill="#6b7280">Synonym lookup · Keyword expansion</text>
   </g>
@@ -125,7 +125,7 @@
     <rect x="30" y="434" width="160" height="42" rx="8" fill="#fef3c7" stroke="#F59E0B" stroke-width="1.5"/>
     <rect x="30" y="434" width="160" height="0" rx="8" fill="#F59E0B" opacity="0"/>
     <text x="46" y="448" font-size="9" font-weight="700" fill="#F59E0B">PostgreSQL</text>
-    <text x="46" y="460" font-size="7" fill="#6b7280">Azure Flex  ·  PgBouncer</text>
+    <text x="46" y="460" font-size="7" fill="#6b7280">Azure Flex · VNet private</text>
   </g>
   <g filter="url(#shadow)">
     <rect x="200" y="434" width="160" height="42" rx="8" fill="#fef3c7" stroke="#F59E0B" stroke-width="1.5"/>
@@ -190,18 +190,23 @@
     <rect x="560" y="410" width="320" height="118" rx="8" fill="#f1f5f9" stroke="#64748b" stroke-width="1.5"/>
     <rect x="568" y="414" width="150" height="16" rx="4" fill="#64748b" opacity="0.15"/>
     <text x="643" y="425" text-anchor="middle" font-size="7.5" font-weight="700" fill="#64748b" letter-spacing="0.5">OBSERVABILITY</text>
+    <text x="720" y="500" text-anchor="middle" font-size="9" fill="#64748b" font-style="italic">Log Analytics live · Prometheus/Loki/Grafana opt-in</text>
   </g>
   <g filter="url(#shadow-light)">
-    <rect x="580" y="438" width="90" height="34" rx="8" fill="#f1f5f9" stroke="#64748b" stroke-width="1.5"/>
-    <text x="625" y="458" text-anchor="middle" font-size="8.5" font-weight="600" fill="#334155">Prometheus</text>
+    <rect x="575" y="438" width="68" height="34" rx="8" fill="#f1f5f9" stroke="#64748b" stroke-width="1.5"/>
+    <text x="609" y="458" text-anchor="middle" font-size="7.5" font-weight="600" fill="#334155">Log Analytics</text>
   </g>
   <g filter="url(#shadow-light)">
-    <rect x="685" y="438" width="80" height="34" rx="8" fill="#f1f5f9" stroke="#64748b" stroke-width="1.5"/>
-    <text x="725" y="458" text-anchor="middle" font-size="8.5" font-weight="600" fill="#334155">Loki</text>
+    <rect x="649" y="438" width="68" height="34" rx="8" fill="#f1f5f9" stroke="#64748b" stroke-width="1.5"/>
+    <text x="683" y="458" text-anchor="middle" font-size="7.5" font-weight="600" fill="#334155">Prometheus</text>
   </g>
   <g filter="url(#shadow-light)">
-    <rect x="780" y="438" width="80" height="34" rx="8" fill="#f1f5f9" stroke="#64748b" stroke-width="1.5"/>
-    <text x="820" y="458" text-anchor="middle" font-size="8.5" font-weight="600" fill="#334155">Grafana</text>
+    <rect x="723" y="438" width="68" height="34" rx="8" fill="#f1f5f9" stroke="#64748b" stroke-width="1.5"/>
+    <text x="757" y="458" text-anchor="middle" font-size="7.5" font-weight="600" fill="#334155">Loki</text>
+  </g>
+  <g filter="url(#shadow-light)">
+    <rect x="797" y="438" width="68" height="34" rx="8" fill="#f1f5f9" stroke="#64748b" stroke-width="1.5"/>
+    <text x="831" y="458" text-anchor="middle" font-size="7.5" font-weight="600" fill="#334155">Grafana</text>
   </g>
   <path d="M 450 98 L 450 114" stroke="#94a3b8" stroke-width="1.0" fill="none" marker-end="url(#arrow)"/>
   <path d="M 450 156 L 450 174" stroke="#94a3b8" stroke-width="1.0" fill="none" marker-end="url(#arrow)"/>
@@ -209,6 +214,6 @@
   <path d="M 660 260 L 660 280" stroke="#8B5CF6" stroke-width="1.2" fill="none" marker-end="url(#arrow-purple)"/>
   <path d="M 450 384 L 450 398 L 550 398 L 550 532 L 550 540" stroke="#8B5CF6" stroke-width="1.2" fill="none" marker-end="url(#arrow-purple)"/>
   <text x="450" y="726" text-anchor="middle" font-size="7" fill="#94a3b8">9 AI Providers  ·  307 API Endpoints  ·  88 Components  ·  8,900+ Backend Tests  ·  4,200+ Frontend Tests</text>
-  <text x="880" y="748" text-anchor="end" font-size="10" fill="#6B7280">Updated: 2026-06-15</text>
+  <text x="880" y="748" text-anchor="end" font-size="10" fill="#6B7280">Updated: 2026-07-03</text>
   <!-- stats-updated: 2026-07-03 -->
 </svg>

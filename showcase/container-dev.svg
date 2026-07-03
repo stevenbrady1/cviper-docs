@@ -60,8 +60,8 @@
     <rect x="240" y="158" width="180" height="80" rx="8" fill="#ecfdf5" stroke="#10B981" stroke-width="1.5"/>
     <rect x="240" y="158" width="180" height="16" rx="8" fill="#10B981" opacity="0.08"/>
     <text x="256" y="172" font-size="9" font-weight="700" fill="#10B981">cviper-backend</text>
-    <text x="256" y="188" font-size="7.5" fill="#334155">Gunicorn + FastAPI</text>
-    <text x="256" y="200" font-size="7" fill="#6b7280">Uvicorn workers</text>
+    <text x="256" y="188" font-size="7.5" fill="#334155">Uvicorn + FastAPI</text>
+    <text x="256" y="200" font-size="7" fill="#6b7280">Multi-worker processes</text>
     <text x="256" y="212" font-size="7" fill="#6b7280">Port 8000</text>
     <text x="256" y="224" font-size="7" fill="#6b7280">AUTH_ENABLED=true</text>
   </g>
@@ -69,14 +69,14 @@
     <rect x="40" y="252" width="380" height="50" rx="8" fill="#f5f3ff" stroke="#8B5CF6" stroke-width="2"/>
     <rect x="40" y="252" width="380" height="0" rx="8" fill="#8B5CF6" opacity="0"/>
     <text x="56" y="266" font-size="8" font-weight="600" fill="#8B5CF6">Env Vars (from Bicep + Key Vault)</text>
-    <text x="56" y="278" font-size="7" fill="#6b7280">DATABASE_URL · JWT_SECRET_KEY · OPENAI_API_KEY · GOOGLE_API_KEY</text>
-    <text x="56" y="290" font-size="7" fill="#6b7280">ANTHROPIC_API_KEY · CLOUD_MODE=true · AUTH_ENABLED=true</text>
+    <text x="56" y="278" font-size="7" fill="#6b7280">DATABASE_URL · JWT_SECRET_KEY · GOOGLE_API_KEY · CLOUD_MODE=true</text>
+    <text x="56" y="290" font-size="7" fill="#6b7280">AUTH_ENABLED=true · other AI keys: admin-managed + per-user</text>
   </g>
   <g filter="url(#shadow)">
     <rect x="40" y="316" width="160" height="48" rx="8" fill="#fef3c7" stroke="#F59E0B" stroke-width="1.5"/>
     <rect x="40" y="316" width="160" height="0" rx="8" fill="#F59E0B" opacity="0"/>
     <text x="56" y="330" font-size="10" font-weight="700" fill="#F59E0B">PostgreSQL</text>
-    <text x="56" y="342" font-size="7" fill="#6b7280">Azure Flex · PgBouncer</text>
+    <text x="56" y="342" font-size="7" fill="#6b7280">Azure Flexible Server</text>
     <text x="56" y="354" font-size="7" fill="#6b7280">Private endpoint (VNet)</text>
   </g>
   <g filter="url(#shadow)">
@@ -90,13 +90,13 @@
     <rect x="40" y="378" width="160" height="42" rx="8" fill="#fef2f2" stroke="#EF4444" stroke-width="1.5"/>
     <rect x="40" y="378" width="160" height="0" rx="8" fill="#EF4444" opacity="0"/>
     <text x="56" y="392" font-size="10" font-weight="700" fill="#EF4444">Key Vault</text>
-    <text x="56" y="404" font-size="7" fill="#6b7280">Secrets · API keys · JWT key</text>
+    <text x="56" y="404" font-size="7" fill="#6b7280">Fernet master key · JWT secret</text>
   </g>
   <g filter="url(#shadow)">
     <rect x="220" y="378" width="160" height="42" rx="8" fill="#fef2f2" stroke="#EF4444" stroke-width="1.5"/>
     <rect x="220" y="378" width="160" height="0" rx="8" fill="#EF4444" opacity="0"/>
     <text x="236" y="392" font-size="10" font-weight="700" fill="#EF4444">Log Analytics</text>
-    <text x="236" y="404" font-size="7" fill="#6b7280">Grafana · Prometheus · Loki</text>
+    <text x="236" y="404" font-size="7" fill="#6b7280">Azure Monitor · Grafana opt-in</text>
   </g>
   <g filter="url(#shadow-light)">
     <rect x="40" y="432" width="380" height="26" rx="8" fill="#fef2f2" stroke="#EF4444" stroke-width="1.5"/>
@@ -121,14 +121,14 @@
     <text x="516" y="188" font-size="7.5" fill="#334155">npm run dev</text>
     <text x="516" y="200" font-size="7" fill="#6b7280">HMR · React Fast Refresh</text>
     <text x="516" y="212" font-size="7" fill="#6b7280">Port 3000</text>
-    <text x="516" y="224" font-size="7" fill="#6b7280">Proxy /api -&gt; :8000</text>
+    <text x="516" y="224" font-size="7" fill="#6b7280">API base → localhost:8000</text>
   </g>
   <g filter="url(#shadow)">
     <rect x="700" y="158" width="180" height="80" rx="8" fill="#ecfdf5" stroke="#10B981" stroke-width="1.5"/>
     <rect x="700" y="158" width="180" height="16" rx="8" fill="#10B981" opacity="0.08"/>
     <text x="716" y="172" font-size="9" font-weight="700" fill="#10B981">Python Backend</text>
     <text x="716" y="188" font-size="7.5" fill="#334155">python main.py</text>
-    <text x="716" y="200" font-size="7" fill="#6b7280">Uvicorn · Auto-reload</text>
+    <text x="716" y="200" font-size="7" fill="#6b7280">Uvicorn workers</text>
     <text x="716" y="212" font-size="7" fill="#6b7280">Port 8000</text>
     <text x="716" y="224" font-size="7" fill="#6b7280">AUTH_ENABLED=false</text>
   </g>
@@ -190,7 +190,7 @@
   <text x="620" y="548" font-size="8" font-weight="400" fill="#64748b">SQLite file (dev) / in-memory (tests)</text>
   <rect x="36" y="552" width="848" height="18" fill="#ffffff"/>
   <text x="60" y="566" font-size="8" font-weight="600" fill="#334155">Secrets</text>
-  <text x="240" y="566" font-size="8" font-weight="400" fill="#64748b">Azure Key Vault + Managed Identity</text>
+  <text x="240" y="566" font-size="8" font-weight="400" fill="#64748b">Key Vault (master/JWT) + Container App secrets</text>
   <text x="620" y="566" font-size="8" font-weight="400" fill="#64748b">.env file (gitignored)</text>
   <rect x="36" y="570" width="848" height="18" fill="#f9fafb"/>
   <text x="60" y="584" font-size="8" font-weight="600" fill="#334155">Documents</text>
@@ -203,15 +203,15 @@
   <rect x="36" y="606" width="848" height="18" fill="#f9fafb"/>
   <text x="60" y="620" font-size="8" font-weight="600" fill="#334155">Frontend</text>
   <text x="240" y="620" font-size="8" font-weight="400" fill="#64748b">nginx serving Vite build (static files)</text>
-  <text x="620" y="620" font-size="8" font-weight="400" fill="#64748b">Vite dev server (HMR, proxy /api)</text>
+  <text x="620" y="620" font-size="8" font-weight="400" fill="#64748b">Vite dev server (HMR, direct API base)</text>
   <rect x="36" y="624" width="848" height="18" fill="#ffffff"/>
   <text x="60" y="638" font-size="8" font-weight="600" fill="#334155">Monitoring</text>
-  <text x="240" y="638" font-size="8" font-weight="400" fill="#64748b">Grafana + Prometheus + Loki + Log Analytics</text>
+  <text x="240" y="638" font-size="8" font-weight="400" fill="#64748b">Azure Log Analytics + Monitor (Grafana opt-in)</text>
   <text x="620" y="638" font-size="8" font-weight="400" fill="#64748b">Console logs only</text>
   <rect x="36" y="642" width="848" height="18" fill="#f9fafb"/>
   <text x="60" y="656" font-size="8" font-weight="600" fill="#334155">AI Providers</text>
-  <text x="240" y="656" font-size="8" font-weight="400" fill="#64748b">9 cloud providers (keys in Key Vault)</text>
+  <text x="240" y="656" font-size="8" font-weight="400" fill="#64748b">9 cloud providers (admin + user keys)</text>
   <text x="620" y="656" font-size="8" font-weight="400" fill="#64748b">Ollama (free) + cloud providers (.env keys)</text>
-  <text x="900" y="702" text-anchor="end" font-size="10" fill="#6B7280">Updated: 2026-04-15</text>
+  <text x="900" y="702" text-anchor="end" font-size="10" fill="#6B7280">Updated: 2026-07-03</text>
   <!-- stats-updated: 2026-07-03 -->
 </svg>

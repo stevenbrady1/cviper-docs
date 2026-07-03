@@ -41,14 +41,14 @@
     <text x="46" y="94" font-size="9" font-weight="700" fill="#3B82F6">1. Register</text>
     <text x="46" y="112" font-size="7.5" fill="#334155">POST /api/auth/register</text>
     <text x="46" y="124" font-size="7" fill="#6b7280">Email pre-check → Create account → Send verification email</text>
-    <text x="46" y="136" font-size="7" fill="#6b7280">6-step wizard: credentials → CV → role → boards → career pages</text>
+    <text x="46" y="136" font-size="7" fill="#6b7280">7-step wizard: credentials → AI key → targeting → legal</text>
   </g>
   <g filter="url(#shadow)">
     <rect x="350" y="80" width="260" height="68" rx="8" fill="#ecfdf5" stroke="#10B981" stroke-width="1.5"/>
     <rect x="350" y="80" width="260" height="18" rx="8" fill="#10B981" opacity="0.08"/>
     <text x="366" y="94" font-size="9" font-weight="700" fill="#10B981">2. Login</text>
     <text x="366" y="112" font-size="7.5" fill="#334155">POST /api/auth/login</text>
-    <text x="366" y="124" font-size="7" fill="#6b7280">Credentials → Account lockout check (5 attempts)</text>
+    <text x="366" y="124" font-size="7" fill="#6b7280">Credentials → Account lockout check (10 attempts)</text>
     <text x="366" y="136" font-size="7" fill="#6b7280">Also: OAuth (Google, LinkedIn, Microsoft)</text>
   </g>
   <g filter="url(#shadow)">
@@ -56,15 +56,15 @@
     <rect x="670" y="80" width="260" height="18" rx="8" fill="#F97316" opacity="0.08"/>
     <text x="686" y="94" font-size="9" font-weight="700" fill="#F97316">3. Try Demo</text>
     <text x="686" y="112" font-size="7.5" fill="#334155">POST /api/auth/sandbox</text>
-    <text x="686" y="124" font-size="7" fill="#6b7280">Creates temporary sandbox user (~1 hr session)</text>
-    <text x="686" y="136" font-size="7" fill="#6b7280">Per-fingerprint rate limit · Sandbox-only providers</text>
+    <text x="686" y="124" font-size="7" fill="#6b7280">Creates temporary demo user (~1 hr trial)</text>
+    <text x="686" y="136" font-size="7" fill="#6b7280">Per-fingerprint rate limit · Demo-only providers</text>
   </g>
   <g filter="url(#shadow)">
     <rect x="30" y="172" width="260" height="56" rx="8" fill="#fef2f2" stroke="#EF4444" stroke-width="1.5"/>
     <rect x="30" y="172" width="260" height="18" rx="8" fill="#EF4444" opacity="0.06"/>
     <text x="46" y="186" font-size="8" font-weight="700" fill="#EF4444">Email Verification</text>
     <text x="46" y="204" font-size="7.5" fill="#334155">GET /api/auth/verify-email/{token}</text>
-    <text x="46" y="216" font-size="7" fill="#6b7280">Single-use token · Time-limited expiry · HTTPS deep-link</text>
+    <text x="46" y="216" font-size="7" fill="#6b7280">Time-limited token expiry · HTTPS deep-link</text>
     <text x="46" y="222" font-size="6" fill="#EF4444">Required for password reset gate</text>
   </g>
   <g filter="url(#shadow)">
@@ -112,8 +112,8 @@
     <rect x="200" y="506" width="200" height="64" rx="8" fill="#fff7ed" stroke="#F97316" stroke-width="1.5"/>
     <rect x="200" y="506" width="200" height="18" rx="8" fill="#F97316" opacity="0.08"/>
     <text x="216" y="520" font-size="9" font-weight="700" fill="#F97316">Demo User</text>
-    <text x="216" y="538" font-size="7" fill="#6b7280">Sandbox providers only</text>
-    <text x="216" y="550" font-size="7" fill="#6b7280">~1 hr session · Read-heavy · No export</text>
+    <text x="216" y="538" font-size="7" fill="#6b7280">Demo providers only</text>
+    <text x="216" y="550" font-size="7" fill="#6b7280">~1 hr trial · Read-heavy · Restricted actions</text>
     <text x="216" y="562" font-size="7" fill="#6b7280">Auto-logout on expiry · Per-fingerprint rate limit</text>
   </g>
   <g filter="url(#shadow)">
@@ -143,45 +143,46 @@
     <text x="480" y="666" text-anchor="middle" font-size="11" font-weight="700" fill="#334155">Security Controls</text>
   </g>
   <g filter="url(#shadow-light)">
-    <rect x="36" y="678" width="126" height="50" rx="8" fill="#fef2f2" stroke="#EF4444" stroke-width="1.5"/>
-    <text x="99" y="697" text-anchor="middle" font-size="9.5" font-weight="600" fill="#9f1239">Account Lockout</text>
-    <text x="99" y="714" text-anchor="middle" font-size="7" fill="#6b7280">5 failed attempts</text>
-    <text x="99" y="726" text-anchor="middle" font-size="6.5" fill="#94a3b8">15-min cooldown</text>
+    <rect x="67" y="678" width="126" height="50" rx="8" fill="#fef2f2" stroke="#EF4444" stroke-width="1.5"/>
+    <text x="130" y="697" text-anchor="middle" font-size="9.5" font-weight="600" fill="#9f1239">Account Lockout</text>
+    <text x="130" y="714" text-anchor="middle" font-size="7" fill="#6b7280">10 failed attempts</text>
+    <text x="130" y="726" text-anchor="middle" font-size="6.5" fill="#94a3b8">15-min cooldown</text>
   </g>
   <g filter="url(#shadow-light)">
-    <rect x="176" y="678" width="126" height="50" rx="8" fill="#fef2f2" stroke="#EF4444" stroke-width="1.5"/>
-    <text x="239" y="697" text-anchor="middle" font-size="9.5" font-weight="600" fill="#9f1239">Rate Limiting</text>
-    <text x="239" y="714" text-anchor="middle" font-size="7" fill="#6b7280">Login: 5/min</text>
-    <text x="239" y="726" text-anchor="middle" font-size="6.5" fill="#94a3b8">AI: 30/min</text>
+    <rect x="207" y="678" width="126" height="50" rx="8" fill="#fef2f2" stroke="#EF4444" stroke-width="1.5"/>
+    <text x="270" y="697" text-anchor="middle" font-size="9.5" font-weight="600" fill="#9f1239">Rate Limiting</text>
+    <text x="270" y="714" text-anchor="middle" font-size="7" fill="#6b7280">Login: 5/min</text>
+    <text x="270" y="726" text-anchor="middle" font-size="6.5" fill="#94a3b8">AI: 3–30/min</text>
   </g>
   <g filter="url(#shadow-light)">
-    <rect x="316" y="678" width="126" height="50" rx="8" fill="#fef2f2" stroke="#EF4444" stroke-width="1.5"/>
-    <text x="379" y="697" text-anchor="middle" font-size="9.5" font-weight="600" fill="#9f1239">CSRF Protection</text>
-    <text x="379" y="714" text-anchor="middle" font-size="7" fill="#6b7280">Double-submit cookie</text>
-    <text x="379" y="726" text-anchor="middle" font-size="6.5" fill="#94a3b8">On all mutations</text>
+    <rect x="347" y="678" width="126" height="50" rx="8" fill="#fef2f2" stroke="#EF4444" stroke-width="1.5"/>
+    <text x="410" y="697" text-anchor="middle" font-size="9.5" font-weight="600" fill="#9f1239">CSRF Protection</text>
+    <text x="410" y="714" text-anchor="middle" font-size="7" fill="#6b7280">Double-submit cookie</text>
+    <text x="410" y="726" text-anchor="middle" font-size="6.5" fill="#94a3b8">Cookie-based flows</text>
   </g>
   <g filter="url(#shadow-light)">
-    <rect x="456" y="678" width="126" height="50" rx="8" fill="#fef2f2" stroke="#EF4444" stroke-width="1.5"/>
-    <text x="519" y="697" text-anchor="middle" font-size="9.5" font-weight="600" fill="#9f1239">Session Mgmt</text>
-    <text x="519" y="714" text-anchor="middle" font-size="7" fill="#6b7280">JWT + refresh token</text>
-    <text x="519" y="726" text-anchor="middle" font-size="6.5" fill="#94a3b8">Token hash in DB</text>
+    <rect x="487" y="678" width="126" height="50" rx="8" fill="#fef2f2" stroke="#EF4444" stroke-width="1.5"/>
+    <text x="550" y="697" text-anchor="middle" font-size="9.5" font-weight="600" fill="#9f1239">Session Mgmt</text>
+    <text x="550" y="714" text-anchor="middle" font-size="7" fill="#6b7280">JWT + refresh token</text>
+    <text x="550" y="726" text-anchor="middle" font-size="6.5" fill="#94a3b8">Token hash in DB</text>
   </g>
   <g filter="url(#shadow-light)">
-    <rect x="596" y="678" width="126" height="50" rx="8" fill="#fef2f2" stroke="#EF4444" stroke-width="1.5"/>
-    <text x="659" y="697" text-anchor="middle" font-size="9.5" font-weight="600" fill="#9f1239">Audit Logging</text>
-    <text x="659" y="714" text-anchor="middle" font-size="7" fill="#6b7280">All API mutations</text>
-    <text x="659" y="726" text-anchor="middle" font-size="6.5" fill="#94a3b8">Structured events</text>
+    <rect x="627" y="678" width="126" height="50" rx="8" fill="#fef2f2" stroke="#EF4444" stroke-width="1.5"/>
+    <text x="690" y="697" text-anchor="middle" font-size="9.5" font-weight="600" fill="#9f1239">Audit Logging</text>
+    <text x="690" y="714" text-anchor="middle" font-size="7" fill="#6b7280">All API mutations</text>
+    <text x="690" y="726" text-anchor="middle" font-size="6.5" fill="#94a3b8">Structured events</text>
   </g>
   <g filter="url(#shadow-light)">
-    <rect x="736" y="678" width="126" height="50" rx="8" fill="#fef2f2" stroke="#EF4444" stroke-width="1.5"/>
-    <text x="799" y="697" text-anchor="middle" font-size="9.5" font-weight="600" fill="#9f1239">Anomaly Detection</text>
-    <text x="799" y="714" text-anchor="middle" font-size="7" fill="#6b7280">Login velocity</text>
-    <text x="799" y="726" text-anchor="middle" font-size="6.5" fill="#94a3b8">Fingerprint mismatch</text>
+    <rect x="767" y="678" width="126" height="50" rx="8" fill="#fef2f2" stroke="#EF4444" stroke-width="1.5"/>
+    <text x="830" y="697" text-anchor="middle" font-size="9.5" font-weight="600" fill="#9f1239">Anomaly Detection</text>
+    <text x="830" y="714" text-anchor="middle" font-size="7" fill="#6b7280">High read-rate alerts</text>
+    <text x="830" y="726" text-anchor="middle" font-size="6.5" fill="#94a3b8">IDOR probe detection</text>
   </g>
   <path d="M 160 148 L 160 172" stroke="#3B82F6" stroke-width="1.2" fill="none" marker-end="url(#arrow-blue)"/>
   <path d="M 480 148 L 480 236" stroke="#10B981" stroke-width="1.2" fill="none" marker-end="url(#arrow-green)"/>
   <path d="M 800 148 L 800 200 L 580 200 L 580 236" stroke="#F97316" stroke-width="1.2" fill="none" marker-end="url(#arrow-amber)"/>
   <path d="M 160 228 L 160 260 L 350 260" stroke="#EF4444" stroke-width="1.2" fill="none" marker-end="url(#arrow-red)"/>
+  <path d="M 610 272 L 670 272" stroke="#94a3b8" stroke-width="0.8" fill="none" stroke-dasharray="3,2"/>
   <path d="M 480 306 L 480 326" stroke="#8B5CF6" stroke-width="1.2" fill="none" marker-end="url(#arrow-purple)"/>
   <path d="M 410 380 L 490 380" stroke="#94a3b8" stroke-width="1.0" fill="none" marker-end="url(#arrow)"/>
   <text x="450" y="374" text-anchor="middle" font-size="6" fill="#94a3b8" font-weight="500">HTTPS</text>
@@ -193,6 +194,6 @@
   <text x="590" y="484" text-anchor="middle" font-size="6" fill="#3B82F6" font-weight="500">user</text>
   <path d="M 630 490 L 630 498 L 810 498 L 810 506" stroke="#EF4444" stroke-width="1.2" fill="none" marker-end="url(#arrow-red)"/>
   <text x="630" y="484" text-anchor="middle" font-size="6" fill="#EF4444" font-weight="500">is_admin</text>
-  <text x="940" y="772" text-anchor="end" font-size="10" fill="#6B7280">Updated: 2026-04-15</text>
+  <text x="940" y="772" text-anchor="end" font-size="10" fill="#6B7280">Updated: 2026-07-03</text>
   <!-- stats-updated: 2026-07-03 -->
 </svg>

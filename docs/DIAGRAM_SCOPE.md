@@ -47,13 +47,13 @@ CViper maintains a set of architecture diagrams for three audiences: technical r
 - Azure Container Apps environment (frontend + backend containers)
 - Azure Database for PostgreSQL (production)
 - AI Providers (9 cloud providers, grouped)
-- Observability stack (Grafana, Prometheus, Loki)
+- Observability stack (Azure Log Analytics live; Grafana, Prometheus, Loki defined but opt-in)
 - Request flow: User -> Cloudflare -> Frontend -> Backend API -> DB / AI Providers
 
 **Stats to keep current** (auto-synced by `generate_stats.py`):
 - Endpoint count (currently 307)
 - Component count (currently 87)
-- Fallback method count (currently 26)
+- Fallback coverage (27 AI task operations)
 
 ### 2. CI/CD Deployment Pipeline
 
@@ -89,7 +89,7 @@ CViper maintains a set of architecture diagrams for three audiences: technical r
 - Hybrid scoring (80% AI + 20% keyword)
 
 **Stats to keep current** (auto-synced):
-- Fallback template count (currently 26)
+- Fallback coverage (27 AI task operations)
 
 ### 4. Container & Local Dev Architecture
 
@@ -98,7 +98,7 @@ CViper maintains a set of architecture diagrams for three audiences: technical r
 **Must show**:
 - **Production (Azure)**:
   - `cviper-frontend` container (React/Vite, nginx reverse proxy)
-  - `cviper-backend` container (FastAPI, Gunicorn)
+  - `cviper-backend` container (FastAPI, Uvicorn multi-worker — no Gunicorn; see backend/entrypoint.sh)
   - Key env vars injected (DATABASE_URL, JWT_SECRET_KEY, AI provider keys)
   - Network: Frontend -> Backend API (internal), Backend -> PostgreSQL private endpoint
   - Azure Blob Storage for generated documents
@@ -117,7 +117,7 @@ CViper maintains a set of architecture diagrams for three audiences: technical r
 - Core tables: users, jobs, searches, companies, salary_estimates, salary_benchmarks, cv_analyses, cv_versions, search_profiles, seen_jobs, skill_trends, config
 - Relationships and cardinality (users 1->N jobs, jobs 1->N cv_analyses, etc.)
 - Dual-database note: PostgreSQL (production) vs SQLite (dev/CI) via SQLAlchemy dialect abstraction
-- Alembic migration chain (44 migrations)
+- Alembic migration chain (`@stats.migrations`, auto-synced)
 - Key constraints: partial unique index on email, user_id scoping on all user-owned tables
 
 ### 6. Auth & RBAC Flow
