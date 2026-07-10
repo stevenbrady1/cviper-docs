@@ -7,6 +7,11 @@ This project uses [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
 
+### Changed
+
+- **Cross-border consent is remembered (CV-874)** — the "Sending your CV to X (US)" disclosure now asks once per provider per account instead of once per session. The grant is the existing `UserConsent` audit row, hydrated back from `GET /api/gdpr/consents`, so it follows your account across devices. A new **AI Data-Sharing Consent** card in Settings → AI lists the providers you've approved and withdraws consent in one click (GDPR Art. 7(3)) — after which the next US-provider call discloses again.
+- **Provider cards no longer read as disabled (CV-874)** — Simple-mode Settings previously dimmed every non-active provider card to 55% opacity, which users read as "locked" (reported live: an EU user couldn't see how to add an EU provider). Dimming removed — the Active badge + green border differentiate the live provider — and every card now shows a **US / EU / Local** data-residency badge. The consent modal's "Use EU/local instead" button now lands on the AI settings section with the EU/local cards highlighted and scrolled into view.
+
 ### Added
 
 - **Release tooling (CV-390)** — releasing is now a single command. `scripts/bump_version.py major|minor|patch | --set X.Y.Z` updates `frontend/package.json`, the new `backend/version.py` (`__version__`, what production `/api/version` now actually serves instead of `"unknown"`), and this changelog in one shot. A forbid-drift CI guard (`scripts/check_version_consistency.py` + pytest twin) fails the build if the three locations ever disagree. Pushing a `vX.Y.Z` tag auto-deploys that release to **staging**; production deploys remain manual (`workflow_dispatch`, new `version_tag` promotion input). `/api/health` now also reports the running version.
