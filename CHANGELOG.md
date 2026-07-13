@@ -23,6 +23,7 @@ This project uses [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ### Added
 
+- **Industry preferences now shape search ranking (CV-385)** — the target/avoided industries you set in Settings finally do something: jobs matching a target industry get a +8 ranking boost, avoided industries get -8, on both the streaming and standard search paths. It's a re-ordering, never a filter — no job is hidden — and every adjustment explains itself in the job's pros/cons ("Matches your target industries" / "In an industry you avoid").
 - **Release tooling (CV-390)** — releasing is now a single command. `scripts/bump_version.py major|minor|patch | --set X.Y.Z` updates `frontend/package.json`, the new `backend/version.py` (`__version__`, what production `/api/version` now actually serves instead of `"unknown"`), and this changelog in one shot. A forbid-drift CI guard (`scripts/check_version_consistency.py` + pytest twin) fails the build if the three locations ever disagree. Pushing a `vX.Y.Z` tag auto-deploys that release to **staging**; production deploys remain manual (`workflow_dispatch`, new `version_tag` promotion input). `/api/health` now also reports the running version.
 
 ## [0.9.0] - 2026-06-03
