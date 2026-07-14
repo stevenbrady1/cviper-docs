@@ -195,5 +195,5 @@
   <path d="M 630 490 L 630 498 L 810 498 L 810 506" stroke="#EF4444" stroke-width="1.2" fill="none" marker-end="url(#arrow-red)"/>
   <text x="630" y="484" text-anchor="middle" font-size="6" fill="#EF4444" font-weight="500">is_admin</text>
   <text x="940" y="772" text-anchor="end" font-size="10" fill="#6B7280">Updated: 2026-07-03</text>
-  <!-- stats-updated: 2026-07-13 -->
+  <!-- stats-updated: 2026-07-14 -->
 </svg>
