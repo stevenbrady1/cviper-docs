@@ -213,7 +213,7 @@
   <path d="M 440 230 L 460 230" stroke="#10B981" stroke-width="1.2" fill="none" marker-end="url(#arrow-green)"/>
   <path d="M 660 260 L 660 280" stroke="#8B5CF6" stroke-width="1.2" fill="none" marker-end="url(#arrow-purple)"/>
   <path d="M 450 384 L 450 398 L 550 398 L 550 532 L 550 540" stroke="#8B5CF6" stroke-width="1.2" fill="none" marker-end="url(#arrow-purple)"/>
-  <text x="450" y="726" text-anchor="middle" font-size="7" fill="#94a3b8">9 AI Providers  ·  309 API Endpoints  ·  92 Components  ·  9,600+ Backend Tests  ·  4,400+ Frontend Tests</text>
+  <text x="450" y="726" text-anchor="middle" font-size="7" fill="#94a3b8">9 AI Providers  ·  309 API Endpoints  ·  92 Components  ·  9,600+ Backend Tests  ·  4,500+ Frontend Tests</text>
   <text x="880" y="748" text-anchor="end" font-size="10" fill="#6B7280">Updated: 2026-07-03</text>
   <!-- stats-updated: 2026-07-13 -->
 </svg>

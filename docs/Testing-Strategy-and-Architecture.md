@@ -104,11 +104,7 @@ The test suite follows a classic test pyramid, with the majority of tests at the
 
 ## 3. Repository Folder Structure
 
-<<<<<<< HEAD
-### Backend Tests (481 files)
-=======
-### Backend Tests (481 files)
->>>>>>> origin/main
+### Backend Tests (484 files)
 
 ```
 backend/tests/
@@ -127,11 +123,7 @@ backend/tests/
 └── security/                       # Auth, RBAC, GDPR, sandboxing (23 files)
 ```
 
-<<<<<<< HEAD
 ### Frontend Tests (322 files)
-=======
-### Frontend Tests (322 files)
->>>>>>> origin/main
 
 ```
 frontend/src/
