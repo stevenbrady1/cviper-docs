@@ -13,7 +13,7 @@
 | Alembic Migrations | 49 |
 | AI Package Modules | 34 |
 | AI Domain Services | 8 |
-| Backend Test Files | 490 |
+| Backend Test Files | 491 |
 | Frontend Test Files | 330 |
 | Backend Tests (approx) | 9,800+ |
 | Frontend Tests (approx) | 4,600+ |
