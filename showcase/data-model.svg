@@ -1,5 +1,5 @@
 <!-- HAND-CRAFTED: Do not regenerate — generated from docs/diagrams/data-model.json by scripts/diagram_gen.py -->
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1100 880" font-family="Inter, system-ui, -apple-system, sans-serif">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1100 940" font-family="Inter, system-ui, -apple-system, sans-serif">
   <defs>
     <marker id="arrow" viewBox="0 0 10 7" refX="10" refY="3.5" markerWidth="8" markerHeight="6" orient="auto-start-reverse">
       <path d="M 0 0 L 10 3.5 L 0 7 z" fill="#94a3b8"/>
@@ -30,9 +30,9 @@
     </filter>
   </defs>
 
-  <rect width="1100" height="880" fill="#fafbfc"/>
+  <rect width="1100" height="940" fill="#fafbfc"/>
   <text x="550" y="28" text-anchor="middle" font-size="16" font-weight="700" fill="#1e293b" letter-spacing="0.4">CViper Data Model</text>
-  <text x="550" y="43" text-anchor="middle" font-size="9.5" fill="#64748b">40 Tables  ·  PostgreSQL (Production) + SQLite (Dev/CI)  ·  47 Alembic Migrations</text>
+  <text x="550" y="43" text-anchor="middle" font-size="9.5" fill="#64748b">43 Tables  ·  PostgreSQL (Production) + SQLite (Dev/CI)  ·  49 Alembic Migrations</text>
   <g filter="url(#shadow)">
     <rect x="420" y="80" width="260" height="130" rx="8" fill="#fef2f2" stroke="#EF4444" stroke-width="1.5"/>
     <rect x="420" y="80" width="260" height="20" rx="8" fill="#EF4444" opacity="0.08"/>
@@ -260,7 +260,7 @@
     <text x="572" y="512" font-size="7" fill="#6b7280">skill · status · priority</text>
   </g>
   <g filter="url(#shadow-light)">
-    <rect x="14" y="560" width="1072" height="298" rx="8" fill="#f5f3ff" stroke="#8B5CF6" stroke-width="2"/>
+    <rect x="14" y="560" width="1072" height="358" rx="8" fill="#f5f3ff" stroke="#8B5CF6" stroke-width="2"/>
     <rect x="22" y="564" width="220" height="16" rx="4" fill="#8B5CF6" opacity="0.15"/>
     <text x="132" y="575" text-anchor="middle" font-size="7.5" font-weight="700" fill="#8B5CF6" letter-spacing="0.5">BILLING · USAGE · OPS · MOBILE</text>
   </g>
@@ -362,6 +362,27 @@
     <text x="306" y="818" font-size="7" fill="#6b7280">id PK · user_id FK CASCADE · job_id (idx)</text>
     <text x="306" y="830" font-size="7" fill="#6b7280">signal · title_core (idx) · match_score</text>
   </g>
-  <text x="1080" y="872" text-anchor="end" font-size="10" fill="#6B7280">Updated: 2026-07-03</text>
-  <!-- stats-updated: 2026-07-14 -->
+  <g filter="url(#shadow-light)">
+    <rect x="556" y="788" width="250" height="52" rx="8" fill="#f5f3ff" stroke="#8B5CF6" stroke-width="2"/>
+    <rect x="556" y="788" width="250" height="16" rx="8" fill="#8B5CF6" opacity="0.08"/>
+    <text x="572" y="802" font-size="8.5" font-weight="700" fill="#8B5CF6">provider_rate_limit</text>
+    <text x="572" y="818" font-size="7" fill="#6b7280">provider_id + date (unique)</text>
+    <text x="572" y="830" font-size="7" fill="#6b7280">count · updated_at — shared demo/AI quota (CV-708)</text>
+  </g>
+  <g filter="url(#shadow-light)">
+    <rect x="822" y="788" width="254" height="52" rx="8" fill="#f5f3ff" stroke="#8B5CF6" stroke-width="2"/>
+    <rect x="822" y="788" width="254" height="16" rx="8" fill="#8B5CF6" opacity="0.08"/>
+    <text x="838" y="802" font-size="8.5" font-weight="700" fill="#8B5CF6">session_token_usage</text>
+    <text x="838" y="818" font-size="7" fill="#6b7280">user_id PK · FK CASCADE</text>
+    <text x="838" y="830" font-size="7" fill="#6b7280">tokens · updated_at — shared AI session budget (CV-708)</text>
+  </g>
+  <g filter="url(#shadow-light)">
+    <rect x="24" y="854" width="250" height="52" rx="8" fill="#f5f3ff" stroke="#8B5CF6" stroke-width="2"/>
+    <rect x="24" y="854" width="250" height="16" rx="8" fill="#8B5CF6" opacity="0.08"/>
+    <text x="40" y="868" font-size="8.5" font-weight="700" fill="#8B5CF6">circuit_breaker_state</text>
+    <text x="40" y="884" font-size="7" fill="#6b7280">provider_key PK</text>
+    <text x="40" y="896" font-size="7" fill="#6b7280">state · opened_at · failures (json) — shared breaker (CV-708)</text>
+  </g>
+  <text x="1080" y="932" text-anchor="end" font-size="10" fill="#6B7280">Updated: 2026-07-03</text>
+  <!-- stats-updated: 2026-07-16 -->
 </svg>
