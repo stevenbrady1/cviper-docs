@@ -38,6 +38,7 @@ We collect and process the following categories of personal data:
 - **Search data:** Search keywords, location preferences, and salary expectations.
 - **AI interaction logs:** Prompts sent to and responses received from AI providers (kept for debugging and quality; auto-deleted with your account and never stored for demo/sandbox sessions).
 - **Technical data:** Anonymised IP addresses, browser type, and error reports (with URLs redacted).
+- **Waitlist data:** If you join the waitlist we store your email address, solely to contact you about access to CViper.
 
 ## 3. Lawful Basis for Processing
 
@@ -94,6 +95,7 @@ We keep your data only as long as we need it.
 | Sandbox event analytics | 90 days |
 | Database backups | 7 days |
 | Session cookies | 24 hours (or 30 days with "remember me") |
+| **Waitlist email** (if you joined the waitlist) | Deleted once your invitation is actioned, or on request. |
 
 **Kept until you delete your account:**
 
