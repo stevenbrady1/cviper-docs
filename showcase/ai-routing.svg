@@ -113,7 +113,7 @@
     <text x="762.5" y="425" text-anchor="middle" font-size="9" font-weight="600" fill="#3730a3">⑧ Ollama</text>
   </g>
   <g filter="url(#shadow)">
-    <polygon points="425,464 462.1,496 425,528 387.9,528 372,496 387.9,464" fill="#fffbeb" stroke="#F59E0B" stroke-width="1.2"/>
+    <polygon points="387.9,464 462.1,464 478,496 462.1,528 387.9,528 372,496" fill="#fffbeb" stroke="#F59E0B" stroke-width="1.2"/>
     <text x="425" y="490" text-anchor="middle" font-size="8" font-weight="600" fill="#92400e">Circuit<tspan x="425" dy="12"> Breaker</tspan></text>
   </g>
   <g filter="url(#shadow)">
@@ -167,8 +167,8 @@
   <text x="425" y="326" text-anchor="middle" font-size="6" fill="#94a3b8" font-weight="500">No</text>
   <path d="M 424 442 L 424 464" stroke="#94a3b8" stroke-width="1.0" fill="none" marker-end="url(#arrow)"/>
   <path d="M 424 528 L 424 560" stroke="#10B981" stroke-width="1.2" fill="none" marker-end="url(#arrow-green)"/>
-  <text x="425" y="522" text-anchor="middle" font-size="6" fill="#10B981" font-weight="500">Closed</text>
-  <path d="M 478 496 L 530 496 L 530 442 L 530 442" stroke="#F97316" stroke-width="1.2" fill="none" marker-end="url(#arrow-amber)"/>
+  <text x="447" y="548" text-anchor="middle" font-size="6" fill="#10B981" font-weight="500">Closed</text>
+  <path d="M 478 496 L 530 496 L 530 442" stroke="#F97316" stroke-width="1.2" fill="none" marker-end="url(#arrow-amber)"/>
   <text x="504" y="490" text-anchor="middle" font-size="6" fill="#F97316" font-weight="500">Open</text>
   <path d="M 424 596 L 424 630" stroke="#EF4444" stroke-width="1.0" fill="none" stroke-dasharray="4,2" marker-end="url(#arrow-red)"/>
   <text x="425" y="590" text-anchor="middle" font-size="6" fill="#EF4444" font-weight="500">all providers fail</text>
@@ -183,6 +183,6 @@
   <line x1="676" y1="752" x2="698" y2="752" stroke="#EF4444" stroke-width="1" stroke-dasharray="4,2" marker-end="url(#arrow-red)"/>
   <text x="706" y="755" font-size="7" fill="#6b7280">Keyword fallback</text>
   <text x="425" y="750" text-anchor="middle" font-size="7" fill="#94a3b8">CViper · AI Routing &amp; Fallback Architecture</text>
-  <text x="830" y="772" text-anchor="end" font-size="10" fill="#6B7280">Updated: 2026-07-03</text>
-  <!-- stats-updated: 2026-07-19 -->
+  <text x="830" y="772" text-anchor="end" font-size="10" fill="#6B7280">Updated: 2026-07-20</text>
+  <!-- stats-updated: 2026-07-20 -->
 </svg>
