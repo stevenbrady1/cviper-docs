@@ -10,7 +10,7 @@ CViper is a professional career management tool that helps you discover job oppo
 
 - **Multi-Site Job Search** — searches 9 job boards (Reed, Adzuna, Jooble, Remotive, Findwork, Freelancer via official APIs; LinkedIn, eFinancialCareers, Jobserve via scrapers) plus 200+ direct employer career pages, via SSE streaming
 - **AI CV Analysis** — extracts skills, experience, and profile from PDF/DOCX files with multi-provider comparison
-- **Multi-Provider AI** — supports 9 providers: OpenAI, Anthropic Claude, Google Gemini, Grok, GitHub Models, Mistral, OpenRouter, Pluribus (local), and Ollama. Run providers in parallel and compare results side-by-side with Prompt Lab.
+- **Multi-Provider AI** — supports 8 providers: OpenAI, Anthropic Claude, Google Gemini, Grok, Mistral, OpenRouter, Pluribus (local), and Ollama. Run providers in parallel and compare results side-by-side with Prompt Lab.
 - **Priority-Based AI Routing** — configurable provider priority chain with automatic failover, circuit breakers, and keyword fallback
 - **Async Task Queue** — background AI task processing with real-time progress tracking and status polling
 - **Tailored Documents** — generates customised CVs and cover letters for each role (DOCX & PDF) with ATS scoring and fabrication detection
@@ -69,7 +69,6 @@ Copy the example below into a file called `.env` in the project root:
 OPENAI_API_KEY=sk-your-key-here
 ANTHROPIC_API_KEY=sk-ant-your-key-here
 GOOGLE_API_KEY=your-google-ai-studio-key
-GITHUB_TOKEN=ghp-your-token-here
 OPENROUTER_API_KEY=your-openrouter-key
 MISTRAL_API_KEY=your-mistral-key
 OLLAMA_ENABLED=true
@@ -196,7 +195,6 @@ CViper supports multiple AI providers. You only need **one** to get started.
 | OpenAI | `OPENAI_API_KEY` | platform.openai.com |
 | Anthropic Claude | `ANTHROPIC_API_KEY` | console.anthropic.com |
 | Google Gemini | `GOOGLE_API_KEY` | aistudio.google.dev |
-| GitHub Models | `GITHUB_TOKEN` | github.com/settings/tokens |
 | Mistral | `MISTRAL_API_KEY` | console.mistral.ai |
 | OpenRouter | `OPENROUTER_API_KEY` | openrouter.ai |
 | Grok (xAI) | `GROK_API_KEY` | console.x.ai |
@@ -260,7 +258,7 @@ cviper/
 │   ├── repositories.py         # CRUD operations
 │   ├── ai_service.py           # AI facade → ai/ package
 │   ├── ai/                     # AI subpackage
-│   │   ├── providers.py        #   Provider registry (7 cloud + 2 local providers + 2 demo keys)
+│   │   ├── providers.py        #   Provider registry (6 cloud + 2 local providers + 2 demo keys)
 │   │   ├── router.py           #   Priority-based provider routing
 │   │   ├── gateway.py          #   Universal call dispatcher
 │   │   └── services/           #   Domain services (CV, matching, docs, scoring)
@@ -387,7 +385,7 @@ kill -9 <PID>
 |-------|-----------|
 | Frontend | React 18, Vite, CSS (custom design system) |
 | Backend | Python, FastAPI, Uvicorn |
-| AI | OpenAI, Anthropic, Google Gemini, Grok, GitHub Models, Mistral, OpenRouter, Pluribus, Ollama |
+| AI | OpenAI, Anthropic, Google Gemini, Grok, Mistral, OpenRouter, Pluribus, Ollama |
 | CV Parsing | PyPDF2, python-docx |
 | Database | PostgreSQL (production via Azure Flexible Server), SQLite (local dev) |
 | ORM | SQLAlchemy 2.0 + Alembic migrations |

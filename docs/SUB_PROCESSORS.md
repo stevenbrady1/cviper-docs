@@ -1,7 +1,7 @@
 # Sub-Processors
 
-**Version:** 1.0
-**Last updated:** 2026-05-19
+**Version:** 1.1
+**Last updated:** 2026-07-22
 **Owner:** DPO (Data Protection Officer role — currently the service operator)
 **Companion documents:** [PRIVACY_POLICY.md](./PRIVACY_POLICY.md) · [DATA_RETENTION_SCHEDULE.md](./DATA_RETENTION_SCHEDULE.md) · [DPIA-AI-Processing.md](./DPIA-AI-Processing.md)
 
@@ -38,7 +38,6 @@ The user explicitly selects which AI provider receives their CV / job text. Sand
 | **Mistral AI** | AI text generation (open + commercial models) | CV text + job description, model output | France / EU | UK→EU: adequacy (no SCC required) + Mistral DPA | [Mistral DPA](https://mistral.ai/terms#data-processing-agreement) | Yes — La Plateforme API excludes training |
 | **xAI (Grok)** | AI text generation | As above | USA | UK→US: SCCs + xAI DPA | xAI DPA — **to verify before enabling for non-sandbox users** | To verify |
 | **OpenRouter** | AI gateway routing to multiple upstream model providers | As above + the upstream provider receives the same data | USA (OpenRouter); upstream varies | UK→US: SCCs + OpenRouter DPA; chain-of-DPA via upstream provider | [OpenRouter terms](https://openrouter.ai/terms) — formal DPA on enterprise tier | Upstream-dependent — disclosed per model |
-| **GitHub Models** | AI text generation (Microsoft-hosted catalogue) | As above | USA / Microsoft global | UK→US: SCCs + Microsoft DPA (parent) | [Microsoft Online Services DPA](https://www.microsoft.com/licensing/docs/view/Microsoft-Products-and-Services-Data-Protection-Addendum-DPA) | Per Microsoft DPA (no training on customer data) |
 | **Pluribus** | Sandbox / demo AI provider — operator-managed, ephemeral session use only | CV text + job description from demo sessions only; never persisted | UK | UK domestic | Internal service — no cross-border transfer | Not used for training |
 | **Ollama (self-hosted)** | AI text generation on user infrastructure | None leaves the user's network | User-controlled | N/A — no transfer | N/A — not a sub-processor under Art. 28 | N/A |
 

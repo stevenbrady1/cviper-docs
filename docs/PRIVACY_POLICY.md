@@ -1,7 +1,7 @@
 # Privacy Policy
 
-**Version:** 1.2
-**Last updated:** May 2026
+**Version:** 1.3
+**Last updated:** July 2026
 **Service:** CViper — https://cviper.ai
 
 > This document is the canonical Privacy Policy for CViper. The public
@@ -58,7 +58,6 @@ When you use AI-powered features (CV analysis, job scoring, document generation)
 - Mistral (France/EU)
 - Grok / xAI (USA)
 - OpenRouter (USA — gateway routing to multiple model providers)
-- GitHub Models (USA)
 - Pluribus (sandbox/demo provider, used only for hosted demo sessions)
 - Ollama (self-hosted, no data leaves your infrastructure)
 

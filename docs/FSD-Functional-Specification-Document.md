@@ -51,7 +51,7 @@
 ### What's New in v0.3.1
 
 - **Demo Mode UX Redesign**: Landing page reordered (demo first, API key guide, login below). Guided tour available on demo launch. Prompt Lab visible in read-only mode for demo users.
-- **API Key Guide**: Step-by-step walkthrough for Google Gemini, GitHub Models, Ollama, OpenAI, and Anthropic — in FAQ, Settings, and on the landing page.
+- **API Key Guide**: Step-by-step walkthrough for Google Gemini, Ollama, OpenAI, and Anthropic — in FAQ, Settings, and on the landing page.
 - **AI Disclaimer**: All AI results attributed to the user's chosen model with accuracy warnings. Privacy Policy updated to v1.1 with Section 5 (AI-Generated Content Disclaimer).
 - **Infrastructure Resilience**: Pre-deploy config validation gate (33 checks), infrastructure dependency map, server-side path redaction, custom domain binding verification.
 - **ATS Discovery**: iCIMS and Taleo handlers added. Concurrent discovery pipeline with board health monitoring.
@@ -188,9 +188,9 @@ CViper is a full-stack web application consisting of:
      │ OpenRouter   │ │ Jooble  │ │ │ - Infinity datasource       │ │
      │ Mistral      │ │ Remotive│ │ │ - cviper-unified dashboard  │ │
      │ Grok (xAI)   │ │ etc.    │ │ │ - Auto-provisioned on start │ │
-     │ GitHub       │ └─────────┘ │ └─────────────────────────────┘ │
-     │ Pluribus *   │             │  * local gateway only           │
-     └──────────────┘             │ ┌─────────────────────────────┐ │
+     │ Pluribus *   │ └─────────┘ │ └─────────────────────────────┘ │
+     └──────────────┘             │  * local gateway only           │
+                                  │ ┌─────────────────────────────┐ │
               │                   │ │ Ollama (Docker :11434)      │ │
               │                   │ │ - Model: llama3.2 (default) │ │
               └───────────────────│ │ - OpenAI-compatible API     │ │
@@ -588,7 +588,7 @@ Users configure a provider priority order (highest priority first). The TaskRout
 
 | Component | Role |
 |-----------|------|
-| **Priority chain** | User-configurable ordered list: pluribus → anthropic → google → openai → grok → openrouter → mistral → github → ollama |
+| **Priority chain** | User-configurable ordered list: pluribus → anthropic → google → openai → grok → openrouter → mistral → ollama |
 | **Circuit breaker** | Temporarily skips providers with recent failures |
 | **Sandbox routing** | Dedicated sandbox_google → sandbox_openrouter → keyword (isolated from production) |
 | **Keyword fallback** | 22 template-based methods covering every AI operation |
@@ -1007,7 +1007,7 @@ board.ats_provider → resolve_site_type() → get_handler() → handler.search(
 
 | Component | Detail |
 |-----------|--------|
-| Backend: `PROVIDER_MODELS` | Hardcoded dict in `ai/providers.py` mapping 8 cloud providers + local gateways to their available models (id, name, tier) |
+| Backend: `PROVIDER_MODELS` | Hardcoded dict in `ai/providers.py` mapping 7 cloud providers + local gateways to their available models (id, name, tier) |
 | Backend: endpoint | `PUT /api/ai-provider-model/{provider_id}` — validates model against `PROVIDER_MODELS`, updates `ProviderRegistry.clients[provider_id]["model"]`, persists to config table as `provider_model_preferences` |
 | Backend: response | `available_models` list added to `get_available_providers()` and `get_provider_keys_masked()` API responses |
 | Frontend: ConfigTab | Model dropdown replaces static model label when `available_models` array is non-empty; `onChange` calls `PUT /api/ai-provider-model/{provider_id}` via `authFetch` |
@@ -1022,7 +1022,6 @@ board.ats_provider → resolve_site_type() → get_handler() → handler.search(
 | Google | Gemini 2.0 Flash, Gemini 1.5 Flash, Gemini 1.5 Pro |
 | Mistral | Mistral Large, Mistral Small, Mistral Nemo |
 | Grok (xAI) | Grok 3, Grok 3 Mini, Grok 2 |
-| GitHub | GPT-4o (GitHub), GPT-4o Mini (GitHub) |
 | OpenRouter | Auto (Best Available), Claude Sonnet 4.6, GPT-4o, Gemini Flash 2.0 |
 | Pluribus (local only) | Default (auto) |
 
@@ -2120,7 +2119,7 @@ Response:
 |---------|---------|---------|
 | Sub-Navigation | 4 tabs: General, AI Providers, Search & Keywords, Preferences | Horizontal tab bar with active indicator (P6) |
 | General | CV folder, location, output folder, base CV selector, CV editor, CV format & layout, CV library | Auto-save on change (1s debounce) |
-| AI Providers | Provider priority (drag-reorder), API keys management, signup links, model selection | Active provider badge, masked keys, set/change/remove. "Get Key" link to provider signup page when unconfigured; green hint for free-tier providers (Ollama, GitHub, Google, OpenRouter, Mistral). Model dropdown per provider when `available_models` present (FR-026) |
+| AI Providers | Provider priority (drag-reorder), API keys management, signup links, model selection | Active provider badge, masked keys, set/change/remove. "Get Key" link to provider signup page when unconfigured; green hint for free-tier providers (Ollama, Google, OpenRouter, Mistral). Model dropdown per provider when `available_models` present (FR-026) |
 | Search & Keywords | Skills & technologies, job titles, keyword tags, industry preferences (target/avoided) | Auto-save on change |
 | Preferences | Advanced Mode toggle, Change Password (auth-enabled only) | Persists to localStorage + backend config |
 

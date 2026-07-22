@@ -4,15 +4,17 @@
 **Date**: 2026-02 (original), 2026-03 (revised)
 **Decision makers**: Project owner
 
+> **Amendment 2026-07-22 (CV-1034)**: GitHub Models removed from the provider set and priority chain following its upstream retirement (closed to new customers 2026-06-16, fully retired 2026-07-30). The original routing decision is unchanged; the provider lists below are updated to reflect the live configuration.
+
 ## Context
 
-CViper uses multiple AI providers (OpenAI, Claude, Gemini, Grok, Mistral, GitHub Models, OpenRouter, Ollama) plus Pluribus (local gateway only) for different tasks. Relying on a single provider creates vendor lock-in and single points of failure. The system needs automatic failover, user-configurable preferences, and graceful degradation.
+CViper uses multiple AI providers (OpenAI, Claude, Gemini, Grok, Mistral, OpenRouter, Ollama) plus Pluribus (local gateway only) for different tasks. Relying on a single provider creates vendor lock-in and single points of failure. The system needs automatic failover, user-configurable preferences, and graceful degradation.
 
 ## Decision
 
 Implement **priority-based routing with automatic fallback**: the TaskRouter maintains a user-configurable ordered list of providers (DEFAULT_PRIORITY). For each AI call, it selects the highest-priority available provider. If that provider fails, the gateway tries the next in the chain. When all providers are exhausted, 22 keyword-based fallback methods provide basic results.
 
-- **Priority chain**: pluribus → anthropic → google → openai → grok → openrouter → mistral → github → ollama (configurable per user)
+- **Priority chain**: pluribus → anthropic → google → openai → grok → openrouter → mistral → ollama (configurable per user)
 - **Circuit breakers**: providers with recent failures are temporarily skipped
 - **Sandbox isolation**: sandbox users route to dedicated sandbox_google → sandbox_openrouter → keyword (never production providers)
 - **Keyword fallback**: 22 methods in FallbackService cover every AI operation with template-based results
