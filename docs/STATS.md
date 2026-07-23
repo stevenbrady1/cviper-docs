@@ -14,7 +14,7 @@
 | AI Package Modules | 34 |
 | AI Domain Services | 8 |
 | Backend Test Files | 505 |
-| Frontend Test Files | 355 |
+| Frontend Test Files | 356 |
 | Backend Tests (approx) | 10,100+ |
 | Frontend Tests (approx) | 4,900+ |
 | Total Tests (approx) | 15,000+ |
