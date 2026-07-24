@@ -124,9 +124,9 @@ backend/tests/
 ```
 
 <<<<<<< HEAD
-### Frontend Tests (364 files)
+### Frontend Tests (366 files)
 =======
-### Frontend Tests (364 files)
+### Frontend Tests (366 files)
 >>>>>>> origin/main
 
 ```
