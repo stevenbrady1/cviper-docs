@@ -104,7 +104,7 @@ The test suite follows a classic test pyramid, with the majority of tests at the
 
 ## 3. Repository Folder Structure
 
-### Backend Tests (521 files)
+### Backend Tests (522 files)
 
 ```
 backend/tests/
@@ -619,16 +619,16 @@ npm run test:e2e:headed             # With browser
 | `_block_ai_gateway` | Function (autouse) | Blocks AI calls |
 | `_mock_outbound_http` | Function (autouse) | Blocks external HTTP |
 
-### Current Test Counts (as of v0.6.1)
+### Current Test Counts
 
-| Suite | Files | Tests |
-|-------|-------|-------|
-| Backend (pytest) | 302 | 6,000+ |
-| Frontend (Vitest) | 171 | 2,300+ |
-| E2E (Playwright) | 144 | 400+ |
-| **Total** | **617** | **8,700+** |
+| Suite | Files | Test cases (authored) |
+|-------|-------|-----------------------|
+| Backend (pytest) | 522 | 6,800+ |
+| Frontend (Vitest) | 373 | 3,600+ |
+| **Total** | **895** | **10,400+** |
 
-> Source: `python scripts/generate_stats.py` (refreshes `frontend/src/data/stats.json` and `docs/STATS.md`).
+> **Authored, not fabricated (CV-1090):** the case counts are `def test_` (pytest) and `it(`/`test(` (Vitest) definitions counted from source by `python scripts/generate_stats.py` — never a file-count multiplier. Parametrised runs (`@pytest.mark.parametrize`, `test.each`) expand these further at collection time, so each figure is a truthful lower bound on executed tests.
+> E2E (Playwright) journeys are counted separately in §7 (spec files), not summed into this table.
 > About-page stats hydrate from `stats.json` so on-page counters stay aligned with this table.
 
 ### 7-Row Test Design Checklist (Mandatory)

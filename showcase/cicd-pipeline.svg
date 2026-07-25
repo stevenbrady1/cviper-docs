@@ -50,7 +50,7 @@
     <circle cx="176" cy="109" r="4" fill="#10B981"/>
     <text x="186" y="113" font-size="8" font-weight="600" fill="#10B981">HARD</text>
     <text x="205" y="124" text-anchor="middle" font-size="7" fill="#6b7280">9 test areas + coverage</text>
-    <text x="205" y="136" text-anchor="middle" font-size="6.5" fill="#94a3b8">pytest · 8,900+ tests</text>
+    <text x="205" y="136" text-anchor="middle" font-size="6.5" fill="#94a3b8">pytest · 6,800+ tests</text>
   </g>
   <g filter="url(#shadow)">
     <rect x="140" y="158" width="130" height="68" rx="8" fill="#ecfdf5" stroke="#10B981" stroke-width="1.5"/>
@@ -58,7 +58,7 @@
     <circle cx="176" cy="189" r="4" fill="#10B981"/>
     <text x="186" y="193" font-size="8" font-weight="600" fill="#10B981">HARD</text>
     <text x="205" y="204" text-anchor="middle" font-size="7" fill="#6b7280">5 test areas + coverage</text>
-    <text x="205" y="216" text-anchor="middle" font-size="6.5" fill="#94a3b8">Vitest · 4,200+ tests</text>
+    <text x="205" y="216" text-anchor="middle" font-size="6.5" fill="#94a3b8">Vitest · 3,600+ tests</text>
   </g>
   <g filter="url(#shadow)">
     <rect x="140" y="238" width="130" height="68" rx="8" fill="#ecfdf5" stroke="#10B981" stroke-width="1.5"/>

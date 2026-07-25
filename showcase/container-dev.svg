@@ -210,7 +210,7 @@
   <text x="620" y="638" font-size="8" font-weight="400" fill="#64748b">Console logs only</text>
   <rect x="36" y="642" width="848" height="18" fill="#f9fafb"/>
   <text x="60" y="656" font-size="8" font-weight="600" fill="#334155">AI Providers</text>
-  <text x="240" y="656" font-size="8" font-weight="400" fill="#64748b">9 cloud providers (admin + user keys)</text>
+  <text x="240" y="656" font-size="8" font-weight="400" fill="#64748b">8 cloud providers (admin + user keys)</text>
   <text x="620" y="656" font-size="8" font-weight="400" fill="#64748b">Ollama (free) + cloud providers (.env keys)</text>
   <text x="900" y="702" text-anchor="end" font-size="10" fill="#6B7280">Updated: 2026-07-03</text>
   <!-- stats-updated: 2026-07-24 -->

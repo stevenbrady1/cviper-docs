@@ -32,7 +32,7 @@
 
   <rect width="1100" height="940" fill="#fafbfc"/>
   <text x="550" y="28" text-anchor="middle" font-size="16" font-weight="700" fill="#1e293b" letter-spacing="0.4">CViper Data Model</text>
-  <text x="550" y="43" text-anchor="middle" font-size="9.5" fill="#64748b">47 Tables  ·  PostgreSQL (Production) + SQLite (Dev/CI)  ·  54 Alembic Migrations</text>
+  <text x="550" y="43" text-anchor="middle" font-size="9.5" fill="#64748b">47 Tables  ·  PostgreSQL (Production) + SQLite (Dev/CI)  ·  55 Alembic Migrations</text>
   <g filter="url(#shadow)">
     <rect x="420" y="80" width="260" height="130" rx="8" fill="#fef2f2" stroke="#EF4444" stroke-width="1.5"/>
     <rect x="420" y="80" width="260" height="20" rx="8" fill="#EF4444" opacity="0.08"/>

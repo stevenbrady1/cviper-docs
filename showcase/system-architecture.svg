@@ -155,36 +155,32 @@
     <text x="69" y="555" text-anchor="middle" font-size="7.5" font-weight="700" fill="#8B5CF6" letter-spacing="0.5">AI PROVIDERS</text>
   </g>
   <g filter="url(#shadow-light)">
-    <rect x="36" y="562" width="90" height="28" rx="8" fill="#f5f3ff" stroke="#8B5CF6" stroke-width="2"/>
-    <text x="81" y="579" text-anchor="middle" font-size="7.5" font-weight="600" fill="#5b21b6">Anthropic</text>
+    <rect x="68" y="562" width="90" height="28" rx="8" fill="#f5f3ff" stroke="#8B5CF6" stroke-width="2"/>
+    <text x="113" y="579" text-anchor="middle" font-size="7.5" font-weight="600" fill="#5b21b6">Anthropic</text>
   </g>
   <g filter="url(#shadow-light)">
-    <rect x="137" y="562" width="90" height="28" rx="8" fill="#f5f3ff" stroke="#8B5CF6" stroke-width="2"/>
-    <text x="182" y="579" text-anchor="middle" font-size="7.5" font-weight="600" fill="#5b21b6">Google</text>
+    <rect x="180" y="562" width="90" height="28" rx="8" fill="#f5f3ff" stroke="#8B5CF6" stroke-width="2"/>
+    <text x="225" y="579" text-anchor="middle" font-size="7.5" font-weight="600" fill="#5b21b6">Google</text>
   </g>
   <g filter="url(#shadow-light)">
-    <rect x="238" y="562" width="90" height="28" rx="8" fill="#f5f3ff" stroke="#8B5CF6" stroke-width="2"/>
-    <text x="283" y="579" text-anchor="middle" font-size="7.5" font-weight="600" fill="#5b21b6">OpenAI</text>
+    <rect x="292" y="562" width="90" height="28" rx="8" fill="#f5f3ff" stroke="#8B5CF6" stroke-width="2"/>
+    <text x="337" y="579" text-anchor="middle" font-size="7.5" font-weight="600" fill="#5b21b6">OpenAI</text>
   </g>
   <g filter="url(#shadow-light)">
-    <rect x="339" y="562" width="90" height="28" rx="8" fill="#f5f3ff" stroke="#8B5CF6" stroke-width="2"/>
-    <text x="384" y="579" text-anchor="middle" font-size="7.5" font-weight="600" fill="#5b21b6">Grok</text>
+    <rect x="404" y="562" width="90" height="28" rx="8" fill="#f5f3ff" stroke="#8B5CF6" stroke-width="2"/>
+    <text x="449" y="579" text-anchor="middle" font-size="7.5" font-weight="600" fill="#5b21b6">Grok</text>
   </g>
   <g filter="url(#shadow-light)">
-    <rect x="440" y="562" width="90" height="28" rx="8" fill="#f5f3ff" stroke="#8B5CF6" stroke-width="2"/>
-    <text x="485" y="579" text-anchor="middle" font-size="7.5" font-weight="600" fill="#5b21b6">OpenRouter</text>
+    <rect x="516" y="562" width="90" height="28" rx="8" fill="#f5f3ff" stroke="#8B5CF6" stroke-width="2"/>
+    <text x="561" y="579" text-anchor="middle" font-size="7.5" font-weight="600" fill="#5b21b6">OpenRouter</text>
   </g>
   <g filter="url(#shadow-light)">
-    <rect x="541" y="562" width="90" height="28" rx="8" fill="#f5f3ff" stroke="#8B5CF6" stroke-width="2"/>
-    <text x="586" y="579" text-anchor="middle" font-size="7.5" font-weight="600" fill="#5b21b6">Mistral</text>
+    <rect x="628" y="562" width="90" height="28" rx="8" fill="#f5f3ff" stroke="#8B5CF6" stroke-width="2"/>
+    <text x="673" y="579" text-anchor="middle" font-size="7.5" font-weight="600" fill="#5b21b6">Mistral</text>
   </g>
   <g filter="url(#shadow-light)">
-    <rect x="642" y="562" width="96" height="28" rx="8" fill="#f5f3ff" stroke="#8B5CF6" stroke-width="2"/>
-    <text x="690" y="579" text-anchor="middle" font-size="7.5" font-weight="600" fill="#5b21b6">GitHub Models</text>
-  </g>
-  <g filter="url(#shadow-light)">
-    <rect x="749" y="562" width="90" height="28" rx="8" fill="#f5f3ff" stroke="#8B5CF6" stroke-width="2"/>
-    <text x="794" y="579" text-anchor="middle" font-size="7.5" font-weight="600" fill="#5b21b6">Ollama</text>
+    <rect x="740" y="562" width="90" height="28" rx="8" fill="#f5f3ff" stroke="#8B5CF6" stroke-width="2"/>
+    <text x="785" y="579" text-anchor="middle" font-size="7.5" font-weight="600" fill="#5b21b6">Ollama</text>
   </g>
   <g filter="url(#shadow)">
     <rect x="560" y="410" width="320" height="118" rx="8" fill="#f1f5f9" stroke="#64748b" stroke-width="1.5"/>
@@ -213,7 +209,7 @@
   <path d="M 440 230 L 460 230" stroke="#10B981" stroke-width="1.2" fill="none" marker-end="url(#arrow-green)"/>
   <path d="M 660 260 L 660 280" stroke="#8B5CF6" stroke-width="1.2" fill="none" marker-end="url(#arrow-purple)"/>
   <path d="M 450 384 L 450 398 L 550 398 L 550 532 L 550 540" stroke="#8B5CF6" stroke-width="1.2" fill="none" marker-end="url(#arrow-purple)"/>
-  <text x="450" y="726" text-anchor="middle" font-size="7" fill="#94a3b8">9 AI Providers  ·  317 API Endpoints  ·  100 Components  ·  10,400+ Backend Tests  ·  5,200+ Frontend Tests</text>
-  <text x="880" y="748" text-anchor="end" font-size="10" fill="#6B7280">Updated: 2026-07-03</text>
+  <text x="450" y="726" text-anchor="middle" font-size="7" fill="#94a3b8">8 AI Providers  ·  317 API Endpoints  ·  100 Components  ·  6,800+ Backend Tests  ·  3,600+ Frontend Tests</text>
+  <text x="880" y="748" text-anchor="end" font-size="10" fill="#6B7280">Updated: 2026-07-22</text>
   <!-- stats-updated: 2026-07-24 -->
 </svg>
