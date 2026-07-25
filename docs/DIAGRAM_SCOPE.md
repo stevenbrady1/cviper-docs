@@ -47,7 +47,7 @@ CViper maintains a set of architecture diagrams for three audiences: technical r
 - Azure Container Apps environment (frontend + backend containers)
 - Azure Database for PostgreSQL (production)
 - AI Providers (8 cloud providers, grouped)
-- Observability stack (Azure Log Analytics live; Grafana, Prometheus, Loki defined but opt-in)
+- Observability stack (Azure Monitor + Log Analytics — metrics, structured JSON logs, correlation IDs)
 - Request flow: User -> Cloudflare -> Frontend -> Backend API -> DB / AI Providers
 
 **Stats to keep current** (auto-synced by `generate_stats.py`):

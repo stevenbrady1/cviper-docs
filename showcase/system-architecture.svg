@@ -186,23 +186,15 @@
     <rect x="560" y="410" width="320" height="118" rx="8" fill="#f1f5f9" stroke="#64748b" stroke-width="1.5"/>
     <rect x="568" y="414" width="150" height="16" rx="4" fill="#64748b" opacity="0.15"/>
     <text x="643" y="425" text-anchor="middle" font-size="7.5" font-weight="700" fill="#64748b" letter-spacing="0.5">OBSERVABILITY</text>
-    <text x="720" y="500" text-anchor="middle" font-size="9" fill="#64748b" font-style="italic">Log Analytics live · Prometheus/Loki/Grafana opt-in</text>
+    <text x="720" y="500" text-anchor="middle" font-size="9" fill="#64748b" font-style="italic">Metrics · Structured JSON logs · Correlation IDs</text>
   </g>
   <g filter="url(#shadow-light)">
-    <rect x="575" y="438" width="68" height="34" rx="8" fill="#f1f5f9" stroke="#64748b" stroke-width="1.5"/>
-    <text x="609" y="458" text-anchor="middle" font-size="7.5" font-weight="600" fill="#334155">Log Analytics</text>
+    <rect x="574" y="438" width="140" height="34" rx="8" fill="#f1f5f9" stroke="#64748b" stroke-width="1.5"/>
+    <text x="644" y="458" text-anchor="middle" font-size="8.5" font-weight="600" fill="#334155">Azure Monitor</text>
   </g>
   <g filter="url(#shadow-light)">
-    <rect x="649" y="438" width="68" height="34" rx="8" fill="#f1f5f9" stroke="#64748b" stroke-width="1.5"/>
-    <text x="683" y="458" text-anchor="middle" font-size="7.5" font-weight="600" fill="#334155">Prometheus</text>
-  </g>
-  <g filter="url(#shadow-light)">
-    <rect x="723" y="438" width="68" height="34" rx="8" fill="#f1f5f9" stroke="#64748b" stroke-width="1.5"/>
-    <text x="757" y="458" text-anchor="middle" font-size="7.5" font-weight="600" fill="#334155">Loki</text>
-  </g>
-  <g filter="url(#shadow-light)">
-    <rect x="797" y="438" width="68" height="34" rx="8" fill="#f1f5f9" stroke="#64748b" stroke-width="1.5"/>
-    <text x="831" y="458" text-anchor="middle" font-size="7.5" font-weight="600" fill="#334155">Grafana</text>
+    <rect x="726" y="438" width="140" height="34" rx="8" fill="#f1f5f9" stroke="#64748b" stroke-width="1.5"/>
+    <text x="796" y="458" text-anchor="middle" font-size="8.5" font-weight="600" fill="#334155">Log Analytics</text>
   </g>
   <path d="M 450 98 L 450 114" stroke="#94a3b8" stroke-width="1.0" fill="none" marker-end="url(#arrow)"/>
   <path d="M 450 156 L 450 174" stroke="#94a3b8" stroke-width="1.0" fill="none" marker-end="url(#arrow)"/>
@@ -211,5 +203,5 @@
   <path d="M 450 384 L 450 398 L 550 398 L 550 532 L 550 540" stroke="#8B5CF6" stroke-width="1.2" fill="none" marker-end="url(#arrow-purple)"/>
   <text x="450" y="726" text-anchor="middle" font-size="7" fill="#94a3b8">8 AI Providers  ·  317 API Endpoints  ·  100 Components  ·  6,800+ Backend Tests  ·  3,600+ Frontend Tests</text>
   <text x="880" y="748" text-anchor="end" font-size="10" fill="#6B7280">Updated: 2026-07-22</text>
-  <!-- stats-updated: 2026-07-24 -->
+  <!-- stats-updated: 2026-07-25 -->
 </svg>
