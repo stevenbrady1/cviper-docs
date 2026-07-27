@@ -23,3 +23,6 @@ Each ADR follows this structure:
 | [005](005-fatal-startup-guard-rules.md) | Fatal startup guard rules | accepted | 2026-03 |
 | [006](006-async-task-queue.md) | Async task queue for AI operations | proposed | 2026-04 |
 | [007](007-cv-snapshot-vs-latest-analysis.md) | cv_snapshot vs latest CV analysis (Job Search drift class) | accepted | 2026-05 |
+| [008](008-cv-iterative-authoring.md) | Iterative CV/cover letter authoring (cv_drafts version DAG) | accepted | 2026-05 |
+| [009](009-cv-structured-content-representation.md) | Structured CV content representation | proposed | 2026-05 |
+| [010](010-canonical-domain-cviper-ai.md) | Canonical domain: cviper.ai (cviper.uk 301s) | accepted | 2026-07 |
