@@ -4,10 +4,15 @@
 **Last updated:** July 2026
 **Service:** CViper — https://cviper.ai
 
-> This document is the canonical Privacy Policy for CViper. The public
-> copy at [`frontend/public/legal/privacy-policy.md`](../frontend/public/legal/privacy-policy.md)
-> is rendered to users and must stay identical to this file. If the
-> two drift, this markdown version takes precedence for legal review.
+<!--
+MAINTENANCE NOTE (not rendered — CV-1160):
+This document is the canonical Privacy Policy for CViper. The copy at
+frontend/public/legal/privacy-policy.md is what users see, rendered by
+MarkdownLegal, and must stay in sync with this file; if the two drift, this
+file takes precedence for legal review.
+Internal repo paths and maintenance notes belong in comments here, never in the
+rendered copy — see scripts/docs_drift_check.py :: check_rendered_legal_no_repo_paths.
+-->
 
 ---
 

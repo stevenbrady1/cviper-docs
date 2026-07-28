@@ -4,16 +4,14 @@
 **Effective date:** April 2026
 **Service:** CViper — https://cviper.ai
 
-> **⚠️ This document has not yet been reviewed by a qualified solicitor.**
-> It is a good-faith template written by the service operator to describe
-> how the service works and the expectations placed on users. It must be
-> reviewed by appropriate legal counsel before being treated as binding
-> or before any material change to the service (new processor, price
-> model, etc.).
-
-> The in-app copy at [`frontend/src/components/TermsOfService.jsx`](../frontend/src/components/TermsOfService.jsx)
-> must be kept in sync with this file. If the two drift, this markdown
-> version takes precedence; the component should be updated to match.
+<!--
+MAINTENANCE NOTE (not rendered — CV-1160):
+The user-facing copy is frontend/public/legal/terms-of-service.md, rendered by
+MarkdownLegal. It must be kept in sync with this file; if the two drift, this
+file takes precedence and the rendered copy should be updated to match.
+Internal repo paths and maintenance notes belong in comments here, never in the
+rendered copy — see scripts/docs_drift_check.py :: check_rendered_legal_no_repo_paths.
+-->
 
 ---
 
