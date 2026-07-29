@@ -213,5 +213,5 @@
   <text x="240" y="656" font-size="8" font-weight="400" fill="#64748b">8 cloud providers (admin + user keys)</text>
   <text x="620" y="656" font-size="8" font-weight="400" fill="#64748b">Ollama (free) + cloud providers (.env keys)</text>
   <text x="900" y="702" text-anchor="end" font-size="10" fill="#6B7280">Updated: 2026-07-03</text>
-  <!-- stats-updated: 2026-07-28 -->
+  <!-- stats-updated: 2026-07-29 -->
 </svg>
