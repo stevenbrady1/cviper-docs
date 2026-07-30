@@ -123,7 +123,7 @@ backend/tests/
 └── security/                       # Auth, RBAC, GDPR, sandboxing (23 files)
 ```
 
-### Frontend Tests (404 files)
+### Frontend Tests (414 files)
 
 ```
 frontend/src/
@@ -624,8 +624,8 @@ npm run test:e2e:headed             # With browser
 | Suite | Files | Test cases (authored) |
 |-------|-------|-----------------------|
 | Backend (pytest) | 527 | 6,800+ |
-| Frontend (Vitest) | 404 | 4,200+ |
-| **Total** | **931** | **11,100+** |
+| Frontend (Vitest) | 414 | 4,300+ |
+| **Total** | **941** | **11,200+** |
 
 > **Authored, not fabricated (CV-1090):** the case counts are `def test_` (pytest) and `it(`/`test(` (Vitest) definitions counted from source by `python scripts/generate_stats.py` — never a file-count multiplier. Parametrised runs (`@pytest.mark.parametrize`, `test.each`) expand these further at collection time, so each figure is a truthful lower bound on executed tests.
 > E2E (Playwright) journeys are counted separately in §7 (spec files), not summed into this table.
