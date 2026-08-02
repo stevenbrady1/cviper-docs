@@ -15,6 +15,6 @@
 | AI Domain Services | 8 |
 | Backend Test Files | 527 |
 | Frontend Test Files | 417 |
-| Backend Test Cases (authored) | 6,800+ |
+| Backend Test Cases (authored) | 6,900+ |
 | Frontend Test Cases (authored) | 4,300+ |
 | Total Test Cases (authored) | 11,200+ |

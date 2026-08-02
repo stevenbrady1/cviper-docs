@@ -623,7 +623,7 @@ npm run test:e2e:headed             # With browser
 
 | Suite | Files | Test cases (authored) |
 |-------|-------|-----------------------|
-| Backend (pytest) | 527 | 6,800+ |
+| Backend (pytest) | 527 | 6,900+ |
 | Frontend (Vitest) | 417 | 4,300+ |
 | **Total** | **944** | **11,200+** |
 
