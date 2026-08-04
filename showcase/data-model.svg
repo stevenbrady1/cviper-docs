@@ -32,7 +32,7 @@
 
   <rect width="1100" height="940" fill="#fafbfc"/>
   <text x="550" y="28" text-anchor="middle" font-size="16" font-weight="700" fill="#1e293b" letter-spacing="0.4">CViper Data Model</text>
-  <text x="550" y="43" text-anchor="middle" font-size="9.5" fill="#64748b">47 Tables  ·  PostgreSQL (Production) + SQLite (Dev/CI)  ·  55 Alembic Migrations</text>
+  <text x="550" y="43" text-anchor="middle" font-size="9.5" fill="#64748b">47 Tables  ·  PostgreSQL (Production) + SQLite (Dev/CI)  ·  56 Alembic Migrations</text>
   <g filter="url(#shadow)">
     <rect x="420" y="80" width="260" height="130" rx="8" fill="#fef2f2" stroke="#EF4444" stroke-width="1.5"/>
     <rect x="420" y="80" width="260" height="20" rx="8" fill="#EF4444" opacity="0.08"/>
@@ -411,5 +411,5 @@
     <text x="838" y="896" font-size="7" fill="#6b7280">title · category · content · sort_order · is_visible (CV-025)</text>
   </g>
   <text x="1080" y="932" text-anchor="end" font-size="10" fill="#6B7280">Updated: 2026-07-03</text>
-  <!-- stats-updated: 2026-08-03 -->
+  <!-- stats-updated: 2026-08-04 -->
 </svg>

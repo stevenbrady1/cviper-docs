@@ -50,7 +50,7 @@
     <circle cx="176" cy="109" r="4" fill="#10B981"/>
     <text x="186" y="113" font-size="8" font-weight="600" fill="#10B981">HARD</text>
     <text x="205" y="124" text-anchor="middle" font-size="7" fill="#6b7280">9 test areas + coverage</text>
-    <text x="205" y="136" text-anchor="middle" font-size="6.5" fill="#94a3b8">pytest · 6,800+ tests</text>
+    <text x="205" y="136" text-anchor="middle" font-size="6.5" fill="#94a3b8">pytest · 6,900+ tests</text>
   </g>
   <g filter="url(#shadow)">
     <rect x="140" y="158" width="130" height="68" rx="8" fill="#ecfdf5" stroke="#10B981" stroke-width="1.5"/>
@@ -58,43 +58,31 @@
     <circle cx="176" cy="189" r="4" fill="#10B981"/>
     <text x="186" y="193" font-size="8" font-weight="600" fill="#10B981">HARD</text>
     <text x="205" y="204" text-anchor="middle" font-size="7" fill="#6b7280">5 test areas + coverage</text>
-    <text x="205" y="216" text-anchor="middle" font-size="6.5" fill="#94a3b8">Vitest · 3,600+ tests</text>
+    <text x="205" y="216" text-anchor="middle" font-size="6.5" fill="#94a3b8">Vitest · 4,500+ tests</text>
   </g>
   <g filter="url(#shadow)">
     <rect x="140" y="238" width="130" height="68" rx="8" fill="#ecfdf5" stroke="#10B981" stroke-width="1.5"/>
-    <text x="205" y="257" text-anchor="middle" font-size="9.5" font-weight="600" fill="#065f46">E2E Tests</text>
+    <text x="205" y="257" text-anchor="middle" font-size="9.5" font-weight="600" fill="#065f46">Browser Verify</text>
     <circle cx="176" cy="269" r="4" fill="#10B981"/>
     <text x="186" y="273" font-size="8" font-weight="600" fill="#10B981">HARD</text>
-    <text x="205" y="284" text-anchor="middle" font-size="7" fill="#6b7280">critical regression suite</text>
-    <text x="205" y="296" text-anchor="middle" font-size="6.5" fill="#94a3b8">Playwright · Chromium</text>
+    <text x="205" y="284" text-anchor="middle" font-size="7" fill="#6b7280">critical E2E · a11y · real-backend</text>
+    <text x="205" y="296" text-anchor="middle" font-size="6.5" fill="#94a3b8">Playwright · axe-core</text>
   </g>
   <g filter="url(#shadow)">
-    <rect x="305" y="78" width="150" height="50" rx="8" fill="#eef2ff" stroke="#8B5CF6" stroke-width="1.5"/>
-    <text x="380" y="96" text-anchor="middle" font-size="9.5" font-weight="600" fill="#3730a3">Code Quality</text>
-    <polygon points="336,104 340,108 336,112 332,108" fill="#8B5CF6" stroke="#8B5CF6" stroke-width="1.2"/>
-    <text x="346" y="112" font-size="8" font-weight="600" fill="#8B5CF6">ADV</text>
-    <text x="450" y="112" text-anchor="end" font-size="7" fill="#6b7280">flake8 · ESLint · depcheck</text>
+    <rect x="305" y="78" width="150" height="68" rx="8" fill="#fffbeb" stroke="#F59E0B" stroke-width="1.5"/>
+    <text x="380" y="97" text-anchor="middle" font-size="9.5" font-weight="600" fill="#92400e">Code Quality</text>
+    <circle cx="351" cy="109" r="4" fill="#F59E0B" stroke="#F59E0B" stroke-width="1.5"/>
+    <text x="361" y="113" font-size="8" font-weight="600" fill="#F59E0B">SOFT</text>
+    <text x="380" y="124" text-anchor="middle" font-size="7" fill="#6b7280">flake8 · ESLint · depcheck</text>
+    <text x="380" y="136" text-anchor="middle" font-size="6.5" fill="#94a3b8">Docs Drift · ruff ratchet</text>
   </g>
   <g filter="url(#shadow)">
-    <rect x="305" y="138" width="150" height="50" rx="8" fill="#fffbeb" stroke="#F59E0B" stroke-width="1.5"/>
-    <text x="380" y="156" text-anchor="middle" font-size="9.5" font-weight="600" fill="#92400e">Docs Drift</text>
-    <circle cx="336" cy="168" r="4" fill="#F59E0B" stroke="#F59E0B" stroke-width="1.5"/>
-    <text x="346" y="172" font-size="8" font-weight="600" fill="#F59E0B">SOFT</text>
-    <text x="450" y="172" text-anchor="end" font-size="7" fill="#6b7280">stats · ruff ratchet</text>
-  </g>
-  <g filter="url(#shadow)">
-    <rect x="305" y="198" width="150" height="50" rx="8" fill="#fef2f2" stroke="#EF4444" stroke-width="1.5"/>
-    <text x="380" y="216" text-anchor="middle" font-size="9.5" font-weight="600" fill="#9f1239">Security SCA</text>
-    <circle cx="336" cy="228" r="4" fill="none" stroke="#EF4444" stroke-width="1.5"/>
-    <text x="346" y="232" font-size="8" font-weight="600" fill="#EF4444">SOFT</text>
-    <text x="450" y="232" text-anchor="end" font-size="7" fill="#6b7280">pip-audit · npm audit</text>
-  </g>
-  <g filter="url(#shadow)">
-    <rect x="305" y="258" width="150" height="50" rx="8" fill="#fef2f2" stroke="#EF4444" stroke-width="1.5"/>
-    <text x="380" y="276" text-anchor="middle" font-size="9.5" font-weight="600" fill="#9f1239">Security SAST</text>
-    <circle cx="336" cy="288" r="4" fill="none" stroke="#EF4444" stroke-width="1.5"/>
-    <text x="346" y="292" font-size="8" font-weight="600" fill="#EF4444">SOFT</text>
-    <text x="450" y="292" text-anchor="end" font-size="7" fill="#6b7280">Snyk · secrets · SSRF</text>
+    <rect x="305" y="198" width="150" height="68" rx="8" fill="#fef2f2" stroke="#EF4444" stroke-width="1.5"/>
+    <text x="380" y="217" text-anchor="middle" font-size="9.5" font-weight="600" fill="#9f1239">Security</text>
+    <circle cx="351" cy="229" r="4" fill="none" stroke="#EF4444" stroke-width="1.5"/>
+    <text x="361" y="233" font-size="8" font-weight="600" fill="#EF4444">SOFT</text>
+    <text x="380" y="244" text-anchor="middle" font-size="7" fill="#6b7280">pip-audit · npm audit</text>
+    <text x="380" y="256" text-anchor="middle" font-size="6.5" fill="#94a3b8">Snyk · secrets · SSRF</text>
   </g>
   <g filter="url(#shadow)">
     <rect x="498" y="155" width="124" height="68" rx="8" fill="#eff6ff" stroke="#3B82F6" stroke-width="1.5"/>
@@ -143,10 +131,8 @@
   <path d="M 270 112 L 282 112 L 282 72 L 488 72 L 488 188 L 498 188" stroke="#94a3b8" stroke-width="1.0" fill="none" marker-end="url(#arrow)"/>
   <path d="M 270 192 L 282 192 L 282 72 L 488 72 L 488 348 L 498 348" stroke="#94a3b8" stroke-width="1.0" fill="none" marker-end="url(#arrow)"/>
   <path d="M 270 272 L 282 272 L 282 384 L 488 384 L 488 268 L 498 268" stroke="#94a3b8" stroke-width="0.9" fill="none" marker-end="url(#arrow)"/>
-  <path d="M 456 104 L 476 104 L 476 228 L 664 228" stroke="#94a3b8" stroke-width="0.9" fill="none" marker-end="url(#arrow)"/>
-  <path d="M 456 164 L 476 164 L 476 228 L 664 228" stroke="#94a3b8" stroke-width="0.9" fill="none" marker-end="url(#arrow)"/>
-  <path d="M 456 224 L 476 224 L 476 228 L 664 228" stroke="#94a3b8" stroke-width="0.9" fill="none" marker-end="url(#arrow)"/>
-  <path d="M 456 284 L 476 284 L 476 228 L 664 228" stroke="#94a3b8" stroke-width="0.9" fill="none" marker-end="url(#arrow)"/>
+  <path d="M 456 112 L 476 112 L 476 228 L 664 228" stroke="#94a3b8" stroke-width="0.9" fill="none" marker-end="url(#arrow)"/>
+  <path d="M 456 232 L 476 232 L 476 228 L 664 228" stroke="#94a3b8" stroke-width="0.9" fill="none" marker-end="url(#arrow)"/>
   <path d="M 622 200 L 636 200 L 636 228 L 664 228" stroke="#94a3b8" stroke-width="1.1" fill="none" marker-end="url(#arrow)"/>
   <path d="M 622 268 L 636 268 L 636 228 L 664 228" stroke="#94a3b8" stroke-width="1.1" fill="none" marker-end="url(#arrow)"/>
   <path d="M 622 348 L 636 348 L 636 228 L 664 228" stroke="#94a3b8" stroke-width="1.1" fill="none" marker-end="url(#arrow)"/>
@@ -166,5 +152,5 @@
   <text x="879" y="428" text-anchor="middle" font-size="7.5" font-weight="700" fill="#475569" letter-spacing="0.4">STAGE 6</text>
   <text x="475" y="500" text-anchor="middle" font-size="7" fill="#94a3b8">Commit → Test → Verify → Build → Gate → Deploy</text>
   <text x="930" y="522" text-anchor="end" font-size="10" fill="#6B7280">Updated: 2026-07-03</text>
-  <!-- stats-updated: 2026-08-03 -->
+  <!-- stats-updated: 2026-08-04 -->
 </svg>
