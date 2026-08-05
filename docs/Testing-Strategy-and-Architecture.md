@@ -104,7 +104,7 @@ The test suite follows a classic test pyramid, with the majority of tests at the
 
 ## 3. Repository Folder Structure
 
-### Backend Tests (529 files)
+### Backend Tests (530 files)
 
 ```
 backend/tests/
@@ -623,7 +623,7 @@ npm run test:e2e:headed             # With browser
 
 | Suite | Files | Test cases (authored) |
 |-------|-------|-----------------------|
-| Backend (pytest) | 529 | 6,900+ |
+| Backend (pytest) | 530 | 6,900+ |
 | Frontend (Vitest) | 430 | 4,500+ |
 | **Total** | **959** | **11,500+** |
 
