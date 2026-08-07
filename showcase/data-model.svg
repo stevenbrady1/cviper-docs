@@ -1,5 +1,5 @@
 <!-- HAND-CRAFTED: Do not regenerate — generated from docs/diagrams/data-model.json by scripts/diagram_gen.py -->
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1100 940" font-family="Inter, system-ui, -apple-system, sans-serif">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1100 1006" font-family="Inter, system-ui, -apple-system, sans-serif">
   <defs>
     <marker id="arrow" viewBox="0 0 10 7" refX="10" refY="3.5" markerWidth="8" markerHeight="6" orient="auto-start-reverse">
       <path d="M 0 0 L 10 3.5 L 0 7 z" fill="#94a3b8"/>
@@ -30,9 +30,9 @@
     </filter>
   </defs>
 
-  <rect width="1100" height="940" fill="#fafbfc"/>
+  <rect width="1100" height="1006" fill="#fafbfc"/>
   <text x="550" y="28" text-anchor="middle" font-size="16" font-weight="700" fill="#1e293b" letter-spacing="0.4">CViper Data Model</text>
-  <text x="550" y="43" text-anchor="middle" font-size="9.5" fill="#64748b">47 Tables  ·  PostgreSQL (Production) + SQLite (Dev/CI)  ·  56 Alembic Migrations</text>
+  <text x="550" y="43" text-anchor="middle" font-size="9.5" fill="#64748b">48 Tables  ·  PostgreSQL (Production) + SQLite (Dev/CI)  ·  57 Alembic Migrations</text>
   <g filter="url(#shadow)">
     <rect x="420" y="80" width="260" height="130" rx="8" fill="#fef2f2" stroke="#EF4444" stroke-width="1.5"/>
     <rect x="420" y="80" width="260" height="20" rx="8" fill="#EF4444" opacity="0.08"/>
@@ -88,7 +88,7 @@
     <text x="40" y="258" font-size="7" fill="#6b7280">id PK · username · attempted_at</text>
   </g>
   <g filter="url(#shadow-light)">
-    <rect x="14" y="290" width="390" height="240" rx="8" fill="#eff6ff" stroke="#3B82F6" stroke-width="1.5"/>
+    <rect x="14" y="290" width="390" height="306" rx="8" fill="#eff6ff" stroke="#3B82F6" stroke-width="1.5"/>
     <rect x="22" y="294" width="138" height="16" rx="4" fill="#3B82F6" opacity="0.15"/>
     <text x="91" y="305" text-anchor="middle" font-size="7.5" font-weight="700" fill="#3B82F6" letter-spacing="0.5">JOB MANAGEMENT</text>
   </g>
@@ -128,6 +128,12 @@
     <rect x="204" y="488" width="190" height="16" rx="8" fill="#3B82F6" opacity="0.08"/>
     <text x="220" y="502" font-size="8.5" font-weight="700" fill="#3B82F6">seen_jobs</text>
     <text x="220" y="518" font-size="7" fill="#6b7280">url PK · user_id FK</text>
+  </g>
+  <g filter="url(#shadow-light)">
+    <rect x="24" y="540" width="370" height="42" rx="8" fill="#eff6ff" stroke="#3B82F6" stroke-width="1.5"/>
+    <rect x="24" y="540" width="370" height="16" rx="8" fill="#3B82F6" opacity="0.08"/>
+    <text x="40" y="554" font-size="8.5" font-weight="700" fill="#3B82F6">job_duplicate_decisions</text>
+    <text x="40" y="570" font-size="7" fill="#6b7280">user_id FK · job_id_kept FK · decision</text>
   </g>
   <g filter="url(#shadow-light)">
     <rect x="264" y="350" width="136" height="42" rx="8" fill="#eff6ff" stroke="#3B82F6" stroke-width="1.5"/>
@@ -266,150 +272,150 @@
     <text x="572" y="512" font-size="7" fill="#6b7280">skill · status · priority</text>
   </g>
   <g filter="url(#shadow-light)">
-    <rect x="14" y="560" width="1072" height="358" rx="8" fill="#f5f3ff" stroke="#8B5CF6" stroke-width="2"/>
-    <rect x="22" y="564" width="220" height="16" rx="4" fill="#8B5CF6" opacity="0.15"/>
-    <text x="132" y="575" text-anchor="middle" font-size="7.5" font-weight="700" fill="#8B5CF6" letter-spacing="0.5">BILLING · USAGE · OPS · MOBILE</text>
-  </g>
-  <g filter="url(#shadow-light)">
-    <rect x="24" y="590" width="250" height="52" rx="8" fill="#f5f3ff" stroke="#8B5CF6" stroke-width="2"/>
-    <rect x="24" y="590" width="250" height="16" rx="8" fill="#8B5CF6" opacity="0.08"/>
-    <text x="40" y="604" font-size="8.5" font-weight="700" fill="#8B5CF6">processed_stripe_events</text>
-    <text x="40" y="620" font-size="7" fill="#6b7280">event_id PK · event_type</text>
-    <text x="40" y="632" font-size="7" fill="#6b7280">processed_at — Stripe webhook idempotency</text>
-  </g>
-  <g filter="url(#shadow-light)">
-    <rect x="290" y="590" width="250" height="52" rx="8" fill="#f5f3ff" stroke="#8B5CF6" stroke-width="2"/>
-    <rect x="290" y="590" width="250" height="16" rx="8" fill="#8B5CF6" opacity="0.08"/>
-    <text x="306" y="604" font-size="8.5" font-weight="700" fill="#8B5CF6">affiliate_clicks</text>
-    <text x="306" y="620" font-size="7" fill="#6b7280">id PK · job_url_hash · site_source</text>
-    <text x="306" y="632" font-size="7" fill="#6b7280">user_id FK SET NULL · clicked_at · click_type</text>
-  </g>
-  <g filter="url(#shadow-light)">
-    <rect x="556" y="590" width="250" height="52" rx="8" fill="#f5f3ff" stroke="#8B5CF6" stroke-width="2"/>
-    <rect x="556" y="590" width="250" height="16" rx="8" fill="#8B5CF6" opacity="0.08"/>
-    <text x="572" y="604" font-size="8.5" font-weight="700" fill="#8B5CF6">sandbox_usage</text>
-    <text x="572" y="620" font-size="7" fill="#6b7280">fingerprint + date (unique)</text>
-    <text x="572" y="632" font-size="7" fill="#6b7280">ip_address · request_count · server_fingerprint</text>
-  </g>
-  <g filter="url(#shadow-light)">
-    <rect x="822" y="590" width="254" height="52" rx="8" fill="#f5f3ff" stroke="#8B5CF6" stroke-width="2"/>
-    <rect x="822" y="590" width="254" height="16" rx="8" fill="#8B5CF6" opacity="0.08"/>
-    <text x="838" y="604" font-size="8.5" font-weight="700" fill="#8B5CF6">usage_daily_summary</text>
-    <text x="838" y="620" font-size="7" fill="#6b7280">user_id + date (unique) FK CASCADE</text>
-    <text x="838" y="632" font-size="7" fill="#6b7280">ai_calls · cv_scores · doc_generations · salary_estimates</text>
+    <rect x="14" y="626" width="1072" height="358" rx="8" fill="#f5f3ff" stroke="#8B5CF6" stroke-width="2"/>
+    <rect x="22" y="630" width="220" height="16" rx="4" fill="#8B5CF6" opacity="0.15"/>
+    <text x="132" y="641" text-anchor="middle" font-size="7.5" font-weight="700" fill="#8B5CF6" letter-spacing="0.5">BILLING · USAGE · OPS · MOBILE</text>
   </g>
   <g filter="url(#shadow-light)">
     <rect x="24" y="656" width="250" height="52" rx="8" fill="#f5f3ff" stroke="#8B5CF6" stroke-width="2"/>
     <rect x="24" y="656" width="250" height="16" rx="8" fill="#8B5CF6" opacity="0.08"/>
-    <text x="40" y="670" font-size="8.5" font-weight="700" fill="#8B5CF6">sandbox_events</text>
-    <text x="40" y="686" font-size="7" fill="#6b7280">id PK · user_id FK CASCADE</text>
-    <text x="40" y="698" font-size="7" fill="#6b7280">event_type · event_data (JSON) — demo funnel</text>
+    <text x="40" y="670" font-size="8.5" font-weight="700" fill="#8B5CF6">processed_stripe_events</text>
+    <text x="40" y="686" font-size="7" fill="#6b7280">event_id PK · event_type</text>
+    <text x="40" y="698" font-size="7" fill="#6b7280">processed_at — Stripe webhook idempotency</text>
   </g>
   <g filter="url(#shadow-light)">
     <rect x="290" y="656" width="250" height="52" rx="8" fill="#f5f3ff" stroke="#8B5CF6" stroke-width="2"/>
     <rect x="290" y="656" width="250" height="16" rx="8" fill="#8B5CF6" opacity="0.08"/>
-    <text x="306" y="670" font-size="8.5" font-weight="700" fill="#8B5CF6">device_tokens</text>
-    <text x="306" y="686" font-size="7" fill="#6b7280">id PK · user_id FK CASCADE</text>
-    <text x="306" y="698" font-size="7" fill="#6b7280">platform (ios|android) · token · revoked_at — push</text>
+    <text x="306" y="670" font-size="8.5" font-weight="700" fill="#8B5CF6">affiliate_clicks</text>
+    <text x="306" y="686" font-size="7" fill="#6b7280">id PK · job_url_hash · site_source</text>
+    <text x="306" y="698" font-size="7" fill="#6b7280">user_id FK SET NULL · clicked_at · click_type</text>
   </g>
   <g filter="url(#shadow-light)">
     <rect x="556" y="656" width="250" height="52" rx="8" fill="#f5f3ff" stroke="#8B5CF6" stroke-width="2"/>
     <rect x="556" y="656" width="250" height="16" rx="8" fill="#8B5CF6" opacity="0.08"/>
-    <text x="572" y="670" font-size="8.5" font-weight="700" fill="#8B5CF6">reminder_dismissals</text>
-    <text x="572" y="686" font-size="7" fill="#6b7280">user_id + reminder_id PK FK CASCADE</text>
-    <text x="572" y="698" font-size="7" fill="#6b7280">dismissed_at</text>
+    <text x="572" y="670" font-size="8.5" font-weight="700" fill="#8B5CF6">sandbox_usage</text>
+    <text x="572" y="686" font-size="7" fill="#6b7280">fingerprint + date (unique)</text>
+    <text x="572" y="698" font-size="7" fill="#6b7280">ip_address · request_count · server_fingerprint</text>
   </g>
   <g filter="url(#shadow-light)">
     <rect x="822" y="656" width="254" height="52" rx="8" fill="#f5f3ff" stroke="#8B5CF6" stroke-width="2"/>
     <rect x="822" y="656" width="254" height="16" rx="8" fill="#8B5CF6" opacity="0.08"/>
-    <text x="838" y="670" font-size="8.5" font-weight="700" fill="#8B5CF6">feedback_attachments</text>
-    <text x="838" y="686" font-size="7" fill="#6b7280">id PK · feedback_id FK CASCADE</text>
-    <text x="838" y="698" font-size="7" fill="#6b7280">stored_filename (unique) · mime_type · size_bytes</text>
+    <text x="838" y="670" font-size="8.5" font-weight="700" fill="#8B5CF6">usage_daily_summary</text>
+    <text x="838" y="686" font-size="7" fill="#6b7280">user_id + date (unique) FK CASCADE</text>
+    <text x="838" y="698" font-size="7" fill="#6b7280">ai_calls · cv_scores · doc_generations · salary_estimates</text>
   </g>
   <g filter="url(#shadow-light)">
     <rect x="24" y="722" width="250" height="52" rx="8" fill="#f5f3ff" stroke="#8B5CF6" stroke-width="2"/>
     <rect x="24" y="722" width="250" height="16" rx="8" fill="#8B5CF6" opacity="0.08"/>
-    <text x="40" y="736" font-size="8.5" font-weight="700" fill="#8B5CF6">cv_drafts</text>
-    <text x="40" y="752" font-size="7" fill="#6b7280">id PK · job_id FK · user_id FK CASCADE</text>
-    <text x="40" y="764" font-size="7" fill="#6b7280">parent_draft_id · version_number · ats_score · expires_at</text>
+    <text x="40" y="736" font-size="8.5" font-weight="700" fill="#8B5CF6">sandbox_events</text>
+    <text x="40" y="752" font-size="7" fill="#6b7280">id PK · user_id FK CASCADE</text>
+    <text x="40" y="764" font-size="7" fill="#6b7280">event_type · event_data (JSON) — demo funnel</text>
   </g>
   <g filter="url(#shadow-light)">
     <rect x="290" y="722" width="250" height="52" rx="8" fill="#f5f3ff" stroke="#8B5CF6" stroke-width="2"/>
     <rect x="290" y="722" width="250" height="16" rx="8" fill="#8B5CF6" opacity="0.08"/>
-    <text x="306" y="736" font-size="8.5" font-weight="700" fill="#8B5CF6">prompt_template_overrides</text>
-    <text x="306" y="752" font-size="7" fill="#6b7280">task + user_id PK</text>
-    <text x="306" y="764" font-size="7" fill="#6b7280">system_prompt · user_prompt_template · rules (JSON)</text>
+    <text x="306" y="736" font-size="8.5" font-weight="700" fill="#8B5CF6">device_tokens</text>
+    <text x="306" y="752" font-size="7" fill="#6b7280">id PK · user_id FK CASCADE</text>
+    <text x="306" y="764" font-size="7" fill="#6b7280">platform (ios|android) · token · revoked_at — push</text>
   </g>
   <g filter="url(#shadow-light)">
     <rect x="556" y="722" width="250" height="52" rx="8" fill="#f5f3ff" stroke="#8B5CF6" stroke-width="2"/>
     <rect x="556" y="722" width="250" height="16" rx="8" fill="#8B5CF6" opacity="0.08"/>
-    <text x="572" y="736" font-size="8.5" font-weight="700" fill="#8B5CF6">admin_audit_logs</text>
-    <text x="572" y="752" font-size="7" fill="#6b7280">id PK · admin_user_id FK SET NULL</text>
-    <text x="572" y="764" font-size="7" fill="#6b7280">table_name · record_id · old/new_values (JSON)</text>
+    <text x="572" y="736" font-size="8.5" font-weight="700" fill="#8B5CF6">reminder_dismissals</text>
+    <text x="572" y="752" font-size="7" fill="#6b7280">user_id + reminder_id PK FK CASCADE</text>
+    <text x="572" y="764" font-size="7" fill="#6b7280">dismissed_at</text>
   </g>
   <g filter="url(#shadow-light)">
     <rect x="822" y="722" width="254" height="52" rx="8" fill="#f5f3ff" stroke="#8B5CF6" stroke-width="2"/>
     <rect x="822" y="722" width="254" height="16" rx="8" fill="#8B5CF6" opacity="0.08"/>
-    <text x="838" y="736" font-size="8.5" font-weight="700" fill="#8B5CF6">api_keys</text>
-    <text x="838" y="752" font-size="7" fill="#6b7280">id PK · user_id FK CASCADE</text>
-    <text x="838" y="764" font-size="7" fill="#6b7280">key_prefix (idx) · key_hash · scopes · revoked_at</text>
+    <text x="838" y="736" font-size="8.5" font-weight="700" fill="#8B5CF6">feedback_attachments</text>
+    <text x="838" y="752" font-size="7" fill="#6b7280">id PK · feedback_id FK CASCADE</text>
+    <text x="838" y="764" font-size="7" fill="#6b7280">stored_filename (unique) · mime_type · size_bytes</text>
   </g>
   <g filter="url(#shadow-light)">
     <rect x="24" y="788" width="250" height="52" rx="8" fill="#f5f3ff" stroke="#8B5CF6" stroke-width="2"/>
     <rect x="24" y="788" width="250" height="16" rx="8" fill="#8B5CF6" opacity="0.08"/>
-    <text x="40" y="802" font-size="8.5" font-weight="700" fill="#8B5CF6">job_embeddings</text>
-    <text x="40" y="818" font-size="7" fill="#6b7280">id PK · cache_key (unique idx)</text>
-    <text x="40" y="830" font-size="7" fill="#6b7280">vector (JSON) · created_at — semantic cache</text>
+    <text x="40" y="802" font-size="8.5" font-weight="700" fill="#8B5CF6">cv_drafts</text>
+    <text x="40" y="818" font-size="7" fill="#6b7280">id PK · job_id FK · user_id FK CASCADE</text>
+    <text x="40" y="830" font-size="7" fill="#6b7280">parent_draft_id · version_number · ats_score · expires_at</text>
   </g>
   <g filter="url(#shadow-light)">
     <rect x="290" y="788" width="250" height="52" rx="8" fill="#f5f3ff" stroke="#8B5CF6" stroke-width="2"/>
     <rect x="290" y="788" width="250" height="16" rx="8" fill="#8B5CF6" opacity="0.08"/>
-    <text x="306" y="802" font-size="8.5" font-weight="700" fill="#8B5CF6">job_feedback</text>
-    <text x="306" y="818" font-size="7" fill="#6b7280">id PK · user_id FK CASCADE · job_id (idx)</text>
-    <text x="306" y="830" font-size="7" fill="#6b7280">signal · title_core (idx) · match_score</text>
+    <text x="306" y="802" font-size="8.5" font-weight="700" fill="#8B5CF6">prompt_template_overrides</text>
+    <text x="306" y="818" font-size="7" fill="#6b7280">task + user_id PK</text>
+    <text x="306" y="830" font-size="7" fill="#6b7280">system_prompt · user_prompt_template · rules (JSON)</text>
   </g>
   <g filter="url(#shadow-light)">
     <rect x="556" y="788" width="250" height="52" rx="8" fill="#f5f3ff" stroke="#8B5CF6" stroke-width="2"/>
     <rect x="556" y="788" width="250" height="16" rx="8" fill="#8B5CF6" opacity="0.08"/>
-    <text x="572" y="802" font-size="8.5" font-weight="700" fill="#8B5CF6">provider_rate_limit</text>
-    <text x="572" y="818" font-size="7" fill="#6b7280">provider_id + date (unique)</text>
-    <text x="572" y="830" font-size="7" fill="#6b7280">count · updated_at — shared demo/AI quota (CV-708)</text>
+    <text x="572" y="802" font-size="8.5" font-weight="700" fill="#8B5CF6">admin_audit_logs</text>
+    <text x="572" y="818" font-size="7" fill="#6b7280">id PK · admin_user_id FK SET NULL</text>
+    <text x="572" y="830" font-size="7" fill="#6b7280">table_name · record_id · old/new_values (JSON)</text>
   </g>
   <g filter="url(#shadow-light)">
     <rect x="822" y="788" width="254" height="52" rx="8" fill="#f5f3ff" stroke="#8B5CF6" stroke-width="2"/>
     <rect x="822" y="788" width="254" height="16" rx="8" fill="#8B5CF6" opacity="0.08"/>
-    <text x="838" y="802" font-size="8.5" font-weight="700" fill="#8B5CF6">session_token_usage</text>
-    <text x="838" y="818" font-size="7" fill="#6b7280">user_id PK · FK CASCADE</text>
-    <text x="838" y="830" font-size="7" fill="#6b7280">tokens · updated_at — shared AI session budget (CV-708)</text>
+    <text x="838" y="802" font-size="8.5" font-weight="700" fill="#8B5CF6">api_keys</text>
+    <text x="838" y="818" font-size="7" fill="#6b7280">id PK · user_id FK CASCADE</text>
+    <text x="838" y="830" font-size="7" fill="#6b7280">key_prefix (idx) · key_hash · scopes · revoked_at</text>
   </g>
   <g filter="url(#shadow-light)">
     <rect x="24" y="854" width="250" height="52" rx="8" fill="#f5f3ff" stroke="#8B5CF6" stroke-width="2"/>
     <rect x="24" y="854" width="250" height="16" rx="8" fill="#8B5CF6" opacity="0.08"/>
-    <text x="40" y="868" font-size="8.5" font-weight="700" fill="#8B5CF6">circuit_breaker_state</text>
-    <text x="40" y="884" font-size="7" fill="#6b7280">provider_key PK</text>
-    <text x="40" y="896" font-size="7" fill="#6b7280">state · opened_at · failures (json) — shared breaker (CV-708)</text>
+    <text x="40" y="868" font-size="8.5" font-weight="700" fill="#8B5CF6">job_embeddings</text>
+    <text x="40" y="884" font-size="7" fill="#6b7280">id PK · cache_key (unique idx)</text>
+    <text x="40" y="896" font-size="7" fill="#6b7280">vector (JSON) · created_at — semantic cache</text>
   </g>
   <g filter="url(#shadow-light)">
     <rect x="290" y="854" width="250" height="52" rx="8" fill="#f5f3ff" stroke="#8B5CF6" stroke-width="2"/>
     <rect x="290" y="854" width="250" height="16" rx="8" fill="#8B5CF6" opacity="0.08"/>
-    <text x="306" y="868" font-size="8.5" font-weight="700" fill="#8B5CF6">ai_feedback</text>
+    <text x="306" y="868" font-size="8.5" font-weight="700" fill="#8B5CF6">job_feedback</text>
     <text x="306" y="884" font-size="7" fill="#6b7280">id PK · user_id FK CASCADE · job_id (idx)</text>
-    <text x="306" y="896" font-size="7" fill="#6b7280">operation (idx) · rating +1/-1 · provider · model · ai_meta (CV-915)</text>
+    <text x="306" y="896" font-size="7" fill="#6b7280">signal · title_core (idx) · match_score</text>
   </g>
   <g filter="url(#shadow-light)">
     <rect x="556" y="854" width="250" height="52" rx="8" fill="#f5f3ff" stroke="#8B5CF6" stroke-width="2"/>
     <rect x="556" y="854" width="250" height="16" rx="8" fill="#8B5CF6" opacity="0.08"/>
-    <text x="572" y="868" font-size="8.5" font-weight="700" fill="#8B5CF6">waitlist_signups</text>
-    <text x="572" y="884" font-size="7" fill="#6b7280">id PK · email (unique)</text>
-    <text x="572" y="896" font-size="7" fill="#6b7280">created_at — pre-account waitlist, no user FK (CV-1027)</text>
+    <text x="572" y="868" font-size="8.5" font-weight="700" fill="#8B5CF6">provider_rate_limit</text>
+    <text x="572" y="884" font-size="7" fill="#6b7280">provider_id + date (unique)</text>
+    <text x="572" y="896" font-size="7" fill="#6b7280">count · updated_at — shared demo/AI quota (CV-708)</text>
   </g>
   <g filter="url(#shadow-light)">
     <rect x="822" y="854" width="254" height="52" rx="8" fill="#f5f3ff" stroke="#8B5CF6" stroke-width="2"/>
     <rect x="822" y="854" width="254" height="16" rx="8" fill="#8B5CF6" opacity="0.08"/>
-    <text x="838" y="868" font-size="8.5" font-weight="700" fill="#8B5CF6">site_content</text>
-    <text x="838" y="884" font-size="7" fill="#6b7280">id PK · page (idx) · section_id · uq(page, section_id)</text>
-    <text x="838" y="896" font-size="7" fill="#6b7280">title · category · content · sort_order · is_visible (CV-025)</text>
+    <text x="838" y="868" font-size="8.5" font-weight="700" fill="#8B5CF6">session_token_usage</text>
+    <text x="838" y="884" font-size="7" fill="#6b7280">user_id PK · FK CASCADE</text>
+    <text x="838" y="896" font-size="7" fill="#6b7280">tokens · updated_at — shared AI session budget (CV-708)</text>
   </g>
-  <text x="1080" y="932" text-anchor="end" font-size="10" fill="#6B7280">Updated: 2026-07-03</text>
-  <!-- stats-updated: 2026-08-04 -->
+  <g filter="url(#shadow-light)">
+    <rect x="24" y="920" width="250" height="52" rx="8" fill="#f5f3ff" stroke="#8B5CF6" stroke-width="2"/>
+    <rect x="24" y="920" width="250" height="16" rx="8" fill="#8B5CF6" opacity="0.08"/>
+    <text x="40" y="934" font-size="8.5" font-weight="700" fill="#8B5CF6">circuit_breaker_state</text>
+    <text x="40" y="950" font-size="7" fill="#6b7280">provider_key PK</text>
+    <text x="40" y="962" font-size="7" fill="#6b7280">state · opened_at · failures (json) — shared breaker (CV-708)</text>
+  </g>
+  <g filter="url(#shadow-light)">
+    <rect x="290" y="920" width="250" height="52" rx="8" fill="#f5f3ff" stroke="#8B5CF6" stroke-width="2"/>
+    <rect x="290" y="920" width="250" height="16" rx="8" fill="#8B5CF6" opacity="0.08"/>
+    <text x="306" y="934" font-size="8.5" font-weight="700" fill="#8B5CF6">ai_feedback</text>
+    <text x="306" y="950" font-size="7" fill="#6b7280">id PK · user_id FK CASCADE · job_id (idx)</text>
+    <text x="306" y="962" font-size="7" fill="#6b7280">operation (idx) · rating +1/-1 · provider · model · ai_meta (CV-915)</text>
+  </g>
+  <g filter="url(#shadow-light)">
+    <rect x="556" y="920" width="250" height="52" rx="8" fill="#f5f3ff" stroke="#8B5CF6" stroke-width="2"/>
+    <rect x="556" y="920" width="250" height="16" rx="8" fill="#8B5CF6" opacity="0.08"/>
+    <text x="572" y="934" font-size="8.5" font-weight="700" fill="#8B5CF6">waitlist_signups</text>
+    <text x="572" y="950" font-size="7" fill="#6b7280">id PK · email (unique)</text>
+    <text x="572" y="962" font-size="7" fill="#6b7280">created_at — pre-account waitlist, no user FK (CV-1027)</text>
+  </g>
+  <g filter="url(#shadow-light)">
+    <rect x="822" y="920" width="254" height="52" rx="8" fill="#f5f3ff" stroke="#8B5CF6" stroke-width="2"/>
+    <rect x="822" y="920" width="254" height="16" rx="8" fill="#8B5CF6" opacity="0.08"/>
+    <text x="838" y="934" font-size="8.5" font-weight="700" fill="#8B5CF6">site_content</text>
+    <text x="838" y="950" font-size="7" fill="#6b7280">id PK · page (idx) · section_id · uq(page, section_id)</text>
+    <text x="838" y="962" font-size="7" fill="#6b7280">title · category · content · sort_order · is_visible (CV-025)</text>
+  </g>
+  <text x="1080" y="998" text-anchor="end" font-size="10" fill="#6B7280">Updated: 2026-07-03</text>
+  <!-- stats-updated: 2026-08-07 -->
 </svg>
