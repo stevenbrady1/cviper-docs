@@ -4,7 +4,14 @@
 **Effective date:** April 2026
 **Service:** CViper — https://cviper.ai
 
+> **Beta notice.** CViper is in beta. These Terms are under external legal review and may change. If they change materially, we will ask you to accept the updated version before you continue using the Service.
+
 <!--
+INTERIM NOTICE (CV-1162): the beta notice above is the rendered replacement for
+the "not yet reviewed by a qualified solicitor" caveat removed in CV-1160. It
+must stay until external review completes and the reviewed Terms are adopted,
+at which point it is removed along with this comment.
+
 MAINTENANCE NOTE (not rendered — CV-1160):
 The user-facing copy is frontend/public/legal/terms-of-service.md, rendered by
 MarkdownLegal. It must be kept in sync with this file; if the two drift, this
