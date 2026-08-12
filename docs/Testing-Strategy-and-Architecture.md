@@ -104,7 +104,7 @@ The test suite follows a classic test pyramid, with the majority of tests at the
 
 ## 3. Repository Folder Structure
 
-### Backend Tests (574 files)
+### Backend Tests (575 files)
 
 ```
 backend/tests/
@@ -623,9 +623,9 @@ npm run test:e2e:headed             # With browser
 
 | Suite | Files | Test cases (authored) |
 |-------|-------|-----------------------|
-| Backend (pytest) | 574 | 8,200+ |
+| Backend (pytest) | 575 | 8,200+ |
 | Frontend (Vitest) | 452 | 4,900+ |
-| **Total** | **1026** | **13,100+** |
+| **Total** | **1027** | **13,200+** |
 
 > **Authored, not fabricated (CV-1090):** the case counts are `def test_` (pytest) and `it(`/`test(` (Vitest) definitions counted from source by `python scripts/generate_stats.py` — never a file-count multiplier. Parametrised runs (`@pytest.mark.parametrize`, `test.each`) expand these further at collection time, so each figure is a truthful lower bound on executed tests.
 > E2E (Playwright) journeys are counted separately in §7 (spec files), not summed into this table.
