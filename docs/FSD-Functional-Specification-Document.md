@@ -476,7 +476,18 @@ Patterns stripped before AI calls:
 
 **Acceptance Criteria**:
 - Search returns results from all enabled sources within 60 seconds
-- Results are deduplicated by URL (same job from multiple sources appears once)
+- Results are deduplicated by two independent signals; a pair merges if EITHER fires
+  (`backend/helpers/search.py::_dedupe_cross_posts`):
+  - **(a) Cross-post key** — normalised company (legal suffixes stripped) + seniority-stripped
+    title-core + city-level location bucket. A job too ambiguous to key (placeholder company or
+    empty title-core) is never merged.
+  - **(b) Description fingerprint** — a 64-bit SimHash of the description
+    (`backend/helpers/dedupe_fingerprint.py`), compared within the same location bucket only,
+    with Hamming-distance bands: auto-merge at ≤ `MERGE_MAX_HAMMING`, flag-don't-merge up to
+    `FLAG_MAX_HAMMING`. Company is deliberately NOT consulted here — agency cross-posts carry
+    the agency's name or "Confidential", which is exactly what (a) cannot see through.
+  - The kept record is the one with the longest description (the best scoring input), held in
+    the first-seen position.
 - Streaming SSE delivers results per-source as they arrive (no waiting for slowest)
 - Location filtering supports distance radius (default 25 miles)
 - Work mode filter supports: remote, hybrid, onsite, any
@@ -516,22 +527,64 @@ Patterns stripped before AI calls:
 **Scoring Algorithm**:
 
 ```
-IF ai_score AND keyword_score available:
-    match_score = 0.7 * ai_score + 0.3 * keyword_score
-    scoring_method = "ai_weighted"
-ELIF ai_score available:
-    match_score = ai_score
-    scoring_method = "ai_only"
-ELSE:
-    match_score = keyword_score
-    scoring_method = "keyword_only"
+The keyword score is ALWAYS computed first (fast, deterministic), so there is no
+AI-without-keyword branch.
 
-Sub-scores (each 0-25, summing to 100 max):
-  - skills_match: overlap between CV skills and job requirements
-  - experience_fit: years of experience vs. job seniority
-  - industry_alignment: CV industries vs. company sector
-  - seniority_match: CV seniority level vs. job level
+IF an AI provider resolved and returned a score:
+    match_score = 0.8 * ai_score + 0.2 * keyword_score
+    scoring_method = "ai_weighted"
+ELIF the AI call was attempted and raised:
+    match_score = keyword_score
+    scoring_method = "keyword_fallback"      (+ fallback_reason, fallback_code)
+ELSE (AI disabled, provider="keyword", or no provider resolved):
+    match_score = keyword_score
+    scoring_method = "keyword_only"          (+ fallback_code)
+
+A score-cache hit returns the stored method with a "_cached" suffix.
+
+Sub-scores — FIVE dimensions, each scored 0-100, combined by percentage
+weight (the weights sum to 100):
+  - skills_match:       35%  CV skills vs. job requirements, weighted by
+                             proficiency (expert 100%, advanced 80%,
+                             intermediate 50%, basic 25%, missing 0%)
+  - experience_fit:     25%  years of experience vs. role requirements
+  - seniority_match:    20%  candidate level vs. role level
+  - industry_alignment: 10%  relevance of the candidate's sector experience
+  - competency_match:   10%  soft skills and leadership competencies
+
+The weights are SENIORITY-ADAPTIVE. The set above is the default ("mid"),
+also used whenever a role's seniority is unknown or unrecognised. Junior
+roles weight raw skills highest; lead/director roles shift weight onto
+competency and industry:
+
+  seniority   skills  experience  seniority  industry  competency
+  junior       45%       15%        15%        10%        15%
+  mid          35%       25%        20%        10%        10%
+  senior       30%       25%        20%        10%        15%
+  lead         25%       25%        20%        10%        20%
+  director     20%       25%        20%        15%        20%
+
+The model is INSTRUCTED that ai_score must equal the weighted sum of its own
+sub-scores, but this is measured, not enforced: the server recomputes the sum
+and emits a signed `weighted_sum_delta` plus a `score_weighted_sum_drift`
+event. The model's headline stands (CV-820 step 1).
+
+Two-way score (adds the reverse direction — how well the JOB fits the
+CANDIDATE's stated preferences):
+
+    two_way_score = 0.6 * match_score + 0.4 * candidate_score
+
+Returns match_score unchanged when no candidate_score is available.
+candidate_score carries its own sub-scores: salary_fit, location_fit,
+work_mode_fit, culture_fit, growth_potential — and falls back to a keyword
+reverse score when the AI omits candidate_fit.
 ```
+
+**Source of truth**: blend and two-way formula — `backend/ai/services/job_matching.py`
+(`compute_two_way_score`, and the blend in `match_job` / batch scoring). Sub-score
+dimensions and the seniority weight table — `backend/ai/prompts/constants.py`
+(`FIT_SCORE_WEIGHTS`, `_SENIORITY_WEIGHTS`, `resolve_fit_weights`,
+`get_fit_score_weights`).
 
 **Acceptance Criteria**:
 - Score range: 0-100 with colour coding (green 80+, orange 60-79, red <60)
