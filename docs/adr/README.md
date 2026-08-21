@@ -26,3 +26,4 @@ Each ADR follows this structure:
 | [008](008-cv-iterative-authoring.md) | Iterative CV/cover letter authoring (cv_drafts version DAG) | accepted | 2026-05 |
 | [009](009-cv-structured-content-representation.md) | Structured CV content representation | proposed | 2026-05 |
 | [010](010-canonical-domain-cviper-ai.md) | Canonical domain: cviper.ai (cviper.uk 301s) | accepted | 2026-07 |
+| [011](011-two-product-architecture.md) | Two products, one brand: CViper (cloud) + CViper Light (desktop) | accepted | 2026-08 |

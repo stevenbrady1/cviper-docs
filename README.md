@@ -248,6 +248,16 @@ Logs are written to `docker-start.log` in the project root.
 
 ---
 
+## Architecture
+
+CViper is **two products**: this hosted web application, and **CViper Light** — a
+local-first Tauri desktop app in a separate repository that shares a body of
+domain logic with it.
+
+Start with [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md), which describes both
+and how they relate. The decision behind the split, and the guard that keeps the
+shared logic from drifting apart, is [ADR-011](docs/adr/011-two-product-architecture.md).
+
 ## Project Structure
 
 ```

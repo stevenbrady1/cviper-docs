@@ -1,0 +1,164 @@
+<!-- HAND-CRAFTED: Do not regenerate — generated from docs/diagrams/two-product-context.json by scripts/diagram_gen.py -->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 920 742" font-family="Inter, system-ui, -apple-system, sans-serif">
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 7" refX="10" refY="3.5" markerWidth="8" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 3.5 L 0 7 z" fill="#94a3b8"/>
+    </marker>
+    <marker id="arrow-red" viewBox="0 0 10 7" refX="10" refY="3.5" markerWidth="8" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 3.5 L 0 7 z" fill="#EF4444"/>
+    </marker>
+    <marker id="arrow-blue" viewBox="0 0 10 7" refX="10" refY="3.5" markerWidth="8" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 3.5 L 0 7 z" fill="#3B82F6"/>
+    </marker>
+    <marker id="arrow-green" viewBox="0 0 10 7" refX="10" refY="3.5" markerWidth="8" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 3.5 L 0 7 z" fill="#10B981"/>
+    </marker>
+    <marker id="arrow-amber" viewBox="0 0 10 7" refX="10" refY="3.5" markerWidth="8" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 3.5 L 0 7 z" fill="#F97316"/>
+    </marker>
+    <marker id="arrow-purple" viewBox="0 0 10 7" refX="10" refY="3.5" markerWidth="8" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 3.5 L 0 7 z" fill="#8B5CF6"/>
+    </marker>
+    <filter id="shadow">
+      <feDropShadow dx="0" dy="1" stdDeviation="2" flood-color="#000" flood-opacity="0.06"/>
+    </filter>
+    <filter id="shadow-lg">
+      <feDropShadow dx="0" dy="2" stdDeviation="3.5" flood-color="#000" flood-opacity="0.09"/>
+    </filter>
+    <filter id="shadow-light">
+      <feDropShadow dx="0" dy="1" stdDeviation="1.5" flood-color="#000" flood-opacity="0.05"/>
+    </filter>
+  </defs>
+
+  <rect width="920" height="742" fill="#fafbfc"/>
+  <text x="460" y="28" text-anchor="middle" font-size="16" font-weight="700" fill="#1e293b" letter-spacing="0.4">CViper and CViper Light — Two Products, One Body of Logic</text>
+  <text x="460" y="43" text-anchor="middle" font-size="9.5" fill="#64748b">Separate repositories  ·  separate releases  ·  shared domain logic, copied and pinned</text>
+  <text x="230" y="68" text-anchor="middle" font-size="8.5" font-weight="600" fill="#475569" letter-spacing="0.4">CVIPER  —  HOSTED WEB APP</text>
+  <text x="690" y="68" text-anchor="middle" font-size="8.5" font-weight="600" fill="#475569" letter-spacing="0.4">CVIPER LIGHT  —  DESKTOP APP</text>
+  <g filter="url(#shadow)">
+    <rect x="20" y="76" width="420" height="300" rx="8" fill="#ecfdf5" stroke="#10B981" stroke-width="1.5"/>
+    <rect x="28" y="80" width="210" height="16" rx="4" fill="#10B981" opacity="0.15"/>
+    <text x="133" y="91" text-anchor="middle" font-size="7.5" font-weight="700" fill="#10B981" letter-spacing="0.5">github.com/stevenbrady1/CViper</text>
+  </g>
+  <g filter="url(#shadow-light)">
+    <rect x="40" y="106" width="380" height="34" rx="8" fill="#eff6ff" stroke="#3B82F6" stroke-width="1.5"/>
+    <rect x="40" y="106" width="380" height="0" rx="8" fill="#3B82F6" opacity="0"/>
+    <text x="56" y="120" font-size="10" font-weight="700" fill="#3B82F6">Browser  ·  account + login</text>
+    <text x="56" y="132" font-size="7" fill="#6b7280">Cloudflare edge → Azure Container Apps</text>
+  </g>
+  <g filter="url(#shadow)">
+    <rect x="40" y="154" width="380" height="62" rx="8" fill="#ecfdf5" stroke="#10B981" stroke-width="1.5"/>
+    <rect x="40" y="154" width="380" height="16" rx="8" fill="#10B981" opacity="0.08"/>
+    <text x="56" y="168" font-size="9" font-weight="700" fill="#10B981">FastAPI backend  (Python)</text>
+    <text x="56" y="184" font-size="7.5" fill="#334155">324 endpoints · 33 route modules</text>
+    <text x="56" y="196" font-size="7" fill="#6b7280">AI gateway: retry, truncation retry, provider fallback chain</text>
+  </g>
+  <g filter="url(#shadow-light)">
+    <rect x="40" y="230" width="185" height="48" rx="8" fill="#fef3c7" stroke="#F59E0B" stroke-width="1.5"/>
+    <rect x="40" y="230" width="185" height="0" rx="8" fill="#F59E0B" opacity="0"/>
+    <text x="56" y="244" font-size="10" font-weight="700" fill="#F59E0B">PostgreSQL</text>
+    <text x="56" y="256" font-size="7" fill="#6b7280">Azure Flexible Server</text>
+  </g>
+  <g filter="url(#shadow-light)">
+    <rect x="237" y="230" width="183" height="48" rx="8" fill="#f5f3ff" stroke="#8B5CF6" stroke-width="1.5"/>
+    <rect x="237" y="230" width="183" height="0" rx="8" fill="#8B5CF6" opacity="0"/>
+    <text x="253" y="244" font-size="10" font-weight="700" fill="#8B5CF6">@stats.providers AI providers</text>
+    <text x="253" y="256" font-size="7" fill="#6b7280">Admin keys + per-user keys</text>
+  </g>
+  <g filter="url(#shadow-light)">
+    <rect x="40" y="292" width="380" height="66" rx="8" fill="#f5f3ff" stroke="#8B5CF6" stroke-width="2"/>
+    <rect x="40" y="292" width="380" height="0" rx="8" fill="#8B5CF6" opacity="0"/>
+    <text x="56" y="306" font-size="9" font-weight="600" fill="#8B5CF6">Accounts  ·  sync  ·  server-side keys  ·  merges duplicates</text>
+    <text x="56" y="318" font-size="7" fill="#6b7280">Multi-device. Shared AI budget. Cross-post duplicates are MERGED</text>
+    <text x="56" y="330" font-size="7" fill="#6b7280">with a server-side undo.</text>
+  </g>
+  <g filter="url(#shadow)">
+    <rect x="480" y="76" width="420" height="300" rx="8" fill="#f1f5f9" stroke="#64748b" stroke-width="1.5"/>
+    <rect x="488" y="80" width="200" height="16" rx="4" fill="#64748b" opacity="0.15"/>
+    <text x="588" y="91" text-anchor="middle" font-size="7.5" font-weight="700" fill="#64748b" letter-spacing="0.5">C:\Dev\cviper  (no remote yet)</text>
+  </g>
+  <g filter="url(#shadow-light)">
+    <rect x="500" y="106" width="380" height="34" rx="8" fill="#eff6ff" stroke="#3B82F6" stroke-width="1.5"/>
+    <rect x="500" y="106" width="380" height="0" rx="8" fill="#3B82F6" opacity="0"/>
+    <text x="516" y="120" font-size="10" font-weight="700" fill="#3B82F6">Desktop window  ·  no account, no login</text>
+    <text x="516" y="132" font-size="7" fill="#6b7280">Tauri v2 WebView → Rust core</text>
+  </g>
+  <g filter="url(#shadow)">
+    <rect x="500" y="154" width="380" height="62" rx="8" fill="#ecfdf5" stroke="#10B981" stroke-width="1.5"/>
+    <rect x="500" y="154" width="380" height="16" rx="8" fill="#10B981" opacity="0.08"/>
+    <text x="516" y="168" font-size="9" font-weight="700" fill="#10B981">Rust core + TypeScript packages</text>
+    <text x="516" y="184" font-size="7.5" fill="#334155">Every outbound request starts in Rust, never in the page</text>
+    <text x="516" y="196" font-size="7" fill="#6b7280">Keyless paths first: browser links, keyword-only scoring</text>
+  </g>
+  <g filter="url(#shadow-light)">
+    <rect x="500" y="230" width="185" height="48" rx="8" fill="#fef3c7" stroke="#F59E0B" stroke-width="1.5"/>
+    <rect x="500" y="230" width="185" height="0" rx="8" fill="#F59E0B" opacity="0"/>
+    <text x="516" y="244" font-size="10" font-weight="700" fill="#F59E0B">SQLite</text>
+    <text x="516" y="256" font-size="7" fill="#6b7280">One file on the user's disk</text>
+  </g>
+  <g filter="url(#shadow-light)">
+    <rect x="697" y="230" width="183" height="48" rx="8" fill="#f5f3ff" stroke="#8B5CF6" stroke-width="1.5"/>
+    <rect x="697" y="230" width="183" height="0" rx="8" fill="#8B5CF6" opacity="0"/>
+    <text x="713" y="244" font-size="10" font-weight="700" fill="#8B5CF6">Your key, or Ollama</text>
+    <text x="713" y="256" font-size="7" fill="#6b7280">OS credential store</text>
+  </g>
+  <g filter="url(#shadow-light)">
+    <rect x="500" y="292" width="380" height="66" rx="8" fill="#f5f3ff" stroke="#8B5CF6" stroke-width="2"/>
+    <rect x="500" y="292" width="380" height="0" rx="8" fill="#8B5CF6" opacity="0"/>
+    <text x="516" y="306" font-size="9" font-weight="600" fill="#8B5CF6">No accounts  ·  no sync  ·  no telemetry  ·  flags duplicates</text>
+    <text x="516" y="318" font-size="7" fill="#6b7280">Single device by design. Cross-post duplicates are FLAGGED,</text>
+    <text x="516" y="330" font-size="7" fill="#6b7280">never merged — a missed duplicate costs a scroll.</text>
+  </g>
+  <g filter="url(#shadow)">
+    <rect x="20" y="396" width="880" height="86" rx="8" fill="#eef2ff" stroke="#8B5CF6" stroke-width="1.5"/>
+    <rect x="20" y="396" width="880" height="18" rx="8" fill="#8B5CF6" opacity="0.08"/>
+    <text x="36" y="410" font-size="9" font-weight="700" fill="#8B5CF6">TWELVE MODULES COPIED FROM CVIPER INTO CVIPER LIGHT  —  copied, not extracted into a shared package</text>
+    <text x="36" y="428" font-size="7.5" fill="#334155">salary wording  ·  dedupe fingerprint  ·  Reed salary + contract  ·  advert-extraction prompt + schema  ·  JSON repair  ·  prompt calibration  ·  keyword scorer</text>
+    <text x="36" y="440" font-size="7" fill="#6b7280">A shared library would have to be published and versioned across a Python service and a Rust/TypeScript desktop app — out of proportion to twelve files.</text>
+    <text x="36" y="452" font-size="7" fill="#6b7280">Copies are accepted. UNDETECTED copies are not: docs/port-parity-manifest.yaml pins each source's content hash and the guard fails when one drifts.</text>
+  </g>
+  <path d="M 230 360 L 230 396" stroke="#F97316" stroke-width="1.2" fill="none" marker-end="url(#arrow-amber)"/>
+  <text x="230" y="354" text-anchor="middle" font-size="6" fill="#F97316" font-weight="500">ported from</text>
+  <path d="M 690 396 L 690 360" stroke="#F97316" stroke-width="1.2" fill="none" marker-end="url(#arrow-amber)"/>
+  <text x="690" y="390" text-anchor="middle" font-size="6" fill="#F97316" font-weight="500">pinned in</text>
+  <rect x="20" y="496" width="880" height="220" rx="8" fill="#f8fafc" stroke="#e2e8f0" stroke-width="0.5"/>
+  <text x="460" y="516" text-anchor="middle" font-size="11" font-weight="700" fill="#1e293b">Where the two products deliberately diverge</text>
+  <text x="60" y="536" font-size="9" font-weight="700" fill="#64748b">Concern</text>
+  <text x="260" y="536" font-size="9" font-weight="700" fill="#3B82F6">CViper (hosted)</text>
+  <text x="580" y="536" font-size="9" font-weight="700" fill="#10B981">CViper Light (desktop)</text>
+  <line x1="40" y1="542" x2="880" y2="542" stroke="#e2e8f0" stroke-width="0.5"/>
+  <rect x="36" y="544" width="848" height="18" fill="#f9fafb"/>
+  <text x="60" y="558" font-size="8" font-weight="600" fill="#334155">Identity</text>
+  <text x="260" y="558" font-size="8" font-weight="400" fill="#64748b">Accounts, JWT, refresh cookies</text>
+  <text x="580" y="558" font-size="8" font-weight="400" fill="#64748b">None — there is nothing to log in to</text>
+  <rect x="36" y="562" width="848" height="18" fill="#ffffff"/>
+  <text x="60" y="576" font-size="8" font-weight="600" fill="#334155">Data at rest</text>
+  <text x="260" y="576" font-size="8" font-weight="400" fill="#64748b">PostgreSQL, encrypted fields</text>
+  <text x="580" y="576" font-size="8" font-weight="400" fill="#64748b">SQLite file on the user's disk</text>
+  <rect x="36" y="580" width="848" height="18" fill="#f9fafb"/>
+  <text x="60" y="594" font-size="8" font-weight="600" fill="#334155">AI keys</text>
+  <text x="260" y="594" font-size="8" font-weight="400" fill="#64748b">Admin-managed + per-user, server-side</text>
+  <text x="580" y="594" font-size="8" font-weight="400" fill="#64748b">OS credential store, never read back</text>
+  <rect x="36" y="598" width="848" height="18" fill="#ffffff"/>
+  <text x="60" y="612" font-size="8" font-weight="600" fill="#334155">Duplicates</text>
+  <text x="260" y="612" font-size="8" font-weight="400" fill="#64748b">Merged, with a server-side undo</text>
+  <text x="580" y="612" font-size="8" font-weight="400" fill="#64748b">Flagged only, never merged</text>
+  <rect x="36" y="616" width="848" height="18" fill="#f9fafb"/>
+  <text x="60" y="630" font-size="8" font-weight="600" fill="#334155">Day rates</text>
+  <text x="260" y="630" font-size="8" font-weight="400" fill="#64748b">Annualised (x230 working days)</text>
+  <text x="580" y="630" font-size="8" font-weight="400" fill="#64748b">Left null — no salary_period field yet</text>
+  <rect x="36" y="634" width="848" height="18" fill="#ffffff"/>
+  <text x="60" y="648" font-size="8" font-weight="600" fill="#334155">Pro-rata pay</text>
+  <text x="260" y="648" font-size="8" font-weight="400" fill="#64748b">No handling at all</text>
+  <text x="580" y="648" font-size="8" font-weight="400" fill="#64748b">Detected and the salary left null</text>
+  <rect x="36" y="652" width="848" height="18" fill="#f9fafb"/>
+  <text x="60" y="666" font-size="8" font-weight="600" fill="#334155">Extraction schema</text>
+  <text x="260" y="666" font-size="8" font-weight="400" fill="#64748b">17 fields, nested</text>
+  <text x="580" y="666" font-size="8" font-weight="400" fill="#64748b">9 flat fields — a 3B local model fails on nesting</text>
+  <rect x="36" y="670" width="848" height="18" fill="#ffffff"/>
+  <text x="60" y="684" font-size="8" font-weight="600" fill="#334155">Telemetry</text>
+  <text x="260" y="684" font-size="8" font-weight="400" fill="#64748b">Opt-in analytics</text>
+  <text x="580" y="684" font-size="8" font-weight="400" fill="#64748b">None, and a test enforces it</text>
+  <text x="900" y="734" text-anchor="end" font-size="10" fill="#6B7280">Updated: 2026-08-21</text>
+  <!-- stats-updated: 2026-08-21 -->
+</svg>

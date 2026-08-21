@@ -1,0 +1,157 @@
+<!-- HAND-CRAFTED: Do not regenerate — generated from docs/diagrams/job-ingestion-flow.json by scripts/diagram_gen.py -->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 920 790" font-family="Inter, system-ui, -apple-system, sans-serif">
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 7" refX="10" refY="3.5" markerWidth="8" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 3.5 L 0 7 z" fill="#94a3b8"/>
+    </marker>
+    <marker id="arrow-red" viewBox="0 0 10 7" refX="10" refY="3.5" markerWidth="8" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 3.5 L 0 7 z" fill="#EF4444"/>
+    </marker>
+    <marker id="arrow-blue" viewBox="0 0 10 7" refX="10" refY="3.5" markerWidth="8" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 3.5 L 0 7 z" fill="#3B82F6"/>
+    </marker>
+    <marker id="arrow-green" viewBox="0 0 10 7" refX="10" refY="3.5" markerWidth="8" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 3.5 L 0 7 z" fill="#10B981"/>
+    </marker>
+    <marker id="arrow-amber" viewBox="0 0 10 7" refX="10" refY="3.5" markerWidth="8" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 3.5 L 0 7 z" fill="#F97316"/>
+    </marker>
+    <marker id="arrow-purple" viewBox="0 0 10 7" refX="10" refY="3.5" markerWidth="8" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 3.5 L 0 7 z" fill="#8B5CF6"/>
+    </marker>
+    <filter id="shadow">
+      <feDropShadow dx="0" dy="1" stdDeviation="2" flood-color="#000" flood-opacity="0.06"/>
+    </filter>
+    <filter id="shadow-lg">
+      <feDropShadow dx="0" dy="2" stdDeviation="3.5" flood-color="#000" flood-opacity="0.09"/>
+    </filter>
+    <filter id="shadow-light">
+      <feDropShadow dx="0" dy="1" stdDeviation="1.5" flood-color="#000" flood-opacity="0.05"/>
+    </filter>
+  </defs>
+
+  <rect width="920" height="790" fill="#fafbfc"/>
+  <text x="460" y="28" text-anchor="middle" font-size="16" font-weight="700" fill="#1e293b" letter-spacing="0.4">From Advert to Tracked Job — Ingestion Data Flow</text>
+  <text x="460" y="43" text-anchor="middle" font-size="9.5" fill="#64748b">Paste, upload or fetch  →  guards  →  AI extraction  →  human review  →  save</text>
+  <text x="280" y="68" text-anchor="middle" font-size="8.5" font-weight="600" fill="#475569" letter-spacing="0.4">THE PATH A PASTED ADVERT TAKES</text>
+  <text x="720" y="68" text-anchor="middle" font-size="8.5" font-weight="600" fill="#475569" letter-spacing="0.4">INVARIANTS</text>
+  <g filter="url(#shadow)">
+    <rect x="40" y="84" width="460" height="58" rx="8" fill="#eff6ff" stroke="#3B82F6" stroke-width="1.5"/>
+    <rect x="40" y="84" width="460" height="16" rx="8" fill="#3B82F6" opacity="0.08"/>
+    <text x="56" y="98" font-size="9" font-weight="700" fill="#3B82F6">1  ·  INPUT — whatever the user actually has</text>
+    <text x="56" y="114" font-size="7.5" fill="#334155">Paste the advert text  ·  upload .pdf / .docx / .txt</text>
+    <text x="56" y="126" font-size="7" fill="#6b7280">CViper Light also fetches ONE page from a link, on request</text>
+  </g>
+  <g filter="url(#shadow)">
+    <rect x="40" y="160" width="460" height="66" rx="8" fill="#fff7ed" stroke="#F97316" stroke-width="1.5"/>
+    <rect x="40" y="160" width="460" height="16" rx="8" fill="#F97316" opacity="0.08"/>
+    <text x="56" y="174" font-size="9" font-weight="700" fill="#F97316">2  ·  GUARDS — before a single AI token is spent</text>
+    <text x="56" y="190" font-size="7.5" fill="#334155">Extension  ·  magic bytes  ·  size cap  ·  malware scan</text>
+    <text x="56" y="202" font-size="7" fill="#6b7280">Oversize paste is TRUNCATED at 50,000 chars, never rejected</text>
+    <text x="56" y="214" font-size="7" fill="#6b7280">An attacker must not be able to spend the user's AI budget</text>
+  </g>
+  <g filter="url(#shadow)">
+    <rect x="40" y="244" width="460" height="78" rx="8" fill="#f5f3ff" stroke="#8B5CF6" stroke-width="1.5"/>
+    <rect x="40" y="244" width="460" height="16" rx="8" fill="#8B5CF6" opacity="0.08"/>
+    <text x="56" y="258" font-size="9" font-weight="700" fill="#8B5CF6">3  ·  AI EXTRACTION</text>
+    <text x="56" y="274" font-size="7.5" fill="#334155">Prompt rule: null, NEVER guess — an invented day rate is worse</text>
+    <text x="56" y="286" font-size="7" fill="#6b7280">than an empty box the user fills in themselves</text>
+    <text x="56" y="298" font-size="7" fill="#6b7280">Gateway: retry  ·  truncation retry at 2x budget  ·  provider fallback</text>
+    <text x="56" y="310" font-size="7" fill="#6b7280">Response validated against the schema; markup-laden fields zeroed</text>
+  </g>
+  <g filter="url(#shadow)">
+    <rect x="40" y="340" width="460" height="58" rx="8" fill="#f5f3ff" stroke="#8B5CF6" stroke-width="2"/>
+    <rect x="40" y="340" width="460" height="16" rx="8" fill="#8B5CF6" opacity="0.08"/>
+    <text x="56" y="354" font-size="9" font-weight="700" fill="#8B5CF6">4  ·  NORMALISE</text>
+    <text x="56" y="370" font-size="7.5" fill="#334155">Empty string and missing collapse into ONE null, so the form</text>
+    <text x="56" y="382" font-size="7" fill="#6b7280">renders "the advert didn't say" identically every time</text>
+  </g>
+  <g filter="url(#shadow)">
+    <rect x="40" y="416" width="460" height="62" rx="8" fill="#ecfdf5" stroke="#10B981" stroke-width="1.5"/>
+    <rect x="40" y="416" width="460" height="16" rx="8" fill="#10B981" opacity="0.08"/>
+    <text x="56" y="430" font-size="9" font-weight="700" fill="#10B981">5  ·  HUMAN REVIEW — nothing has been saved yet</text>
+    <text x="56" y="446" font-size="7.5" fill="#334155">Every field editable. Nulls render as empty boxes to fill in.</text>
+    <text x="56" y="458" font-size="7" fill="#6b7280">This is the point of the feature: the user checks before it persists.</text>
+  </g>
+  <g filter="url(#shadow)">
+    <rect x="40" y="496" width="460" height="72" rx="8" fill="#fef3c7" stroke="#F59E0B" stroke-width="1.5"/>
+    <rect x="40" y="496" width="460" height="16" rx="8" fill="#F59E0B" opacity="0.08"/>
+    <text x="56" y="510" font-size="9" font-weight="700" fill="#F59E0B">6  ·  SAVE — now it is ordinary user input</text>
+    <text x="56" y="526" font-size="7.5" fill="#334155">Re-validated as USER input, not as AI output — the user may have edited it</text>
+    <text x="56" y="538" font-size="7" fill="#6b7280">Salary normalised  ·  dedupe fingerprint computed  ·  job row written</text>
+    <text x="56" y="550" font-size="7" fill="#6b7280">recruiter_email is persisted but NEVER served back (data minimisation)</text>
+  </g>
+  <g filter="url(#shadow)">
+    <rect x="540" y="244" width="360" height="78" rx="8" fill="#eef2ff" stroke="#8B5CF6" stroke-width="1.5"/>
+    <rect x="540" y="244" width="360" height="16" rx="8" fill="#8B5CF6" opacity="0.08"/>
+    <text x="556" y="258" font-size="9" font-weight="700" fill="#8B5CF6">FAIL-OPEN  —  every failure lands here</text>
+    <text x="556" y="274" font-size="7.5" fill="#334155">No AI configured  ·  no provider available  ·  gateway</text>
+    <text x="556" y="286" font-size="7" fill="#6b7280">exception  ·  timeout  ·  truncation  ·  JSON decode error</text>
+    <text x="556" y="298" font-size="7" fill="#6b7280">→  an empty reviewable form and an honest banner.</text>
+    <text x="556" y="310" font-size="7" fill="#6b7280">Never a 500. A manual save still works.</text>
+  </g>
+  <g filter="url(#shadow)">
+    <rect x="540" y="340" width="360" height="58" rx="8" fill="#fffbeb" stroke="#F59E0B" stroke-width="1.5"/>
+    <rect x="540" y="340" width="360" height="16" rx="8" fill="#F59E0B" opacity="0.08"/>
+    <text x="556" y="354" font-size="9" font-weight="700" fill="#F59E0B">THE PASTED TEXT IS NEVER LOGGED</text>
+    <text x="556" y="370" font-size="7.5" fill="#334155">It is third-party personal data and often client-</text>
+    <text x="556" y="382" font-size="7" fill="#6b7280">confidential. Length and outcome only — no excerpt,</text>
+    <text x="556" y="394" font-size="7" fill="#6b7280">in any failure path.</text>
+  </g>
+  <g filter="url(#shadow)">
+    <rect x="540" y="416" width="360" height="62" rx="8" fill="#f1f5f9" stroke="#64748b" stroke-width="1.5"/>
+    <rect x="540" y="416" width="360" height="16" rx="8" fill="#64748b" opacity="0.08"/>
+    <text x="556" y="430" font-size="9" font-weight="700" fill="#64748b">SHARED WITH CVIPER LIGHT, AND PINNED</text>
+    <text x="556" y="446" font-size="7.5" fill="#334155">Stages 3, 4 and 6 are ported into the desktop app.</text>
+    <text x="556" y="458" font-size="7" fill="#6b7280">docs/port-parity-manifest.yaml fails the build here</text>
+    <text x="556" y="470" font-size="7" fill="#6b7280">when any of them changes, naming what depends on it.</text>
+  </g>
+  <g filter="url(#shadow)">
+    <rect x="540" y="496" width="360" height="72" rx="8" fill="#f5f3ff" stroke="#8B5CF6" stroke-width="2"/>
+    <rect x="540" y="496" width="360" height="16" rx="8" fill="#8B5CF6" opacity="0.08"/>
+    <text x="556" y="510" font-size="9" font-weight="700" fill="#8B5CF6">WHAT NEVER HAPPENS ON THIS PATH</text>
+    <text x="556" y="526" font-size="7.5" fill="#334155">No field is auto-accepted without the user seeing it.</text>
+    <text x="556" y="538" font-size="7" fill="#6b7280">No temp file outlives the request.</text>
+    <text x="556" y="550" font-size="7" fill="#6b7280">No job row is written before step 6.</text>
+    <text x="556" y="562" font-size="7" fill="#6b7280">No AI cost is incurred before the guards pass.</text>
+  </g>
+  <path d="M 270 142 L 270 160" stroke="#94a3b8" stroke-width="1.0" fill="none" marker-end="url(#arrow)"/>
+  <path d="M 270 226 L 270 244" stroke="#94a3b8" stroke-width="1.0" fill="none" marker-end="url(#arrow)"/>
+  <path d="M 270 322 L 270 340" stroke="#94a3b8" stroke-width="1.0" fill="none" marker-end="url(#arrow)"/>
+  <path d="M 270 398 L 270 416" stroke="#94a3b8" stroke-width="1.0" fill="none" marker-end="url(#arrow)"/>
+  <path d="M 270 478 L 270 496" stroke="#10B981" stroke-width="1.2" fill="none" marker-end="url(#arrow-green)"/>
+  <path d="M 500 284 L 540 284" stroke="#EF4444" stroke-width="1.0" fill="none" stroke-dasharray="4,2" marker-end="url(#arrow-red)"/>
+  <text x="520" y="277" text-anchor="middle" font-size="6" fill="#EF4444" font-weight="500">any failure</text>
+  <rect x="20" y="588" width="880" height="186" rx="8" fill="#f8fafc" stroke="#e2e8f0" stroke-width="0.5"/>
+  <text x="460" y="608" text-anchor="middle" font-size="11" font-weight="700" fill="#1e293b">The awkward adverts this path is built for</text>
+  <text x="60" y="628" font-size="9" font-weight="700" fill="#64748b">The advert says</text>
+  <text x="260" y="628" font-size="9" font-weight="700" fill="#3B82F6">What happens</text>
+  <text x="520" y="628" font-size="9" font-weight="700" fill="#10B981">Why</text>
+  <line x1="40" y1="634" x2="880" y2="634" stroke="#e2e8f0" stroke-width="0.5"/>
+  <rect x="36" y="636" width="848" height="18" fill="#f9fafb"/>
+  <text x="60" y="650" font-size="8" font-weight="600" fill="#334155">"Competitive" / "DOE"</text>
+  <text x="260" y="650" font-size="8" font-weight="400" fill="#64748b">Salary left empty</text>
+  <text x="520" y="650" font-size="8" font-weight="400" fill="#64748b">A guessed number is a bad decision; an empty box is a 5-second fix</text>
+  <rect x="36" y="654" width="848" height="18" fill="#ffffff"/>
+  <text x="60" y="668" font-size="8" font-weight="600" fill="#334155">"£45k-£55k"</text>
+  <text x="260" y="668" font-size="8" font-weight="400" fill="#64748b">Parsed to 45000-55000</text>
+  <text x="520" y="668" font-size="8" font-weight="400" fill="#64748b">k-suffix ranges are the common UK phrasing</text>
+  <rect x="36" y="672" width="848" height="18" fill="#f9fafb"/>
+  <text x="60" y="686" font-size="8" font-weight="600" fill="#334155">"£650 per day"</text>
+  <text x="260" y="686" font-size="8" font-weight="400" fill="#64748b">CViper annualises; Light leaves null</text>
+  <text x="520" y="686" font-size="8" font-weight="400" fill="#64748b">Light has no salary_period field — see ADR-011</text>
+  <rect x="36" y="690" width="848" height="18" fill="#ffffff"/>
+  <text x="60" y="704" font-size="8" font-weight="600" fill="#334155">"£45,000 pro rata"</text>
+  <text x="260" y="704" font-size="8" font-weight="400" fill="#64748b">Light detects it; CViper does not</text>
+  <text x="520" y="704" font-size="8" font-weight="400" fill="#64748b">Built in the port, absent upstream — a real gap</text>
+  <rect x="36" y="708" width="848" height="18" fill="#f9fafb"/>
+  <text x="60" y="722" font-size="8" font-weight="600" fill="#334155">Posted by an agency</text>
+  <text x="260" y="722" font-size="8" font-weight="400" fill="#64748b">company vs agency kept separate</text>
+  <text x="520" y="722" font-size="8" font-weight="400" fill="#64748b">The end client and the recruiter are different organisations</text>
+  <rect x="36" y="726" width="848" height="18" fill="#ffffff"/>
+  <text x="60" y="740" font-size="8" font-weight="600" fill="#334155">Hybrid / remote wording</text>
+  <text x="260" y="740" font-size="8" font-weight="400" fill="#64748b">Captured as written, not parsed</text>
+  <text x="520" y="740" font-size="8" font-weight="400" fill="#64748b">No work-mode extraction exists on this path yet</text>
+  <text x="900" y="782" text-anchor="end" font-size="10" fill="#6B7280">Updated: 2026-08-21</text>
+  <!-- stats-updated: 2026-08-21 -->
+</svg>

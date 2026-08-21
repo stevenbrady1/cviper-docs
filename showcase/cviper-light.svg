@@ -1,0 +1,168 @@
+<!-- HAND-CRAFTED: Do not regenerate — generated from docs/diagrams/cviper-light.json by scripts/diagram_gen.py -->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 920 736" font-family="Inter, system-ui, -apple-system, sans-serif">
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 7" refX="10" refY="3.5" markerWidth="8" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 3.5 L 0 7 z" fill="#94a3b8"/>
+    </marker>
+    <marker id="arrow-red" viewBox="0 0 10 7" refX="10" refY="3.5" markerWidth="8" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 3.5 L 0 7 z" fill="#EF4444"/>
+    </marker>
+    <marker id="arrow-blue" viewBox="0 0 10 7" refX="10" refY="3.5" markerWidth="8" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 3.5 L 0 7 z" fill="#3B82F6"/>
+    </marker>
+    <marker id="arrow-green" viewBox="0 0 10 7" refX="10" refY="3.5" markerWidth="8" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 3.5 L 0 7 z" fill="#10B981"/>
+    </marker>
+    <marker id="arrow-amber" viewBox="0 0 10 7" refX="10" refY="3.5" markerWidth="8" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 3.5 L 0 7 z" fill="#F97316"/>
+    </marker>
+    <marker id="arrow-purple" viewBox="0 0 10 7" refX="10" refY="3.5" markerWidth="8" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 3.5 L 0 7 z" fill="#8B5CF6"/>
+    </marker>
+    <filter id="shadow">
+      <feDropShadow dx="0" dy="1" stdDeviation="2" flood-color="#000" flood-opacity="0.06"/>
+    </filter>
+    <filter id="shadow-lg">
+      <feDropShadow dx="0" dy="2" stdDeviation="3.5" flood-color="#000" flood-opacity="0.09"/>
+    </filter>
+    <filter id="shadow-light">
+      <feDropShadow dx="0" dy="1" stdDeviation="1.5" flood-color="#000" flood-opacity="0.05"/>
+    </filter>
+  </defs>
+
+  <rect width="920" height="736" fill="#fafbfc"/>
+  <text x="460" y="28" text-anchor="middle" font-size="16" font-weight="700" fill="#1e293b" letter-spacing="0.4">CViper Light — Local-First Desktop Architecture</text>
+  <text x="460" y="43" text-anchor="middle" font-size="9.5" fill="#64748b">Tauri v2  ·  React + Vite  ·  SQLite  ·  everything stays on the user's machine</text>
+  <text x="300" y="68" text-anchor="middle" font-size="8.5" font-weight="600" fill="#475569" letter-spacing="0.4">YOUR COMPUTER</text>
+  <text x="750" y="68" text-anchor="middle" font-size="8.5" font-weight="600" fill="#475569" letter-spacing="0.4">OUTBOUND — ONLY WHEN YOU PRESS A BUTTON</text>
+  <g filter="url(#shadow)">
+    <rect x="20" y="76" width="560" height="412" rx="8" fill="#ecfdf5" stroke="#10B981" stroke-width="1.5"/>
+    <rect x="28" y="80" width="200" height="16" rx="4" fill="#10B981" opacity="0.15"/>
+    <text x="128" y="91" text-anchor="middle" font-size="7.5" font-weight="700" fill="#10B981" letter-spacing="0.5">NO ACCOUNT · NO SERVER OF OURS</text>
+  </g>
+  <g filter="url(#shadow)">
+    <rect x="40" y="106" width="520" height="66" rx="8" fill="#eff6ff" stroke="#3B82F6" stroke-width="1.5"/>
+    <rect x="40" y="106" width="520" height="16" rx="8" fill="#3B82F6" opacity="0.08"/>
+    <text x="56" y="120" font-size="9" font-weight="700" fill="#3B82F6">WebView  —  React + Vite + Tailwind 4</text>
+    <text x="56" y="136" font-size="7.5" fill="#334155">The screens: tracker, job search, CV analysis, settings</text>
+    <text x="56" y="148" font-size="7" fill="#6b7280">Holds no API key. Opens no socket. Cannot reach the network.</text>
+  </g>
+  <g filter="url(#shadow-light)">
+    <rect x="40" y="186" width="520" height="34" rx="8" fill="#f5f3ff" stroke="#8B5CF6" stroke-width="2"/>
+    <rect x="40" y="186" width="520" height="0" rx="8" fill="#8B5CF6" opacity="0"/>
+    <text x="56" y="200" font-size="9" font-weight="600" fill="#8B5CF6">Tauri IPC boundary  —  typed commands in, typed results out</text>
+    <text x="56" y="212" font-size="7" fill="#6b7280">The only way across. Capabilities pinned in capabilities/default.json</text>
+  </g>
+  <g filter="url(#shadow)">
+    <rect x="40" y="234" width="520" height="78" rx="8" fill="#ecfdf5" stroke="#10B981" stroke-width="1.5"/>
+    <rect x="40" y="234" width="520" height="16" rx="8" fill="#10B981" opacity="0.08"/>
+    <text x="56" y="248" font-size="9" font-weight="700" fill="#10B981">Rust core  (src-tauri)</text>
+    <text x="56" y="264" font-size="7.5" fill="#334155">jobs  ·  providers  ·  secrets  ·  fetch_page  ·  updater</text>
+    <text x="56" y="276" font-size="7" fill="#6b7280">Every outbound request starts HERE, never in the page — which is why</text>
+    <text x="56" y="288" font-size="7" fill="#6b7280">a key cannot leak into the renderer even if the renderer is compromised.</text>
+  </g>
+  <g filter="url(#shadow)">
+    <rect x="40" y="326" width="250" height="54" rx="8" fill="#fef3c7" stroke="#F59E0B" stroke-width="1.5"/>
+    <rect x="40" y="326" width="250" height="0" rx="8" fill="#F59E0B" opacity="0"/>
+    <text x="56" y="340" font-size="10" font-weight="700" fill="#F59E0B">SQLite  (tauri-plugin-sql)</text>
+    <text x="56" y="352" font-size="7" fill="#6b7280">One file on your disk.</text>
+    <text x="56" y="364" font-size="7" fill="#6b7280">Applications, CVs, notes.</text>
+  </g>
+  <g filter="url(#shadow)">
+    <rect x="310" y="326" width="250" height="54" rx="8" fill="#f5f3ff" stroke="#8B5CF6" stroke-width="1.5"/>
+    <rect x="310" y="326" width="250" height="0" rx="8" fill="#8B5CF6" opacity="0"/>
+    <text x="326" y="340" font-size="10" font-weight="700" fill="#8B5CF6">OS credential store  (keyring crate)</text>
+    <text x="326" y="352" font-size="7" fill="#6b7280">API keys live here, not in a file.</text>
+    <text x="326" y="364" font-size="7" fill="#6b7280">No command reads one back out.</text>
+  </g>
+  <g filter="url(#shadow)">
+    <rect x="40" y="394" width="520" height="66" rx="8" fill="#fffbeb" stroke="#F59E0B" stroke-width="1.5"/>
+    <rect x="40" y="394" width="520" height="16" rx="8" fill="#F59E0B" opacity="0.08"/>
+    <text x="56" y="408" font-size="9" font-weight="700" fill="#F59E0B">Shared workspace packages  (source-only, never built)</text>
+    <text x="56" y="424" font-size="7" fill="#6b7280">core-types · ai-providers · job-apis · cv-parsing · keyword-scoring · ui</text>
+    <text x="56" y="436" font-size="7" fill="#6b7280">Twelve modules ported from CViper — pinned by docs/port-parity-manifest.yaml</text>
+  </g>
+  <g filter="url(#shadow)">
+    <rect x="600" y="76" width="300" height="412" rx="8" fill="#f1f5f9" stroke="#64748b" stroke-width="1.5"/>
+    <rect x="608" y="80" width="150" height="16" rx="4" fill="#64748b" opacity="0.15"/>
+    <text x="683" y="91" text-anchor="middle" font-size="7.5" font-weight="700" fill="#64748b" letter-spacing="0.5">USER-INITIATED ONLY</text>
+  </g>
+  <g filter="url(#shadow-light)">
+    <rect x="616" y="108" width="268" height="48" rx="8" fill="#eff6ff" stroke="#3B82F6" stroke-width="1.5"/>
+    <rect x="616" y="108" width="268" height="0" rx="8" fill="#3B82F6" opacity="0"/>
+    <text x="632" y="122" font-size="10" font-weight="700" fill="#3B82F6">Job boards — Adzuna, Reed</text>
+    <text x="632" y="134" font-size="7" fill="#6b7280">Your own API keys · daily request budget</text>
+  </g>
+  <g filter="url(#shadow-light)">
+    <rect x="616" y="168" width="268" height="48" rx="8" fill="#f5f3ff" stroke="#8B5CF6" stroke-width="1.5"/>
+    <rect x="616" y="168" width="268" height="0" rx="8" fill="#8B5CF6" opacity="0"/>
+    <text x="632" y="182" font-size="10" font-weight="700" fill="#8B5CF6">AI provider (your key)</text>
+    <text x="632" y="194" font-size="7" fill="#6b7280">CV analysis · advert extraction</text>
+  </g>
+  <g filter="url(#shadow-light)">
+    <rect x="616" y="228" width="268" height="48" rx="8" fill="#fffbeb" stroke="#F59E0B" stroke-width="1.5"/>
+    <rect x="616" y="228" width="268" height="0" rx="8" fill="#F59E0B" opacity="0"/>
+    <text x="632" y="242" font-size="10" font-weight="700" fill="#F59E0B">Ollama (localhost)</text>
+    <text x="632" y="254" font-size="7" fill="#6b7280">Offline. No key, no internet.</text>
+  </g>
+  <g filter="url(#shadow-light)">
+    <rect x="616" y="288" width="268" height="56" rx="8" fill="#fff7ed" stroke="#F97316" stroke-width="1.5"/>
+    <rect x="616" y="288" width="268" height="0" rx="8" fill="#F97316" opacity="0"/>
+    <text x="632" y="302" font-size="10" font-weight="700" fill="#F97316">Fetch one advert</text>
+    <text x="632" y="314" font-size="7" fill="#6b7280">One page, on request. No cookies, no key.</text>
+    <text x="632" y="326" font-size="7" fill="#6b7280">Private + loopback addresses refused.</text>
+  </g>
+  <g filter="url(#shadow-light)">
+    <rect x="616" y="356" width="268" height="48" rx="8" fill="#f1f5f9" stroke="#64748b" stroke-width="1.5"/>
+    <rect x="616" y="356" width="268" height="0" rx="8" fill="#64748b" opacity="0"/>
+    <text x="632" y="370" font-size="10" font-weight="700" fill="#64748b">Update check</text>
+    <text x="632" y="382" font-size="7" fill="#6b7280">Manual only — never on launch.</text>
+  </g>
+  <g filter="url(#shadow-light)">
+    <rect x="616" y="416" width="268" height="48" rx="8" fill="#eef2ff" stroke="#8B5CF6" stroke-width="1.5"/>
+    <rect x="616" y="416" width="268" height="0" rx="8" fill="#8B5CF6" opacity="0"/>
+    <text x="632" y="430" font-size="10" font-weight="700" fill="#8B5CF6">No server of ours</text>
+    <text x="632" y="442" font-size="7" fill="#6b7280">There is nowhere for your data to go.</text>
+  </g>
+  <path d="M 300 172 L 300 186" stroke="#94a3b8" stroke-width="1.0" fill="none" marker-end="url(#arrow)"/>
+  <path d="M 300 220 L 300 234" stroke="#94a3b8" stroke-width="1.0" fill="none" marker-end="url(#arrow)"/>
+  <path d="M 300 312 L 300 320 L 164 320 L 164 326" stroke="#3B82F6" stroke-width="1.2" fill="none" marker-end="url(#arrow-blue)"/>
+  <path d="M 300 312 L 300 320 L 436 320 L 436 326" stroke="#8B5CF6" stroke-width="1.2" fill="none" marker-end="url(#arrow-purple)"/>
+  <path d="M 560 272 L 580 272 L 580 282 L 600 282" stroke="#F97316" stroke-width="1.2" fill="none" marker-end="url(#arrow-amber)"/>
+  <rect x="20" y="500" width="880" height="210" rx="8" fill="#f8fafc" stroke="#e2e8f0" stroke-width="0.5"/>
+  <text x="460" y="520" text-anchor="middle" font-size="11" font-weight="700" fill="#1e293b">What CViper Light deliberately does NOT do</text>
+  <text x="60" y="540" font-size="9" font-weight="700" fill="#64748b">Capability</text>
+  <text x="260" y="540" font-size="9" font-weight="700" fill="#EF4444">Light</text>
+  <text x="400" y="540" font-size="9" font-weight="700" fill="#10B981">Why it is absent</text>
+  <line x1="40" y1="546" x2="880" y2="546" stroke="#e2e8f0" stroke-width="0.5"/>
+  <rect x="36" y="548" width="848" height="18" fill="#f9fafb"/>
+  <text x="60" y="562" font-size="8" font-weight="600" fill="#334155">Accounts / login</text>
+  <text x="260" y="562" font-size="8" font-weight="400" fill="#64748b">None</text>
+  <text x="400" y="562" font-size="8" font-weight="400" fill="#64748b">No identity is stored, so there is none to breach</text>
+  <rect x="36" y="566" width="848" height="18" fill="#ffffff"/>
+  <text x="60" y="580" font-size="8" font-weight="600" fill="#334155">Sync between devices</text>
+  <text x="260" y="580" font-size="8" font-weight="400" fill="#64748b">None</text>
+  <text x="400" y="580" font-size="8" font-weight="400" fill="#64748b">Single device by design; export/import moves your data</text>
+  <rect x="36" y="584" width="848" height="18" fill="#f9fafb"/>
+  <text x="60" y="598" font-size="8" font-weight="600" fill="#334155">Telemetry</text>
+  <text x="260" y="598" font-size="8" font-weight="400" fill="#64748b">None, ever</text>
+  <text x="400" y="598" font-size="8" font-weight="400" fill="#64748b">A test fails the build if any code reads the switch as on</text>
+  <rect x="36" y="602" width="848" height="18" fill="#ffffff"/>
+  <text x="60" y="616" font-size="8" font-weight="600" fill="#334155">Cloud storage</text>
+  <text x="260" y="616" font-size="8" font-weight="400" fill="#64748b">None</text>
+  <text x="400" y="616" font-size="8" font-weight="400" fill="#64748b">The database file is on your own disk</text>
+  <rect x="36" y="620" width="848" height="18" fill="#f9fafb"/>
+  <text x="60" y="634" font-size="8" font-weight="600" fill="#334155">Background network</text>
+  <text x="260" y="634" font-size="8" font-weight="400" fill="#64748b">None</text>
+  <text x="400" y="634" font-size="8" font-weight="400" fill="#64748b">Nothing happens on launch — not even an update check</text>
+  <rect x="36" y="638" width="848" height="18" fill="#ffffff"/>
+  <text x="60" y="652" font-size="8" font-weight="600" fill="#334155">Link tracking</text>
+  <text x="260" y="652" font-size="8" font-weight="400" fill="#64748b">None</text>
+  <text x="400" y="652" font-size="8" font-weight="400" fill="#64748b">Job adverts open in your browser with the URL unmodified</text>
+  <rect x="36" y="656" width="848" height="18" fill="#f9fafb"/>
+  <text x="60" y="670" font-size="8" font-weight="600" fill="#334155">Crawling</text>
+  <text x="260" y="670" font-size="8" font-weight="400" fill="#64748b">None</text>
+  <text x="400" y="670" font-size="8" font-weight="400" fill="#64748b">"Fetch" reads exactly one page and follows no links</text>
+  <text x="900" y="728" text-anchor="end" font-size="10" fill="#6B7280">Updated: 2026-08-21</text>
+  <!-- stats-updated: 2026-08-21 -->
+</svg>
