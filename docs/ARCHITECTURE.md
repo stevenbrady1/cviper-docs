@@ -61,31 +61,87 @@ Browser
 
 Live counts are in [`STATS.md`](STATS.md) and are generated, never hand-written.
 
-### Backend layering — and an honest note about it
+### Backend layering
 
-The declared layers are `routes/` → `services/` → `repositories/`, with `ai/` as
-a parallel domain package.
+Requests flow down. Imports flow the same way, and a guard enforces it.
 
-**The names do not currently match reality.** Measured 2026-08-20:
+```
+routes/                         HTTP adapters. May import anything below.
+  |
+domain/  ai/  career_search/    Business logic. May import repositories,
+services/  helpers/             core, utils and each other. NEVER routes.
+  |
+repositories/                   Database access. May import core and utils.
+  |                             NEVER domain logic, NEVER routes.
+core/  utils/                   Pure primitives, no I/O. Import NOTHING
+                                from the stack above.
+```
 
-| Layer | Files | Lines |
-|---|---|---|
-| `routes/` | 34 | 21,174 |
-| `ai/` | 38 | 17,729 |
-| `helpers/` | 41 | **12,768** |
-| `repositories/` | 8 | 4,411 |
-| `services/` | 6 | **1,026** |
+Measured 2026-08-21, after CV-1323:
 
-`helpers/` is twelve times the size of `services/` and holds real domain logic —
-search, ATS scoring, geography, document generation, parse reporting. A new
-developer told "business logic lives in services" will look in the wrong place
-for almost all of it.
+| Layer | Files | Lines | What it is |
+|---|---|---|---|
+| `routes/` | 34 | 20,796 | HTTP adapters |
+| `ai/` | 38 | 17,764 | the AI gateway, prompts, providers and AI services |
+| `domain/` | 40 | 12,270 | business logic |
+| `repositories/` | 24 | 4,803 | data access, one module per entity |
+| `career_search/` | 8 | 3,133 | career-page discovery |
+| `services/` | 6 | 1,027 | background jobs, alerts, push, reminders |
+| `core/` | 4 | 603 | pure primitives |
+| `helpers/` | 6 | 590 | infrastructure adapters |
+| `utils/` | 2 | 25 | generic utilities |
 
-This is recorded rather than quietly tidied because fixing it is a large,
-behaviour-preserving refactor that has not happened yet. See the audit report
-`ClaudeReports/audits/2026-08-20-audit-full-architecture-refactor-cviper-and-light.md`,
-Phase 4. Until then: **the layer names are aspirational, `helpers/` is where the
-domain lives.**
+Live counts are in [`STATS.md`](STATS.md) and are generated; the table above is
+a shape, not a stat, and is refreshed when the shape changes.
+
+**What each name promises.** The previous version of this section carried an
+honest note saying the layer names were aspirational and `helpers/` was where
+the domain actually lived. That is no longer true, and the note is gone because
+the condition it described is gone — not because it was tidied away.
+
+- **`domain/`** is the answer to "where is the business logic?". Search, ATS
+  behaviour, geography, document generation, CV analysis, scoring provenance,
+  advert parsing, reminder rules, registration seeding. If it knows about CVs,
+  jobs, adverts or users, it is here.
+- **`core/`** exists so `repositories/` has somewhere to get shared pure logic
+  from without reaching upward. Country coercion, job-title identity, the
+  dedupe fingerprint. No session, no request, no I/O.
+- **`helpers/`** is now what its name always promised: five adapters onto
+  something outside the process — blob storage, ClamAV, diagnostic redaction,
+  HTTP session identity, the cloud/desktop switch. The test for adding
+  something: would this module be equally at home in an unrelated product?
+- **`services/`** is background work — cron sweeps, alerts, push. It is small
+  because that is genuinely all it does; it is no longer small *while*
+  something else holds the logic it is named for.
+- **`ai/`** and **`career_search/`** are domain-tier packages that predate
+  `domain/` and were deliberately left where they are. The guard treats them as
+  peers, not exceptions.
+
+**`repositories/` is a re-export surface.** `__init__.py` is 171 lines of
+`from .job_repository import ...`. It used to be 2,623 lines and 102
+definitions — 60% of its own layer — which is why the seven correctly-named
+sibling modules read as the exception rather than the rule. Import style across
+the codebase is `import repositories as repo`, and every name is still reachable
+as `repo.<name>`.
+
+**The guard, and why it is not a convention.** A layering that lives only in a
+document is a diagram, and diagrams do not fail builds — which is how the
+inversion above went unnoticed until an audit measured it.
+`scripts/check_import_direction.py` parses every backend module with `ast`,
+including function-local imports, and fails the build on an import that points
+back up the stack. Its break-on-purpose tests are in
+`backend/tests/infrastructure/test_import_direction.py`; each builds a synthetic
+repository under `tmp_path` rather than breaking a real file, so proving the
+guard works never requires sabotaging the tree it guards.
+
+`KNOWN_VIOLATIONS` is empty and a test fails if it grows. When CV-1323 started
+there were six entries — five where `repositories/` reached up into `helpers/`,
+one where a background sweep imported a FastAPI router for a date helper.
+
+History: `ClaudeReports/audits/2026-08-20-audit-full-architecture-refactor-cviper-and-light.md`
+(the measurement) and
+`ClaudeReports/changes/2026-08-21-change-cv1323-backend-layering-phase4.md`
+(the impact analysis and the plan).
 
 ### The AI gateway
 
@@ -168,7 +224,7 @@ Twelve modules were copied from CViper into CViper Light:
 | Domain | CViper | CViper Light |
 |---|---|---|
 | Salary wording | `backend/salary_utils.py` | `packages/ai-providers/src/salary-wording.ts` |
-| Dedupe fingerprint | `backend/helpers/dedupe_fingerprint.py` | `packages/job-apis/src/fingerprint.ts` |
+| Dedupe fingerprint | `backend/core/dedupe_fingerprint.py` | `packages/job-apis/src/fingerprint.ts` |
 | Reed salary + contract | `backend/job_sites_api.py` | `packages/job-apis/src/reed-{salary,contract}.ts` |
 | Keyword scorer | `backend/ai/keywords.py` | `packages/keyword-scoring/` |
 | Prompt calibration | `backend/ai/prompts/constants.py` | `packages/ai-providers/src/prompt/constants.ts` |
