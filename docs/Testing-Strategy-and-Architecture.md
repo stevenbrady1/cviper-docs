@@ -625,7 +625,7 @@ npm run test:e2e:headed             # With browser
 |-------|-------|-----------------------|
 | Backend (pytest) | 600 | 8,700+ |
 | Frontend (Vitest) | 454 | 4,900+ |
-| **Total** | **1054** | **13,600+** |
+| **Total** | **1054** | **13,700+** |
 
 > **Authored, not fabricated (CV-1090):** the case counts are `def test_` (pytest) and `it(`/`test(` (Vitest) definitions counted from source by `python scripts/generate_stats.py` — never a file-count multiplier. Parametrised runs (`@pytest.mark.parametrize`, `test.each`) expand these further at collection time, so each figure is a truthful lower bound on executed tests.
 > E2E (Playwright) journeys are counted separately in §7 (spec files), not summed into this table.

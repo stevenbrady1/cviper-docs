@@ -17,4 +17,4 @@
 | Frontend Test Files | 454 |
 | Backend Test Cases (authored) | 8,700+ |
 | Frontend Test Cases (authored) | 4,900+ |
-| Total Test Cases (authored) | 13,600+ |
+| Total Test Cases (authored) | 13,700+ |
