@@ -7,6 +7,16 @@ This project uses [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
 
+### Added
+
+- **Public landing page rebuilt to reference tier (#1458, 2026-08-23 → 2026-08-31)** — display-scale hero with a serif accent, on-page how-it-works, product-proof frames, CViper Light family section, closing CTA band, sticky header nav. The first-visit walkthrough auto-open is retired; the guide opens on request from the page.
+- **"Free setup help" band promoted to position 2 (#1473, #1478)** — the AI-newcomer promise ("Never used AI before? We'll set you up in about 2 minutes.") has its own section directly after the hero, with the three key-setup steps, the every-click walkthrough, and the demo alternative. A tappable "New to AI? No problem." card in the hero jumps straight to it (#1480).
+- **Landing motion system (#1470, #1471, #1474)** — staged hero entrance, aurora drift, rewrite-schematic play with a breathing sparkle, step cascades, a living headline (the accent rotates every job → each role → this role), and scroll parallax. Everything sits behind `prefers-reduced-motion` guards and rests at the static design for captures and assistive tech.
+
+### Changed
+
+- **Hero rewritten for the non-technical reader (#1461, #1478, #1480, #1482)** — "AI" now appears above the fold as a benefit with the never-invented qualifier; the subhead shrank 43 → 25 words (a 30-word ceiling is contract-pinned); the "whole app is three steps" stepper was removed as underselling and replaced by an unnumbered capability strip; the two helper notes merged into one; trust badges moved below the New-to-AI card with the divider removed.
+
 ### Fixed
 
 - **Every sign-up path now records GDPR consent, with real version numbers (CV-1321)** — some registration routes created an account without writing the consent audit row, and others wrote a placeholder version string. Consent is now recorded on every path with the actual policy versions in force at the time.
