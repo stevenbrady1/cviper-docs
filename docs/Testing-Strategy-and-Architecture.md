@@ -105,7 +105,7 @@ The test suite follows a classic test pyramid, with the majority of tests at the
 
 ## 3. Repository Folder Structure
 
-### Backend Tests (633 files)
+### Backend Tests (638 files)
 
 ```
 backend/tests/
@@ -124,7 +124,7 @@ backend/tests/
 └── security/                       # Auth, RBAC, GDPR, sandboxing (23 files)
 ```
 
-### Frontend Tests (499 files)
+### Frontend Tests (502 files)
 
 ```
 frontend/src/
@@ -538,6 +538,22 @@ npm run test:e2e                    # Playwright headless
 | Frontend | 80% | 75% | 80% | Configured in `vite.config.js` |
 | E2E | Not measured | — | — | About user journeys, not lines |
 
+**Weak-file remediation (AUDIT-2026-09 Phase 6).** The audit named the three
+weakest backend files; each now holds ≥ 80% statement coverage via behaviour
+tests (no source scans). Measured 2026-09-05 with
+`pytest <suite> --cov=<module> --cov-report=term`:
+
+| File | Before | After (measured 2026-09-05) | Behaviour suite |
+|------|--------|------------------------------|-----------------|
+| `services/background_tasks.py` | 10% | 82% | `tests/services/test_background_tasks_behaviour.py` (maintenance/alert/sandbox loops) |
+| `domain/cv_health_check.py` | 12% | 96% | `tests/cv/test_cv_health_check_behaviour.py` (per-check verdicts, score, degenerate CVs) |
+| `job_sites_api.py` | 55% | 88% | `tests/search/test_job_board_failure_modes.py` (per-board timeout/429/5xx/malformed-JSON/empty/schema-change, over `tests/search` + `tests/jobs`) |
+
+The audit described `background_tasks.py` as a task queue (enqueue order,
+retry, workers); those semantics actually live in `task_registry.py` (already
+> 90% via `tests/test_task_registry.py`) — the file's real content is the
+three asyncio maintenance loops, which is what its suite covers.
+
 ### 11.2 Priority Code Paths
 
 | Priority | Code path | Target |
@@ -629,9 +645,9 @@ npm run test:e2e:headed             # With browser
 
 | Suite | Files | Test cases (authored) |
 |-------|-------|-----------------------|
-| Backend (pytest) | 633 | 9,300+ |
-| Frontend (Vitest) | 499 | 5,300+ |
-| **Total** | **1132** | **14,700+** |
+| Backend (pytest) | 638 | 9,400+ |
+| Frontend (Vitest) | 502 | 5,300+ |
+| **Total** | **1140** | **14,700+** |
 
 > **Authored, not fabricated (CV-1090):** the case counts are `def test_` (pytest) and `it(`/`test(` (Vitest) definitions counted from source by `python scripts/generate_stats.py` — never a file-count multiplier. Parametrised runs (`@pytest.mark.parametrize`, `test.each`) expand these further at collection time, so each figure is a truthful lower bound on executed tests.
 > E2E (Playwright) journeys are counted separately in §7 (spec files), not summed into this table.
