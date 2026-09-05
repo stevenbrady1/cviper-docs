@@ -104,7 +104,7 @@ The test suite follows a classic test pyramid, with the majority of tests at the
 
 ## 3. Repository Folder Structure
 
-### Backend Tests (622 files)
+### Backend Tests (630 files)
 
 ```
 backend/tests/
@@ -123,7 +123,7 @@ backend/tests/
 └── security/                       # Auth, RBAC, GDPR, sandboxing (23 files)
 ```
 
-### Frontend Tests (493 files)
+### Frontend Tests (499 files)
 
 ```
 frontend/src/
@@ -526,9 +526,14 @@ npm run test:e2e                    # Playwright headless
 
 ### 11.1 Targets
 
+<!-- The backend figure is a MEASUREMENT, not a target — restamp it (value
+     and date) from `cd backend && pytest tests -q --cov=. --cov-report=term`
+     when re-measuring. Guard: check_coverage_figure_is_dated in
+     scripts/docs_drift_check.py fails once the date is >180 days old
+     (AUDIT-2026-09 (i)). -->
 | Component | Statements | Branches | Functions | Rationale |
 |-----------|-----------|----------|-----------|-----------|
-| Backend | 60% (current) | — | — | Growing towards 75% |
+| Backend | 80% (measured 2026-09-05) | — | — | Hold ≥ 75%; full-suite statement coverage was 80.4% (26,269/32,664) |
 | Frontend | 80% | 75% | 80% | Configured in `vite.config.js` |
 | E2E | Not measured | — | — | About user journeys, not lines |
 
@@ -623,9 +628,9 @@ npm run test:e2e:headed             # With browser
 
 | Suite | Files | Test cases (authored) |
 |-------|-------|-----------------------|
-| Backend (pytest) | 622 | 9,200+ |
-| Frontend (Vitest) | 493 | 5,300+ |
-| **Total** | **1115** | **14,500+** |
+| Backend (pytest) | 630 | 9,300+ |
+| Frontend (Vitest) | 499 | 5,300+ |
+| **Total** | **1129** | **14,600+** |
 
 > **Authored, not fabricated (CV-1090):** the case counts are `def test_` (pytest) and `it(`/`test(` (Vitest) definitions counted from source by `python scripts/generate_stats.py` — never a file-count multiplier. Parametrised runs (`@pytest.mark.parametrize`, `test.each`) expand these further at collection time, so each figure is a truthful lower bound on executed tests.
 > E2E (Playwright) journeys are counted separately in §7 (spec files), not summed into this table.

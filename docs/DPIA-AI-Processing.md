@@ -193,3 +193,63 @@ The conclusion is that AI processing is proportionate, with multiple opt-out pat
 | Date | Change | Author |
 |---|---|---|
 | 2026-05-19 | Initial publication — private-beta scope. | DPO |
+| 2026-09-05 | Appendix C added — EU AI Act position (candidate-side use outside Annex III 4(a)); employer-facing re-issue gate. (AUDIT-2026-09 (j)) | DPO |
+
+---
+
+## Appendix C — EU AI Act position (AUDIT-2026-09)
+
+### C.1 Classification
+
+CViper's AI features tailor a candidate's **own** CV and cover letter, score
+job adverts **for the candidate**, and surface advice **to the candidate**.
+Nothing in the product evaluates candidates on behalf of an employer.
+
+Regulation (EU) 2024/1689 (the AI Act), Annex III 4(a), classifies as
+high-risk those AI systems
+
+> "intended to be used for the recruitment or selection of natural persons,
+> in particular to place targeted job advertisements, to analyse and filter
+> job applications, and to evaluate candidates".
+
+CViper's processing sits **outside** Annex III 4(a): the system is operated
+by and for the data subject themselves (candidate-side), does not filter or
+rank applications for a recruiter, and produces no output an employer uses
+to evaluate a person. The job-advert *scoring* ranks adverts for the
+candidate — the object being evaluated is the vacancy, not a natural person.
+
+The product is therefore not a high-risk AI system under the Act as shipped.
+General-purpose-model obligations rest with the upstream providers (Google,
+OpenAI, Anthropic, Mistral, OpenRouter-routed models) as GPAI providers;
+CViper is a deployer of those models.
+
+### C.2 Transparency obligations that DO apply
+
+Article 50 transparency duties apply regardless of risk class where AI
+output could be mistaken for human output. CViper already discloses AI
+involvement on every AI-derived surface (provenance chips, fallback notes,
+AI-disclaimer copy — see Step 6 mitigations M2/M4), which satisfies the
+deployer-side duty for this use.
+
+### C.3 Re-issue gate — employer-facing features
+
+**Binding condition:** any future feature in which CViper output is consumed
+by an employer or recruiter to evaluate, filter, rank, or select candidates
+(for example: sharing scored candidate profiles with recruiters, an
+employer-side inbox, "recruiter view" analytics) moves that feature INTO
+Annex III 4(a) territory and is **prohibited from shipping** until:
+
+1. this DPIA is re-issued with a full AI-Act conformity assessment for the
+   feature (risk-management system, data-governance, human-oversight and
+   accuracy documentation per Chapter III), and
+2. the classification decision above is re-made in writing by the DPO.
+
+This gate mirrors the public-launch revision conditions in Step 7 and binds
+regardless of how small the employer-facing surface appears.
+
+### C.4 Review triggers
+
+Re-review this appendix when: (a) the Commission amends Annex III or issues
+guidance touching candidate-side career tools; (b) any employer/recruiter
+persona enters the product; (c) an upstream provider reclassifies a model
+CViper routes to in a way that changes deployer duties.

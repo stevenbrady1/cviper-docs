@@ -2322,11 +2322,15 @@ key_source, username, role
 
 ### 10.1 Test Plan Overview
 
+<!-- The three count-bearing rows below are AUTO-PATCHED by
+     scripts/generate_stats.py (patch_fsd_test_table) from stats.json and
+     ci.yml — do not hand-edit the numbers (AUDIT-2026-09 (i); guard:
+     check_fsd_test_table in scripts/docs_drift_check.py). -->
 | Layer | Framework | Test Count | Execution |
 |-------|----------|-----------|-----------|
-| Backend Unit/Integration | pytest + pytest-xdist | 1968+ tests, 36 files | Parallel (`-n auto --dist worksteal`) |
-| Frontend Unit/Component | Vitest + React Testing Library | 527+ tests, 30 files | Threaded pool |
-| CI Pipeline | GitHub Actions | 9 jobs (with paths-filter for PR skipping) | Push/PR to main/develop |
+| Backend Unit/Integration | pytest + pytest-xdist | 9,200+ tests, 623 files | Parallel (`-n auto --dist worksteal`) |
+| Frontend Unit/Component | Vitest + React Testing Library | 5,300+ tests, 497 files | Threaded pool |
+| CI Pipeline | GitHub Actions | 16 jobs (with paths-filter for PR skipping) | Push/PR to main/develop |
 | Security Scanning | Snyk + Aikido + Custom | 4 scan types | Every CI run |
 
 ### 10.2 Test Environment
