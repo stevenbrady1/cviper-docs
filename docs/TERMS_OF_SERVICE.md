@@ -111,7 +111,7 @@ The Service is provided **"as is"** without warranty of any kind, either express
 
 ## 10. Fees
 
-As of the effective date, CViper is offered free of charge to individual users. If paid tiers are introduced, users will be notified in advance and these Terms will be updated. Any third-party AI provider fees incurred by using your own API keys are your responsibility.
+As of the effective date, CViper is offered free of charge to individual users. If paid tiers are introduced, users will be notified in advance and these Terms will be updated. Any third-party AI provider fees incurred by using your own API keys are your responsibility. A small number of introductory "trial credit" AI operations are processed through CViper's own AI provider accounts rather than your API key; the same privacy notice and retention rules apply, and trial credits are capped and may be changed or withdrawn at any time.
 
 ## 11. Limitation of Liability
 

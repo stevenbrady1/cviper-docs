@@ -217,7 +217,7 @@ CViper addresses these pain points through automation, AI analysis, and a unifie
 
 | ID | Assumption |
 |----|-----------|
-| A-001 | Users have access to at least one AI provider API key (free tiers available from Google, GitHub, etc.) |
+| A-001 | **Decision (2026-09-05, ADR-012)** — the former assumption "users have a key before their first result" is retired: first results are served on hosted trial credits (operator's provider account, counted per operation, daily USD cap); sustained use requires the user's own key (free tiers available from Google, GitHub, etc.) or Pro |
 | A-002 | Job boards and ATS APIs remain publicly accessible without authentication (Greenhouse, Lever, SmartRecruiters) |
 | A-003 | Users provide their own CV text for analysis and document generation |
 | A-004 | SQLite is sufficient for local development; CI uses PostgreSQL 16 for schema drift checks; production uses Azure PostgreSQL Flexible Server for concurrent multi-user access |

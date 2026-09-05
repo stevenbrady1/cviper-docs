@@ -34,7 +34,7 @@ A DPIA is required because the processing:
 |---|---|
 | 1. Data ingestion | User uploads a CV (DOCX/PDF/TXT). Backend parses to text. |
 | 2. Local pre-processing | Skills + job title profile is extracted (kept indefinitely). Full CV text is encrypted at rest (Fernet AES-128) with a per-user 7-day TTL. |
-| 3. User opt-in | User explicitly selects which AI provider(s) to enable in Settings → AI. No AI call fires without an enabled provider. |
+| 3. User opt-in | User explicitly selects which AI provider(s) to enable in Settings → AI, or — for a Free account's first results — consumes hosted trial credits (ADR-012), in which case the call runs via the **operator's** provider account (currently Google) under the same prompt-sanitisation and retention controls, capped per operation and per day. No AI call fires without one of those two explicit user actions. |
 | 4. Prompt construction | Backend constructs a structured prompt (system message + JSON schema + truncated CV text + truncated job description). User-supplied input is sanitised to mitigate prompt injection. |
 | 5. Transmission | Prompt is sent over TLS 1.2+ to the selected provider's API endpoint. |
 | 6. Provider processing | Provider runs the prompt through its model and returns JSON output. Output is logged (encrypted) for debugging and quality. |
@@ -194,6 +194,7 @@ The conclusion is that AI processing is proportionate, with multiple opt-out pat
 |---|---|---|
 | 2026-05-19 | Initial publication — private-beta scope. | DPO |
 | 2026-09-05 | Appendix C added — EU AI Act position (candidate-side use outside Annex III 4(a)); employer-facing re-issue gate. (AUDIT-2026-09 (j)) | DPO |
+| 2026-09-05 | Step 2.1 amended for hosted trial credits (ADR-012): a Free account's first results may be processed via the operator's provider account. | DPO |
 
 ---
 
