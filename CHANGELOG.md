@@ -7,6 +7,8 @@ This project uses [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
 
+## [0.10.0] - 2026-09-05
+
 ### Added
 
 - **Public landing page rebuilt to reference tier (#1458, 2026-08-23 → 2026-08-31)** — display-scale hero with a serif accent, on-page how-it-works, product-proof frames, CViper Light family section, closing CTA band, sticky header nav. The first-visit walkthrough auto-open is retired; the guide opens on request from the page.
