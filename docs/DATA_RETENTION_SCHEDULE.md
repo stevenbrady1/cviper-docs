@@ -39,6 +39,7 @@
 | **Sandbox users** | `users` (is_sandbox=true) | 30 minutes | Yes | Ephemeral demo accounts |
 | **Sandbox events** | `sandbox_events` | 90 days | Yes | Abuse monitoring |
 | **Sandbox usage** | `sandbox_usage` | 90 days | Yes | Rate tracking |
+| **Waitlist signups** | `waitlist_signups` | Until the invitation is actioned, then deleted within 7 days | Planned — CV-1390 (purge in `_scheduled_maintenance()` after the CViper Light launch invitation, CV-1388) | Art. 5(1)(e) storage limitation; matches Privacy Policy §6 "deleted once your invitation is actioned" |
 
 ## Automated Enforcement
 

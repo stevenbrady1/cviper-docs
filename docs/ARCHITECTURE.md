@@ -195,6 +195,20 @@ The fetch path is deliberately narrow: one page, no cookies, no key, no link
 following, and private or loopback addresses refused before the request and
 again on redirect.
 
+### Licence and distribution (ADR 012, 2026-09-06)
+
+Light is free to use and MIT-licensed in its own public repository,
+`github.com/stevenbrady1/cviper-light`; this repository stays private. Windows
+and macOS ship as signed builds, Linux as an unsigned AppImage with a checksum.
+Local AI requires an Ollama install in v1 (no bundled runtime). Jobserve is a
+manual-search card, never a scraper. The update check reads a static, signed
+`latest.json` from GitHub Releases and is the one network call the app may make
+without a button press — on by default, with a visible toggle, and named as such
+in Light's privacy notice. Three invariants are tests in Light's CI, not
+policy: no personal data reaches an owner server, no inference is billed to the
+owner, nothing is paywalled. See
+[`adr/012-cviper-light-licence-and-distribution.md`](adr/012-cviper-light-licence-and-distribution.md).
+
 ### Workspace layout
 
 ```
@@ -322,6 +336,7 @@ Stated here so nobody has to rediscover them.
 | Question | File |
 |---|---|
 | Why two products? | [`adr/011-two-product-architecture.md`](adr/011-two-product-architecture.md) |
+| How Light is licensed, signed and updated | [`adr/012-cviper-light-licence-and-distribution.md`](adr/012-cviper-light-licence-and-distribution.md) |
 | What is shared, and is it still in sync? | [`port-parity-manifest.yaml`](port-parity-manifest.yaml) |
 | What do the diagrams have to show? | [`DIAGRAM_SCOPE.md`](DIAGRAM_SCOPE.md) |
 | Every other architecture decision | [`adr/README.md`](adr/README.md) |

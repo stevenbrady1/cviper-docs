@@ -27,3 +27,4 @@ Each ADR follows this structure:
 | [009](009-cv-structured-content-representation.md) | Structured CV content representation | proposed | 2026-05 |
 | [010](010-canonical-domain-cviper-ai.md) | Canonical domain: cviper.ai (cviper.uk 301s) | accepted | 2026-07 |
 | [011](011-two-product-architecture.md) | Two products, one brand: CViper (cloud) + CViper Light (desktop) | accepted | 2026-08 |
+| [012](012-cviper-light-licence-and-distribution.md) | CViper Light: free, MIT-licensed, local-only distribution | accepted | 2026-09 |
