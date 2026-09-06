@@ -164,5 +164,5 @@
   <text x="260" y="670" font-size="8" font-weight="400" fill="#64748b">None</text>
   <text x="400" y="670" font-size="8" font-weight="400" fill="#64748b">"Fetch" reads exactly one page and follows no links</text>
   <text x="900" y="728" text-anchor="end" font-size="10" fill="#6B7280">Updated: 2026-08-21</text>
-  <!-- stats-updated: 2026-09-05 -->
+  <!-- stats-updated: 2026-09-06 -->
 </svg>
