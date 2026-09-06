@@ -328,3 +328,212 @@ Stated here so nobody has to rediscover them.
 | Live counts | [`STATS.md`](STATS.md) |
 | What CViper Light does and does not do | Light's `docs/FEATURE-MATRIX.md` |
 | The full structural audit | `ClaudeReports/audits/2026-08-20-audit-full-architecture-refactor-cviper-and-light.md` |
+
+---
+
+# Appendix — Hosted product deep-dive
+
+_Folded from APPLICATION_SPEC §1–§3 (AUDIT-2026-09 Phase 8). Scope is
+the HOSTED product only; sections 1–7 above cover the two-product
+picture. The schema inventory lives in generated
+`docs/03-DATA-MODEL.md`; the API inventory in generated
+`docs/02-API.md`; workflows and UI in `docs/01-PRODUCT-SPEC.md`._
+
+## A.1 High-Level Architecture
+
+```
+                    ┌──────────────┐
+                    │  Cloudflare  │  DNS/TLS (cviper.ai)
+                    └──────┬───────┘
+                           ▼
+┌─────────────────────────────────────┐
+│         React 18 SPA (Vite)         │  Port 3000
+│  App.jsx + components + tabs         │
+│  State-based tab navigation         │
+│  SSE streaming for search results   │
+└─────────────┬───────────────────────┘
+              │ REST + SSE
+              ▼
+┌─────────────────────────────────────┐
+│     FastAPI Backend (Python)        │  Port 8000
+│  API endpoints, AI facade            │
+│  (see docs/STATS.md for counts)     │
+│  9 job board integrations           │
+│  Rate limiting, JWT auth, RBAC      │
+└─────────────┬───────────────────────┘
+              │
+              ▼
+┌─────────────────────────────────────┐
+│  PostgreSQL (Azure Flexible Server) │  Production
+│  SQLite (local dev/CI)              │
+│  Alembic migrations, RLS policies   │
+│  JSON columns for nested data       │
+└─────────────────────────────────────┘
+```
+
+**No React Router** — navigation is a single `activeTab` state variable switching between views. Tabs are registered in `config/tabs.js` with progressive disclosure tiers (focused/standard/full). Desktop TopNav groups secondary tabs into "Insights" and "More" dropdown menus. `useTabTier` hook derives the current tier from onboarding progress. WizardMode provides guided onboarding that constrains visible tabs to one at a time.
+
+**No external UI library** — custom CSS in `theme.css` with a banking-style professional design (navy/blue primary palette).
+
+**Fully offline-capable** — every AI feature has a keyword/template-based fallback that works without any API keys.
+
+**Async Task Queue** — AI operations (scoring, CV analysis, document generation) are processed via an async task queue with status tracking. Tasks are queued, processed in order, and report progress. The frontend displays progress indicators and queue management UI for long-running AI operations.
+
+**Tier System (Free / Pro / Sandbox)** — every user has a `tier` field on the `User` model with three values: `free` (default), `pro` (paid), and `sandbox` (demo). Tier drives per-operation daily quotas (`UsageLimitMiddleware`), AI token budgets (Pro 5×, Sandbox 0.5× — CV-244), and feature gating. Promotion paths: (1) **Phase 1 admin path** (CV-236) — admin promotes a user via `PATCH /api/admin/users/{id}/tier`; (2) **Phase 2 Stripe path** (scaffolding from v0.6.1, CV-238/239/240/241) — user-driven checkout via `POST /api/billing/create-checkout-session`, webhook receiver at `POST /api/billing/webhook`, nightly demotion job sweeps `tier='pro'` users whose `tier_expires_at` has passed back to `free`, plus a per-request read-time expiry guard so a paused subscription stops conferring Pro features even before the nightly run.
+
+---
+
+## A.2 Tech Stack
+
+### Frontend
+| Concern | Technology |
+|---------|-----------|
+| Framework | React 18.2 (no class components except ErrorBoundary) |
+| Build | Vite 5 (port 3000, auto-open) |
+| Styling | Single `theme.css` file (~4,600 lines), no CSS-in-JS |
+| Tests | Vitest + @testing-library/react + jsdom |
+| HTTP | Native `fetch()` with `async/await` |
+| State | `useState` / `useRef` / `useMemo` (no Redux/Zustand) |
+
+### Backend
+| Concern | Technology |
+|---------|-----------|
+| Framework | FastAPI + Uvicorn |
+| ORM | SQLAlchemy 2.0 (declarative models) |
+| Database | PostgreSQL (production), SQLite (local dev/CI) |
+| Migrations | Alembic with dialect-aware operations |
+| AI | OpenAI, Anthropic, Google Gemini, Grok (xAI), Mistral, OpenRouter, Ollama + Pluribus (local only) |
+| Scraping | requests, BeautifulSoup4 (plain self-identifying HTTP — no browser impersonation, CV-1306) |
+| Documents | python-docx (DOCX), PyPDF2 (PDF read), custom PDF writer |
+| Rate Limiting | slowapi |
+| Auth | JWT (access + refresh tokens), bcrypt, RBAC (admin/standard/sandbox) |
+| Monitoring | Prometheus custom metrics, Grafana dashboards, Loki structured logging |
+| Deploy | Azure Container Apps, Bicep IaC, Cloudflare |
+
+### Python Dependencies (requirements.txt)
+```
+fastapi>=0.115.0
+uvicorn>=0.30.0
+pydantic>=2.5.0
+python-multipart>=0.0.6
+PyPDF2==3.0.1
+python-docx==1.1.0
+openai==1.12.0
+python-dotenv==1.2.2
+tiktoken==0.6.0
+anthropic>=0.25.0
+google-genai>=1.0.0
+mistralai>=1.0.0
+cryptography>=42.0.0
+requests>=2.31.0
+beautifulsoup4>=4.12.0
+lxml>=4.9.0
+openpyxl>=3.1.0
+slowapi>=0.1.9
+sqlalchemy>=2.0.0
+```
+
+---
+
+## A.3 Project Structure
+
+```
+cviper/
+├── backend/
+│   ├── main.py                    # FastAPI app setup, middleware, startup
+│   ├── database.py                # SQLAlchemy models + engine setup
+│   ├── repositories.py            # CRUD layer (all DB operations return dicts)
+│   ├── ai_service.py              # Thin facade (~200 lines) → ai/ package
+│   ├── ai/
+│   │   ├── providers.py           # ProviderRegistry — 8 cloud + 2 local AI provider clients + 2 sandbox
+│   │   ├── router.py              # TaskRouter — priority-based routing with fallback
+│   │   ├── gateway.py             # AIGateway — universal dispatcher + JSON repair
+│   │   ├── keywords.py            # KeywordService — synonym lookup, expansion
+│   │   ├── fallbacks.py           # FallbackService — 18+ template fallbacks
+│   │   └── services/              # 6 domain services (CV, matching, docs, scoring, etc.)
+│   ├── routes/                    # Route modules (see docs/STATS.md)
+│   │   ├── search.py              # Job search + SSE streaming
+│   │   ├── jobs.py                # Saved jobs CRUD + scoring
+│   │   ├── cv_analysis.py         # CV analysis + AI keys
+│   │   ├── documents.py           # Document generation + download
+│   │   ├── auth.py                # JWT auth + registration
+│   │   ├── admin.py               # Admin-only endpoints (incl. PATCH /api/admin/users/{id}/tier — CV-236)
+│   │   ├── billing.py             # Stripe checkout + webhook + Pro demotion (CV-238/239/240/241)
+│   │   ├── companies.py           # Companies + salary estimates
+│   │   ├── ai_insights.py         # Deep analysis, portfolio review
+│   │   ├── feedback.py            # User feedback system
+│   │   ├── gdpr.py                # Data export/deletion
+│   │   ├── monitoring.py          # Health, metrics, diagnostics
+│   │   └── ...                    # config, health, misc, notifications, etc.
+│   ├── migrations/                # Alembic migrations (44)
+│   ├── job_sites_api.py           # JobSearchAggregator + 6 board integrations
+│   ├── salary_utils.py            # normalize_salary() parser
+│   ├── adzuna_client.py           # Adzuna API for live salary benchmarks
+│   ├── document_generator.py      # DOCX/PDF generation
+│   ├── url_validator.py           # SSRF prevention
+│   ├── salary_benchmarks_seed.py  # ~32 curated London IT/Finance benchmarks
+│   ├── requirements.txt
+│   ├── Dockerfile
+│   └── tests/                     # See docs/STATS.md for current counts
+│       ├── conftest.py            # In-memory SQLite + fixtures
+│       └── test_*.py              # Organised by domain (ai, api, security, etc.)
+├── frontend/
+│   ├── src/
+│   │   ├── main.jsx               # React.StrictMode → <App />
+│   │   ├── App.jsx                # Main component (orchestration + state)
+│   │   ├── theme.css              # Full design system
+│   │   ├── components/            # Extracted UI components (see docs/STATS.md)
+│   │   │   ├── ErrorBoundary.jsx, Toast.jsx, TopNav.jsx
+│   │   │   ├── LoginScreen.jsx, StatusBar.jsx, TabAIIndicator.jsx
+│   │   │   ├── AIProviderCard.jsx, AIMultiProviderCard.jsx
+│   │   │   ├── WizardMode.jsx, CollapsibleSection.jsx
+│   │   │   ├── AboutProject.jsx, CompanyDetail.jsx, Icon.jsx
+│   │   │   └── ... (see docs/STATS.md for count)
+│   │   ├── tabs/                  # Tab-level components
+│   │   │   ├── CVAnalysisTab.jsx  # CV upload + analysis
+│   │   │   ├── SearchTab.jsx      # Job search + results
+│   │   │   ├── ApplicationsTab.jsx # Application tracking + Kanban
+│   │   │   ├── CompaniesTab.jsx   # Company + salary management
+│   │   │   ├── ConfigTab.jsx      # Settings
+│   │   │   ├── CareerInsightsTab.jsx # Skills gap + strategy
+│   │   │   ├── PromptsLabTab.jsx  # Multi-provider AI comparison
+│   │   │   ├── FAQTab.jsx         # Searchable FAQ
+│   │   │   ├── AdminTab.jsx       # Admin panel
+│   │   │   ├── FeedbackAdmin.jsx  # Feedback triage
+│   │   │   └── search/            # Search sub-components
+│   │   ├── hooks/                 # Custom hooks
+│   │   │   ├── useApi.js          # API_BASE + authFetch wrapper
+│   │   │   ├── useAIProviders.js  # Provider state + retry logic
+│   │   │   ├── useWizard.js       # Guided onboarding wizard state + auto-advance
+│   │   │   ├── useTabTier.js      # Progressive tab disclosure tier derivation
+│   │   │   ├── useOnboarding.js   # First-visit state + step tracking
+│   │   │   ├── useTaskTracker.js  # Running/completed task management
+│   │   │   └── useToast.js        # Toast message state
+│   │   └── context/
+│   │       └── AppContext.jsx     # Auth + settings + jobs context
+│   ├── package.json
+│   ├── vite.config.js
+│   ├── Dockerfile
+│   └── nginx.conf
+├── azure/                         # Infrastructure as Code
+│   ├── container-apps.bicep       # Container Apps, ACR, VNet, PostgreSQL
+│   └── deploy.sh                  # Deployment script with secret management
+├── data/                          # Local dev data (Docker volume mount)
+│   └── config/
+│       ├── keywords.json          # 85 skills + synonyms + job levels
+│       ├── job_sites.json         # 6 job boards with enabled flags
+│       ├── settings.json          # cv_folder, location, output_folder
+│       └── cv_format.json         # 5 CV format presets
+├── docs/
+│   ├── runbooks/                  # 13 operational runbooks
+│   ├── adr/                       # 9 architecture decision records
+│   ├── BACKLOG.yaml               # Product backlog (synced with GitHub Issues)
+│   └── ...                        # BRD, FSD, Testing Strategy, SLO, etc.
+├── docker-compose.yml
+├── .github/workflows/
+│   ├── ci.yml                     # CI: tests, lint, security, schema drift, Docker smoke
+│   └── deploy.yml                 # Manual deploy to Azure
+└── .env                           # API keys (not committed)
+```
+
+---

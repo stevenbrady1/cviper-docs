@@ -2,418 +2,97 @@
 
 **Make Every Application Count — Strike with Precision.**
 
-CViper is a professional career management tool that helps you discover job opportunities, analyse your CV, and generate tailored application materials — all powered by AI.
+CViper is a professional career management tool that helps you discover job
+opportunities, analyse your CV, and generate tailored application materials —
+all powered by AI.
 
 ---
 
-## What It Does
+## What it does
 
-- **Multi-Site Job Search** — searches 7 job boards (Reed, Adzuna, Jooble, Remotive, Findwork, Freelancer via official APIs; Jobserve via a plain self-identifying scraper) plus 200+ direct employer career pages, via SSE streaming. LinkedIn and eFinancialCareers block automated access and are surfaced as manual-search links instead
-- **AI CV Analysis** — extracts skills, experience, and profile from PDF/DOCX files with multi-provider comparison
-- **Multi-Provider AI** — supports 8 providers: OpenAI, Anthropic Claude, Google Gemini, Grok, Mistral, OpenRouter, Pluribus (local), and Ollama. Run providers in parallel and compare results side-by-side with Prompt Lab.
-- **Priority-Based AI Routing** — configurable provider priority chain with automatic failover, circuit breakers, and keyword fallback
-- **Async Task Queue** — background AI task processing with real-time progress tracking and status polling
-- **Tailored Documents** — generates customised CVs and cover letters for each role (DOCX & PDF) with ATS scoring and fabrication detection
-- **Two-Way Scoring** — evaluates both candidate-to-job fit and job-to-candidate fit with sub-scores, using seniority-adaptive weighting that adjusts scoring dimensions by role level
-- **Application Tracking** — track status from Saved → Applied → Interviewing → Offer, with Kanban board
-- **Salary Benchmarking** — AI-generated salary estimates grounded against curated London IT/Financial benchmarks, with contractor day-rate and IR35 support
-- **Skills Gap Analysis** — dashboard with weekly stats, CSV/XLSX export, and learning resource recommendations
-- **Interview Prep** — AI-generated interview questions, preparation notes, and follow-up email drafting
-- **Company Career Pages** — discover and manage company career pages (Greenhouse, Lever, iCIMS, Taleo) with concurrent discovery pipeline and health monitoring
-- **Guided Onboarding** — step-by-step tour for new users (including demo mode) with nudge banners and progress tracking
-- **Demo Mode** — restricted sandbox with sample data, guided tour, and a step-by-step API key guide for non-technical users
-- **RBAC & Auth** — JWT-based authentication with admin, standard, and sandbox user roles, with email verification via deep-link after registration
-- **Personal API Keys** — self-service scoped API keys (`cvk_`) so users can call the API with their own credentials, resolved per-owner with scope enforcement
-- **Banking-Grade Security** — security observability dashboards, structured audit logging, and anomaly detection for sensitive operations
-- **Data Retention & GDPR** — automated data retention schedules with configurable policies and email token cleanup for GDPR compliance
-- **Cross-Border Consent** — GDPR special-category and cross-border data-transfer consent gate shown before AI processing routes personal data to overseas providers
-- **Feedback System** — in-app feedback collection with image attachments and admin triage panel
-- **FAQ & Help** — searchable FAQ across 12 categories including AI explainers (tokens, accuracy, API keys)
-- **Career Insights** — rejection pattern analysis, application strategy, and skills gap roadmap
-- **Job Alerts** — automatic new-job notifications from saved search profiles with deduplication, daily/weekly frequency, and in-app notification bell
-- **Usage Tracking & Tiers** — Free/Pro tier system with per-operation daily limits (AI calls, CV scores, salary estimates, document generation), upgrade prompts, and usage dashboard
-- **AI Fairness** — bias audit framework with 31 synthetic CVs across 5 demographic dimensions, FAIRNESS_GUARDRAIL in all scoring prompts, automated regression tests
-- **CV Optimisation** — guided bullet improvement with AI suggestions
-- **AI Disclaimer** — transparent attribution: all AI results come from the user's chosen model, with accuracy warnings in-app and in the privacy policy
-- **PWA Support** — service worker with stale-while-revalidate caching, installable on mobile
-- **Pro Tier (Phase 1)** — admin-assigned `Free → Pro` promotion via `PATCH /api/admin/users/{id}/tier`, "PRO" badge in TopNav, tier-aware daily AI token budgets (Pro 5×, Sandbox 0.5×), nightly demotion sweep for expired Pros (Stripe Phase 2 scaffolding in place)
-- **Infrastructure Resilience** — pre-deploy config validation, server path redaction, 90+ lessons-learned with 60+ automated auto-correction rules and prevention guards
+- **Multi-Site Job Search** — searches 7 job boards (Reed, Adzuna, Jooble, Remotive, Findwork, Freelancer via official APIs; Jobserve via a plain self-identifying scraper) plus 200+ direct employer career pages, via SSE streaming. LinkedIn and eFinancialCareers block automated access and are surfaced as manual-search links instead.
+- **AI CV Analysis & Tailored Documents** — extracts your profile from PDF/DOCX, scores every job against it (two-way, seniority-adaptive), and generates customised CVs and cover letters with ATS scoring and fabrication detection.
+- **Multi-Provider AI** — supports 8 providers: OpenAI, Anthropic Claude, Google Gemini, Grok, Mistral, OpenRouter, Pluribus (local), and Ollama — with priority routing, automatic failover, circuit breakers, and keyword fallback.
+- **Application Tracking & Insights** — Kanban status tracking, salary benchmarking (incl. contractor day rates/IR35), skills-gap analysis, interview prep, job alerts, career insights.
+- **Accounts & Safety** — JWT auth with RBAC, Free/Pro tiers with usage limits, demo sandbox, GDPR data retention/export/erasure, cross-border AI consent, AI fairness guardrails, structured audit logging.
+
+The full feature-by-feature specification lives in
+[`docs/01-PRODUCT-SPEC.md`](docs/01-PRODUCT-SPEC.md).
 
 ---
 
-## Getting Started
+## 5-minute setup (Docker)
 
-### Prerequisites
+1. **Create `.env`** in the project root — at least one AI provider key (the
+   keyword matcher works with none):
 
-Choose **one** of the two setup paths below:
+   ```env
+   OPENAI_API_KEY=sk-your-key-here        # or ANTHROPIC_API_KEY /
+   GOOGLE_API_KEY=your-google-key         # GOOGLE_API_KEY / MISTRAL_API_KEY /
+   AI_PROVIDER=openai                     # OPENROUTER_API_KEY / OLLAMA_ENABLED=true
+   ```
 
-| Path | You need |
-|------|----------|
-| **Docker** (recommended) | [Docker Desktop](https://www.docker.com/products/docker-desktop/) |
-| **Local development** | Python 3.10+, Node.js 18+ |
+2. **Start it:**
 
-Both paths require at least one AI provider API key (see [AI Provider Setup](#ai-provider-setup) below). The keyword-based matcher works without any key.
+   ```bash
+   docker compose up -d --build
+   ```
 
----
+3. **Open** http://localhost:3000 (backend API on port 8000).
 
-### Option A: Docker (Recommended)
+Stop with `docker compose down`; rebuild after changes with
+`docker compose up -d --build`.
 
-This is the fastest way to get running. Docker handles all dependencies for you.
-
-**Step 1 — Create your `.env` file**
-
-Copy the example below into a file called `.env` in the project root:
-
-```env
-# At least one AI provider key is needed (all are optional)
-OPENAI_API_KEY=sk-your-key-here
-ANTHROPIC_API_KEY=sk-ant-your-key-here
-GOOGLE_API_KEY=your-google-ai-studio-key
-OPENROUTER_API_KEY=your-openrouter-key
-MISTRAL_API_KEY=your-mistral-key
-OLLAMA_ENABLED=true
-
-# Default provider for single-provider operations
-AI_PROVIDER=openai
-```
-
-**Step 2 — Start the containers**
+**Local development instead of Docker** (Python 3.10+, Node 18+):
 
 ```bash
-docker compose up -d --build
-```
-
-**Step 3 — Open the app**
-
-Go to **http://localhost:3000** in your browser. The backend API runs on port 8000.
-
-**Stopping the app:**
-
-```bash
-docker compose down
-```
-
-**Rebuilding after code changes:**
-
-```bash
-docker compose up -d --build
+cd backend && python -m venv venv && . venv/bin/activate   # Windows: venv\Scripts\activate
+pip install -r requirements.txt && python main.py          # API on :8000
+cd ../frontend && npm install && npm run dev               # UI on :3000
 ```
 
 ---
 
-### Option B: Local Development
+## Documentation
 
-#### Step 1 — Clone and create `.env`
+| What you need | Where |
+|---|---|
+| Feature behaviour, user stories, workflows, UI | [`docs/01-PRODUCT-SPEC.md`](docs/01-PRODUCT-SPEC.md) |
+| API inventory (generated — every route) | [`docs/02-API.md`](docs/02-API.md); live Swagger at http://localhost:8000/docs |
+| Data model (generated — every table) | [`docs/03-DATA-MODEL.md`](docs/03-DATA-MODEL.md) |
+| Testing strategy, test plan, traceability | [`docs/04-QUALITY.md`](docs/04-QUALITY.md) |
+| Two-product architecture (hosted + Light) | [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md) |
+| Business requirements / functional spec | [`docs/BRD-Business-Requirements-Document.md`](docs/BRD-Business-Requirements-Document.md) · [`docs/FSD-Functional-Specification-Document.md`](docs/FSD-Functional-Specification-Document.md) |
+| Deploying (Azure Container Apps, Bicep) | [`docs/DEPLOYMENT_GUIDE.md`](docs/DEPLOYMENT_GUIDE.md) |
+| Contributing, conventions, working rules | [`CONTRIBUTING.md`](CONTRIBUTING.md) · [`CLAUDE.md`](CLAUDE.md) · [`docs/conventions/`](docs/conventions/) |
+| Developer onboarding & tooling | [`DEVELOPER_GUIDE.md`](DEVELOPER_GUIDE.md) |
+| Change history | [`CHANGELOG.md`](CHANGELOG.md) |
 
-```bash
-git clone <repo-url> cviper
-cd cviper
-```
-
-Create a `.env` file in the project root with your API keys (same format as Option A above).
-
-#### Step 2 — Set up the backend
-
-```bash
-cd backend
-python -m venv venv
-```
-
-Activate the virtual environment:
+**Running tests:**
 
 ```bash
-# Windows
-venv\Scripts\activate
-
-# macOS / Linux
-source venv/bin/activate
+cd backend && pytest                 # backend (parallel)
+cd frontend && npm test              # frontend (Vitest)
+cd frontend && npm run test:e2e      # Playwright
 ```
 
-Install dependencies:
-
-```bash
-pip install -r requirements.txt
-```
-
-#### Step 3 — Set up the frontend
-
-```bash
-cd ../frontend
-npm install
-```
-
-#### Step 4 — Start the backend
-
-Open a terminal in the `backend/` folder:
-
-```bash
-venv\Scripts\activate          # Windows
-source venv/bin/activate       # macOS / Linux
-python main.py
-```
-
-The backend starts on **http://localhost:8000**. Wait until you see `Uvicorn running on http://0.0.0.0:8000` before starting the frontend.
-
-#### Step 5 — Start the frontend
-
-Open a **second** terminal in the `frontend/` folder:
-
-```bash
-npm run dev
-```
-
-The frontend starts on **http://localhost:3000**. Open this URL in your browser.
-
-#### One-Command Start (Windows)
-
-If you've already run setup once, you can use:
-
-```
-start-app.bat
-```
-
-This launches both servers, waits for health checks, and opens the app automatically.
-
-#### Automated Setup (Windows)
-
-If you haven't installed dependencies yet:
-
-```
-setup.bat
-```
-
-This creates the Python virtual environment and installs all backend and frontend dependencies in one go.
+More in [`docs/04-QUALITY.md`](docs/04-QUALITY.md) §13 Quick Reference.
 
 ---
 
-## AI Provider Setup
+## Tech stack
 
-CViper supports multiple AI providers. You only need **one** to get started.
-
-| Provider | Env Variable | Get a Key |
-|----------|-------------|-----------|
-| OpenAI | `OPENAI_API_KEY` | platform.openai.com |
-| Anthropic Claude | `ANTHROPIC_API_KEY` | console.anthropic.com |
-| Google Gemini | `GOOGLE_API_KEY` | aistudio.google.dev |
-| Mistral | `MISTRAL_API_KEY` | console.mistral.ai |
-| OpenRouter | `OPENROUTER_API_KEY` | openrouter.ai |
-| Grok (xAI) | `GROK_API_KEY` | console.x.ai |
-| Ollama (local) | `OLLAMA_ENABLED=true` | ollama.com (free, runs locally) |
-| Pluribus (local) | `PLURIBUS_SECRET` | Anthropic-compatible localhost gateway |
-
-Add keys to your `.env` file and restart the backend. The Settings tab in the UI shows which providers are active.
-
----
-
-## Using CViper
-
-### 1. Upload Your CV
-
-Go to the **CV Analysis** tab and drag-and-drop your CV (PDF or DOCX). CViper extracts your skills, experience, and profile automatically.
-
-### 2. Search for Jobs
-
-Go to the **Job Search** tab. Select your AI providers, enter a location and optional minimum salary, then click **Search for Jobs**. Results are scored against your CV.
-
-### 3. Apply for Jobs
-
-Select matching jobs from the results and click **Apply for Selected Jobs** (up to 5 concurrent). A tailored CV and cover letter are generated for each role.
-
-### 4. Track Applications
-
-Go to **Applications** to update statuses, add notes, and manage your pipeline in table or Kanban view.
-
-### 5. Compare AI Models (Prompt Lab)
-
-Go to **Prompt Lab → Compare** to send a single prompt to multiple AI providers simultaneously and compare their responses side-by-side. Adjust temperature and max tokens per run.
-
----
-
-## Auto-Start on Windows Boot (Docker)
-
-To have CViper launch automatically when you log in:
-
-```
-install-startup.bat
-```
-
-This places a shortcut in your Windows Startup folder. The script waits for Docker Desktop to be ready, then starts the containers.
-
-To remove auto-start:
-```
-install-startup.bat --uninstall
-```
-
-Logs are written to `docker-start.log` in the project root.
-
----
-
-## Architecture
-
-CViper is **two products**: this hosted web application, and **CViper Light** — a
-local-first Tauri desktop app in a separate repository that shares a body of
-domain logic with it.
-
-Start with [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md), which describes both
-and how they relate. The decision behind the split, and the guard that keeps the
-shared logic from drifting apart, is [ADR-011](docs/adr/011-two-product-architecture.md).
-
-## Project Structure
-
-```
-cviper/
-├── backend/                    # FastAPI backend (Python)
-│   ├── main.py                 # App setup, middleware, startup
-│   ├── database.py             # SQLAlchemy models & engine
-│   ├── repositories.py         # CRUD operations
-│   ├── ai_service.py           # AI facade → ai/ package
-│   ├── ai/                     # AI subpackage
-│   │   ├── providers.py        #   Provider registry (6 cloud + 2 local providers + 2 demo keys)
-│   │   ├── router.py           #   Priority-based provider routing
-│   │   ├── gateway.py          #   Universal call dispatcher
-│   │   └── services/           #   Domain services (CV, matching, docs, scoring)
-│   ├── routes/                 # 30 route modules (search, jobs, auth, admin, etc.)
-│   ├── migrations/             # Alembic migrations (PostgreSQL)
-│   ├── requirements.txt
-│   └── Dockerfile
-├── frontend/                   # React 18 + Vite frontend
-│   ├── src/
-│   │   ├── App.jsx             # Main application component
-│   │   ├── theme.css           # Design system stylesheet
-│   │   ├── components/         # Extracted UI components (see docs/STATS.md)
-│   │   ├── tabs/               # Tab components (CV, Search, Apps, Companies, etc.)
-│   │   ├── hooks/              # Custom hooks (useApi, useAIProviders, useToast)
-│   │   └── context/            # React context providers (AppContext)
-│   ├── nginx.conf              # Production nginx config
-│   └── Dockerfile
-├── azure/                      # Infrastructure as Code
-│   ├── container-apps.bicep    # Azure Container Apps + networking
-│   └── deploy.sh               # Deployment script with secret management
-├── docs/                       # Project documentation
-│   ├── runbooks/               # 13 operational runbooks
-│   └── adr/                    # 9 architecture decision records
-├── docker-compose.yml          # Local container orchestration
-├── .github/workflows/          # CI (automatic) + Deploy (manual gate)
-├── .env                        # API keys (not committed)
-├── start-app.bat               # Local dev launcher (Windows)
-├── setup.bat                   # Dependency installer (Windows)
-├── setup.sh                    # Dependency installer (Linux/Mac)
-└── Makefile                    # Cross-platform dev commands
-```
-
----
-
-## Running Tests
-
-**Backend:**
-```bash
-cd backend
-venv\Scripts\activate
-pytest
-```
-
-**Frontend (unit/component):**
-```bash
-cd frontend
-npm test
-```
-
-**Frontend (E2E — Playwright):**
-```bash
-cd frontend
-npm run test:e2e           # headless Chromium
-npm run test:e2e:headed    # with visible browser
-```
-
-E2E tests use route mocking — no backend needed. 154 specs providing 100% E2E journey coverage across all tabs, modals, and user workflows.
-
----
-
-## API Documentation
-
-When the backend is running, interactive docs are available at:
-
-- **Swagger UI:** http://localhost:8000/docs
-- **ReDoc:** http://localhost:8000/redoc
-
----
-
-## Troubleshooting
-
-### Docker containers won't start
-
-```bash
-docker compose logs backend     # Check backend errors
-docker compose logs frontend    # Check frontend errors
-docker compose down && docker compose up -d --build   # Clean rebuild
-```
-
-### Backend won't start (local)
-
-```bash
-python --version                             # Needs 3.10+
-pip install --upgrade -r requirements.txt    # Reinstall deps
-python -m py_compile main.py                 # Check syntax errors
-```
-
-### Frontend shows blank page
-
-```bash
-node --version                               # Needs 18+
-rm -rf node_modules && npm install           # Clean reinstall
-```
-
-### "Unable to connect to backend server" in the UI
-
-- Make sure the backend is running on port 8000
-- Check the backend terminal for errors
-- Click the **Retry** button in the UI after starting the backend
-
-### AI providers not showing in Settings
-
-- Check `.env` has at least one valid API key
-- Restart the backend after editing `.env`
-- Look for `[OK] ... client initialized` in the backend startup log
-
-### Port already in use
-
-```bash
-# Windows
-netstat -ano | findstr :8000
-taskkill /PID <PID> /F
-
-# macOS / Linux
-lsof -i :8000
-kill -9 <PID>
-```
-
----
-
-## Tech Stack
-
-| Layer | Technology |
-|-------|-----------|
-| Frontend | React 18, Vite, CSS (custom design system) |
-| Backend | Python, FastAPI, Uvicorn |
-| AI | OpenAI, Anthropic, Google Gemini, Grok, Mistral, OpenRouter, Pluribus, Ollama |
-| CV Parsing | PyPDF2, python-docx |
-| Database | PostgreSQL (production via Azure Flexible Server), SQLite (local dev) |
-| ORM | SQLAlchemy 2.0 + Alembic migrations |
-| Documents | python-docx (DOCX), custom PDF writer |
-| Auth | JWT (access + refresh tokens), bcrypt, RBAC (admin/standard/sandbox) |
-| CI | GitHub Actions (tests, lint, security scans, Docker smoke, schema drift, docs drift, dead exports, unused deps) |
-| Deploy | Azure Container Apps, Bicep IaC, Cloudflare DNS/TLS, manual deploy gate |
-| Monitoring | Prometheus, Grafana, Loki (structured logging) |
+React 18 + Vite · FastAPI (Python 3.11+) · PostgreSQL (prod) / SQLite (local)
+· Azure Container Apps + Bicep IaC · Capacitor (iOS/Android) · Playwright +
+pytest + Vitest.
 
 ---
 
 ## Legal
 
-- **[Privacy Policy](docs/PRIVACY_POLICY.md)** — data collection, lawful bases, GDPR rights, AI disclaimer
-- **[Terms of Service](docs/TERMS_OF_SERVICE.md)** — acceptable use, third-party services, limitation of liability
-
-Both documents are also reachable in-app via **Settings → Privacy & Data** or directly at `https://cviper.ai/?tab=privacy` and `https://cviper.ai/?tab=terms`.
+[Terms of Service](docs/TERMS_OF_SERVICE.md) ·
+[Privacy Policy](docs/PRIVACY_POLICY.md)
 
 ## License
 
-Proprietary — CViper
+Personal project — all rights reserved. Not licensed for redistribution.
