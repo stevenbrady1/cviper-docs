@@ -1,9 +1,17 @@
 # ADR 012 — CViper Light: free, MIT-licensed, local-only distribution
 
-**Status**: accepted
-**Date**: 2026-09-06
+**Status**: accepted (amended 2026-09-12 — Windows code-signing route corrected)
+**Date**: 2026-09-06 (original), 2026-09-12 (amended)
 **Source**: Owner decisions of 2026-09-06 on `ClaudeReports/summaries/2026-09-06-summary-cviper-light-free-rollout-plan.md` §7 (itself a follow-up to the 2026-09-05 CVAurum competitive analysis)
 **Related**: [ADR 011](011-two-product-architecture.md) (two products, one brand), [ADR 002](002-ai-tier-routing.md) (AI routing — the hosted product's model, which Light deliberately does not inherit)
+
+> **Amendment 2026-09-12**: decision 2 and the first Consequences bullet named
+> Azure Trusted Signing and priced Windows signing at ~$120–400/yr. Both are
+> wrong for this owner. The service was renamed Azure Artifact Signing and is
+> closed to individual developers outside the USA and Canada; and since 2024 no
+> certificate of any grade removes the SmartScreen warning by itself. The
+> licence, the platform set and the other four decisions are unchanged. See
+> [Amendment (2026-09-12)](#amendment-2026-09-12--windows-code-signing) below.
 
 ## Context
 
@@ -29,7 +37,10 @@ that concrete. The owner took all five on 2026-09-06.
    `PORTED-TO:` markers and manifest entries (ADR 011).
 
 2. **Platforms at launch: Windows and macOS signed builds at beta; Linux as an
-   unsigned AppImage.** macOS builds are notarised under the owner's Apple
+   unsigned AppImage.** *(Original text, retained for the record — superseded
+   in part by the [2026-09-12 amendment](#amendment-2026-09-12--windows-code-signing):
+   the Windows route named below is not available to this owner, and the cost
+   figure is wrong.)* macOS builds are notarised under the owner's Apple
    Developer account; Windows builds are signed (Azure Trusted Signing or an
    equivalent certificate). Linux ships unsigned with a checksum on the
    release page. These are the only recurring costs Light creates.
@@ -62,9 +73,12 @@ policy (LESSON-033 forbid-list shape):
 
 ## Consequences
 
-- **Owner cost model**: Apple Developer Program (~$99/yr) and Windows signing
-  (~$120–400/yr) are the only recurring costs. Inference, downloads, updates
-  and job-board quota are £0 to the owner — users bring their own keys.
+- **Owner cost model** *(original text, retained for the record — superseded in
+  part by the [2026-09-12 amendment](#amendment-2026-09-12--windows-code-signing);
+  the corrected figure is $99/yr, already paid)*: Apple Developer Program
+  (~$99/yr) and Windows signing (~$120–400/yr) are the only recurring costs.
+  Inference, downloads, updates and job-board quota are £0 to the owner — users
+  bring their own keys.
 - **GDPR posture**: the owner is not a controller for in-app data. The
   remaining touchpoints are the static download page, the update-manifest
   host, GitHub Issues, and the existing `WaitlistSignup` rows in the hosted
@@ -98,6 +112,115 @@ policy (LESSON-033 forbid-list shape):
   coach) being fully useful before any AI is configured, and by the
   bring-your-own-key lane with the Google AI Studio free tier as the default
   recommendation.
+
+## Amendment (2026-09-12) — Windows code signing
+
+Decision 2 and the first Consequences bullet were checked against primary
+sources on 2026-09-11/12. Three claims did not survive. The decision to ship
+Windows and macOS at beta stands; the Windows *mechanism* and the cost model
+are corrected here.
+
+### 1. Azure Trusted Signing cannot be bought by this owner
+
+The service was renamed **Azure Artifact Signing**. Microsoft Learn, *"Code
+signing options for Windows app developers"* (`ms.date` 2026-08-29), states:
+
+> "Geographic limitation: Azure Artifact Signing is available to organizations
+> in the USA, Canada, the European Union, and the United Kingdom. Individual
+> developers are currently limited to the USA and Canada. If you are an
+> individual developer outside those regions, see OV certificates below."
+
+The owner is a UK **individual**, not a registered company, so this route is
+closed today. A UK limited company *would* be eligible — incorporation costs
+~£50 and would unlock Azure Artifact Signing at ~$120/yr. The older
+"organisation must be 3+ years old" rule appears to have been removed (a
+Microsoft employee stated there are "no minimum org age restrictions" on
+2026-08-17), but that is moot here: the blocker is geography plus individual
+status, not age.
+
+### 2. Buying a certificate does not remove the SmartScreen warning
+
+Microsoft Learn, *"SmartScreen reputation for Windows app developers"*
+(`ms.date` 2026-05-04, updated 2026-08-17), states:
+
+> "EV certificates no longer bypass SmartScreen. Years ago, signing files with
+> an Extended Validation (EV) code signing certificate would result in positive
+> SmartScreen reputation by default, but this behavior no longer exists. […]
+> Paying a premium for EV solely to avoid SmartScreen warnings is no longer
+> justified."
+
+That behaviour was removed in 2024. A signed OV or IV build still warns until
+reputation accrues organically — Microsoft describes this as several weeks and
+hundreds of clean installs, with no mechanism to request expedited review. The
+implicit premise of the original decision (buy a certificate, get a non-scary
+install) is therefore false for Windows.
+
+### 3. The free route that does work is the Microsoft Store
+
+Same source (`ms.date` 2026-08-29):
+
+> "If you publish your app as an MSIX package through the Microsoft Store, code
+> signing is free and handled for you automatically […] users never see a
+> SmartScreen warning."
+
+The individual developer account is now free — the former $19 registration fee
+was waived; registration is via `storedeveloper.microsoft.com` and requires ID
+and selfie verification. Two caveats against Light's Tauri v2 stack (ADR 011):
+Tauri cannot emit MSIX natively and needs Microsoft's `winapp` CLI (public
+preview at the time of writing); and a Store build cannot use the in-app
+updater, because the Store handles its own updates — which bears directly on
+decision 5.
+
+### 4. macOS — unchanged in substance, but name the certificate
+
+macOS notarisation remains correct as decided. The certificate is a **Developer
+ID Application** certificate, which is a *different* certificate from the
+**Apple Distribution** one already used for iOS/TestFlight. It is included in
+the existing $99/yr Apple Developer Program membership at no extra cost, is
+available to Individual (not only Organization) memberships, and notarisation
+itself is free.
+
+### Corrected cost model
+
+| Platform | Route | Recurring cost |
+|---|---|---|
+| macOS | Developer ID Application certificate + notarisation, under the existing membership | **$99/yr — already paid** |
+| Windows | Microsoft Store MSIX; Microsoft signs it, and no SmartScreen warning is shown | **£0 / $0** |
+| Linux | unsigned AppImage + checksum (unchanged) | £0 |
+
+The realistic recurring cost of Light's distribution is therefore **$99/yr,
+which the owner already pays** — not the $219–499/yr the original bullet
+implied.
+
+If a Windows certificate is still wanted for the direct download (which the
+Store route does not cover), the cheapest eligible options are:
+
+- **Certum Open Source Code Signing** — ~€49–69/yr. Light is MIT-licensed, so
+  it qualifies on the open-source test. *(UNCONFIRMED: Certum's published terms
+  on commercial use of their open-source certificate could not be verified
+  first-hand. Check before purchase.)*
+- **SSL.com IV (Individual Validation)** — ~$129/yr, plus roughly $180/yr more
+  for CI/automated signing.
+- **Incorporate a UK Ltd company** (~£50) — unlocks Azure Artifact Signing at
+  ~$120/yr.
+
+None of these removes the SmartScreen warning on day one (see §2). They buy
+attribution and the start of a reputation clock, not a clean install.
+
+### Recorded as unconfirmed
+
+- Whether an **individual** Microsoft Partner Center account can complete the
+  Microsoft Entra tenant association required for automated/CI submission to
+  the Store — **unconfirmed**. If it cannot, Store releases may have to be
+  uploaded by hand.
+- Certum's terms on commercial use of their open-source certificate, as above —
+  **unconfirmed**.
+
+**Sources:** Microsoft Learn, *"Code signing options for Windows app
+developers"* (`ms.date` 2026-08-29); Microsoft Learn, *"SmartScreen reputation
+for Windows app developers"* (`ms.date` 2026-05-04, updated 2026-08-17);
+Microsoft employee statement on organisation age, 2026-08-17. All verified
+2026-09-11/12.
 
 ## Alternatives considered
 
