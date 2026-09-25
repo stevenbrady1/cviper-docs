@@ -917,6 +917,7 @@ board.ats_provider → resolve_site_type() → get_handler() → handler.search(
 **Acceptance Criteria**:
 - `GET /api/gdpr/export` returns comprehensive JSON of all user data (jobs, analyses, configs, prompt logs, consents), rate-limited to 2/hour
 - `DELETE /api/gdpr/delete-account` requires password verification, performs cascading deletion of all user data across all tables
+- `POST /api/import/light` (CV-1395) imports a CViper Light backup or a JSON Resume into the account — CVs, tracked jobs with application state, match scores — validated in full before any write, idempotent on `source_id`, rate-limited to 10/hour
 - `UserConsent` model tracks granular consent (analytics, ai_processing, data_sharing) with timestamps
 - Consent banner shown on first visit; consents viewable/withdrawable via `/api/gdpr/consents` endpoints
 - Privacy Policy page accessible from sidebar and config tab
@@ -2007,6 +2008,7 @@ Response:
 | DELETE | `/api/gdpr/delete-account` | None | Password-verified account erasure |
 | GET | `/api/gdpr/consents` | None | List user's consent records |
 | POST | `/api/gdpr/consents` | None | Record or withdraw consent |
+| POST | `/api/import/light` | 10/hour | Import a CViper Light backup or JSON Resume (CV-1395) |
 
 #### Authentication (Additional)
 
