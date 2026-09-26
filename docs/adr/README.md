@@ -28,3 +28,4 @@ Each ADR follows this structure:
 | [010](010-canonical-domain-cviper-ai.md) | Canonical domain: cviper.ai (cviper.uk 301s) | accepted | 2026-07 |
 | [011](011-two-product-architecture.md) | Two products, one brand: CViper (cloud) + CViper Light (desktop) | accepted | 2026-08 |
 | [012](012-cviper-light-licence-and-distribution.md) | CViper Light: free, MIT-licensed, local-only distribution | accepted (amended 2026-09-12) | 2026-09 |
+| [013](013-cviper-ai-serving-topology-during-mothball.md) | cviper.ai serving topology during the mothball: cviper-landing Pages is live, this repo's frontend is reinstate-ready only | accepted | 2026-09 |
