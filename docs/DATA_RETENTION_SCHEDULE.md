@@ -30,6 +30,7 @@
 | **Notifications** | `notifications` | 180 days | Yes | Transient UI alerts |
 | **Affiliate clicks** | `affiliate_clicks` | 180 days | Yes | Analytics tracking |
 | **Admin audit logs** | `admin_audit_logs` | 365 days | Yes | Compliance — longer retention for accountability |
+| **Request audit logs** | `audit_logs` | 90 days | Yes (CV-1265) | Security monitoring (IDOR probes, anomaly input) — same purpose and period as failed login attempts. IP stored anonymised (last octet/group zeroed). |
 | **Withdrawn consents** | `user_consents` (withdrawn) | 365 days | Yes | GDPR Art. 7(1) — proof of withdrawal |
 | **Active consents** | `user_consents` (active) | Until withdrawn or account deleted | Manual | Required for lawful processing |
 | **Password reset tokens** | `password_reset_tokens` | 7 days past expiry | Yes | Security; single-use tokens |
