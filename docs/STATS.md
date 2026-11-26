@@ -10,11 +10,11 @@
 | AI Providers | 8 |
 | Frontend Components | 121 |
 | Frontend Hooks | 42 |
-| Alembic Migrations | 63 |
+| Alembic Migrations | 64 |
 | AI Package Modules | 39 |
 | AI Domain Services | 8 |
-| Backend Test Files | 655 |
+| Backend Test Files | 658 |
 | Frontend Test Files | 516 |
 | Backend Test Cases (authored) | 9,600+ |
 | Frontend Test Cases (authored) | 5,400+ |
-| Total Test Cases (authored) | 15,000+ |
+| Total Test Cases (authored) | 15,100+ |
