@@ -34,7 +34,6 @@ If a primitive's one-line purpose here is wrong, fix its first JSDoc / leading c
 | `useSwipeNavigation` | [hooks/useSwipeNavigation.js](../frontend/src/hooks/useSwipeNavigation.js) | — |
 | `useTabNavigation` | [hooks/useTabNavigation.js](../frontend/src/hooks/useTabNavigation.js) | — |
 | `useTabTier` | [hooks/useTabTier.js](../frontend/src/hooks/useTabTier.js) | — |
-| `useTaskPoller` | [hooks/useTaskPoller.js](../frontend/src/hooks/useTaskPoller.js) | useTaskPoller — generic hook for submitting AI tasks and polling status. |
 | `useTaskTracker` | [hooks/useTaskTracker.js](../frontend/src/hooks/useTaskTracker.js) | — |
 | `useUsage` | [hooks/useUsage.js](../frontend/src/hooks/useUsage.js) | — |
 | `useWizard` | [hooks/useWizard.js](../frontend/src/hooks/useWizard.js) | — |

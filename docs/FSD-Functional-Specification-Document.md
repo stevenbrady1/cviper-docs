@@ -2371,7 +2371,7 @@ key_source, username, role
      check_fsd_test_table in scripts/docs_drift_check.py). -->
 | Layer | Framework | Test Count | Execution |
 |-------|----------|-----------|-----------|
-| Backend Unit/Integration | pytest + pytest-xdist | 9,600+ tests, 658 files | Parallel (`-n auto --dist worksteal`) |
+| Backend Unit/Integration | pytest + pytest-xdist | 9,700+ tests, 664 files | Parallel (`-n auto --dist worksteal`) |
 | Frontend Unit/Component | Vitest + React Testing Library | 5,400+ tests, 516 files | Threaded pool |
 | CI Pipeline | GitHub Actions | 16 jobs (with paths-filter for PR skipping) | Push/PR to main/develop |
 | Security Scanning | Snyk + Aikido + Custom | 4 scan types | Every CI run |

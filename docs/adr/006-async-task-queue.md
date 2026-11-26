@@ -1,6 +1,6 @@
 # ADR-006: Async Task Queue for AI Operations
 
-**Status**: proposed
+**Status**: superseded (CV-1417) — the unwired task queue was deleted; this approach was never adopted
 **Date**: 2026-04-12
 **Decision makers**: Project owner
 **Backlog**: CV-161 (#228), CV-162 (#229)
